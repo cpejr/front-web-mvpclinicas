@@ -21,78 +21,63 @@ function Perfil() {
         <CaixaFoto></CaixaFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloInput>Nome Completo:</TituloInput>
+            <TituloInput>NOME COMPLETO:</TituloInput>
             <Input
-              placeholder="Nome Completo"
+              placeholder="Digite seu nome completo"
               backgroundColor="white"
-              width="90%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
+              height="40px"
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloInput>Telefone:</TituloInput>
+              <TituloInput>TELEFONE:</TituloInput>
               <Input
-                placeholder="Telefone"
+                placeholder="Digite seu número de telefone"
                 backgroundColor="white"
-                width="50%"
-                height="100%"
-                minHeight="45px"
-                maxHeight="40px"
-                paddingRight="2%"
+                width="100%"
+                height="40px"
+                alignSelf="flex-start"
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloInput>Data de Nascimento:</TituloInput>
+              <TituloInput>DATA DE NASCIMENTO:</TituloInput>
               <Input
-                placeholder="Data de Nascimento"
+                placeholder="Digite sua data de nascimento:"
                 backgroundColor="white"
-                width="50%"
-                height="100%"
-                minHeight="45px"
-                maxHeight="40px"
-                paddingRight="2%"
+                width="100%"
+                height="40px"
+                alignSelf="flex-start"
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
-            <TituloInput>Email</TituloInput>
+            <TituloInput>EMAIL:</TituloInput>
             <Input
-              placeholder="Email"
+              placeholder="Digite seu endereço de e-mail"
               backgroundColor="white"
-              width="90%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
+              height="40px"
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloInput>CRM</TituloInput>
+              <TituloInput>CRM:</TituloInput>
               <Input
-                placeholder="CRM"
+                placeholder="Digite seu CRM"
                 backgroundColor="white"
-                width="50%"
-                height="100%"
-                minHeight="45px"
-                maxHeight="40px"
-                paddingRight="2%"
+                width="100%"
+                height="40px"
+                alignSelf="flex-start"
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloInput>Unidade Federativa</TituloInput>
+              <TituloInput>UNIDADE FEDERATIVA</TituloInput>
               <Input
-                placeholder="Unidade Federativa"
+                placeholder="Digite a Unidade Federativa Referente ao seu CRM"
                 backgroundColor="white"
-                width="50%"
-                height="100%"
-                minHeight="45px"
-                maxHeight="40px"
-                paddingRight="2%"
+                width="100%"
+                height="40px"
+                justifyContent="flex-start"
+                alignSelf="flex-start"
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
@@ -103,12 +88,12 @@ function Perfil() {
             <Botao>Alterar Senha</Botao>
           </BotoesEdicao>
           <Botao
-          color="#000000"
-          backgroundColor="white"
-          borderColor="#FF000080"
-
+            color="#000000"
+            backgroundColor="white"
+            borderColor="#FF000080"
           >
-            Excluir</Botao>
+            Excluir
+          </Botao>
         </CaixaBotoes>
       </Conteudo>
     </Body>

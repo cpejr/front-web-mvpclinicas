@@ -5,40 +5,47 @@ const Input = styled.input`
   display: flex;
   flex-direction: ${(props) => props.flexDirection};
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent ?? 'center'};
+  align-self: ${(props) => props.alignSelf ?? 'center'};
   /* Medidas */
-  border-radius: 3px;
-  margin-top: ${(props) => props.marginTop ?? '2%'};
+  margin-top: ${(props) => props.marginTop };
   margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
   min-width: ${(props) => props.minWidth};
   max-width: ${(props) => props.maxWidth};
-  min-height: ${(props) => props.minHeight};
-  max-height: ${(props) => props.maxHeight};
   padding-top: ${(props) => props.paddingTop};
   padding-left: ${(props) => props.paddingLeft};
   padding-right: ${(props) => props.paddingRight};
   padding-bottom: ${(props) => props.paddingBottom};
-  height: ${(props) => props.height};
-  width: ${(props) => props.width};
+  height: ${(props) => props.height ?? '20px'};
+  width: ${(props) => props.width ?? '100%'};
   /* Cor e estilo */
-  color: ${(props) => props.color};
+  color: ${(props) => props.color ?? "#570B87"};
   background-color: ${(props) => props.backgroundColor};
-  border-color: ${(props) => props.borderColor};
+  border-color: ${(props) => props.borderColor ?? "#FFFFFF"};
   border-style: solid;
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.boxShadow};
+  border-bottom: 2px solid #570B87;
+  &:focus {
+    outline: none; 
+  }
   /* Características de texto */
-  font-size: ${(props) => props.fontSize};
+  font-size: ${(props) => props.fontSize ?? "1em"};
+  font-family: ${(props) => props.fontFamily ?? "Roboto Condensed"};
   text-align: ${(props) => props.textAlign};
   font-weight: ${(props) => props.fontWeight};
+  line-height: ${(props) => props.lineHeight ?? "50px"};
+::placeholder {
+  color: #8B00FF;
+}
   /* Margem */
   margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
-  margin-top: ${(props) => props.marginTop ?? '2%'};
+  margin-top: ${(props) => props.marginTop };
 `;
 
 export default Input;
