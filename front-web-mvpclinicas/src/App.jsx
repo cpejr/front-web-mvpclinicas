@@ -1,7 +1,9 @@
+import Perfil from "./pages/Perfil"
+
 function App() {
   return (
     <div>
-      MVP Clinicas
+      <Perfil/>
     </div>
   );
 }
