@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   Route,
   createRoutesFromElements,
+  Navigate
 } from "react-router-dom";
 
 import Cadastro from "../src/pages/Cadastro";
@@ -16,13 +17,14 @@ import Perfil from "../src/pages/Perfil";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/cadastro" element={<Cadastro />}></Route>
-      <Route path="/local" element={<Local />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/novocomentario" element={<NovoComentario />}></Route>
-      <Route path="/novolocal" element={<NovoLocal />}></Route>
-      <Route path="/perfil" element={<Perfil />}></Route>
+      <Route path="/" element={<Home />}/>
+      <Route path="/cadastro" element={<Cadastro />}/>
+      <Route path="/local" element={<Local />}/>
+      <Route path="/login" element={<Login />}/>
+      <Route path="/novocomentario" element={<NovoComentario />}/>
+      <Route path="/novolocal" element={<NovoLocal />}/>
+      <Route path="/perfil" element={<Perfil />}/>
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )
 );
