@@ -6,7 +6,6 @@ export const Body = styled.div `
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: green;
 `
 
 export const Conteudo = styled.div`
@@ -23,13 +22,13 @@ export const CaixaFoto = styled.div`
   justify-content: center;
   align-items: center;
   height: 20%;
-  width: 40%;
+  width: 20%;
   padding: 2%;
-  background-color: beige;
   margin-top: 5%;
+  background-color: grey;
 `;
 
-export const CaixaInput = styled.div`
+export const CaixaInputs = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,8 +36,16 @@ export const CaixaInput = styled.div`
   height: 65%;
   width: 70%;
   padding: 2%;
-  background-color: brown;
   margin-top: 5%;
+`;
+
+export const ConjuntoTituloInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 70%;
 `;
 
 export const InputDividido = styled.div`
@@ -48,7 +55,6 @@ export const InputDividido = styled.div`
   align-items: center;
   height: 100%;
   width: 70%;
-  background-color: brown;
 `;
 
 export const TituloInput = styled.div`
@@ -65,12 +71,9 @@ export const CaixaBotoes = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 15%;
+  height: 20%;
   width: 70%;
   padding: 2%;
-  background-color: grey;
-  margin-top: 2%;
-  margin-bottom: 5%;
 `;
 
 export const BotoesEdicao = styled.div`
@@ -79,6 +82,6 @@ export const BotoesEdicao = styled.div`
   justify-content: space-evenly;
   align-items: center;
   height: 50%;
-  width: 70%;
-  background-color: grey;
+  width: 100%;
+  padding: 3%;
 `;

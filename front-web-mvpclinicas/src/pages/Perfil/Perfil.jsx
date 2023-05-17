@@ -4,7 +4,8 @@ import {
   BotoesEdicao,
   CaixaBotoes,
   CaixaFoto,
-  CaixaInput,
+  CaixaInputs,
+  ConjuntoTituloInput,
   Conteudo,
   InputDividido,
   TituloInput,
@@ -18,78 +19,96 @@ function Perfil() {
     <Body>
       <Conteudo>
         <CaixaFoto></CaixaFoto>
-        <CaixaInput>
-          <TituloInput>Nome Completo:</TituloInput>
-          <Input
-            placeholder="Nome Completo"
-            backgroundColor="white"
-            width="90%"
-            height="100%"
-            minHeight="45px"
-            maxHeight="40px"
-            paddingRight="2%"
-          ></Input>
+        <CaixaInputs>
+          <ConjuntoTituloInput>
+            <TituloInput>Nome Completo:</TituloInput>
+            <Input
+              placeholder="Nome Completo"
+              backgroundColor="white"
+              width="90%"
+              height="100%"
+              minHeight="45px"
+              maxHeight="40px"
+              paddingRight="2%"
+            ></Input>
+          </ConjuntoTituloInput>
           <InputDividido>
-            <TituloInput>Telefone:</TituloInput>
-            <Input
-              placeholder="Telefone"
-              backgroundColor="white"
-              width="50%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
-            ></Input>
-            <TituloInput>Data de Nascimento:</TituloInput>
-            <Input
-              placeholder="Data de Nascimento"
-              backgroundColor="white"
-              width="50%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
-            ></Input>
+            <ConjuntoTituloInput>
+              <TituloInput>Telefone:</TituloInput>
+              <Input
+                placeholder="Telefone"
+                backgroundColor="white"
+                width="50%"
+                height="100%"
+                minHeight="45px"
+                maxHeight="40px"
+                paddingRight="2%"
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloInput>Data de Nascimento:</TituloInput>
+              <Input
+                placeholder="Data de Nascimento"
+                backgroundColor="white"
+                width="50%"
+                height="100%"
+                minHeight="45px"
+                maxHeight="40px"
+                paddingRight="2%"
+              ></Input>
+            </ConjuntoTituloInput>
           </InputDividido>
-          <TituloInput>Email</TituloInput>
-          <Input
-            placeholder="Email"
-            backgroundColor="white"
-            width="90%"
-            height="100%"
-            minHeight="45px"
-            maxHeight="40px"
-            paddingRight="2%"
-          ></Input>
+          <ConjuntoTituloInput>
+            <TituloInput>Email</TituloInput>
+            <Input
+              placeholder="Email"
+              backgroundColor="white"
+              width="90%"
+              height="100%"
+              minHeight="45px"
+              maxHeight="40px"
+              paddingRight="2%"
+            ></Input>
+          </ConjuntoTituloInput>
           <InputDividido>
-            <TituloInput>CRM</TituloInput>
-            <Input
-              placeholder="CRM"
-              backgroundColor="white"
-              width="50%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
-            ></Input>
-            <TituloInput>Unidade Federativa</TituloInput>
-            <Input
-              placeholder="Unidade Federativa"
-              backgroundColor="white"
-              width="50%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
-            ></Input>
+            <ConjuntoTituloInput>
+              <TituloInput>CRM</TituloInput>
+              <Input
+                placeholder="CRM"
+                backgroundColor="white"
+                width="50%"
+                height="100%"
+                minHeight="45px"
+                maxHeight="40px"
+                paddingRight="2%"
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloInput>Unidade Federativa</TituloInput>
+              <Input
+                placeholder="Unidade Federativa"
+                backgroundColor="white"
+                width="50%"
+                height="100%"
+                minHeight="45px"
+                maxHeight="40px"
+                paddingRight="2%"
+              ></Input>
+            </ConjuntoTituloInput>
           </InputDividido>
-        </CaixaInput>
+        </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
             <Botao>Alterar Dados</Botao>
             <Botao>Alterar Senha</Botao>
           </BotoesEdicao>
-          <Botao>Excluir</Botao>
+          <Botao
+          color="#000000"
+          backgroundColor="white"
+          borderColor="#FF000080"
+
+          >
+            Excluir</Botao>
         </CaixaBotoes>
       </Conteudo>
     </Body>

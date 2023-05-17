@@ -1,47 +1,44 @@
 import styled from 'styled-components';
 
 const Input = styled.input`
+  /* Posição */
+  display: flex;
+  flex-direction: ${(props) => props.flexDirection};
+  align-items: center;
+  justify-content: center;
+  /* Medidas */
+  border-radius: 3px;
+  margin-top: ${(props) => props.marginTop ?? '2%'};
+  margin-bottom: ${(props) => props.marginBottom};
+  margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
+  min-width: ${(props) => props.minWidth};
+  max-width: ${(props) => props.maxWidth};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  padding-top: ${(props) => props.paddingTop};
+  padding-left: ${(props) => props.paddingLeft};
+  padding-right: ${(props) => props.paddingRight};
+  padding-bottom: ${(props) => props.paddingBottom};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
+  /* Cor e estilo */
+  color: ${(props) => props.color};
   background-color: ${(props) => props.backgroundColor};
-  text-align: ${(props) => props.textAlign ?? 'left'};
-  color: ${(props) => props.color};
-  border-radius: 3px;
-  font-size: ${(props) => props.fontSize};
-  margin-top: ${(props) => props.marginTop};
-  margin-bottom: ${(props) => props.marginBottom ?? '0px'};
+  border-color: ${(props) => props.borderColor};
   border-style: solid;
-  line-break: ${(props) => props.lineBreak};
-  padding-left: ${(props) => props.paddingLeft ?? '2%'};
-  padding-right: ${(props) => props.paddingRight ?? '0px'};
-  box-shadow: ${(props) => props.boxShadow};
   border-width: ${(props) => props.borderWidth};
-  padding-right: ${(props) => props.paddingRight ?? '0px'};
-  padding-bottom: ${(props) => props.paddingBottom};
-  height: ${(props) => props.height ?? '50px'};
-  min-height: ${(props) => props.minHeight};
-  max-height: ${(props) => props.maxHeight};
-  width: ${(props) => props.width};
-  background-image: ${(props) => props.backgroundImage};
-  text-align: ${(props) => props.textAlign ?? 'left'};
-  color: ${(props) => props.color};
-  border-radius: 3px;
+  border-radius: ${(props) => props.borderRadius};
+  box-shadow: ${(props) => props.boxShadow};
+  /* Características de texto */
   font-size: ${(props) => props.fontSize};
-  margin-top: ${(props) => props.marginTop};
-  margin-bottom: ${(props) => props.marginBottom ?? '0px'};
-  border-style: solid;
-  line-break: ${(props) => props.lineBreak};
-  height: ${(props) => props.height ?? '50px'};
-  min-height: ${(props) => props.minHeight};
-  max-height: ${(props) => props.maxHeight};
-  padding-left: ${(props) => props.paddingLeft ?? '2%'};
-  box-shadow: ${(props) => props.boxShadow};
-  border-width: ${(props) => props.borderWidth};
-  padding-right: ${(props) => props.paddingRight ?? '0px'};
-  padding-bottom: ${(props) => props.paddingBottom};
-  width: ${(props) => props.width};
-  outline: ${(props) => props.outline};
-  @media (max-width: 820px) {
-    width: 100%;
-  }
+  text-align: ${(props) => props.textAlign};
+  font-weight: ${(props) => props.fontWeight};
+  /* Margem */
+  margin-bottom: ${(props) => props.marginBottom};
+  margin-left: ${(props) => props.marginLeft};
+  margin-right: ${(props) => props.marginRight};
+  margin-top: ${(props) => props.marginTop ?? '2%'};
 `;
 
 export default Input;
