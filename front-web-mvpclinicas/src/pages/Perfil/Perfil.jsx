@@ -8,76 +8,123 @@ import {
   ConjuntoTituloInput,
   Conteudo,
   InputDividido,
+  TituloIcon,
   TituloInput,
 } from "./Styles";
 
+import {
+  IdcardOutlined,
+  PhoneOutlined,
+  CalendarOutlined,
+  MailOutlined,
+  CopyOutlined,
+  GlobalOutlined,
+} from "@ant-design/icons";
+
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
+import fotoPerfil from "../../assets/montanha.jpg"
+
 
 function Perfil() {
   return (
     <Body>
       <Conteudo>
-        <CaixaFoto></CaixaFoto>
+        <CaixaFoto>
+          <img
+            src={fotoPerfil}
+            width="100%"
+            height="100%"
+            style={{ borderRadius: '100%' }}
+          ></img>
+        </CaixaFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloInput>NOME COMPLETO:</TituloInput>
+            <TituloIcon>
+              <TituloInput>NOME COMPLETO:</TituloInput>
+              <IdcardOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+            </TituloIcon>
             <Input
               placeholder="Digite seu nome completo"
               backgroundColor="white"
-              height="40px"
+              heightMedia700="20px"
+              marginBottomMedia700="8%"
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloInput>TELEFONE:</TituloInput>
+              <TituloIcon>
+                <TituloInput>TELEFONE:</TituloInput>
+                <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              </TituloIcon>
               <Input
                 placeholder="Digite seu número de telefone"
                 backgroundColor="white"
                 width="100%"
-                height="40px"
+                heightMedia700="20px"
                 alignSelf="flex-start"
+                marginBottomMedia700="8%"
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloInput>DATA DE NASCIMENTO:</TituloInput>
+              <TituloIcon>
+                <TituloInput>DATA DE NASCIMENTO:</TituloInput>
+                <CalendarOutlined
+                  style={{ fontSize: "18px", color: "#570B87" }}
+                />
+              </TituloIcon>
               <Input
                 placeholder="Digite sua data de nascimento:"
                 backgroundColor="white"
                 width="100%"
-                height="40px"
+                heightMedia700="20px"
                 alignSelf="flex-start"
+                marginBottomMedia700="8%"
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
-            <TituloInput>EMAIL:</TituloInput>
+            <TituloIcon>
+              <TituloInput>EMAIL:</TituloInput>
+              <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+            </TituloIcon>
             <Input
               placeholder="Digite seu endereço de e-mail"
               backgroundColor="white"
-              height="40px"
+              heightMedia700="20px"
+              marginBottomMedia700="8%"
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloInput>CRM:</TituloInput>
+              <TituloIcon>
+                <TituloInput>CRM:</TituloInput>
+                <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              </TituloIcon>
               <Input
                 placeholder="Digite seu CRM"
                 backgroundColor="white"
                 width="100%"
-                height="40px"
+                heightMedia700="20px"
                 alignSelf="flex-start"
+                marginBottomMedia700="8%"
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloInput>UNIDADE FEDERATIVA</TituloInput>
+              <TituloIcon>
+                <TituloInput>UNIDADE FEDERATIVA</TituloInput>
+                <GlobalOutlined
+                  style={{ fontSize: "18px", color: "#570B87" }}
+                />
+              </TituloIcon>
               <Input
-                placeholder="Digite a Unidade Federativa Referente ao seu CRM"
+                placeholder="Digite a Unidade Federativa do CRM"
                 backgroundColor="white"
                 width="100%"
-                height="40px"
+                heightMedia700="20px"
                 justifyContent="flex-start"
                 alignSelf="flex-start"
+                marginBottomMedia700="8%"
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>

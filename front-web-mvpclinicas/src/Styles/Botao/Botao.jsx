@@ -39,6 +39,15 @@ const Botao = styled.button`
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
   margin-top: ${(props) => props.marginTop };
+
+  @media (max-width: 500px) {
+    width: ${(props) => props.widthMedia500 ?? '180px'};
+  }
+
+  @media (max-width: 500px) {
+    height: ${(props) => props.HeightMedia500 ?? '35px'};
+  }
+
 `;
 
 export default Botao;
