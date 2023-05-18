@@ -8,6 +8,9 @@ export const GetDadosUsuario = async (id) => {
       .then((res) => {
         dadosUsuario = res.data;
       })
+      .catch((error) => {
+        alert(error.message)
+      });
 
     return { dadosUsuario };
   };

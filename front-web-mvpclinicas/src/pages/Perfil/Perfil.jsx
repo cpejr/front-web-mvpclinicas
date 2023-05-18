@@ -31,13 +31,13 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const id = '646614fa7e221267c351d2c5';
+  const id = '6466a62695e98cb373b670f4';
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(id);
     setUsuario(resposta.dadosUsuario);
   }
-
+  
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
@@ -60,7 +60,7 @@ function Perfil() {
               <IdcardOutlined style={{ fontSize: "18px", color: "#570B87" }} />
             </TituloIcon>
             <Input
-              placeholder="Digite seu nome completo"
+              placeholder={usuario.nome}
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
@@ -73,7 +73,7 @@ function Perfil() {
                 <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder="Digite seu número de telefone"
+                placeholder={usuario.telefone}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -89,7 +89,7 @@ function Perfil() {
                 />
               </TituloIcon>
               <Input
-                placeholder="Digite sua data de nascimento:"
+                placeholder={usuario.data_nascimento}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -104,7 +104,7 @@ function Perfil() {
               <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
             </TituloIcon>
             <Input
-              placeholder="Digite seu endereço de e-mail"
+              placeholder={usuario.email}
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
@@ -117,7 +117,7 @@ function Perfil() {
                 <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder="Digite seu CRM"
+                placeholder={usuario.crm}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -133,7 +133,7 @@ function Perfil() {
                 />
               </TituloIcon>
               <Input
-                placeholder="Digite a Unidade Federativa do CRM"
+                placeholder={usuario.uni_federativa}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
