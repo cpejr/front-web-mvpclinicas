@@ -24,8 +24,6 @@ export const Conteudo = styled.div`
 export const CaixaFoto = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 12em;
-  font-size: 12em;
   align-items: center;
   justify-content: center;
   width: 250px;
