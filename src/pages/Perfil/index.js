@@ -1,1 +1,1 @@
-export { default } from "./Pefil";
+export { default } from "./Perfil";
