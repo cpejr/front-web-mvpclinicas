@@ -133,7 +133,7 @@ export const CaixaBotoes = styled.div`
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 70%;
+  width: 100%;
   padding: 2%;
 
   @media (max-width: 900px) {
@@ -148,10 +148,11 @@ export const BotoesEdicao = styled.div`
   justify-content: space-evenly;
   align-items: center;
   height: 50%;
-  width: 100%;
+  width: 65%;
 
-  @media (max-width: 900px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     gap: 20px;
+    width: 100%;
   }
 `;

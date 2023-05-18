@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -25,8 +25,23 @@ import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg"
 
+import * as managerService from "../../services/ManagerService/managerService";
+
+
 
 function Perfil() {
+  const [usuario, setUsuario] = useState({});
+  const id = '646614fa7e221267c351d2c5';
+
+  async function pegandoDadosUsuario() {
+    const resposta = await managerService.GetDadosUsuario(id);
+    setUsuario(resposta.dadosUsuario);
+  }
+
+  useEffect(() => {
+    pegandoDadosUsuario();
+  }, []);
+
   return (
     <Body>
       <Conteudo>
@@ -138,6 +153,8 @@ function Perfil() {
             color="#000000"
             backgroundColor="white"
             borderColor="#FF000080"
+            width="20%"
+            widthMedia700="30%"
           >
             Excluir
           </Botao>
