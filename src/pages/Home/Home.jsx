@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Body,
-  BotoesEdicao,
-  CaixaBotoes,
-  CaixaFoto,
   CaixaInputs,
-  ConjuntoTituloInput,
-  Conteudo,
-  InputDividido,
-  TituloIcon,
-  TituloInput,
+  Conteudo
 } from "./Styles";
 
 import {
@@ -19,6 +12,7 @@ import {
   MailOutlined,
   CopyOutlined,
   GlobalOutlined,
+  SearchOutlined
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -45,120 +39,20 @@ function Perfil() {
   return (
     <Body>
       <Conteudo>
-        <CaixaFoto>
-          <img
-            src={fotoPerfil}
-            width="100%"
-            height="100%"
-            style={{ borderRadius: '100%' }}
-          ></img>
-        </CaixaFoto>
-        <CaixaInputs>
-          <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>NOME COMPLETO:</TituloInput>
-              <IdcardOutlined style={{ fontSize: "18px", color: "#570B87" }} />
-            </TituloIcon>
-            <Input
-              placeholder="Digite seu nome completo"
-              backgroundColor="white"
-              heightMedia700="20px"
-              marginBottomMedia700="8%"
-            ></Input>
-          </ConjuntoTituloInput>
-          <InputDividido>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>TELEFONE:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder="Digite seu número de telefone"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-              ></Input>
-            </ConjuntoTituloInput>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>DATA DE NASCIMENTO:</TituloInput>
-                <CalendarOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder="Digite sua data de nascimento:"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-              ></Input>
-            </ConjuntoTituloInput>
-          </InputDividido>
-          <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>EMAIL:</TituloInput>
-              <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
-            </TituloIcon>
-            <Input
-              placeholder="Digite seu endereço de e-mail"
-              backgroundColor="white"
-              heightMedia700="20px"
-              marginBottomMedia700="8%"
-            ></Input>
-          </ConjuntoTituloInput>
-          <InputDividido>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>CRM:</TituloInput>
-                <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder="Digite seu CRM"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-              ></Input>
-            </ConjuntoTituloInput>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>UNIDADE FEDERATIVA</TituloInput>
-                <GlobalOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder="Digite a Unidade Federativa do CRM"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                justifyContent="flex-start"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-              ></Input>
-            </ConjuntoTituloInput>
-          </InputDividido>
-        </CaixaInputs>
-        <CaixaBotoes>
-          <BotoesEdicao>
-            <Botao>Alterar Dados</Botao>
-            <Botao>Alterar Senha</Botao>
-          </BotoesEdicao>
-          <Botao
-            color="#000000"
-            backgroundColor="white"
-            borderColor="#FF000080"
-            width="20%"
-            widthMedia700="30%"
-          >
-            Excluir
-          </Botao>
-        </CaixaBotoes>
+      <CaixaInputs>
+        <Input
+        placeholder="Pesquisar Local"
+        backgroundColor="white"
+        width="60%"
+        borderColor="#570B87"
+        borderWidth="1px"
+        borderRadius="10px"
+        fontSize="1.5em"
+        padding="10px">
+        </Input>
+        <SearchOutlined style={{ fontSize: "28px", color: "#570B87",position:"absolute",right:"23.5%",paddingBottom:"1.8%"}}/>
+      </CaixaInputs>
+      
       </Conteudo>
     </Body>
   );

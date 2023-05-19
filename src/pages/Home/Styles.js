@@ -6,7 +6,10 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  margin: 0px;
+  padding: 0px;
 `;
+
 
 export const Conteudo = styled.div`
   display: flex;
@@ -15,6 +18,7 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
+  padding-top: 7%;
 
   @media (max-width: 900px) {
     width: 100%;
@@ -48,20 +52,14 @@ export const CaixaFoto = styled.div`
 
 export const CaixaInputs = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  gap: 30px;
   align-items: center;
-  height: 70%;
-  width: 70%;
-  padding: 2%;
-
-  @media (max-width: 900px) {
-    width: 90%;
-  }
+  height: 100%;
+  width: 100%;
 
   @media (max-width: 700px) {
-    gap: 5px;
+    gap: 0px;
   }
 `;
 
