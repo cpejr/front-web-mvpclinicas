@@ -3,9 +3,10 @@ import styled from "styled-components";
 const Botao = styled.button`
   /* Posição */
   align-items: center;
-  display: inline-block;
+  display: ${(props) => props.display ?? "inline-block"};
   flex-direction: ${(props) => props.flexDirection};
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent ?? "center"};
+  align-self:  ${(props) => props.alignSelf};
 
   /* Medidas */
   gap: ${(props) => props.gap};
