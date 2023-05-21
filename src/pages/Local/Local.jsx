@@ -16,6 +16,7 @@ import {
   FotoUsuario,
   InputDividido,
   NomeTelefone,
+  NomeUsuario,
   TituloAvaliacao,
   TituloIcon,
   TituloInput,
@@ -46,14 +47,6 @@ function Local() {
 
   const id_local = "6469762610cc9138d78e6470";
 
-  const proxComentario = () => {
-    setComentarioAtual(comentarioAtual + 1);
-  };
-
-  const antComentario = () => {
-    setComentarioAtual(comentarioAtual - 1);
-  };
-
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocal(id_local);
     setLocal(resposta.dadosLocal);
@@ -64,9 +57,6 @@ function Local() {
     setComentarios(resposta.comentariosLocal);
   }
 
-  //console.log(local.nome)
-  //console.log(comentarios);
-
   useEffect(() => {
     pegandoDadosLocal();
   }, []);
@@ -74,6 +64,22 @@ function Local() {
   useEffect(() => {
     pegandoComentariosLocal();
   }, []);
+
+  const proxComentario = (comentarioAtual) => {
+    if (comentarioAtual === comentarios.length - 1) {
+      setComentarioAtual(0);
+    } else {
+      setComentarioAtual(comentarioAtual + 1);
+    }
+  };
+
+  const antComentario = () => {
+    if (comentarioAtual === 0) {
+      setComentarioAtual(comentarios.length - 1);
+    } else {
+      setComentarioAtual(comentarioAtual - 1);
+    }
+  };
 
   return (
     <Body>
@@ -170,48 +176,35 @@ function Local() {
             <Esquerda
               onClick={() => {
                 antComentario(comentarioAtual);
-                console.log(comentarioAtual);
               }}
             >
               <LeftOutlined style={{ fontSize: 25 }} />
             </Esquerda>
-            <UsuarioComentario>
-              <Usuario>
-                <FotoUsuario>
-                  <img
-                    src={fotoPerfil}
-                    width="100%"
-                    height="100%"
-                    style={{ borderRadius: "100%" }}
-                  />
-                </FotoUsuario>
-                <TituloInput
-                  width="100%"
-                  justifyContent="center"
-                  fontSize="1.2em"
-                >
-                  Nome do Usuário
-                </TituloInput>
-              </Usuario>
-              <Comentario>
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </Comentario>
-            </UsuarioComentario>
+            {comentarios.length > 0 &&
+              comentarioAtual >= 0 &&
+              comentarioAtual < comentarios.length && (
+                <UsuarioComentario>
+                  <Usuario>
+                    <FotoUsuario>
+                      <img
+                        src={fotoPerfil}
+                        width="100%"
+                        height="100%"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </FotoUsuario>
+                    <NomeUsuario>
+                      {comentarios[comentarioAtual].id_usuario.nome}
+                    </NomeUsuario>
+                  </Usuario>
+                  <Comentario>
+                    {comentarios[comentarioAtual].comentario}
+                  </Comentario>
+                </UsuarioComentario>
+              )}
             <Direita
               onClick={() => {
                 proxComentario(comentarioAtual);
-                console.log(comentarioAtual);
               }}
             >
               <RightOutlined style={{ fontSize: 25 }} />

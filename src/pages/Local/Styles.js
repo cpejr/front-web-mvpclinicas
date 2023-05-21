@@ -141,11 +141,12 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: "#EAC9FF";
+  color: #570B87;
 
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   justify-content: ${(props) => props.justifyContent};
+  color: ${(props) => props.color};
 
   @media (max-width: 900px) {
     font-size: 1em;
@@ -236,7 +237,7 @@ export const UsuarioComentario = styled.div`
   align-items: center;
   justify-content: space-around;
   padding: 2%;
-  background-color: purple;
+  background-color: #d580ff;
   border-radius: 2%;
 `;
 
@@ -286,11 +287,25 @@ export const FotoUsuario = styled.div`
   }
 `;
 
+export const NomeUsuario = styled.div`
+  width: 100%;
+  height: 30px;
+  font-family: "Roboto Condensed";
+  font-weight: 500;
+  font-size: 1.4em;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+`;
+
 export const Comentario = styled.div`
   width: 80%;
   height: 60%;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding: 3%;
   font-size: 1.2em;
   overflow-y: auto;

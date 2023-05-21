@@ -9,7 +9,7 @@ const Botao = styled.button`
 
   /* Medidas */
   gap: ${(props) => props.gap};
-  height: ${(props) => props.height ?? "40px"};
+  height: ${(props) => props.height ?? "45px"};
   max-height: ${(props) => props.maxHeight};
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
