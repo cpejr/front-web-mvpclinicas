@@ -1,8 +1,8 @@
+import Local from "./pages/Local"
+
 function App() {
   return (
-    <div>
-      MVP Clinicas
-    </div>
+    <Local/>
   );
 }
 export default App;
