@@ -141,7 +141,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: darkpurple;
+  color: "#EAC9FF";
 
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -216,6 +216,18 @@ export const BoxCarrossel = styled.div`
   justify-content: center;
 `;
 
+export const Esquerda = styled.div`
+  width: 10%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  @media (max-width: 460px) {
+    width: 20%;
+  }
+ 
+`;
+
 export const UsuarioComentario = styled.div`
   display: flex;
   flex-direction: column;
@@ -226,6 +238,17 @@ export const UsuarioComentario = styled.div`
   padding: 2%;
   background-color: purple;
   border-radius: 2%;
+`;
+
+export const Direita = styled.div`
+  width: 10%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  @media (max-width: 460px) {
+    width: 20%;
+  }
 `;
 
 export const Usuario = styled.div`
