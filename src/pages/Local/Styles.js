@@ -24,15 +24,18 @@ export const Conteudo = styled.div`
 export const FotoNome = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: 70%;
-  width: 70%;
+  width: 50%;
   padding: 1%;
 
   @media (max-width: 700px) {
     flex-direction: column;
-    width: 70%;
+  }
+
+  @media (max-width: 400px) {
+    width: 80%;
   }
 `;
 
@@ -45,10 +48,6 @@ export const NomeTelefone = styled.div`
   height: 100%;
   width: 50%;
 
-  @media (max-width: 900px) {
-    width: 60%;
-  }
-
   @media (max-width: 700px) {
     gap: 5px;
     width: 100%;
@@ -60,26 +59,22 @@ export const CaixaFoto = styled.div`
   justify-content: center;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 250px;
+  width: 40%;
+  height: 40%;
   border-radius: 50%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
-  margin: 2%;
-
-  @media (max-width: 900px) {
-    width: 200px;
-    height: 200px;
-  }
 
   @media (max-width: 700px) {
-    width: 160px;
-    height: 160px;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 10%;
   }
 
-  @media (max-width: 450px) {
-    width: 130px;
-    height: 130px;
+  @media (max-width: 400px) {
+    width: 100;
+    height: 100%;
+    margin-bottom: 10%;
   }
 `;
 
@@ -90,11 +85,15 @@ export const CaixaInputs = styled.div`
   gap: 30px;
   align-items: center;
   height: 70%;
-  width: 70%;
+  width: 50%;
   padding: 1%;
 
   @media (max-width: 700px) {
     gap: 5px;
+  }
+
+  @media (max-width: 400px) {
+    width: 80%;
   }
 `;
 
@@ -105,7 +104,7 @@ export const ConjuntoTituloInput = styled.div`
   gap: 7px;
   align-items: center;
   height: 100%;
-  width: 80%;
+  width: 100%;
 
   width: ${(props) => props.width};
 
@@ -120,7 +119,7 @@ export const InputDividido = styled.div`
   justify-content: space-between;
   gap: 50px;
   height: 100%;
-  width: 80%;
+  width: 100%;
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -141,7 +140,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #570B87;
+  color: #570b87;
 
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -162,7 +161,6 @@ export const TituloIcon = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 1%;
   width: 100%;
 `;
 
@@ -173,18 +171,12 @@ export const ConteudoAvaliacao = styled.div`
   gap: 30px;
   align-items: center;
   height: 70%;
-  width: 70%;
+  width: 60%;
   padding: 1%;
   margin-top: 2%;
 
-  @media (max-width: 900px) {
-    width: 60%;
-    padding: 2%;
-  }
-
   @media (max-width: 700px) {
-    padding: 1%;
-    width: 80%;
+    width: 90%;
   }
 `;
 
@@ -212,7 +204,7 @@ export const TituloAvaliacao = styled.div`
 export const BoxCarrossel = styled.div`
   display: flex;
   width: 100%;
-  height: 80%;
+  height: 60%;
   align-items: center;
   justify-content: center;
 `;
@@ -226,14 +218,13 @@ export const Esquerda = styled.div`
   @media (max-width: 460px) {
     width: 20%;
   }
- 
 `;
 
 export const UsuarioComentario = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
-  height: 400px;
+  width: 80%;
+  height: auto;
   align-items: center;
   justify-content: space-around;
   padding: 2%;
@@ -298,6 +289,10 @@ export const NomeUsuario = styled.div`
   align-items: center;
   justify-content: center;
   color: #000000;
+
+  @media (max-width: 500px) {
+    font-size: 1.2em;
+  }
 `;
 
 export const Comentario = styled.div`
@@ -315,6 +310,10 @@ export const Comentario = styled.div`
 
   ::-webkit-scrollbar {
     width: 0px;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 1em;
   }
 `;
 
