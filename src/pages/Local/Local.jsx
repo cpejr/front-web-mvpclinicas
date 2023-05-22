@@ -113,6 +113,7 @@ function Local() {
                 backgroundColor="white"
                 heightMedia700="20px"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -127,6 +128,7 @@ function Local() {
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
           </NomeTelefone>
@@ -146,6 +148,7 @@ function Local() {
               heightMedia700="20px"
               alignSelf="flex-start"
               marginBottomMedia700="8%"
+              readOnly
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -159,6 +162,7 @@ function Local() {
                 backgroundColor="white"
                 heightMedia700="20px"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -173,6 +177,7 @@ function Local() {
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>

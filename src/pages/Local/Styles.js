@@ -10,15 +10,11 @@ export const Body = styled.div`
 
 export const Conteudo = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 90%;
   height: 100%;
-
-  @media (max-width: 900px) {
-    width: 100%;
-  }
 `;
 
 export const FotoNome = styled.div`
@@ -29,6 +25,10 @@ export const FotoNome = styled.div`
   height: 70%;
   width: 50%;
   padding: 1%;
+
+  @media (max-width: 820px) {
+    width: 80%;
+  }
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -87,6 +87,10 @@ export const CaixaInputs = styled.div`
   height: 70%;
   width: 50%;
   padding: 1%;
+
+  @media (max-width: 820px) {
+    width: 80%;
+  }
 
   @media (max-width: 700px) {
     gap: 5px;
@@ -175,7 +179,7 @@ export const ConteudoAvaliacao = styled.div`
   padding: 1%;
   margin-top: 2%;
 
-  @media (max-width: 700px) {
+  @media (max-width: 820px) {
     width: 90%;
   }
 `;
