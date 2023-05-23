@@ -8,7 +8,12 @@ import {
   NomeLocal,
   EnderecoLocal,
   EstrelasLocal,
-  CaixaBotoes
+  CaixaBotoes,
+  TextoPlaceholder,
+  CaixaPlaceholder,
+  CaixaFoto,
+  CaixaDados,
+  CaixaSelect
 } from "./Styles";
 import { Cores } from "../../variaveis";
 import {
@@ -20,42 +25,22 @@ import { Rate } from 'antd';
 import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
+import * as managerService from "../../services/ManagerService/managerService";
 
 
 
 
 function Home() {
-  const modelodeLocal = [
-    {
-      id: 1,
-      nome: "Restaurante A",
-      endereco: "Rua 1, Cidade A",
-      estrelas: 4,
-      imgUrl: "https://exemplo.com/imagem1.jpg"
-    },
-    {
-      id: 2,
-      nome: "Restaurante B",
-      endereco: "Rua 2, Cidade B",
-      estrelas: 3,
-      imgUrl: "https://exemplo.com/imagem2.jpg"
-    },
-    {
-      id: 3,
-      nome: "Restaurante C",
-      endereco: "Rua 3, Cidade C",
-      estrelas: 5,
-      imgUrl: "https://exemplo.com/imagem3.jpg"
-    },
-    {
-      id: 4,
-      nome: "Restaurante D",
-      endereco: "Rua 4, Cidade D",
-      estrelas: 1,
-      imgUrl: "https://exemplo.com/imagem4.jpg"
-    }
-  ];
+  const [locais, setLocais] = useState([""]);
 
+  async function pegandoDadosDeLocais() {
+    const resposta = await managerService.GetDadosLocais();
+    setLocais(resposta.dadosLocais);
+  }
+  
+  useEffect(() => {
+    pegandoDadosDeLocais();
+  }, []);
 
   return (
     <Body>
@@ -73,6 +58,7 @@ function Home() {
         </Input>
         <SearchOutlined style={{ fontSize: "28px", color: "#570B87",position:"absolute",right:"19%",paddingBottom:"1.8%"}}/>
       </CaixaInputs>
+      <CaixaSelect>
       <Select
 				backgroundColor={Cores.branco}
 				color="#570B87"
@@ -80,36 +66,52 @@ function Home() {
         borderWidth="2px"
         borderRadius="10px"
 				fontSize="17px"
-				width="15%"
+				width="20%"
 				marginTop="0px"
-        marginLeft="56%"
 				placeholder="Pesquisar por nome"
 				height="45px"
 				nome="id_usuario"
-        borderWidth820="46%"
+        borderWidth820="100%"
 			>
 				<option value="">
           Pesquisar por nome
 				</option>	
 			</Select>
+      </CaixaSelect>
+      {typeof(locais) === 'undefined' ? (
+        <CaixaPlaceholder>
+        <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
+        </CaixaPlaceholder>
+      ) : (
       <CaixaLocais>
-      {modelodeLocal.map((value) => (
-								<Local key={value?.id}>
+      {locais?.map((value, index) => (
+								<Local key={index}>
+                  <CaixaFoto>
+                  <img
+                  src={value.foto_url}
+                  width="100%"
+                  height="100%"
+                  style={{ borderRadius: '100%' }}
+                  ></img>
+                  </CaixaFoto>
+                  <CaixaDados>
 									<NomeLocal>{value?.nome}</NomeLocal>
 									<EnderecoLocal>{value?.endereco}</EnderecoLocal>
                   <EstrelasLocal>
                   {value?.estrelas}<Rate value={value?.estrelas} style={{color: "#570B87"}} disabled/>
 									</EstrelasLocal>
+                  </CaixaDados>
 								</Local>
 				))}
       </CaixaLocais>
+      )}
       <div className="botoes-direita" style={{width: "100%", justifyContent: "flex-end"}}>
       <CaixaBotoes>
       <Botao
       borderRadius="10px"
       width="100%"
       alignSelf="flex-end"
-      fontSize="27px"
+      fontSize="25px"
       height="50px"
       HeightMedia500="50px"
       widthMedia500="100%"

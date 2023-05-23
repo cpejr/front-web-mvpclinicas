@@ -27,9 +27,10 @@ export const Conteudo = styled.div`
 export const CaixaBotoes = styled.div`
   display: flex;
   justify-content: flex-end;
-  width: 20%;
+  align-items: flex-start;
+  width: 15%;
   position: relative;
-  left: 80%;
+  left: 70.78%;
   &.botoes-direita {
     justify-content: flex-end;
   }
@@ -44,24 +45,23 @@ export const CaixaFoto = styled.div`
   display: flex;
   justify-content: center;
   font-size: 12em;
-  font-size: 12em;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 250px;
-  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
-  margin: 2%;
+  margin: 0%;
 
   @media (max-width: 900px) {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
 
   @media (max-width: 500px) {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
   }
 `;
 
@@ -75,6 +75,19 @@ export const CaixaInputs = styled.div`
 
   @media (max-width: 700px) {
     gap: 0px;
+  }
+`;
+
+export const CaixaDados = styled.div`
+    margin-left: 3%;
+`;
+
+export const CaixaSelect = styled.div`
+    display: flex;
+    width: 71.4%;
+    justify-content: flex-end;
+    @media (max-width: 700px) {
+    justify-content: center;
   }
 `;
 
@@ -156,6 +169,8 @@ export const CaixaLocais = styled.div`
 `;
 
 export const Local = styled.div`
+  display: flex;
+  align-items: stretch;
   background-color: #f2f2f2;
   border: 2px solid #570B87;
   padding: 10px;
@@ -169,7 +184,7 @@ export const NomeLocal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 40px;
   height: 20%;
   width: 100%;
@@ -182,7 +197,7 @@ export const NomeLocal = styled.div`
   }
 `;
 
-export const EnderecoLocal = styled.div`
+export const TextoPlaceholder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -190,11 +205,40 @@ export const EnderecoLocal = styled.div`
   gap: 40px;
   height: 20%;
   width: 100%;
-  padding-bottom: 2%;
+  padding-bottom: 5%;
+  padding-top: 5%;
   color: #570B87;
   font-size: 32px;
+
   @media (max-width: 900px) {
     font-size: 20px;
+  }
+`;
+
+export const CaixaPlaceholder = styled.div`
+  background-color: #f2f2f2;
+  border: 2px solid #570B87;
+  padding: 10px;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  border-radius: 6px;
+  height: 10%;
+  width: 60%;
+`;
+
+export const EnderecoLocal = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  height: 20%;
+  width: 100%;
+  padding-bottom: 2%;
+  color: #570B87;
+  font-size: 26px;
+  @media (max-width: 900px) {
+    font-size: 15px;
   }
 `;
 
@@ -202,14 +246,18 @@ export const EstrelasLocal = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   height: 20%;
+  margin-top: 7%;
   width: 100%;
   padding: 0%;
   color: #570B87;
   font-size: 32px;
   @media (max-width: 900px) {
     font-size: 20px;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
   }
 `;
 
