@@ -47,13 +47,6 @@ function Local() {
 
   const id_local = "6469762610cc9138d78e6470";
 
-  let soma_avaliacoes = 0;
-  for (let i = 0; i < comentarios.length; i++) {
-    soma_avaliacoes += parseInt(comentarios[i].avaliacao);
-  }
-
-  let media_avaliacoes = soma_avaliacoes / comentarios.length;
-
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
       setComentarioAtual(0);
@@ -183,7 +176,7 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>Avaliação Geral: {media_avaliacoes}</TituloAvaliacao>
+          <TituloAvaliacao>Avaliação Geral: {comentarios.media_avaliacao}</TituloAvaliacao>
           <BoxCarrossel>
             <Esquerda
               onClick={() => {
