@@ -1,5 +1,6 @@
 import React from "react";
 import { MailOutlined } from '@ant-design/icons';
+import Icon from "@ant-design/icons/lib/components/Icon";
 import {
   Body,
   BotoesEdicao,
@@ -9,6 +10,7 @@ import {
   Conteudo,
   BotaoCadastro,
   TituloInput,
+  InputNovo,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -18,9 +20,10 @@ function Login(){
     <Conteudo>
       <CaixaFoto></CaixaFoto>
       <CaixaInput> 
+        <InputNovo>
         <TituloInput>E-mail</TituloInput>
         <Input
-          placeholder="Digite seu e-mail"
+          placeholder="Digite seu e-mail✉"
           color="#8B00FF"
           backgroundColor="white"
           type="email"
@@ -30,11 +33,11 @@ function Login(){
           maxHeight="40px"
           paddingRight="2%"
         >
-          <MailOutlined style={{marginLeft: "1rem", position: "absolute"}} color="#623CEA" size="1.5em" />
         </Input>
+        </InputNovo>
         <TituloInput>Senha</TituloInput>
         <Input
-          placeholder="Digite sua senha"
+          placeholder="Digite sua senha🗝"
           backgroundColor="white"
           width="50%"
           type="password"
