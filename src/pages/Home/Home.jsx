@@ -30,8 +30,9 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 
 
+
 function Home() {
-  const [locais, setLocais] = useState([""]);
+  const [locais, setLocais] = useState([]);
 
   async function pegandoDadosDeLocais() {
     const resposta = await managerService.GetDadosLocais();
@@ -78,7 +79,7 @@ function Home() {
 				</option>	
 			</Select>
       </CaixaSelect>
-      {typeof(locais) === 'undefined' ? (
+      {locais.length === 0 ? (
         <CaixaPlaceholder>
         <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
         </CaixaPlaceholder>
@@ -91,7 +92,6 @@ function Home() {
                   src={value.foto_url}
                   width="100%"
                   height="100%"
-                  style={{ borderRadius: '100%' }}
                   ></img>
                   </CaixaFoto>
                   <CaixaDados>
