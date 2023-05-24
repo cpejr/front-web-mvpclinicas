@@ -1,7 +1,8 @@
+import  Cadastro from "./pages/Cadastro/Cadastro"
 function App() {
   return (
     <div>
-      MVP Clinicas
+      <Cadastro></Cadastro>
     </div>
   );
 }
