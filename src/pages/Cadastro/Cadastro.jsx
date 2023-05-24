@@ -25,7 +25,7 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 
-//import api from "../../services/api";
+import api from "../../services/api";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import * as managerService from '../../services/ManagerService/managerService';
@@ -42,17 +42,15 @@ const Cadastro = () => {
     senha: '',
     avatar_url: '',
   };
-  const [usuario, setUsuario] = useState(zeraInputs)
+  const [usuario, setUsuario] = useState({zeraInputs});
   function preenchendoDados(ev) {
-    
-    const { name, valor } = ev.target;
+    const { name, value } = ev.target;
     setUsuario(prevState => ({
       ...prevState,
-      [name]: valor
+      [name]: value
+      
     }));
-   
   }
-  console.log(usuario)
 async function requisicaoCadastro() {
   if(usuario.senha === usuario.confirmacao_senha){
    const usuarioCadastrado = await managerService.CadastroUsuario(
