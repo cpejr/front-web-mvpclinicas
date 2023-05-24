@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Body,
   BotoesEdicao,
@@ -24,11 +25,46 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 
+//import api from "../../services/api";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
+import * as managerService from '../../services/ManagerService/managerService';
 
 
-function Cadastro() {
+const Cadastro = () => {
+  const zeraInputs = {
+    nome: '',
+    telefone: '',
+    data_nascimento: '',
+    email: '',
+    crm: '',
+    uni_federativa:'',
+    senha: '',
+    avatar_url: '',
+  };
+  const [usuario, setUsuario] = useState(zeraInputs)
+  function preenchendoDados(ev) {
+    
+    const { name, valor } = ev.target;
+    setUsuario(prevState => ({
+      ...prevState,
+      [name]: valor
+    }));
+   
+  }
+  console.log(usuario)
+async function requisicaoCadastro() {
+  if(usuario.senha === usuario.confirmacao_senha){
+   const usuarioCadastrado = await managerService.CadastroUsuario(
+      usuario,
+    )
+    if(usuarioCadastrado) {
+      console.log('Usuário criado.')
+    } else {
+      console.log('As senhas digitadas são diferentes.');
+    }
+  }}
+
   return (
     <Body>
       <Conteudo>
@@ -49,6 +85,9 @@ function Cadastro() {
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              name="nome"
+              value={usuario.nome}
+              onChange={preenchendoDados}
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -64,6 +103,9 @@ function Cadastro() {
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                name="telefone"
+                value={usuario.telefone}
+                onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -80,6 +122,9 @@ function Cadastro() {
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                name="data_nascimento"
+                value={usuario.data_nascimento}
+                onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
@@ -93,6 +138,9 @@ function Cadastro() {
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              name="email"
+              value={usuario.email}
+              onChange={preenchendoDados}
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -108,6 +156,9 @@ function Cadastro() {
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                name="crm"
+                value={usuario.crm}
+                onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -125,6 +176,9 @@ function Cadastro() {
                 justifyContent="flex-start"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                name="uni_federativa"
+                value={usuario.uni_federativa}
+                onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
@@ -138,6 +192,9 @@ function Cadastro() {
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              name="senha"
+              value={usuario.senha}
+              onChange={preenchendoDados}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -150,6 +207,9 @@ function Cadastro() {
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              name="confirmacao_senha"
+              value={usuario.confirmacao_senha}
+              onChange={preenchendoDados}
             ></Input>
              <SubtituloInput>Informamos que nenhuma informação aqui preenchida além de seu nome será exibida para outros usuários!</SubtituloInput>
           </ConjuntoTituloInput>
@@ -163,7 +223,10 @@ function Cadastro() {
             color="#570B87" 
             textDecoration="underline"
             >Já possui uma conta?</Botao>
-            <Botao>Confirmar</Botao>
+            <Botao
+            onClick={()=>{requisicaoCadastro();}}>
+              Confirmar
+              </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
       </Conteudo>
