@@ -25,7 +25,9 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 
-import api from "../../services/api";
+import { data, telefone } from '../../../utils/masks';
+
+//import api from "../../services/api";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import * as managerService from '../../services/ManagerService/managerService';
@@ -45,11 +47,23 @@ const Cadastro = () => {
   const [usuario, setUsuario] = useState({zeraInputs});
   function preenchendoDados(ev) {
     const { name, value } = ev.target;
+    if (name === 'telefone') {
+      setUsuario(prevState => ({
+        ...prevState,
+        [name]: telefone(value)
+    }
+  ))} else if (name === 'data_nascimento') {
+    setUsuario(prevState => ({
+      ...prevState,
+      [name]: data(value)
+  }
+))}
+  else {
     setUsuario(prevState => ({
       ...prevState,
       [name]: value
-      
-    }));
+    }))}
+    
   }
 async function requisicaoCadastro() {
   if(usuario.senha === usuario.confirmacao_senha){
