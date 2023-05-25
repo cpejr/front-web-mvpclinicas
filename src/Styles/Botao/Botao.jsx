@@ -18,7 +18,7 @@ const Botao = styled.button`
   padding-left: ${(props) => props.paddingLeft};
   padding-right: ${(props) => props.paddingRight};
   padding-top: ${(props) => props.paddingTop};
-  width: ${(props) => props.width ?? "30%"};
+  width: ${(props) => props.width ?? "40%"};
 
   @media (max-width: 700px) {
     width: ${(props) => props.widthMedia700};
@@ -35,7 +35,7 @@ const Botao = styled.button`
   /* Cor e estilo do botão */
   background-color: ${(props) => props.backgroundColor ?? "#8B00FF"};
   border-color: ${(props) => props.borderColor ?? "#570B87"};
-  border-radius: ${(props) => props.borderRadius ?? "18px"};
+  border-radius: ${(props) => props.borderRadius ?? "10px"};
   border-style: solid;
   border-width: ${(props) => props.borderWidth ?? "1px"};
   box-shadow: ${(props) => props.boxShadow};
