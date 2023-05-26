@@ -30,7 +30,7 @@ export const CaixaBotoes = styled.div`
   align-items: flex-start;
   width: 15%;
   position: relative;
-  left: 70.78%;
+  left: 65.9%;
   &.botoes-direita {
     justify-content: flex-end;
   }
@@ -39,6 +39,24 @@ export const CaixaBotoes = styled.div`
     left: 25%;
   }
 `;
+
+export const CaixaConteudo = styled.div`
+  width: 70%;
+  height: 100%;
+  min-height: 600px;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  justify-content: center;
+  display: flex;
+  scrollbar-width: none;
+  scroll-padding: 0;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  border: 1px solid #570B87;
+  border-radius: 10px;
+`;
+
 
 
 export const CaixaFoto = styled.div`
@@ -49,7 +67,7 @@ export const CaixaFoto = styled.div`
   justify-content: center;
   width: 150px;
   height: 150px;
-  border-radius: 10%;
+  border-radius: 10px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 0%;
@@ -84,7 +102,7 @@ export const CaixaDados = styled.div`
 
 export const CaixaSelect = styled.div`
     display: flex;
-    width: 71.4%;
+    width: 61.5%;
     justify-content: flex-end;
     @media (max-width: 700px) {
     justify-content: center;
@@ -159,7 +177,7 @@ export const CaixaLocais = styled.div`
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 100%;
+  width: 90%;
   padding: 2%;
 
   @media (max-width: 900px) {
@@ -175,9 +193,9 @@ export const Local = styled.div`
   border: 2px solid #570B87;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 6px;
+  border-radius: 10px;
   height: 10%;
-  width: 60%;
+  width: 97%;
 `;
 
 export const NomeLocal = styled.div`
@@ -218,13 +236,14 @@ export const TextoPlaceholder = styled.div`
 export const CaixaPlaceholder = styled.div`
   background-color: #f2f2f2;
   border: 2px solid #570B87;
-  padding: 10px;
   margin-bottom: 5%;
   margin-top: 5%;
-  border-radius: 6px;
-  height: 10%;
-  width: 60%;
-`;
+  border-radius: 10px;
+  height: 100%;
+  width: 90%;
+  justify-content: center;
+
+  `;
 
 export const EnderecoLocal = styled.div`
   display: flex;

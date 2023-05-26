@@ -13,7 +13,8 @@ import {
   CaixaPlaceholder,
   CaixaFoto,
   CaixaDados,
-  CaixaSelect
+  CaixaSelect,
+  CaixaConteudo
 } from "./Styles";
 import { Cores } from "../../variaveis";
 import {
@@ -50,14 +51,17 @@ function Home() {
           <Input
             placeholder="Pesquisar Local"
             backgroundColor="white"
-            width="70%"
+            width="59%"
             borderColor="#570B87"
             borderWidth="2px"
             borderRadius="10px"
             fontSize="1.5em"
-            padding="10px">
+            paddingTop="10px"
+            paddingRight="10px"
+            paddingBottom="10px"
+            paddingLeft="2%">
           </Input>
-          <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "19%", paddingBottom: "1.8%" }} />
+          <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "23.2%", paddingBottom: "1.8%" }} />
         </CaixaInputs>
         <CaixaSelect>
           <Select
@@ -79,6 +83,7 @@ function Home() {
             </option>
           </Select>
         </CaixaSelect>
+        <CaixaConteudo>
         {locais.length === 0 ? (
           <CaixaPlaceholder>
             <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
@@ -105,6 +110,7 @@ function Home() {
             ))}
           </CaixaLocais>
         )}
+        </CaixaConteudo>
         <div className="botoes-direita" style={{ width: "100%", justifyContent: "flex-end" }}>
           <CaixaBotoes>
             <Botao
