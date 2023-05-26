@@ -154,10 +154,6 @@ export const TituloInput = styled.div`
   @media (max-width: 900px) {
     font-size: 1em;
   }
-
-  @media (max-width: 900px) {
-    font-size: 0.8em;
-  }
 `;
 
 export const TituloIcon = styled.div`

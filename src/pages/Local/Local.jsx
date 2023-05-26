@@ -42,7 +42,8 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 function Local() {
   const [local, setLocal] = useState({});
-  const [comentarios, setComentarios] = useState({});
+  const [comentarios, setComentarios] = useState([]);
+  const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
   const id_local = "6469762610cc9138d78e6470";
@@ -70,9 +71,10 @@ function Local() {
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    setComentarios(resposta.comentariosLocal);
+    setComentarios(resposta.comentariosLocal.comentarios);
+    setAvaliacao(resposta.comentariosLocal.media_avaliacao)
   }
-
+  
   useEffect(() => {
     pegandoDadosLocal();
   }, []);
@@ -96,9 +98,9 @@ function Local() {
           <NomeTelefone>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>NOME:</TituloInput>
+                <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
+                  style={{ fontSize: "22px", color: "#570B87" }}
                 />
               </TituloIcon>
               <Input
@@ -111,8 +113,8 @@ function Local() {
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>TELEFONE:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <TituloInput>Telefone:</TituloInput>
+                <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
                 placeholder={local.telefone}
@@ -129,9 +131,9 @@ function Local() {
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>ENDERECO:</TituloInput>
+              <TituloInput>Endereço:</TituloInput>
               <CalendarOutlined
-                style={{ fontSize: "18px", color: "#570B87" }}
+                style={{ fontSize: "22px", color: "#570B87" }}
               />
             </TituloIcon>
             <Input
@@ -147,8 +149,8 @@ function Local() {
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>SETOR:</TituloInput>
-                <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <TituloInput>Setor:</TituloInput>
+                <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
                 placeholder={local.setor}
@@ -160,8 +162,8 @@ function Local() {
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>EMPRESA RESPONSÁVEL:</TituloInput>
-                <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <TituloInput>Empresa Responsável:</TituloInput>
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
                 placeholder={local.empresa}
@@ -176,14 +178,16 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>Avaliação Geral: {comentarios.media_avaliacao}</TituloAvaliacao>
+          <TituloAvaliacao>
+            Avaliação Geral: {avaliacao}
+          </TituloAvaliacao>
           <BoxCarrossel>
             <Esquerda
               onClick={() => {
                 antComentario(comentarioAtual);
               }}
             >
-              <LeftOutlined style={{ fontSize: 25 }} />
+              <LeftOutlined style={{ fontSize: "22px" }} />
             </Esquerda>
             {comentarios.length > 0 &&
               comentarioAtual >= 0 &&
@@ -212,7 +216,7 @@ function Local() {
                 proxComentario(comentarioAtual);
               }}
             >
-              <RightOutlined style={{ fontSize: 25 }} />
+              <RightOutlined style={{ fontSize: "22px" }} />
             </Direita>
           </BoxCarrossel>
         </ConteudoAvaliacao>

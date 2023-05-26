@@ -35,7 +35,7 @@ const Botao = styled.button`
   /* Cor e estilo do botão */
   background-color: ${(props) => props.backgroundColor ?? "#8B00FF"};
   border-color: ${(props) => props.borderColor ?? "#570B87"};
-  border-radius: ${(props) => props.borderRadius ?? "18px"};
+  border-radius: ${(props) => props.borderRadius ?? "10px"};
   border-style: solid;
   border-width: ${(props) => props.borderWidth ?? "1px"};
   box-shadow: ${(props) => props.boxShadow};
