@@ -20,7 +20,8 @@ import { Cores } from "../../variaveis";
 import {
   SearchOutlined,
   StarFilled,
-  StarOutlined
+  StarOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 import { Rate } from 'antd';
 import Input from "../../Styles/Input/Input";
@@ -50,8 +51,9 @@ function Home() {
         <CaixaInputs>
           <Input
             placeholder="Pesquisar Local"
+            height={"25px"}
             backgroundColor="white"
-            width="59%"
+            width="68%"
             borderColor="#570B87"
             borderWidth="2px"
             borderRadius="10px"
@@ -61,7 +63,7 @@ function Home() {
             paddingBottom="10px"
             paddingLeft="2%">
           </Input>
-          <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "23.2%", paddingBottom: "1.8%" }} />
+          <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "19%", paddingBottom: "1.8%" }} />
         </CaixaInputs>
         <CaixaSelect>
           <Select
@@ -124,6 +126,7 @@ function Home() {
             >
               Adicionar Local
             </Botao>
+            <PlusOutlined style={{ fontSize: "26px", color: "#fdfdfd", position: "absolute", right: "4%", top: "23%" }}/>
           </CaixaBotoes></div>
       </Conteudo>
     </Body>

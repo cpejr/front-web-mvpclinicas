@@ -18,7 +18,6 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
-  padding-top: 2%;
   @media (max-width: 900px) {
     width: 100%;
   }
@@ -30,7 +29,7 @@ export const CaixaBotoes = styled.div`
   align-items: flex-start;
   width: 15%;
   position: relative;
-  left: 65.9%;
+  left: 70%;
   &.botoes-direita {
     justify-content: flex-end;
   }
@@ -51,8 +50,8 @@ export const CaixaConteudo = styled.div`
   display: flex;
   scrollbar-width: none;
   scroll-padding: 0;
-  margin-bottom: 5px;
-  margin-top: 10px;
+  margin-bottom: 3%;
+  margin-top: 2%;
   border: 1px solid #570B87;
   border-radius: 10px;
 `;
@@ -102,7 +101,7 @@ export const CaixaDados = styled.div`
 
 export const CaixaSelect = styled.div`
     display: flex;
-    width: 61.5%;
+    width: 70%;
     justify-content: flex-end;
     @media (max-width: 700px) {
     justify-content: center;
