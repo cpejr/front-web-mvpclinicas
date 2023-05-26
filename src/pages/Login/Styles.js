@@ -7,7 +7,7 @@ export const Body = styled.div `
   width: 100%;
   height: 100%;
 `
-export const InoutNovo = styled.div `
+export const InputNovo = styled.div `
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,7 @@ export const CaixaFoto = styled.div`
   padding: 10%;
   background-color: #8B00FF;
   margin-top: 2%;
+  margin-bottom: -5%;
 `;
 
 export const CaixaInput = styled.div`
@@ -60,11 +61,20 @@ export const InputDividido = styled.div`
 export const TituloInput = styled.div`
   display: flex;
   flex-direction: row;
+  font-family: "Roboto Condensed";
   width: 52%;
   color: #570B87;
   font-weight: 600;
   font-size: 1em;
-  margin-top: 5%
+  margin-top: 9%
+`;
+export const TituloIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  width: 96%;
 `;
 
 export const CaixaBotoes = styled.div`
