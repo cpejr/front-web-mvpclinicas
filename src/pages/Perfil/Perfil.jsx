@@ -23,7 +23,7 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { data } from '../../utils/masks';
+import { data, telefone } from '../../utils/masks';
 
 import fotoPerfil from "../../assets/montanha.jpg"
 
@@ -76,7 +76,7 @@ function Perfil() {
                 <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={usuario.telefone}
+                placeholder={telefone(usuario.telefone)}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
