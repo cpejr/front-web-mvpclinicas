@@ -44,9 +44,9 @@ const Cadastro = () => {
     senha: '',
     avatar_url: '',
   };
-  const [usuario, setUsuario] = useState({zeraInputs});
-  function preenchendoDados(ev) {
-    const { name, value } = ev.target;
+  const [usuario, setUsuario] = useState(zeraInputs);
+  function preenchendoDados(e) {
+    const { name, value } = e.target;
     if (name === 'telefone') {
       setUsuario(prevState => ({
         ...prevState,
@@ -71,9 +71,9 @@ async function requisicaoCadastro() {
       usuario,
     )
     if(usuarioCadastrado) {
-      console.log('Usuário criado.')
+      alert('Usuário criado.')
     } else {
-      console.log('As senhas digitadas são diferentes.');
+      alert('As senhas digitadas são diferentes.');
     }
   }}
 
