@@ -72,9 +72,9 @@ function Local() {
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
-    setAvaliacao(resposta.comentariosLocal.media_avaliacao)
+    setAvaliacao(resposta.comentariosLocal.media_avaliacao);
   }
-  
+
   useEffect(() => {
     pegandoDadosLocal();
   }, []);
@@ -178,47 +178,49 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>
-            Avaliação Geral: {avaliacao}
-          </TituloAvaliacao>
-          <BoxCarrossel>
-            <Esquerda
-              onClick={() => {
-                antComentario(comentarioAtual);
-              }}
-            >
-              <LeftOutlined style={{ fontSize: "22px" }} />
-            </Esquerda>
-            {comentarios.length > 0 &&
-              comentarioAtual >= 0 &&
-              comentarioAtual < comentarios.length && (
-                <UsuarioComentario>
-                  <Usuario>
-                    <FotoUsuario>
-                      <img
-                        src={fotoPerfil}
-                        width="100%"
-                        height="100%"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </FotoUsuario>
-                    <NomeUsuario>
-                      {comentarios[comentarioAtual].id_usuario.nome}
-                    </NomeUsuario>
-                  </Usuario>
-                  <Comentario>
-                    {comentarios[comentarioAtual].comentario}
-                  </Comentario>
-                </UsuarioComentario>
-              )}
-            <Direita
-              onClick={() => {
-                proxComentario(comentarioAtual);
-              }}
-            >
-              <RightOutlined style={{ fontSize: "22px" }} />
-            </Direita>
-          </BoxCarrossel>
+          <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          {comentarios.length === 0 ? (
+            <UsuarioComentario>
+              <Comentario>
+                Ainda não existem comentários relacionados a esse local.
+              </Comentario>
+            </UsuarioComentario>
+          ) : (
+            <BoxCarrossel>
+              <Esquerda
+                onClick={() => {
+                  antComentario(comentarioAtual);
+                }}
+              >
+                <LeftOutlined style={{ fontSize: "22px" }} />
+              </Esquerda>
+              <UsuarioComentario>
+                <Usuario>
+                  <FotoUsuario>
+                    <img
+                      src={fotoPerfil}
+                      width="100%"
+                      height="100%"
+                      style={{ borderRadius: "100%" }}
+                    />
+                  </FotoUsuario>
+                  <NomeUsuario>
+                    {comentarios[comentarioAtual].id_usuario.nome}
+                  </NomeUsuario>
+                </Usuario>
+                <Comentario>
+                  {comentarios[comentarioAtual].comentario}
+                </Comentario>
+              </UsuarioComentario>
+              <Direita
+                onClick={() => {
+                  proxComentario(comentarioAtual);
+                }}
+              >
+                <RightOutlined style={{ fontSize: "22px" }} />
+              </Direita>
+            </BoxCarrossel>
+          )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
           <Botao width="20%" widthMedia700="30%">
