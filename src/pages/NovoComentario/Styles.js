@@ -9,11 +9,11 @@ export const Body = styled.div`
 `;
 
 export const Titulo = styled.div`
-  width: 100%;
-  height: 10%;
+  width: 40%;
+  height: 20%;
   font-family: "Barlow";
-  font-weight: 400;
-  font-size: 1.4em;
+  font-weight: 500;
+  font-size: 1.6em;
   line-height: 30px;
   display: flex;
   align-items: center;
@@ -29,19 +29,22 @@ export const Titulo = styled.div`
 
 export const CaixaPerguntas = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  gap: 10px;
   width: 40%;
+  height: 70vh;
+  flex-direction: column;
+  align-items: center;
   padding: 2%;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  height: auto; 
-  overflow-y: auto;
+  gap: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
   }
 
   @media (max-width: 900px) {
@@ -53,18 +56,30 @@ export const CaixaPerguntas = styled.div`
   }
 `;
 
+/* display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 93%;
+    height: 70vh;
+    max-height: 512px;
+    overflow: auto;
+    padding: 8px;
+    margin-top: 3%;
+    box-shadow: 0 4px 2px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-width: 0.1em;
+    border-radius: 3px; */
 
 export const CaixaSalario = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-end;
+  gap: 15px;
   height: 70%;
-  width: 100%;
-  padding: 2%;
-  border: 1px solid #570B87;
+  width: 98%;
+  border: 1px solid #570b87;
   border-radius: 18px;
+  padding: 2%;
 `;
 
 export const ConjuntoTituloInput = styled.div`
@@ -93,6 +108,8 @@ export const TituloInput = styled.div`
   justify-content: flex-start;
   color: #570b87;
 
+  justify-content: ${(props) => props.justifyContent};
+
   @media (max-width: 900px) {
     font-size: 1em;
   }
@@ -102,16 +119,17 @@ export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 30%;
+  padding: 2%;
+`;
+
+export const CaixaCheckbox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
-  width: 40%;
-
-  @media (max-width: 900px) {
-    width: 60%;
-  }
-
-  @media (max-width: 700px) {
-    gap: 5px;
-  }
+  width: 70%;
+  padding: 1%;
 `;
 
 export const TituloAvaliacao = styled.div`

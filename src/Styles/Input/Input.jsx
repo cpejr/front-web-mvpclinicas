@@ -36,7 +36,7 @@ const Input = styled.input`
   box-shadow: ${(props) => props.boxShadow};
   border: ${(props) => props.border};
   border-bottom: 1px solid #570B87;
-  color: ${(props) => props.color };
+  color: ${(props) => props.color ?? "#8B00FF" };
   
   &:focus {
     outline: none; 
@@ -54,7 +54,7 @@ const Input = styled.input`
 }
 
   /* Margem */
-  margin-bottom: ${(props) => props.marginBottom ?? '2%'};
+  margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
   margin-top: ${(props) => props.marginTop };
