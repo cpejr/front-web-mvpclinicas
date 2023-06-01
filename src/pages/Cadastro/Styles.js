@@ -8,6 +8,27 @@ export const Body = styled.div`
   height: 100%;
 `;
 
+export const EstiloData = styled.div`
+  display: flex;
+  font-family: 'Roboto Condensed';
+  color: black;
+  border-bottom: 1px solid #570B87;
+   width: 100%;
+   padding: 0px 0px 0px;
+   margin-bottom: 4px;
+   
+   .ant-picker-input input::placeholder {
+    color: #767676;
+    font-family: 'Roboto Condensed';
+    font-size: 1.1em;
+    padding: 0px 0px 0px;
+   } 
+
+   @media (max-width: 1300px) {
+    margin-bottom: 3px;
+  }
+`;
+
 export const Conteudo = styled.div`
   display: flex;
   align-items: center;
@@ -24,45 +45,81 @@ export const Conteudo = styled.div`
 export const CaixaLogo = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 12em;
   align-items: center;
-  justify-content: center;
-  width: 250px;
-  height: 250px;
-  background-color: #570B87;
+  width: 300px;
+  height: 150px;
+  background-color: #8B00FF;
   margin: 2%;
+  margin-left: 15%;
 
   @media (max-width: 900px) {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 130px;
+    margin-left: 5%;
   }
 
-  @media (max-width: 500px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 650px) {
+    width: 280px;
+    height: 130px;
+    margin-left: 5%;
+  }
+
+   @media (max-width: 500px) {
+    width: 200px;
+    height: 80px;
+    margin-left: 5%;
   }
 `;
 
 export const Titulo = styled.div`
   width: 100%;
   height: 20px;
-  font-family: "Roboto Condensed";
+  font-family: "Courgette";
   font-weight: 400;
-  font-size: 5em;
+  font-size: 4em;
   display: flex;
   color: #570B87;
   justify-content: flex-start;
   align-items: center;
-  @media (max-width: 900px) {
+  
+  @media (max-width: 1200px) {
+    font-size: 3.3em;
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 3em;
+  }
+
+  @media (max-width: 578px) {
     font-size: 2.5em;
   }
 
-  @media (max-width: 500px) {
-    font-size: 2em;
+  @media (max-width: 520px) {
+    font-size: 2.3em;
   }
 
-  @media (max-width: 306px) {
-    font-size: 1em;
+  @media (max-width: 460px) {
+    font-size: 2.0em;
+  }
+
+  @media (max-width: 381px) {
+    font-size: 1.8em;
+  }
+
+  @media (max-width: 358px) {
+    font-size: 1.6em;
+  }
+
+  @media (max-width: 335px) {
+    font-size: 1.4em;
+  }
+
+  @media (max-width: 335px) {
+    font-size: 1.3em;
+  }
+
+  @media (max-width: 299px) {
+    font-size: 1.2em;
   }
 `;
 
@@ -71,18 +128,30 @@ export const CaixaTitulo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 70%;
+  height: 100%;
   width: 70%;
   padding: 2%;
-  gap: 50px;
-  justify-content: space-evenly;
+  gap: 200px;
   
-  @media (max-width: 900px) {
-    width: 90%;
+  @media (max-width: 400px) {
+    gap:50px;
+    
   }
 
-  @media (max-width: 700px) {
-    gap: 5px;
+  @media (max-width: 1450px) {
+    gap:100px;
+  }
+
+  @media (max-width: 1450px) {
+    gap:100px;
+  }
+
+  @media (max-width: 1000px) {
+    gap:80px;
+  }
+
+  @media (max-width: 430px) {
+    gap:40px;
   }
 `;
 
@@ -103,6 +172,8 @@ export const CaixaInputs = styled.div`
   @media (max-width: 700px) {
     gap: 5px;
   }
+
+  
 `;
 
 export const ConjuntoTituloInput = styled.div`
@@ -111,7 +182,6 @@ export const ConjuntoTituloInput = styled.div`
   justify-content: space-evenly;
   gap: 7px;
   align-items: center;
-  height: 100%;
   width: 70%;
 
   @media (max-width: 700px) {
@@ -234,4 +304,9 @@ export const BotoesEdicao = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+
+
+
+
 `;
+

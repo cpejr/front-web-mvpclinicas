@@ -61,6 +61,8 @@ const Input = styled.input`
   @media (max-width: 700px) {
     margin-bottom: ${(props) => props.marginBottomMedia700};
   }
+
 `;
+
 
 export default Input;

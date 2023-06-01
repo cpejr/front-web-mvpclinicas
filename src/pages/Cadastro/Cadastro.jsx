@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { DatePicker } from 'antd';
 import {
   Body,
   BotoesEdicao,
@@ -13,6 +14,7 @@ import {
   SubtituloInput,
   CaixaTitulo,
   Titulo,
+  EstiloData,
 } from "./Styles";
 
 import {
@@ -31,6 +33,7 @@ import { data, telefone } from '../../../utils/masks';
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import * as managerService from '../../services/ManagerService/managerService';
+import { useSubmit } from 'react-router-dom';
 
 
 const Cadastro = () => {
@@ -40,57 +43,68 @@ const Cadastro = () => {
     data_nascimento: '',
     email: '',
     crm: '',
-    uni_federativa:'',
+    uni_federativa: '',
     senha: '',
     avatar_url: '',
   };
   const [usuario, setUsuario] = useState(zeraInputs);
+
   function preenchendoDados(e) {
     const { name, value } = e.target;
     if (name === 'telefone') {
       setUsuario(prevState => ({
         ...prevState,
         [name]: telefone(value)
-    }
-  ))} else if (name === 'data_nascimento') {
-    setUsuario(prevState => ({
-      ...prevState,
-      [name]: data(value)
-  }
-))}
-  else {
-    setUsuario(prevState => ({
-      ...prevState,
-      [name]: value
-    }))}
-    
-  }
-async function requisicaoCadastro() {
-  if(usuario.senha === usuario.confirmacao_senha){
-   const usuarioCadastrado = await managerService.CadastroUsuario(
-      usuario,
-    )
-    if(usuarioCadastrado) {
-      alert('Usuário criado.')
+      }
+      ))
     } else {
-      alert('As senhas digitadas são diferentes.');
+      setUsuario(prevState => ({
+        ...prevState,
+        [name]: value
+      }))
     }
-  }}
 
+  }
+
+  function preenchendoData(name, value) {
+    setUsuario({ ...usuario, [name]: value });
+
+  }
+
+
+  async function requisicaoCadastro() {
+    if (usuario.senha === usuario.confirmacao_senha) {
+      const usuarioCadastrado = await managerService.CadastroUsuario(
+        usuario,
+      )
+      if (usuarioCadastrado) {
+        alert('Usuário criado.')
+      } else {
+        alert('As senhas digitadas são diferentes.');
+      }
+    }
+  }
+
+ 
   return (
     <Body>
       <Conteudo>
         <CaixaTitulo>
-        <CaixaLogo>
-          <img></img>
-      </CaixaLogo>
-      <Titulo>Faça seu cadastro</Titulo>
-      </CaixaTitulo>
+          <CaixaLogo>
+            <img></img>
+          </CaixaLogo>
+          <Titulo>
+            Faça seu
+            <br style={{ display: 'block' }} />
+            cadastro
+          </Titulo>
+
+        </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>NOME COMPLETO:</TituloInput>
-              <IdcardOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>Nome Completo:</TituloInput>
+              <IdcardOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
               placeholder="Digite seu nome completo"
@@ -105,8 +119,8 @@ async function requisicaoCadastro() {
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>TELEFONE:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <TituloInput>Telefone:</TituloInput>
+                <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
                 placeholder="Digite seu número de telefone"
@@ -122,28 +136,32 @@ async function requisicaoCadastro() {
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>DATA DE NASCIMENTO:</TituloInput>
+                <TituloInput>Data de Nascimento:</TituloInput>
                 <CalendarOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
+                  style={{ fontSize: "22px", color: "#570B87" }}
                 />
               </TituloIcon>
-              <Input
-                placeholder="Digite sua data de nascimento:"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                name="data_nascimento"
-                value={usuario.data_nascimento}
-                onChange={preenchendoDados}
-              ></Input>
+              <TituloIcon>
+                <EstiloData>
+                  <DatePicker
+                    style={{ border: '0px', width: '100%' }}
+                    placeholder="Digite sua data de nascimento"
+                    locale="pt_BR"
+                    format="DD/MM/YYYY"
+                    value={usuario.data_nascimento}
+                    name="data_nascimento"
+                    onChange={(value) => preenchendoData('data_nascimento', value)}
+                    suffixIcon={null}
+                  />
+                </EstiloData>
+
+              </TituloIcon>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>EMAIL:</TituloInput>
-              <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>E-mail:</TituloInput>
+              <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
               placeholder="Digite seu endereço de e-mail"
@@ -159,7 +177,7 @@ async function requisicaoCadastro() {
             <ConjuntoTituloInput>
               <TituloIcon>
                 <TituloInput>CRM:</TituloInput>
-                <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
                 placeholder="Digite seu CRM"
@@ -175,9 +193,9 @@ async function requisicaoCadastro() {
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>UNIDADE FEDERATIVA</TituloInput>
+                <TituloInput>Unidade Federativa</TituloInput>
                 <GlobalOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
+                  style={{ fontSize: "22px", color: "#570B87" }}
                 />
               </TituloIcon>
               <Input
@@ -196,8 +214,8 @@ async function requisicaoCadastro() {
           </InputDividido>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>SENHA:</TituloInput>
-              <LockOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>Senha:</TituloInput>
+              <LockOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
               placeholder="Digite sua senha"
@@ -211,8 +229,8 @@ async function requisicaoCadastro() {
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>CONFIRMAÇÃO DE SENHA:</TituloInput>
-              <LockOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>Confirmação de Senha:</TituloInput>
+              <LockOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
               placeholder="Digite sua senha novamente"
@@ -223,22 +241,23 @@ async function requisicaoCadastro() {
               value={usuario.confirmacao_senha}
               onChange={preenchendoDados}
             ></Input>
-             <SubtituloInput>Informamos que nenhuma informação aqui preenchida além de seu nome será exibida para outros usuários!</SubtituloInput>
+            <SubtituloInput>Informamos que nenhuma informação aqui preenchida além de seu nome será exibida para outros usuários!</SubtituloInput>
           </ConjuntoTituloInput>
-         
+
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
             <Botao
-            backgroundColor="transparent"
-            borderColor="transparent"
-            color="#570B87" 
-            textDecoration="underline"
+              backgroundColor="transparent"
+              borderColor="transparent"
+              color="#570B87"
+              textDecoration="underline"
             >Já possui uma conta?</Botao>
             <Botao
-            onClick={()=>{requisicaoCadastro();}}>
+              border-radius="10px"
+              onClick={() => { requisicaoCadastro(); }}>
               Confirmar
-              </Botao>
+            </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
       </Conteudo>
