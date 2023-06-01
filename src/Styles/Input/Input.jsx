@@ -34,6 +34,7 @@ const Input = styled.input`
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.boxShadow};
+  border: ${(props) => props.border};
   border-bottom: 1px solid #570B87;
   color: ${(props) => props.color };
   

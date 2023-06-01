@@ -18,6 +18,7 @@ export const Titulo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: #570b87;
   padding: 2%;
 
@@ -29,54 +30,48 @@ export const Titulo = styled.div`
 export const CaixaPerguntas = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 30px;
-  height: 300px;
+  gap: 10px;
   width: 40%;
   padding: 2%;
-  overflow-y: auto;
-  overflow-x: hidden;
   white-space: pre-wrap;
   word-wrap: break-word;
+  height: auto; 
+  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 0px;
   }
 
   @media (max-width: 900px) {
-    width: 90%;
+    width: 60%;
   }
 
   @media (max-width: 700px) {
     gap: 5px;
   }
 `;
+
 
 export const CaixaSalario = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 10px;
   height: 70%;
-  width: 70%;
+  width: 100%;
   padding: 2%;
-
-  @media (max-width: 900px) {
-    width: 90%;
-  }
-
-  @media (max-width: 700px) {
-    gap: 5px;
-  }
+  border: 1px solid #570B87;
+  border-radius: 18px;
 `;
 
 export const ConjuntoTituloInput = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 7px;
+  gap: 10px;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -88,7 +83,7 @@ export const ConjuntoTituloInput = styled.div`
 
 export const TituloInput = styled.div`
   width: 100%;
-  height: 20px;
+  height: 30%;
   font-family: "Roboto Condensed";
   font-weight: 400;
   font-size: 1.2em;
@@ -103,13 +98,39 @@ export const TituloInput = styled.div`
   }
 `;
 
-export const TituloIcon = styled.div`
+export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  padding: 1%;
-  width: 100%;
+  width: 40%;
+
+  @media (max-width: 900px) {
+    width: 60%;
+  }
+
+  @media (max-width: 700px) {
+    gap: 5px;
+  }
+`;
+
+export const TituloAvaliacao = styled.div`
+  display: flex;
+  width: 60%;
+  height: 50%;
+  font-family: "Roboto Condensed";
+  font-weight: 500;
+  font-size: 1.4em;
+  line-height: 20px;
+  color: #570b87;
+
+  @media (max-width: 900px) {
+    font-size: 1.2em;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 1em;
+  }
 `;
 
 export const CaixaBotoes = styled.div`
