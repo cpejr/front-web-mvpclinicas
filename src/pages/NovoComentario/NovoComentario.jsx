@@ -24,40 +24,44 @@ function NovoComentario() {
     setCheckPreenchido(!checkPreenchido);
   }
 
-  const preenchendoRespostas = (pergunta, valor) => {
+  function preenchendoRespostas(pergunta, valor) {
     setRespostas((prevRespostas) => ({
       ...prevRespostas,
       [pergunta]: valor,
     }));
-  };
+  }
 
-  const validarComentario = () => {
+  function validarComentario() {
     if (!respostas["Qual foi o cargo exercido no local?"]) {
       alert("O campo 'Qual foi o cargo exercido no local?' é obrigatório.");
       return;
     }
-  
-    if (!checkPreenchido && (!respostas["De quanto era o salário pago?"] || !respostas["O salário era pago em dia?"])) {
+
+    if (
+      !checkPreenchido &&
+      (!respostas["De quanto era o salário pago?"] ||
+        !respostas["O salário era pago em dia?"])
+    ) {
       alert("Os campos relacionados ao salário devem ser preenchidos.");
       return;
     }
-  
+
     alert("uhuhuhuh");
-  };
+  }
 
-  console.log(respostas)
-
-  const renderizaInput = (pergunta) => (
-    <ConjuntoTituloInput>
-      <TituloInput>{pergunta}</TituloInput>
-      <Input
-        border="1px solid #570B87"
-        borderRadius="18px"
-        height="30px"
-        onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
-      />
-    </ConjuntoTituloInput>
-  );
+  function renderizaInput(pergunta) {
+    return (
+      <ConjuntoTituloInput>
+        <TituloInput>{pergunta}</TituloInput>
+        <Input
+          border="1px solid #570B87"
+          borderRadius="18px"
+          height="30px"
+          onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
+        />
+      </ConjuntoTituloInput>
+    );
+  }
 
   return (
     <Body>
@@ -86,7 +90,12 @@ function NovoComentario() {
                 borderColor: checkPreenchido ? "gray" : "#570B87",
                 color: checkPreenchido ? "gray" : "#8B00FF",
               }}
-              onChange={(e) => preenchendoRespostas("De quanto era o salário pago?", e.target.value)}
+              onChange={(e) =>
+                preenchendoRespostas(
+                  "De quanto era o salário pago?",
+                  e.target.value
+                )
+              }
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -104,7 +113,12 @@ function NovoComentario() {
                 borderColor: checkPreenchido ? "gray" : "#570B87",
                 color: checkPreenchido ? "gray" : "#8B00FF",
               }}
-              onChange={(e) => preenchendoRespostas("O salário era pago em dia?", e.target.value)}
+              onChange={(e) =>
+                preenchendoRespostas(
+                  "O salário era pago em dia?",
+                  e.target.value
+                )
+              }
             ></Input>
           </ConjuntoTituloInput>
         </CaixaSalario>
