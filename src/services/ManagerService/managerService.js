@@ -25,3 +25,13 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+  .criarNovoLocal(novoLocal)
+  .then((res) => {
+      return res;
+     
+  });
+  return dadosNovoLocal;
+}
