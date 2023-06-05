@@ -130,6 +130,7 @@ export const InputComentario = styled.input`
   font-size: 1em;
   font-family: "Roboto Condensed";
   line-height: 50px;
+  color: #8B00FF;
 
   &:focus {
     outline: none;

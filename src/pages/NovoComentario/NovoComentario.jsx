@@ -72,6 +72,7 @@ function NovoComentario() {
       <ConjuntoTituloInput>
         <TituloInput>{pergunta}</TituloInput>
         <InputComentario
+          placeholder="Área do texto"
           onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
         />
       </ConjuntoTituloInput>
@@ -85,6 +86,7 @@ function NovoComentario() {
         <ConjuntoTituloInput>
           <TituloInput>Qual foi o cargo exercido no local?</TituloInput>
           <InputComentario
+            placeholder="Área do texto"
             erro={erro.cargo}
             onChange={(e) =>
               preenchendoRespostas(
@@ -108,6 +110,7 @@ function NovoComentario() {
               De quanto era o salário pago?
             </TituloInput>
             <InputComentario
+              placeholder="Área do texto"
               disabled={checkPreenchido}
               erro={erro.salario}
               checkPreenchido={checkPreenchido}
@@ -126,6 +129,7 @@ function NovoComentario() {
               O salário era pago em dia?
             </TituloInput>
             <InputComentario
+              placeholder="Área do texto"
               disabled={checkPreenchido}
               erro={erro.dia_salario}
               checkPreenchido={checkPreenchido}
@@ -169,9 +173,7 @@ function NovoComentario() {
               preenchendoRespostas("Avaliação Geral", e.target.value)
             }
           />
-          {erro.avaliacao && (
-            <Rotulo>Digite uma nota de 0 a 5</Rotulo>
-          )}
+          {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
         </CaixaInputRotulo>
       </CaixaAvaliacao>
       <CaixaBotoes>
