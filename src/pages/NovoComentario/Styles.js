@@ -37,6 +37,7 @@ export const CaixaPerguntas = styled.div`
   gap: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -141,6 +142,14 @@ export const CaixaAvaliacao = styled.div`
   justify-content: space-evenly;
   width: 30%;
   padding: 2%;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    width: 60%;
+    padding-top: 5%;
+  }
 `;
 
 export const CaixaCheckbox = styled.div`
@@ -161,14 +170,14 @@ export const TituloAvaliacao = styled.div`
   font-size: 1.4em;
   line-height: 20px;
   color: #570b87;
+  justify-content: center;
 
   @media (max-width: 900px) {
+    width: 80%;
     font-size: 1.2em;
+    text-align: center;
   }
 
-  @media (max-width: 500px) {
-    font-size: 1em;
-  }
 `;
 
 export const CaixaBotoes = styled.div`
@@ -185,5 +194,24 @@ export const CaixaBotoes = styled.div`
     gap: 20px;
     padding: 5%;
     width: 90%;
+  }
+`;
+
+export const CaixaInputRotulo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 30%;
+  gap: 10px;
+`;
+
+export const Rotulo = styled.div`
+  font-size: 1em;
+  color: #ff0000c5;
+  text-align: center;
+  font-family: Roboto Condensed;
+
+  @media (max-width: 900px) {
+    font-size: 0.8em;
   }
 `;

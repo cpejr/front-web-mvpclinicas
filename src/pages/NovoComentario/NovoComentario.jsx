@@ -4,10 +4,12 @@ import {
   CaixaAvaliacao,
   CaixaBotoes,
   CaixaCheckbox,
+  CaixaInputRotulo,
   CaixaPerguntas,
   CaixaSalario,
   ConjuntoTituloInput,
   InputComentario,
+  Rotulo,
   Titulo,
   TituloAvaliacao,
   TituloInput,
@@ -24,6 +26,7 @@ function NovoComentario() {
     cargo: false,
     salario: false,
     dia_salario: false,
+    avaliacao: false,
   });
 
   function estadoCheckbox() {
@@ -39,24 +42,30 @@ function NovoComentario() {
 
   function validarComentario() {
     const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
-    const salarioErro = !checkPreenchido && !respostas["De quanto era o salário pago?"];
-    const diaSalarioErro = !checkPreenchido && !respostas["O salário era pago em dia?"];
-  
+    const salarioErro =
+      !checkPreenchido && !respostas["De quanto era o salário pago?"];
+    const diaSalarioErro =
+      !checkPreenchido && !respostas["O salário era pago em dia?"];
+    const avaliacaoErro =
+      isNaN(respostas["Avaliação Geral"]) ||
+      respostas["Avaliação Geral"] < 0 ||
+      respostas["Avaliação Geral"] > 5;
+
     setErro((prevErro) => ({
       ...prevErro,
       cargo: cargoErro,
       salario: salarioErro,
       dia_salario: diaSalarioErro,
+      avaliacao: avaliacaoErro,
     }));
-  
-    if (cargoErro || salarioErro || diaSalarioErro) {
-      alert("Preencha os campos corretamente!");
+
+    if (cargoErro || salarioErro || diaSalarioErro || avaliacaoErro) {
+      alert("Preencha os campos obrigatórios corretamente!");
       return;
     }
-  
+
     alert("uhuhuhuh");
   }
-  
 
   function renderizaInput(pergunta) {
     return (
@@ -150,7 +159,20 @@ function NovoComentario() {
       </CaixaPerguntas>
       <CaixaAvaliacao>
         <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
-        <Input width="30%" borderBottom="1px solid #570B87"></Input>
+        <CaixaInputRotulo>
+          <Input
+            width="100%"
+            textAlign="center"
+            fontSize="1.4em"
+            erro={erro.avaliacao}
+            onChange={(e) =>
+              preenchendoRespostas("Avaliação Geral", e.target.value)
+            }
+          />
+          {erro.avaliacao && (
+            <Rotulo>Digite uma nota de 0 a 5</Rotulo>
+          )}
+        </CaixaInputRotulo>
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
