@@ -1,16 +1,15 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Input = styled.input`
-
   /* Posição */
   display: flex;
   flex-direction: ${(props) => props.flexDirection};
   align-items: center;
-  justify-content: ${(props) => props.justifyContent ?? 'center'};
-  align-self: ${(props) => props.alignSelf ?? 'center'};
+  justify-content: ${(props) => props.justifyContent ?? "center"};
+  align-self: ${(props) => props.alignSelf ?? "center"};
 
   /* Medidas */
-  margin-top: ${(props) => props.marginTop };
+  margin-top: ${(props) => props.marginTop};
   margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
@@ -20,8 +19,8 @@ const Input = styled.input`
   padding-left: ${(props) => props.paddingLeft};
   padding-right: ${(props) => props.paddingRight};
   padding-bottom: ${(props) => props.paddingBottom};
-  height: ${(props) => props.height ?? '20px'};
-  width: ${(props) => props.width ?? '100%'};
+  height: ${(props) => props.height ?? "20px"};
+  width: ${(props) => props.width ?? "100%"};
 
   @media (max-width: 700px) {
     height: ${(props) => props.heightMedia700};
@@ -49,15 +48,15 @@ const Input = styled.input`
   font-weight: ${(props) => props.fontWeight};
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
-::placeholder {
-  color: #8B00FF;
-}
+  ::placeholder {
+    color: #8b00ff;
+  }
 
   /* Margem */
   margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
-  margin-top: ${(props) => props.marginTop };
+  margin-top: ${(props) => props.marginTop};
 
   @media (max-width: 700px) {
     margin-bottom: ${(props) => props.marginBottomMedia700};

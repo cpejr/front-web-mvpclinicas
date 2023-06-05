@@ -56,19 +56,6 @@ export const CaixaPerguntas = styled.div`
   }
 `;
 
-/* display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 93%;
-    height: 70vh;
-    max-height: 512px;
-    overflow: auto;
-    padding: 8px;
-    margin-top: 3%;
-    box-shadow: 0 4px 2px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    border-width: 0.1em;
-    border-radius: 3px; */
-
 export const CaixaSalario = styled.div`
   display: flex;
   flex-direction: column;
@@ -112,6 +99,39 @@ export const TituloInput = styled.div`
 
   @media (max-width: 900px) {
     font-size: 1em;
+  }
+`;
+
+export const InputComentario = styled.input`
+  display: flex;
+  height: 30px;
+  width: 100%;
+  justify-content: center;
+  align-self: center;
+  border: 1px solid #570b87;
+  border-radius: 18px;
+  padding-left: 2%;
+  border-color: ${(props) => {
+    let cor;
+    if (!props.color) {
+      if (props.checkPreenchido) {
+        cor = "gray";
+      } else if (props.erro) {
+        cor = "#ff0000c5";
+      } else {
+        cor = "#570B87";
+      }
+    } else {
+      cor = props.color;
+    }
+    return cor;
+  }};
+  font-size: 1em;
+  font-family: "Roboto Condensed";
+  line-height: 50px;
+
+  &:focus {
+    outline: none;
   }
 `;
 

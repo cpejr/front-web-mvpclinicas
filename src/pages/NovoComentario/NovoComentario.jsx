@@ -7,6 +7,7 @@ import {
   CaixaPerguntas,
   CaixaSalario,
   ConjuntoTituloInput,
+  InputComentario,
   Titulo,
   TituloAvaliacao,
   TituloInput,
@@ -19,6 +20,11 @@ import { Checkbox } from "antd";
 function NovoComentario() {
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
+  const [erro, setErro] = useState({
+    cargo: false,
+    salario: false,
+    dia_salario: false,
+  });
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -32,31 +38,31 @@ function NovoComentario() {
   }
 
   function validarComentario() {
-    if (!respostas["Qual foi o cargo exercido no local?"]) {
-      alert("O campo 'Qual foi o cargo exercido no local?' é obrigatório.");
+    const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
+    const salarioErro = !checkPreenchido && !respostas["De quanto era o salário pago?"];
+    const diaSalarioErro = !checkPreenchido && !respostas["O salário era pago em dia?"];
+  
+    setErro((prevErro) => ({
+      ...prevErro,
+      cargo: cargoErro,
+      salario: salarioErro,
+      dia_salario: diaSalarioErro,
+    }));
+  
+    if (cargoErro || salarioErro || diaSalarioErro) {
+      alert("Preencha os campos corretamente!");
       return;
     }
-
-    if (
-      !checkPreenchido &&
-      (!respostas["De quanto era o salário pago?"] ||
-        !respostas["O salário era pago em dia?"])
-    ) {
-      alert("Os campos relacionados ao salário devem ser preenchidos.");
-      return;
-    }
-
+  
     alert("uhuhuhuh");
   }
+  
 
   function renderizaInput(pergunta) {
     return (
       <ConjuntoTituloInput>
         <TituloInput>{pergunta}</TituloInput>
-        <Input
-          border="1px solid #570B87"
-          borderRadius="18px"
-          height="30px"
+        <InputComentario
           onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
         />
       </ConjuntoTituloInput>
@@ -67,7 +73,18 @@ function NovoComentario() {
     <Body>
       <Titulo>Responda as perguntas abaixo:</Titulo>
       <CaixaPerguntas>
-        {renderizaInput("Qual foi o cargo exercido no local?")}
+        <ConjuntoTituloInput>
+          <TituloInput>Qual foi o cargo exercido no local?</TituloInput>
+          <InputComentario
+            erro={erro.cargo}
+            onChange={(e) =>
+              preenchendoRespostas(
+                "Qual foi o cargo exercido no local?",
+                e.target.value
+              )
+            }
+          />
+        </ConjuntoTituloInput>
         <CaixaSalario>
           <CaixaCheckbox>
             <TituloInput justifyContent="center">
@@ -81,22 +98,17 @@ function NovoComentario() {
             >
               De quanto era o salário pago?
             </TituloInput>
-            <Input
-              border="1px solid #570B87"
-              borderRadius="18px"
-              height="30px"
+            <InputComentario
               disabled={checkPreenchido}
-              style={{
-                borderColor: checkPreenchido ? "gray" : "#570B87",
-                color: checkPreenchido ? "gray" : "#8B00FF",
-              }}
+              erro={erro.salario}
+              checkPreenchido={checkPreenchido}
               onChange={(e) =>
                 preenchendoRespostas(
                   "De quanto era o salário pago?",
                   e.target.value
                 )
               }
-            ></Input>
+            />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput
@@ -104,22 +116,17 @@ function NovoComentario() {
             >
               O salário era pago em dia?
             </TituloInput>
-            <Input
-              border="1px solid #570B87"
-              borderRadius="18px"
-              height="30px"
+            <InputComentario
               disabled={checkPreenchido}
-              style={{
-                borderColor: checkPreenchido ? "gray" : "#570B87",
-                color: checkPreenchido ? "gray" : "#8B00FF",
-              }}
+              erro={erro.dia_salario}
+              checkPreenchido={checkPreenchido}
               onChange={(e) =>
                 preenchendoRespostas(
                   "O salário era pago em dia?",
                   e.target.value
                 )
               }
-            ></Input>
+            />
           </ConjuntoTituloInput>
         </CaixaSalario>
         {renderizaInput("O Local possuí equipe de apoio adequada?")}
@@ -143,7 +150,7 @@ function NovoComentario() {
       </CaixaPerguntas>
       <CaixaAvaliacao>
         <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
-        <Input width="30%"></Input>
+        <Input width="30%" borderBottom="1px solid #570B87"></Input>
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
