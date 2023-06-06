@@ -51,10 +51,6 @@ export const CaixaPerguntas = styled.div`
   @media (max-width: 900px) {
     width: 60%;
   }
-
-  @media (max-width: 700px) {
-    gap: 5px;
-  }
 `;
 
 export const CaixaSalario = styled.div`
@@ -78,10 +74,6 @@ export const ConjuntoTituloInput = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-
-  @media (max-width: 700px) {
-    gap: 0px;
-  }
 `;
 
 export const TituloInput = styled.div`
@@ -160,6 +152,10 @@ export const CaixaCheckbox = styled.div`
   align-items: center;
   width: 70%;
   padding: 1%;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const TituloAvaliacao = styled.div`
