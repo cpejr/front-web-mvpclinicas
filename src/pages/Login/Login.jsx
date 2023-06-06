@@ -1,4 +1,4 @@
-import React from "react";
+import {useState} from "react";
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import Icon from "@ant-design/icons/lib/components/Icon";
 import {
@@ -12,10 +12,20 @@ import {
   TituloInput,
   TituloIcon,
   InputNovo,
+  Form,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
+import * as managerService from "../../services/ManagerService/managerService";
+
+
 function Login(){ 
+const [email, setEmail] = useState("");
+const [senha, setSenha] = useState("");
+const logar = async (e) => {
+  await managerService.requisicaoLogin(email, senha);
+}
+
   return ( 
     <Body>
     <Conteudo>
@@ -36,7 +46,8 @@ function Login(){
           minHeight="45px"
           maxHeight="40px"
           paddingRight="2%"
-          marginBottom="-5%"
+          marginBottom="0%"
+          onChange = {(e) => setEmail(e.target.value)}
         >
         </Input>
         </InputNovo>
@@ -54,12 +65,20 @@ function Login(){
           maxHeight="40px"
           marginTop="0%"
           paddingRight="2%"
+          onChange = {(e) => setSenha(e.target.value)}
         >
         </Input>
       </CaixaInput>
       <CaixaBotoes>
         <BotoesEdicao>
-          <Botao fontSize = "1.2em" width="40%" widthMedia500="80%" widthMedia280="70%">Entrar</Botao>
+          <Botao 
+          type="submit" 
+          fontSize = "1.2em"
+          width="40%"
+          widthMedia500="80%"
+          widthMedia280="70%"
+          onClick={() => logar()}>
+            Entrar</Botao>
         </BotoesEdicao>
         <BotaoCadastro
         textDecoration= "underline"

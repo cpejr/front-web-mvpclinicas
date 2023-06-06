@@ -25,3 +25,16 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+
+export const requisicaoLogin = async (email, senha) => {
+  try {
+    const res = await requesterService.logarUsuario(email,senha);
+    sessionStorage.setItem('@clinicas-Token', res.data.token);
+    console.log(sessionStorage);
+  } catch (error) {
+  console.log(error);
+  alert(error.message); 
+  }
+
+  return;
+};

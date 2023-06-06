@@ -35,6 +35,7 @@ export const CaixaFoto = styled.div`
   margin-top: 2%;
   margin-bottom: -5%;
 `;
+export const Form = styled.form``;
 
 export const CaixaInput = styled.div`
   display: flex;
