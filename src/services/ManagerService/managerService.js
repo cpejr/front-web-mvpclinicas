@@ -23,3 +23,19 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+
+export const GetComentariosLocal = async (id_local) => {
+  let comentariosLocal = {};
+
+  await requesterService
+    .requisicaoComentariosLocal(id_local)
+    .then((res) => {
+      comentariosLocal = res.data;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+
+  return { comentariosLocal };
+};
+
