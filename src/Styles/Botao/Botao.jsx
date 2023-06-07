@@ -3,13 +3,14 @@ import styled from "styled-components";
 const Botao = styled.button`
   /* Posição */
   align-items: center;
-  display: inline-block;
+  display: ${(props) => props.display ?? "inline-block"};
   flex-direction: ${(props) => props.flexDirection};
-  justify-content: center;
+  justify-content: ${(props) => props.justifyContent ?? "center"};
+  align-self:  ${(props) => props.alignSelf};
 
   /* Medidas */
   gap: ${(props) => props.gap};
-  height: ${(props) => props.height ?? "45px"};
+  height: ${(props) => props.height ?? "40px"};
   max-height: ${(props) => props.maxHeight};
   max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
@@ -35,7 +36,7 @@ const Botao = styled.button`
   /* Cor e estilo do botão */
   background-color: ${(props) => props.backgroundColor ?? "#8B00FF"};
   border-color: ${(props) => props.borderColor ?? "#570B87"};
-  border-radius: ${(props) => props.borderRadius ?? "10px"};
+  border-radius: ${(props) => props.borderRadius ?? "18px"};
   border-style: solid;
   border-width: ${(props) => props.borderWidth ?? "1px"};
   box-shadow: ${(props) => props.boxShadow};
