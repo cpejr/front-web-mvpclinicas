@@ -24,8 +24,6 @@ export const Conteudo = styled.div`
 export const CaixaFoto = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 12em;
-  font-size: 12em;
   align-items: center;
   justify-content: center;
   width: 250px;
@@ -111,10 +109,6 @@ export const TituloInput = styled.div`
   @media (max-width: 900px) {
     font-size: 1em;
   }
-
-  @media (max-width: 500px) {
-    font-size: 0.8em;
-  }
 `;
 
 export const TituloIcon = styled.div`
@@ -133,22 +127,23 @@ export const CaixaBotoes = styled.div`
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 100%;
+  width: 70%;
   padding: 2%;
 
   @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
+    width: 90%;
   }
 `;
 
 export const BotoesEdicao = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   height: 50%;
-  width: 65%;
+  width: 70%;
 
   @media (max-width: 700px) {
     flex-direction: column;

@@ -28,7 +28,7 @@ import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
 import * as managerService from "../../services/ManagerService/managerService";
-
+import AddToast from "../../components/AddToast/AddToast";
 
 function Home() {
   const [locais, setLocais] = useState([]);
@@ -158,12 +158,14 @@ function Home() {
               height="50px"
               HeightMedia500="50px"
               widthMedia500="100%"
+
             >
               Adicionar Local
             </Botao>
             <PlusOutlined style={{ fontSize: "26px", color: "#fdfdfd", position: "absolute", right: "4%", top: "23%" }}/>
           </CaixaBotoes></div>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }
