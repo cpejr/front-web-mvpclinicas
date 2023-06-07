@@ -9,13 +9,13 @@ import {
   Conteudo,
   Subtitulo,
   Titulo,
-  TituloIcon,
   TituloInput,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
+import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 import * as managerService from "../../services/ManagerService/managerService";
 
@@ -57,6 +57,23 @@ function CadastroNovoLocal() {
   }
 
 
+  /*const onPlaceSelected = (place) => {
+    console.log('Local selecionado:', place);
+    // Faça o que quiser com o local selecionado
+  };
+
+  const mapContainerStyle = {
+    width: '100%',
+    height: '400px',
+
+  };
+
+  const center = {
+    lat: -23.5505, // Latitude inicial
+    lng: -46.6333, // Longitude inicial
+  };
+
+  */
   return (
     <Body>
       <Conteudo>
@@ -66,9 +83,7 @@ function CadastroNovoLocal() {
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Nome:</TituloInput>
-            </TituloIcon>
+            <TituloInput>Nome:</TituloInput>
             <Input
               placeholder="Digite o nome do local"
               backgroundColor="white"
@@ -77,12 +92,11 @@ function CadastroNovoLocal() {
               name="nome"
               value={novoLocal.nome}
               onChange={preenchendoDados}
+              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Telefone:</TituloInput>
-            </TituloIcon>
+            <TituloInput>Telefone:</TituloInput>
             <Input
               placeholder="Digite o telefone do local"
               backgroundColor="white"
@@ -91,12 +105,11 @@ function CadastroNovoLocal() {
               name="telefone"
               value={novoLocal.telefone}
               onChange={preenchendoDados}
+              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Setor:</TituloInput>
-            </TituloIcon>
+            <TituloInput>Setor:</TituloInput>
             <Input
               placeholder="Digite o nome do setor responsável"
               backgroundColor="white"
@@ -105,12 +118,11 @@ function CadastroNovoLocal() {
               name="setor"
               value={novoLocal.setor}
               onChange={preenchendoDados}
+              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Empresa Responsável:</TituloInput>
-            </TituloIcon>
+            <TituloInput>Empresa Responsável:</TituloInput>
             <Input
               placeholder="Digite o nome da empresa responsável"
               backgroundColor="white"
@@ -119,13 +131,13 @@ function CadastroNovoLocal() {
               name="empresa"
               value={novoLocal.empresa}
               onChange={preenchendoDados}
+              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
-            </TituloIcon>
+            <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
           </ConjuntoTituloInput>
+
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
