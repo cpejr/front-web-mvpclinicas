@@ -18,16 +18,21 @@ export const EstiloData = styled.div`
    margin-bottom: 4px;
    
    .ant-picker-input input::placeholder {
-    color: #767676;
+    color: #8B00FF;
     font-family: 'Roboto Condensed';
     font-size: 1.1em;
     padding: 0px 0px 0px;
    } 
 
+   .ant-picker {
+    padding: 0px 0px 0px;
+  }
+
    @media (max-width: 1300px) {
     margin-bottom: 3px;
   }
 `;
+
 
 export const Conteudo = styled.div`
   display: flex;
@@ -219,15 +224,15 @@ export const TituloInput = styled.div`
   color: #570B87;
 
   @media (max-width: 900px) {
-    font-size: 1em;
+    font-size: 1.1em;
   }
 
   @media (max-width: 500px) {
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   @media (max-width: 306px) {
-    font-size: 0.7em;
+    font-size: 0.9em;
   }
 `;
 
@@ -243,20 +248,27 @@ export const SubtituloInput = styled.div`
   color: #570B87;
 
   @media (max-width: 1000px) {
-    font-size: 0.9em;
+    font-size: 1.2em;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 1.1em;
     align-items: center;
     justify-content: flex-start;
   }
 
   @media (max-width: 500px) {
-    font-size: 0.8em;
+    font-size: 1em;
     align-items: center;
     justify-content: flex-start;
-    margin-top: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
   }
 
   @media (max-width: 326px) {
-    font-size: 0.7em;
+    font-size: 0.9em;
     align-items: center;
     justify-content: flex-start;
   }

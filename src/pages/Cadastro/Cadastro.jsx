@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { DatePicker } from 'antd';
 import {
   Body,
@@ -27,16 +27,14 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 
-import { data, telefone } from '../../../utils/masks';
-
-//import api from "../../services/api";
+import { telefone } from '../../../utils/masks';
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import * as managerService from '../../services/ManagerService/managerService';
-import { useSubmit } from 'react-router-dom';
 
 
-const Cadastro = () => {
+
+function Cadastro() {
   const zeraInputs = {
     nome: '',
     telefone: '',
@@ -50,24 +48,24 @@ const Cadastro = () => {
   const [usuario, setUsuario] = useState(zeraInputs);
 
   function preenchendoDados(e) {
-    const { name, value } = e.target;
+    const { nome, valor } = e.target;
     if (name === 'telefone') {
-      setUsuario(prevState => ({
-        ...prevState,
-        [name]: telefone(value)
+      setUsuario(estadoAnterior => ({
+        ...estadoAnterior,
+        [nome]: telefone(valor)
       }
       ))
     } else {
-      setUsuario(prevState => ({
-        ...prevState,
-        [name]: value
+      setUsuario(estadoAnterior => ({
+        ...estadoAnterior,
+        [nome]: valor
       }))
     }
 
   }
 
-  function preenchendoData(name, value) {
-    setUsuario({ ...usuario, [name]: value });
+  function preenchendoData(nome, valor) {
+    setUsuario({ ...usuario, [nome]: valor });
 
   }
 
@@ -145,13 +143,14 @@ const Cadastro = () => {
                 <EstiloData>
                   <DatePicker
                     style={{ border: '0px', width: '100%' }}
-                    placeholder="Digite sua data de nascimento"
+                    placeholder="Selecione sua data de nascimento"
                     locale="pt_BR"
                     format="DD/MM/YYYY"
                     value={usuario.data_nascimento}
                     name="data_nascimento"
                     onChange={(value) => preenchendoData('data_nascimento', value)}
                     suffixIcon={null}
+                    
                   />
                 </EstiloData>
 
