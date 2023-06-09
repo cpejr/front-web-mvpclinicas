@@ -1,9 +1,9 @@
 import React from "react"; 
-import Header from "../../Components/Header/Header";
+import Header2 from "../../Components/Header2/Header2";
 function NovoLocal(){ 
   return ( 
     <div> 
-      <Header></Header>
+      <Header2></Header2>
       <h1>NovoLocal</h1> 
     </div> 
   ) 
