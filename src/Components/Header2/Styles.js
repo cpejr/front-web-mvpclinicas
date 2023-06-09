@@ -49,8 +49,8 @@ export const CaixaLink = styled.div`
   width: 200%;
   @media (max-width: 820px) {
     margin: 250%;
-    padding-right: 60%;
-    padding-left: 60%;
+    padding-right: 50%;
+    padding-left: 50%;
   }
   @media (max-width: 768px) {
     display: flex;
@@ -59,6 +59,9 @@ export const CaixaLink = styled.div`
     width: 20%;
     padding-right: 60%;
     padding-left: 60%;
+  }
+  @media (max-width: 540px) {
+    margin: 180%;
   }
   @media (max-width: 425px) {
     justify-content: center;
@@ -96,6 +99,9 @@ export const CaixaLink2 = styled.div`
     margin: -140%;
     padding-right: 20%;
     padding-left: 20%;
+  }
+   @media (max-width: 540px) {
+    margin:-80%;
   }
   @media (max-width: 425px) {
     justify-content: center;
