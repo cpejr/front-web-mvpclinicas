@@ -28,7 +28,7 @@ import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
 import * as managerService from "../../services/ManagerService/managerService";
-
+import Header from "../../Components/Header/Header";
 
 
 
@@ -47,6 +47,7 @@ function Home() {
 
   return (
     <Body>
+      <Header></Header>
       <Conteudo>
         <CaixaInputs>
           <Input

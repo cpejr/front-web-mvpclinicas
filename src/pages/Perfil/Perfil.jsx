@@ -24,7 +24,7 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg"
-
+import Header2 from "../../Components/Header2/Header2";
 import * as managerService from "../../services/ManagerService/managerService";
 
 
@@ -44,6 +44,7 @@ function Perfil() {
 
   return (
     <Body>
+      <Header2></Header2>
       <Conteudo>
         <CaixaFoto>
           <img
