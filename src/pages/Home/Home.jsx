@@ -28,17 +28,44 @@ import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
 import * as managerService from "../../services/ManagerService/managerService";
+import AddToast from "../../components/AddToast/AddToast";
 import Header from "../../Components/Header/Header";
-
-
-
 
 function Home() {
   const [locais, setLocais] = useState([]);
+  const [buscaTipo, setBuscaTipo] = useState("nome");
+  const [pesquisa, setPesquisa] = useState('');
+
+
+  const pesquisaAjustada = pesquisa
+		.toLowerCase()
+		.normalize("NFD")
+		.replace(/[\u0300-\u036f]/g, "");
+  
+  const locaisFiltrados = locais.filter((local) => {
+    if (buscaTipo === "nome"){ 
+      return (local?.nome
+      ?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(pesquisaAjustada) 
+    )}
+    if (buscaTipo === "endereco") {
+    return (local?.endereco
+      ?.toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .includes(pesquisaAjustada) 
+    )}
+    return local
+	});
 
   async function pegandoDadosDeLocais() {
     const resposta = await managerService.GetDadosLocais();
     setLocais(resposta.dadosLocais);
+  }
+  function MudarBuscaTipo(tipo){
+    setBuscaTipo(tipo)
   }
 
   useEffect(() => {
@@ -62,7 +89,10 @@ function Home() {
             paddingTop="10px"
             paddingRight="10px"
             paddingBottom="10px"
-            paddingLeft="2%">
+            paddingLeft="2%"
+            value={pesquisa}
+            onChange={e => setPesquisa(e.target.value)}
+            >
           </Input>
           <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "19%", paddingBottom: "1.8%" }} />
         </CaixaInputs>
@@ -80,9 +110,15 @@ function Home() {
             height="45px"
             nome="id_usuario"
             borderWidth820="100%"
+            defaultValue={"nome"}
+            value={buscaTipo}
+            onChange={e => MudarBuscaTipo(e.target.value)}
           >
-            <option value="">
+            <option value="nome">
               Pesquisar por nome
+            </option>
+            <option value="endereco">
+              Pesquisar por endereço
             </option>
           </Select>
         </CaixaSelect>
@@ -93,7 +129,7 @@ function Home() {
           </CaixaPlaceholder>
         ) : (
           <CaixaLocais>
-            {locais?.map((value, index) => (
+            {locaisFiltrados?.map((value, index) => (
               <Local key={index}>
                 <CaixaFoto>
                   <img
@@ -124,12 +160,14 @@ function Home() {
               height="50px"
               HeightMedia500="50px"
               widthMedia500="100%"
+
             >
               Adicionar Local
             </Botao>
             <PlusOutlined style={{ fontSize: "26px", color: "#fdfdfd", position: "absolute", right: "4%", top: "23%" }}/>
           </CaixaBotoes></div>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }

@@ -23,6 +23,8 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
+import { data, telefone } from '../../utils/masks';
+
 import fotoPerfil from "../../assets/montanha.jpg"
 import Header2 from "../../Components/Header2/Header2";
 import * as managerService from "../../services/ManagerService/managerService";
@@ -31,13 +33,13 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const id = '646614fa7e221267c351d2c5';
+  const id = '6466a62695e98cb373b670f4';
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(id);
     setUsuario(resposta.dadosUsuario);
   }
-
+  
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
@@ -57,90 +59,96 @@ function Perfil() {
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>NOME COMPLETO:</TituloInput>
-              <IdcardOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>Nome Completo:</TituloInput>
+              <IdcardOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
-              placeholder="Digite seu nome completo"
+              placeholder={usuario.nome}
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              readOnly
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>TELEFONE:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <TituloInput>Telefone:</TituloInput>
+                <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder="Digite seu número de telefone"
+                placeholder={telefone(usuario.telefone)}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>DATA DE NASCIMENTO:</TituloInput>
+                <TituloInput>Data de Nascimento:</TituloInput>
                 <CalendarOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
+                  style={{ fontSize: "22px", color: "#570B87" }}
                 />
               </TituloIcon>
               <Input
-                placeholder="Digite sua data de nascimento:"
+                placeholder={data(usuario.data_nascimento)}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
             <TituloIcon>
-              <TituloInput>EMAIL:</TituloInput>
-              <MailOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+              <TituloInput>Email:</TituloInput>
+              <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
             </TituloIcon>
             <Input
-              placeholder="Digite seu endereço de e-mail"
+              placeholder={usuario.email}
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
+              readOnly
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
                 <TituloInput>CRM:</TituloInput>
-                <CopyOutlined style={{ fontSize: "18px", color: "#570B87" }} />
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder="Digite seu CRM"
+                placeholder={usuario.crm}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>UNIDADE FEDERATIVA</TituloInput>
+                <TituloInput>Unidade Federativa</TituloInput>
                 <GlobalOutlined
-                  style={{ fontSize: "18px", color: "#570B87" }}
+                  style={{ fontSize: "22px", color: "#570B87" }}
                 />
               </TituloIcon>
               <Input
-                placeholder="Digite a Unidade Federativa do CRM"
+                placeholder={usuario.uni_federativa}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
                 justifyContent="flex-start"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
+                readOnly
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
@@ -151,11 +159,11 @@ function Perfil() {
             <Botao>Alterar Senha</Botao>
           </BotoesEdicao>
           <Botao
-            color="#000000"
-            backgroundColor="white"
-            borderColor="#FF000080"
-            width="20%"
-            widthMedia700="30%"
+            color="#ffffff"
+            backgroundColor="#ff0000c5"
+            borderColor="#ff0000"
+            width="30%"
+            widthMedia700="40%"
           >
             Excluir
           </Botao>
