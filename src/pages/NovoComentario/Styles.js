@@ -152,9 +152,10 @@ export const CaixaCheckbox = styled.div`
   align-items: center;
   width: 70%;
   padding: 1%;
-
+  
   @media (max-width: 500px) {
-    width: 100%;
+    width: 70%;
+    align-self: center;
   }
 `;
 
