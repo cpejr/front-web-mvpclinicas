@@ -11,6 +11,18 @@ export const GetDadosUsuario = async (id) => {
 
     return { dadosUsuario };
   };
+  export const GetDadosPessoais = async () => {
+    let dadosUsuario = {};
+    await requesterService
+      .requisicaoDadosPessoais()
+      .then((res) => {
+        dadosUsuario = res.data;
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    return dadosUsuario;
+  };
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};

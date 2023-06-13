@@ -156,3 +156,10 @@ export const BotaoCadastro = styled.button`
     width: ${(props) => props.widthMedia280 ?? '100px'};
   }
 `;
+export const Rotulo = styled.div`
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  color: #E00000;
+`;
