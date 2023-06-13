@@ -56,6 +56,7 @@ export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email,senha);
     sessionStorage.setItem('@clinicas-Token', res.data.token);
+    toast.success('Login realizado com sucesso!');
     console.log(sessionStorage);
   } catch (error) {
   console.log(error);

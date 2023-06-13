@@ -160,6 +160,16 @@ export const Rotulo = styled.div`
   width: 100%;
   font-family: "Barlow", sans-serif;
   font-weight: 400;
+  margin-left: 50%;
+  margin-top: 2%;
+  font-size: 1em;
+  color: #E00000;
+`;
+export const RotuloSenha = styled.div`
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  margin-left: 51%;
   font-size: 1em;
   color: #E00000;
 `;

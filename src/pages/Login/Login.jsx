@@ -14,6 +14,7 @@ import {
   InputNovo,
   Form,
   Rotulo,
+  RotuloSenha,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -28,12 +29,14 @@ function Login(){
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
 const [erro, setErro] = useState(false);
-const [camposVazios, setCamposVazios] = useState(false);
+const [camposVazios, setCamposVazios] = useState("");
 const [carregando, setCarregando] = useState(false);
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-const errors = {};
+const errors = {
+  
+};
   const referenciaCamposNulos = {
     email: false,
     senha: false,
@@ -41,7 +44,7 @@ const errors = {};
 
   async function validacaoEmail(e) {
     const { value, name } = e.target;
-
+    console.log(name);
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
     } else {
@@ -49,12 +52,14 @@ const errors = {};
     }
 
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    console.log(regEx.test(value));
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
     } else {
       setErro({ ...erro, [name]: false });
     }
-
+    console.log(value);
+    console.log(erro);
     setEmail(value);
   }
 
@@ -77,11 +82,13 @@ const errors = {};
   }
 
 const logar = async (e) => {
- const resposta = await managerService.requisicaoLogin(email.trim(), senha);
-  /*if (!email.trim()) errors.email = true;
-  if (!senha) errors.senha = true;
-  setCamposVazios({ ...camposVazios, ...errors });
-
+  console.log(email.trim());
+  if (!email.trim()) erro.email = true;
+  console.log(erro.email);
+  if (!senha) erro.senha = true;
+  setCamposVazios({ ...camposVazios, ...erro });
+  console.log(camposVazios);
+  console.log(referenciaCamposNulos);
   if (_.isEqual(camposVazios, referenciaCamposNulos)) {
     setCarregando(true);
     const resposta = await managerService.GetDadosPessoais();
@@ -97,17 +104,17 @@ const logar = async (e) => {
       if (quantidadeUsuarios === contandoForEach) {
         if (procurandoEmail === 0)
           toast.error("Esse email não está cadastrado.");
-        else managerService.ConferirSenha(email.trim(), senha);
+        
       }
     });
 
-    await managerService.requisicaoLogin(email.trim(), senha);
+    await managerService.requisicaoLogin(email, senha);
     setCarregando(false);
   } else {
     setCarregando(true);
     toast.warn("Preencha todos os campos");
     setCarregando(false);
-  }*/
+  }
 
 }
 
@@ -132,16 +139,18 @@ const logar = async (e) => {
           maxHeight="40px"
           paddingRight="2%"
           marginBottom="0%"
+          name="email"
           value={email}
           onChange={validacaoEmail}
           camposVazios={camposVazios.email}
           erro={erro.email}
         >
         </Input>
-        </InputNovo>
         {erro.email && (
             <Rotulo>Digite um email no formato email@email.com</Rotulo>
           )}
+        </InputNovo>
+        
         <TituloIcon>
               <TituloInput>Senha</TituloInput>
               <LockOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
@@ -156,6 +165,7 @@ const logar = async (e) => {
           maxHeight="40px"
           marginTop="0%"
           paddingRight="2%"
+          name="senha"
           value={senha}
           onChange={validacaoSenha}
           camposVazios={camposVazios.senha}
@@ -163,7 +173,7 @@ const logar = async (e) => {
         >
         </Input>
         {erro.senha && (
-            <Rotulo>Digite uma senha com no minimo 8 digitos</Rotulo>
+            <RotuloSenha>Digite uma senha com no minimo 8 digitos</RotuloSenha>
           )}
       </CaixaInput>
       <CaixaBotoes>
@@ -190,6 +200,7 @@ const logar = async (e) => {
         </BotaoCadastro>
       </CaixaBotoes>
     </Conteudo>
+    <AddToast />
   </Body>
   ) 
 } 
