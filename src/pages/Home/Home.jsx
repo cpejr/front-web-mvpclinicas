@@ -74,7 +74,7 @@ function Home() {
 
   return (
     <Body>
-      <Header></Header>
+      <Header/>
       <Conteudo>
         <CaixaInputs>
           <Input

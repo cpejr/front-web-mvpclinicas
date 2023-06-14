@@ -86,7 +86,7 @@ function Local() {
   return (
     <Body>
       <Conteudo>
-        <Header2></Header2>
+        <Header2/>
         <FotoNome>
           <CaixaFoto>
             <img

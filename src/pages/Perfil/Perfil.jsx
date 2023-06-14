@@ -46,7 +46,7 @@ function Perfil() {
 
   return (
     <Body>
-      <Header2></Header2>
+      <Header2/>
       <Conteudo>
         <CaixaFoto>
           <img
