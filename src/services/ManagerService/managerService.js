@@ -60,7 +60,7 @@ export const requisicaoLogin = async (email, senha) => {
     console.log(sessionStorage);
   } catch (error) {
   console.log(error);
-  alert(error.message); 
+  toast.error(error.response.data.message); 
   }
 
   return;

@@ -51,12 +51,17 @@ const errors = {
       setCamposVazios({ ...camposVazios, [name]: true });
     }
 
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/;
     console.log(regEx.test(value));
+    console.log(name);
     if (!regEx.test(value)) {
+      console.log(regEx.test(value));
       setErro({ ...erro, [name]: true });
+      console.log(erro);
     } else {
+      console.log(value);
       setErro({ ...erro, [name]: false });
+
     }
     console.log(value);
     console.log(erro);
@@ -90,7 +95,7 @@ const logar = async (e) => {
   console.log(camposVazios);
   console.log(referenciaCamposNulos);
   if (_.isEqual(camposVazios, referenciaCamposNulos)) {
-    setCarregando(true);
+    /*setCarregando(true);
     const resposta = await managerService.GetDadosPessoais();
     console.log(resposta);
     let procurandoEmail = 0;
@@ -104,9 +109,8 @@ const logar = async (e) => {
       if (quantidadeUsuarios === contandoForEach) {
         if (procurandoEmail === 0)
           toast.error("Esse email não está cadastrado.");
-        
       }
-    });
+    });*/
 
     await managerService.requisicaoLogin(email, senha);
     setCarregando(false);
