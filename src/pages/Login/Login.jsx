@@ -44,7 +44,7 @@ const errors = {
 
   async function validacaoEmail(e) {
     const { value, name } = e.target;
-    console.log(name);
+    
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
     } else {
@@ -52,19 +52,17 @@ const errors = {
     }
 
     const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/;
-    console.log(regEx.test(value));
-    console.log(name);
+   
     if (!regEx.test(value)) {
-      console.log(regEx.test(value));
+      
       setErro({ ...erro, [name]: true });
-      console.log(erro);
+      
     } else {
-      console.log(value);
+      
       setErro({ ...erro, [name]: false });
 
     }
-    console.log(value);
-    console.log(erro);
+    
     setEmail(value);
   }
 
@@ -87,31 +85,12 @@ const errors = {
   }
 
 const logar = async (e) => {
-  console.log(email.trim());
   if (!email.trim()) erro.email = true;
-  console.log(erro.email);
   if (!senha) erro.senha = true;
   setCamposVazios({ ...camposVazios, ...erro });
-  console.log(camposVazios);
-  console.log(referenciaCamposNulos);
+  
   if (_.isEqual(camposVazios, referenciaCamposNulos)) {
-    /*setCarregando(true);
-    const resposta = await managerService.GetDadosPessoais();
-    console.log(resposta);
-    let procurandoEmail = 0;
-    let contandoForEach = 0;
-    let quantidadeUsuarios = resposta.length;
-    resposta.forEach((usuario) => {
-      contandoForEach++;
-      if (usuario.email === email.trim()) {
-        procurandoEmail++;
-      }
-      if (quantidadeUsuarios === contandoForEach) {
-        if (procurandoEmail === 0)
-          toast.error("Esse email não está cadastrado.");
-      }
-    });*/
-
+   
     await managerService.requisicaoLogin(email, senha);
     setCarregando(false);
   } else {
