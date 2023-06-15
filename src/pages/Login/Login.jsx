@@ -33,23 +33,31 @@ const logar = async (e) => {
       <CaixaInput> 
         <InputNovo>
         <TituloIcon>
-              <TituloInput>E-mail</TituloInput>
-              <MailOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
-            </TituloIcon>
-        <Input
-          placeholder="Digite seu e-mail"
-          color="#8B00FF"
-          backgroundColor="white"
-          type="email"
-          width="50%"
-          height="100%"
-          minHeight="45px"
-          maxHeight="40px"
-          paddingRight="2%"
-          marginBottom="0%"
-          onChange = {(e) => setEmail(e.target.value)}
-        >
-        </Input>
+          <TituloInput>E-mail</TituloInput>
+          <MailOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
+        </TituloIcon>
+         
+        {(() => {
+          return(
+            <Input
+              borderColor="red" //mudar
+              placeholder="Digite seu e-mail"
+              color="red"//mudar
+              placeholderColor="red" //mudar 
+              backgroundColor="white"
+              type="email"
+              width="50%"
+              height="100%"
+              minHeight="45px"
+              maxHeight="40px"
+              paddingRight="2%"
+              marginBottom="0%"
+              onChange = {(e) => setEmail(e.target.value)}
+              />)  
+        })()
+        } 
+        {/* {(() => { ... })()} immediately invokes the arrow function and returns the JSX component returned by that function. */}
+        
         </InputNovo>
         <TituloIcon>
               <TituloInput>Senha</TituloInput>
