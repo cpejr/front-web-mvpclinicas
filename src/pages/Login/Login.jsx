@@ -13,6 +13,7 @@ import {
   TituloIcon,
   InputNovo,
   Form,
+  TextoErro,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -67,13 +68,49 @@ const logar = async (e) => {
               onChange = {(e) => setEmail(e.target.value)}
               />)  
         })()} 
+        {(() => { 
+          if (!/\S+@\S+\.\S+/.test(email) && email !== "") {
+            return <TextoErro>Digite o e-mail corretamente</TextoErro>
+          }
+        })()}
         {/* {(() => { ... })()} immediately invokes the arrow function and returns the JSX component returned by that function. */}
         
         </InputNovo>
         <TituloIcon>
-              <TituloInput>Senha</TituloInput>
-              <LockOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
-            </TituloIcon>
+          <TituloInput>Senha</TituloInput>
+          <LockOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
+        </TituloIcon>
+
+        {/* {(() => {
+          if(senha.length() <= 8) {
+            var borderColor = "red";
+            var color = "red";
+            var placeholderColor = "red";
+          }
+          else {
+            var borderColor = "#570B87";
+            var color = "#570B87";
+            var placeholderColor = "#570B87"
+          }
+          return(
+            <Input
+              placeholder="Digite sua senha"
+              color={color}
+              placeholderColor={placeholderColor} 
+              backgroundColor="white"
+              type="password"
+              width="50%"
+              height="100%"
+              minHeight="45px"
+              maxHeight="40px"
+              paddingRight="2%"
+              marginBottom="0%"
+              borderWidth="1px"
+              borderBottom={`1px solid ${borderColor}`}
+              onChange = {(e) => setSenha(e.target.value)}
+
+              />)
+        })()} */}
         <Input
           placeholder="Digite sua senha"
           backgroundColor="white"

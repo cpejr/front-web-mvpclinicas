@@ -67,8 +67,15 @@ export const TituloInput = styled.div`
   color: #570B87;
   font-weight: 600;
   font-size: 1em;
-  margin-top: 9%
+  margin-top: 9%;
 `;
+
+export const TextoErro = styled(TituloInput)`
+  margin-top: 2%;
+  color: red;
+  //width: inherit;
+`
+
 export const TituloIcon = styled.div`
   display: flex;
   flex-direction: row;
