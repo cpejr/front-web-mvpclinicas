@@ -39,16 +39,18 @@ const logar = async (e) => {
          
         {(() => {
           console.log(email);
-          if (email == "") {
-            var borderColor = "white";
+          if (!/\S+@\S+\.\S+/.test(email) && email !== "") {
+            var borderColor = "red";
+            var color = "red";
+            var placeholderColor = "red";
+          }
+          else { 
+            var borderColor = "#570B87";
             var color = "#570B87";
             var placeholderColor = "#570B87"
           }
-          else var borderColor = color = placeholderColor = "red";
-            
           return(
             <Input
-              borderColor={borderColor}
               placeholder="Digite seu e-mail"
               color={color}
               placeholderColor={placeholderColor} 
@@ -60,6 +62,8 @@ const logar = async (e) => {
               maxHeight="40px"
               paddingRight="2%"
               marginBottom="0%"
+              borderWidth="1px"
+              borderBottom={`1px solid ${borderColor}`}
               onChange = {(e) => setEmail(e.target.value)}
               />)  
         })()} 
