@@ -38,12 +38,20 @@ const logar = async (e) => {
         </TituloIcon>
          
         {(() => {
+          console.log(email);
+          if (email == "") {
+            var borderColor = "white";
+            var color = "#570B87";
+            var placeholderColor = "#570B87"
+          }
+          else var borderColor = color = placeholderColor = "red";
+            
           return(
             <Input
-              borderColor="red" //mudar
+              borderColor={borderColor}
               placeholder="Digite seu e-mail"
-              color="red"//mudar
-              placeholderColor="red" //mudar 
+              color={color}
+              placeholderColor={placeholderColor} 
               backgroundColor="white"
               type="email"
               width="50%"
@@ -54,8 +62,7 @@ const logar = async (e) => {
               marginBottom="0%"
               onChange = {(e) => setEmail(e.target.value)}
               />)  
-        })()
-        } 
+        })()} 
         {/* {(() => { ... })()} immediately invokes the arrow function and returns the JSX component returned by that function. */}
         
         </InputNovo>
