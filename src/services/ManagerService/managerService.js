@@ -1,5 +1,5 @@
 import * as requesterService from "../RequesterService/requesterService";
-
+import { toast } from "react-toastify";
 export const GetDadosUsuario = async (id) => {
     let dadosUsuario = {};
   
@@ -33,7 +33,7 @@ export const requisicaoLogin = async (email, senha) => {
     console.log(sessionStorage);
   } catch (error) {
   console.log(error);
-  alert(error.message); 
+  toast.error(error.response.data.message); 
   }
 
   return;
