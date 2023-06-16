@@ -17,14 +17,27 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import * as managerService from "../../services/ManagerService/managerService";
+import { ToastContainer, toast} from 'react-toastify';
 
 
 function Login(){ 
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
+const [erro, setErro] = useState("");
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  if(email.trim() === '' || senha.trim() === ''){
+  toast.error("Preencha todos os campos", {position: toast.POSITION.TOP_CENTER});
+    setErro('Preencha todos os campos');
+    console.log(erro);
+    return;
+  }
+}
 const logar = async (e) => {
   await managerService.requisicaoLogin(email, senha);
 }
+
 
   return ( 
     <Body>
@@ -36,6 +49,7 @@ const logar = async (e) => {
           <TituloInput>E-mail</TituloInput>
           <MailOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
         </TituloIcon>
+        <ToastContainer/>
          
         {(() => {
           console.log(email);
@@ -50,22 +64,26 @@ const logar = async (e) => {
             var placeholderColor = "#570B87"
           }
           return(
-            <Input
-              placeholder="Digite seu e-mail"
-              color={color}
-              placeholderColor={placeholderColor} 
-              backgroundColor="white"
-              type="email"
-              width="50%"
-              height="100%"
-              minHeight="45px"
-              maxHeight="40px"
-              paddingRight="2%"
-              marginBottom="0%"
-              borderWidth="1px"
-              borderBottom={`1px solid ${borderColor}`}
-              onChange = {(e) => setEmail(e.target.value)}
-              />)  
+            
+              <Input
+                required
+                placeholder="Digite seu e-mail"
+                color={color}
+                placeholderColor={placeholderColor} 
+                backgroundColor="white"
+                type="email"
+                width="50%"
+                height="100%"
+                minHeight="45px"
+                maxHeight="40px"
+                paddingRight="2%"
+                marginBottom="0%"
+                borderWidth="1px"
+                borderBottom={`1px solid ${borderColor}`}
+                onChange = {(e) => setEmail(e.target.value)}
+                />
+            
+          )  
         })()} 
         {/* {(() => { ... })()} immediately invokes the arrow function and returns the JSX component returned by that function. */}
         
@@ -74,23 +92,28 @@ const logar = async (e) => {
               <TituloInput>Senha</TituloInput>
               <LockOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
             </TituloIcon>
-        <Input
-          placeholder="Digite sua senha"
-          backgroundColor="white"
-          width="50%"
-          type="password"
-          height="100%"
-          minHeight="45px"
-          maxHeight="40px"
-          marginTop="0%"
-          paddingRight="2%"
-          onChange = {(e) => setSenha(e.target.value)}
-        >
-        </Input>
+
+       
+          <Input
+            required 
+            placeholder="Digite sua senha"
+            backgroundColor="white"
+            width="50%"
+            type="password"
+            height="100%"
+            minHeight="45px"
+            maxHeight="40px"
+            marginTop="0%"
+            paddingRight="2%"
+            onChange = {(e) => setSenha(e.target.value)}
+          >
+          </Input>
+        
       </CaixaInput>
       <CaixaBotoes>
         <BotoesEdicao>
           <Botao 
+          onSubmit={handleSubmit}
           type="submit" 
           fontSize = "1.2em"
           width="40%"

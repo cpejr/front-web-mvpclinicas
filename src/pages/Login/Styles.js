@@ -13,6 +13,7 @@ export const InputNovo = styled.div `
   align-items: center;
   width: 100%;
   height: 100%;
+  border: 1px solid purple;
 `
 
 export const Conteudo = styled.div`
@@ -35,7 +36,9 @@ export const CaixaFoto = styled.div`
   margin-top: 2%;
   margin-bottom: -5%;
 `;
-export const Form = styled.form``;
+export const Form = styled.form`
+background-color: green;
+`;
 
 export const CaixaInput = styled.div`
   display: flex;
@@ -47,6 +50,7 @@ export const CaixaInput = styled.div`
   padding: 2%;
   background-color: white;
   margin-top: 3%;
+  border: 1px solid green;
 `;
 
 export const InputDividido = styled.div`
@@ -89,6 +93,7 @@ export const CaixaBotoes = styled.div`
   background-color: white;
   margin-top: 2%;
   margin-bottom: 5%;
+  border: 1px solid purple;
 `;
 
 export const BotoesEdicao = styled.div`
