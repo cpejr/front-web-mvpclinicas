@@ -100,7 +100,7 @@ function NovoComentario() {
         <CaixaSalario>
           <CaixaCheckbox>
             <TituloInput justifyContent="center">
-              Não desejo responder essa seção AAAAAAAAAAAAAAAS
+              Não desejo responder essa seção AAAAAAAAAAAAAAAS uuuuuuuuuuuuu
             </TituloInput>
             <Checkbox onChange={estadoCheckbox}></Checkbox>
           </CaixaCheckbox>
