@@ -46,6 +46,8 @@ const Cadastro = () => {
     uni_federativa: '',
     senha: '',
     avatar_url: '',
+    nome_mae: '',
+    nome_pai: ''
   };
   const [usuario, setUsuario] = useState(zeraInputs);
 
@@ -63,6 +65,7 @@ const Cadastro = () => {
         [name]: value
       }))
     }
+    //console.log(usuario.nome_mae+ " "+ usuario.nome_pai)
 
   }
 
@@ -116,6 +119,43 @@ const Cadastro = () => {
               onChange={preenchendoDados}
             ></Input>
           </ConjuntoTituloInput>
+          <InputDividido>
+            <ConjuntoTituloInput>
+              <TituloIcon>
+                <TituloInput>Nome da mãe:</TituloInput>
+                <IdcardOutlined style={{ fontSize: "22px", color: "#570B87" }} />
+              </TituloIcon>
+              <Input
+                placeholder="Digite o nome da sua mãe"
+                backgroundColor="white"
+                width="100%"
+                heightMedia700="20px"
+                alignSelf="flex-start"
+                marginBottomMedia700="8%"
+                name="nome_mae"
+                value={usuario.nome_mae}
+                onChange={preenchendoDados}
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloIcon>
+                <TituloInput>Nome do pai: </TituloInput>
+                <IdcardOutlined style={{ fontSize: "22px", color: "#570B87" }} />
+              </TituloIcon>
+              <Input
+                placeholder="Digite o nome do seu pai:"
+                backgroundColor="white"
+                width="100%"
+                heightMedia700="20px"
+                justifyContent="flex-start"
+                alignSelf="flex-start"
+                marginBottomMedia700="8%"
+                name="nome_pai"
+                value={usuario.nome_pai}
+                onChange={preenchendoDados}
+              ></Input>
+            </ConjuntoTituloInput>
+          </InputDividido>
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
