@@ -30,21 +30,21 @@ const [emailPreenchido, setEmailPreenchido] = useState(false);
 const [senhaPreenchida, setSenhaPreenchida] = useState(false);
 
 const logar = async (e) => {
-  var check = 0;
+
   if(email.trim() === '' || senha.trim() === ''){
   toast.warn("Preencha todos os campos!");
     setErro('Preencha todos os campos');
     console.log(erro);
   }
-  else if( (!/\S+@\S+\.\S+/.test(email) && email !== "") || senha.length >= 8){
+  else if( (!/\S+@\S+\.\S+/.test(email) && email !== "") || senha.length < 8){
     toast.error("Preencha os campos corretamente");
     setErro('Preencha os campos corretamente');
     console.log(erro);
   }
-  else if ( (/\S+@\S+\.\S+/.test(email) && email !== "") || senha.length < 8){
+  else if ( (/\S+@\S+\.\S+/.test(email) && email !== "") && senha.length >= 8){
     toast.success("Login Realizado com sucesso");
     console.log("Login realizado com sucesso");
-    check = 1;
+
   }
 
   await managerService.requisicaoLogin(email, senha);
