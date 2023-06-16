@@ -19,6 +19,7 @@ import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import * as managerService from "../../services/ManagerService/managerService";
 import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 function Login(){ 
@@ -26,16 +27,24 @@ const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
 const [erro, setErro] = useState("");
 
-const handleSubmit = (event) => {
-  event.preventDefault();
+const logar = async (e) => {
+  var check = 0;
   if(email.trim() === '' || senha.trim() === ''){
-  toast.error("Preencha todos os campos", {position: toast.POSITION.TOP_CENTER});
+  toast.warn("Preencha todos os campos!");
     setErro('Preencha todos os campos');
     console.log(erro);
-    return;
   }
-}
-const logar = async (e) => {
+  else if( (!/\S+@\S+\.\S+/.test(email) && email !== "") || senha.length >= 8){
+    toast.error("Preencha os campos corretamente");
+    setErro('Preencha os campos corretamente');
+    console.log(erro);
+  }
+  else if ( (/\S+@\S+\.\S+/.test(email) && email !== "") || senha.length < 8){
+    toast.success("Login Realizado com sucesso");
+    console.log("Login realizado com sucesso");
+    check = 1;
+  }
+
   await managerService.requisicaoLogin(email, senha);
 }
 
@@ -50,7 +59,7 @@ const logar = async (e) => {
           <TituloInput>E-mail</TituloInput>
           <MailOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
         </TituloIcon>
-        <ToastContainer/>
+        
          
         {(() => {
           console.log(email);
@@ -146,7 +155,6 @@ const logar = async (e) => {
       <CaixaBotoes>
         <BotoesEdicao>
           <Botao 
-          onSubmit={handleSubmit}
           type="submit" 
           fontSize = "1.2em"
           width="40%"
@@ -166,6 +174,7 @@ const logar = async (e) => {
         }}
         >Cadastre-se
         </BotaoCadastro>
+        <ToastContainer/>
       </CaixaBotoes>
     </Conteudo>
   </Body>
