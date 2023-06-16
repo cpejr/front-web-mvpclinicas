@@ -35,6 +35,7 @@ const Input = styled.input`
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.boxShadow};
+  border-bottom: ${(props) => props.borderBottom};
   //border-bottom: 1px solid #570B87;
   color: ${(props) => props.color };
   
@@ -50,7 +51,7 @@ const Input = styled.input`
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
 ::placeholder {
-  color: #8B00FF;
+  color: ${(props) => props.placeholderColor ?? "#8B00FF"};
 }
 
   /* Margem */
