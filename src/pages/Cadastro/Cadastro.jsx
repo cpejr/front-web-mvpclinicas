@@ -150,7 +150,7 @@ const Cadastro = () => {
                 justifyContent="flex-start"
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
-                name="nome_pai"
+                name="nome_pai"   
                 value={usuario.nome_pai}
                 onChange={preenchendoDados}
               ></Input>
