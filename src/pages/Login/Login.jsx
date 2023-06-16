@@ -26,6 +26,8 @@ function Login(){
 const [email, setEmail] = useState("");
 const [senha, setSenha] = useState("");
 const [erro, setErro] = useState("");
+const [emailPreenchido, setEmailPreenchido] = useState(false);
+const [senhaPreenchida, setSenhaPreenchida] = useState(false);
 
 const logar = async (e) => {
   var check = 0;
@@ -54,16 +56,15 @@ const logar = async (e) => {
     <Conteudo>
       <CaixaFoto></CaixaFoto>
       <CaixaInput> 
+        {/* email */}
         <InputNovo>
         <TituloIcon>
           <TituloInput>E-mail</TituloInput>
           <MailOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
         </TituloIcon>
-        
-         
         {(() => {
           console.log(email);
-          if (!/\S+@\S+\.\S+/.test(email) && email !== "") {
+          if (!/\S+@\S+\.\S+/.test(email) && emailPreenchido) {
             var borderColor = "red";
             var color = "red";
             var placeholderColor = "red";
@@ -74,7 +75,6 @@ const logar = async (e) => {
             var placeholderColor = "#570B87"
           }
           return(
-            
               <Input
                 required
                 placeholder="Digite seu e-mail"
@@ -90,26 +90,29 @@ const logar = async (e) => {
                 marginBottom="0%"
                 borderWidth="1px"
                 borderBottom={`1px solid ${borderColor}`}
-                onChange = {(e) => setEmail(e.target.value)}
+                onChange = {(e) => {
+                  setEmail(e.target.value);
+                  setEmailPreenchido(true)
+                }}
                 />
             
           )  
         })()} 
         {(() => { 
-          if (!/\S+@\S+\.\S+/.test(email) && email !== "") {
+          if (!/\S+@\S+\.\S+/.test(email) && email !== "") 
             return <TextoErro>Digite o e-mail corretamente</TextoErro>
-          }
+          // else if (email.trim() == '' && emailPreenchido) 
+          //   return <TextoErro>O e-mail deve ser preenchido</TextoErro>
         })()}
-        {/* {(() => { ... })()} immediately invokes the arrow function and returns the JSX component returned by that function. */}
-        
         </InputNovo>
+        {/* senha */}
+        <InputNovo>
         <TituloIcon>
           <TituloInput>Senha</TituloInput>
           <LockOutlined style={{ fontSize: "18px", color: "#570B87", marginTop: "10%"}} />
         </TituloIcon>
-
-        {/* {(() => {
-          if(senha.length() <= 8) {
+        {(() => {
+          if(senha.length < 8 && senhaPreenchida) {
             var borderColor = "red";
             var color = "red";
             var placeholderColor = "red";
@@ -134,23 +137,20 @@ const logar = async (e) => {
               marginBottom="0%"
               borderWidth="1px"
               borderBottom={`1px solid ${borderColor}`}
-              onChange = {(e) => setSenha(e.target.value)}
-
+              onChange = {(e) => {
+                setSenha(e.target.value);
+                setSenhaPreenchida(true);
+              }}
               />)
-        })()} */}
-        <Input
-          placeholder="Digite sua senha"
-          backgroundColor="white"
-          width="50%"
-          type="password"
-          height="100%"
-          minHeight="45px"
-          maxHeight="40px"
-          marginTop="0%"
-          paddingRight="2%"
-          onChange = {(e) => setSenha(e.target.value)}
-        >
-        </Input>
+        })()}
+        {(() => { 
+          if (senha.length < 8 && senha !== "") 
+            return <TextoErro>Digite uma senha com no mínimo 8 dígitos</TextoErro>
+          // else if (senha.trim() == '' && senhaPreenchida) 
+          //   return <TextoErro>A senha deve ser preenchida</TextoErro>
+        })()} 
+        </InputNovo>
+
       </CaixaInput>
       <CaixaBotoes>
         <BotoesEdicao>

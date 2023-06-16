@@ -75,6 +75,7 @@ export const TituloInput = styled.div`
 export const TextoErro = styled(TituloInput)`
   margin-top: 2%;
   color: red;
+  font-size: 0.8em;
   //width: inherit;
 `
 
