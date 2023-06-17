@@ -151,3 +151,21 @@ export const BotoesEdicao = styled.div`
     width: 100%;
   }
 `;
+
+export const TextoAlterarFoto = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  color: #570B87;
+
+  @media (max-width: 900px) {
+    font-size: 1em;
+  }
+`;

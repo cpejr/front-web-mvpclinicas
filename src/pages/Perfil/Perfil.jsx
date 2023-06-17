@@ -10,6 +10,7 @@ import {
   InputDividido,
   TituloIcon,
   TituloInput,
+  TextoAlterarFoto,
 } from "./Styles";
 
 import {
@@ -24,6 +25,8 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { data, telefone } from '../../utils/masks';
+import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/ModalAlterarFotoDePerfil";
+import { Modal } from "antd";
 
 import fotoPerfil from "../../assets/montanha.jpg"
 
@@ -33,16 +36,23 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const id = '6466a62695e98cb373b670f4';
+  const _id = '64668ccfcf080fad87158da8';
+  const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
 
   async function pegandoDadosUsuario() {
-    const resposta = await managerService.GetDadosUsuario(id);
+    const resposta = await managerService.GetDadosUsuario(_id);
     setUsuario(resposta.dadosUsuario);
+    console.log(JSON.stringify(usuario._id))
   }
   
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
+
+  async function fechandoModalAlterarFotoPerfil() {
+    setModalAlterarFotoPerfil(false);
+    pegandoDadosUsuario();
+  }
 
   return (
     <Body>
@@ -55,6 +65,10 @@ function Perfil() {
             style={{ borderRadius: '100%' }}
           ></img>
         </CaixaFoto>
+        <TextoAlterarFoto 
+        onClick={() => {
+        setModalAlterarFotoPerfil(true);}}>
+        Alterar imagem de Perfil</TextoAlterarFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
@@ -168,6 +182,21 @@ function Perfil() {
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+      <Modal
+        visible={modalAlterarFotoPerfil}
+        onCancel={fechandoModalAlterarFotoPerfil}
+        footer={null}
+        width={"50%"}
+        centered={true}
+        destroyOnClose={true}
+        style={{ maxWidth: "450px", minWidth: "250px" }}
+      >
+        <ModalAlterarFotoDePerfil
+          emailUsuario={usuario.email}
+          fecharModal={() => fechandoModalAlterarFotoPerfil()}
+          idUsuario={usuario._id}
+        />
+      </Modal>
     </Body>
   );
 }

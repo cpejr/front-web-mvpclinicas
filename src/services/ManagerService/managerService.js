@@ -39,3 +39,15 @@ export const GetComentariosLocal = async (id_local) => {
   return { comentariosLocal };
 };
 
+export const UpdateFotoDePerfil = async (id, file) => {
+  await requesterService
+    .updateFotoDePerfil(id, file)
+    .then(() => {
+      toast.success('Foto atualizada com sucesso');
+    })
+    .catch((error) => {
+      alert(error.message);
+      return;
+    });
+  return;
+};
