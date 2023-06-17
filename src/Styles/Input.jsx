@@ -20,6 +20,7 @@ const Input = styled.input`
   padding-left: ${(props) => props.paddingLeft};
   padding-right: ${(props) => props.paddingRight};
   padding-bottom: ${(props) => props.paddingBottom};
+  padding: ${(props) => props.padding};
   height: ${(props) => props.height ?? '20px'};
   width: ${(props) => props.width ?? '100%'};
 
@@ -61,8 +62,6 @@ const Input = styled.input`
   @media (max-width: 700px) {
     margin-bottom: ${(props) => props.marginBottomMedia700};
   }
-
 `;
-
 
 export default Input;

@@ -25,65 +25,139 @@ import {
   CopyOutlined,
   GlobalOutlined,
   LockOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 
-import { telefone } from '../../../utils/masks';
+import { apenasLetras, telefone } from '../../../utils/masks';
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
+import _ from "lodash";
+import { Spin } from 'antd';
 import * as managerService from '../../services/ManagerService/managerService';
 
 
 
 function Cadastro() {
-  const zeraInputs = {
-    nome: '',
-    telefone: '',
-    data_nascimento: '',
-    email: '',
-    crm: '',
-    uni_federativa: '',
-    senha: '',
-    avatar_url: '',
+
+  const [erro, setErro] = useState(false);
+  const [estado, setEstado] = useState({});
+  const [usuario, setUsuario] = useState({});
+  const [carregando, setCarregando] = useState(false);
+  const errors = {};
+  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+
+  const [camposVazios, setCamposVazios] = useState({
+    nome: false,
+    telefone: false,
+    data_nascimento: false,
+    email: false,
+    crm: false,
+    uni_federativa: false,
+    senha: false,
+    confirmacao_senha: false,
+  });
+  const testeOriginal = {
+    nome: false,
+    telefone: false,
+    data_nascimento: false,
+    email: false,
+    crm: false,
+    uni_federativa: false,
+    senha: false,
+    confirmacao_senha: false,
   };
-  const [usuario, setUsuario] = useState(zeraInputs);
+  let testeTemp = testeOriginal;
+
+  async function validacaoEmail(e) {
+    const { value, name } = e.target;
+    if (value) {
+      setCamposVazios({ ...camposVazios, [name]: false });
+    }
+
+    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    if (!regEx.test(value)) {
+      setErro({ ...erro, [name]: true });
+    } else {
+      setErro({ ...erro, [name]: false });
+    }
+
+    setUsuario({ ...usuario, [name]: value });
+  }
 
   function preenchendoDados(e) {
-    const { nome, valor } = e.target;
-    if (name === 'telefone') {
-      setUsuario(estadoAnterior => ({
-        ...estadoAnterior,
-        [nome]: telefone(valor)
-      }
-      ))
+    const { name, value } = e.target;
+    if (
+      (name === 'telefone' && value.length < 15) ||
+      ((name === 'senha' || name === 'confirmacao_senha') )
+    ) {
+      setErro({ ...erro, [name]: true });
     } else {
-      setUsuario(estadoAnterior => ({
-        ...estadoAnterior,
-        [nome]: valor
-      }))
+      setErro({ ...erro, [name]: false });
+    }
+
+    setUsuario({ ...usuario, [name]: value });
+    setEstado({ ...estado, [name]: value });
+
+    if (name === 'nome') {
+      setEstado({
+        ...estado,
+        [name]: apenasLetras(value),
+      });
+      setUsuario({ ...usuario, [name]: apenasLetras(value) });
+    }
+
+    if (name === 'telefone') {
+      setEstado({ ...estado, [name]: telefone(value) });
+      setUsuario({ ...usuario, [name]: telefone(value) });
+    }
+
+    if (name === 'crm') {
+      setEstado({ ...estado, [name]: (value) });
+      setUsuario({ ...usuario, [name]: (value) });
+    }
+
+    if (name === 'uni_federativa') {
+      setEstado({ ...estado, [name]: apenasLetras(value) });
+      setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
   }
 
-  function preenchendoData(nome, valor) {
-    setUsuario({ ...usuario, [nome]: valor });
-
+  function preenchendoData(name, value) {
+    setUsuario({ ...usuario, [name]: value });
   }
-
 
   async function requisicaoCadastro() {
-    if (usuario.senha === usuario.confirmacao_senha) {
-      const usuarioCadastrado = await managerService.CadastroUsuario(
-        usuario,
-      )
-      if (usuarioCadastrado) {
-        alert('Usuário criado.')
-      } else {
-        alert('As senhas digitadas são diferentes.');
-      }
-    }
-  }
+    setCarregando(true);
+    if (!usuario.nome) errors.nome = true;
+    if (!usuario.telefone) errors.telefone = true;
+    if (!usuario.data_nascimento) errors.data_nascimento = true;
+    if (!usuario.email) errors.email = true;
+    if (!usuario.crm) errors.crm = true;
+    if (!usuario.uni_federativa) errors.uni_federativa = true;
+    if (!usuario.senha) errors.senha = true;
+    if (!usuario.confirmacao_senha) errors.confirmacao_senha = true;
 
- 
+
+    if (_.isEqual(camposVazios, testeTemp)) {
+      if (usuario.senha === usuario.confirmacao_senha) {
+        await managerService.CadastroUsuario(usuario);
+        toast.success('Usuário cadastrado com sucesso!');
+        setCarregando(false);
+      } else {
+        toast.error('As senhas digitadas são diferentes.');
+        setCarregando(false);
+      }
+    } else {
+      toast.error('Preencha todos os campos obrigatórios');
+    }
+
+    testeTemp = testeOriginal;
+    setCarregando(false);
+  }
+console.log(usuario)
   return (
     <Body>
       <Conteudo>
@@ -106,12 +180,16 @@ function Cadastro() {
             </TituloIcon>
             <Input
               placeholder="Digite seu nome completo"
+              status="error"
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="nome"
-              value={usuario.nome}
+              value={estado.nome}
               onChange={preenchendoDados}
+              erro={erro.nome}
+              camposVazios={camposVazios.nome}
+              
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -128,8 +206,10 @@ function Cadastro() {
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
                 name="telefone"
-                value={usuario.telefone}
+                value={estado.telefone}
                 onChange={preenchendoDados}
+                erro={erro.telefone}
+                camposVazios={camposVazios.telefone}
               ></Input>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -146,11 +226,12 @@ function Cadastro() {
                     placeholder="Selecione sua data de nascimento"
                     locale="pt_BR"
                     format="DD/MM/YYYY"
-                    value={usuario.data_nascimento}
+                    value={estado.data_nascimento}
                     name="data_nascimento"
                     onChange={(value) => preenchendoData('data_nascimento', value)}
+                    erro={erro.data_nascimento}
                     suffixIcon={null}
-                    
+
                   />
                 </EstiloData>
 
@@ -168,8 +249,10 @@ function Cadastro() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="email"
-              value={usuario.email}
-              onChange={preenchendoDados}
+              value={estado.email}
+              erro={erro.email}
+              camposVazios={camposVazios.email}
+              onChange={validacaoEmail}
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -186,7 +269,9 @@ function Cadastro() {
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
                 name="crm"
-                value={usuario.crm}
+                value={estado.crm}
+                erro={erro.crm}
+                camposVazios={camposVazios.crm}
                 onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
@@ -206,7 +291,9 @@ function Cadastro() {
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
                 name="uni_federativa"
-                value={usuario.uni_federativa}
+                erro={erro.uni_federativa}
+                camposVazios={camposVazios.uni_federativa}
+                value={estado.uni_federativa}
                 onChange={preenchendoDados}
               ></Input>
             </ConjuntoTituloInput>
@@ -219,11 +306,15 @@ function Cadastro() {
             <Input
               placeholder="Digite sua senha"
               backgroundColor="white"
+              id="senha"
+              type="password"
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="senha"
-              value={usuario.senha}
+              value={estado.senha}
+              erro={erro.senha}
               onChange={preenchendoDados}
+              camposVazios={camposVazios.senha}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -237,7 +328,11 @@ function Cadastro() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="confirmacao_senha"
-              value={usuario.confirmacao_senha}
+              id="confirmacao_senha"
+              type="password"
+              erro={erro.confirmacao_senha}
+              camposVazios={camposVazios.senhaConfirmada}
+              value={estado.confirmacao_senha}
               onChange={preenchendoDados}
             ></Input>
             <SubtituloInput>Informamos que nenhuma informação aqui preenchida além de seu nome será exibida para outros usuários!</SubtituloInput>
@@ -251,15 +346,19 @@ function Cadastro() {
               borderColor="transparent"
               color="#570B87"
               textDecoration="underline"
+              onClick={() => {
+                window.location.href = "/Login"
+              }}
             >Já possui uma conta?</Botao>
             <Botao
               border-radius="10px"
               onClick={() => { requisicaoCadastro(); }}>
-              Confirmar
+              {carregando ? <Spin indicator={antIcon} /> : 'Confirmar'}
             </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }

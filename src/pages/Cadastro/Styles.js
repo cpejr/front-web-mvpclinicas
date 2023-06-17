@@ -20,7 +20,7 @@ export const EstiloData = styled.div`
    .ant-picker-input input::placeholder {
     color: #8B00FF;
     font-family: 'Roboto Condensed';
-    font-size: 1.1em;
+    font-size: 1.3em;
     padding: 0px 0px 0px;
    } 
 
