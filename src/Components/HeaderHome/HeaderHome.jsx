@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ContainerHeader, Texto2, CaixaLink, Texto, CaixaLink2} from "./Styles";
 import { HomeOutlined } from '@ant-design/icons';
-function Header2() {
+function HeaderHome() {
 
   return (
     <ContainerHeader>
@@ -20,4 +20,4 @@ function Header2() {
     </ContainerHeader>
   );
 }
-export default Header2;
+export default HeaderHome;

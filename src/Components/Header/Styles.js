@@ -9,10 +9,30 @@ export const ContainerHeader = styled.div`
   align-items: center;
   background-color: #8B00FF;
   height: 90px;
-  padding-left: 60%;
-  padding-right: 60%;
+  padding-left: 45%;
+  padding-right: 45%;
   margin-bottom: 1%;
   color:${Cores.branco};
+  @media (max-width: 820px) {
+    padding-right: 50%;
+    padding-left: 50%;
+  }
+  @media (max-width: 768px) {
+    padding-right: 60%;
+    padding-left: 60%;
+  }
+  @media (max-width: 540px) {
+    padding-right: 60%;
+    padding-left: 60%;
+  }
+  @media (max-width: 425px) {
+    padding-right: 40%;
+    padding-left: 40%;
+  }
+  @media (max-width: 375px) {
+    padding-right: 30%;
+    padding-left: 30%;
+  }
 `;
 export const Texto = styled.p`
  color: white;
@@ -82,7 +102,6 @@ export const CaixaLink2 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  border-radius: 10px;
   justify-content: space-around;
   align-items: left;
   padding-right: 50%;

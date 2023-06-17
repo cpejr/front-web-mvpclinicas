@@ -26,7 +26,7 @@ import Input from "../../Styles/Input/Input";
 import { data, telefone } from '../../utils/masks';
 
 import fotoPerfil from "../../assets/montanha.jpg"
-import Header2 from "../../Components/Header2/Header2";
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
 
 
@@ -46,7 +46,7 @@ function Perfil() {
 
   return (
     <Body>
-      <Header2/>
+      <HeaderHome/>
       <Conteudo>
         <CaixaFoto>
           <img
