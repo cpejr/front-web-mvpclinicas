@@ -26,6 +26,7 @@ import Input from "../../Styles/Input/Input";
 import { data, telefone } from "../../utils/masks";
 
 import ModalAlterarDados from "../../components/ModalAlterarDados";
+import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
 
 import fotoPerfil from "../../assets/montanha.jpg";
@@ -36,6 +37,7 @@ function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
+  const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const id = "6466a62695e98cb373b670f4";
 
   async function pegandoDadosUsuario() {
@@ -49,14 +51,12 @@ function Perfil() {
     switch (botaoId) {
       case "alterarDados":
         setModalAlterarDados(true);
-        console.log("alterar dados");
         break;
       case "alterarSenha":
-        console.log("alterar senha");
+        setModalAlterarSenha(true);
         break;
       case "excluirPerfil":
         setModalExcluirPerfil(true);
-        console.log("excluir perfil");
         break;
 
       default:
@@ -66,6 +66,7 @@ function Perfil() {
 
   function cancelouModal() {
     setModalAlterarDados(false);
+    setModalAlterarSenha(false);
     setModalExcluirPerfil(false);
   }
 
@@ -209,8 +210,23 @@ function Perfil() {
         open={modalAlterarDados}
         onClose={cancelouModal}
         usuario={usuario}
+        centered
+        destroyOnClose
       />
-      <ModalExcluirPerfil open={modalExcluirPerfil} onClose={cancelouModal} />
+      <ModalAlterarSenha
+        open={modalAlterarSenha}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalExcluirPerfil
+        open={modalExcluirPerfil}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
     </Body>
   );
 }

@@ -11,9 +11,9 @@ import {
   TituloInput,
 } from "./Styles";
 
-import { data, telefone } from "../../utils/masks";
+import { senha } from "../../utils/masks";
 
-function ModalAlterarDados(props) {
+function ModalAlterarSenha(props) {
   const [carregando, setCarregando] = useState(false);
   const [respostas, setRespostas] = useState({});
 
@@ -47,51 +47,29 @@ function ModalAlterarDados(props) {
       <ConteudoModal>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloInput>Nome Completo</TituloInput>
+            <TituloInput>Insira a senha atual</TituloInput>
             <Input
-              placeholder={props.usuario.nome}
+              placeholder={senha(props.usuario.senha)}
+              type="password"
               onChange={(e) =>
-                preenchendoRespostas("Nome Completo", e.target.value)
+                preenchendoRespostas("Senha Atual", e.target.value)
               }
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Telefone</TituloInput>
+            <TituloInput>Digite a nova senha</TituloInput>
             <Input
-              placeholder={telefone(props.usuario.telefone)}
-              onChange={(e) => preenchendoRespostas("Telefone", e.target.value)}
+              placeholder={"Digite Nova Senha"}
+              type="password"
+              onChange={(e) => preenchendoRespostas("Nova Senha", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Data de Nascimento</TituloInput>
+            <TituloInput>Confirme a nova senha</TituloInput>
             <Input
-              placeholder={data(props.usuario.data_nascimento)}
-              onChange={(e) =>
-                preenchendoRespostas("Data de Nascimento", e.target.value)
-              }
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Email</TituloInput>
-            <Input
-              placeholder={props.usuario.email}
-              onChange={(e) => preenchendoRespostas("Email", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>CRM</TituloInput>
-            <Input
-              placeholder={props.usuario.crm}
-              onChange={(e) => preenchendoRespostas("CRM", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Unidade Federativa</TituloInput>
-            <Input
-              placeholder={props.usuario.uni_federativa}
-              onChange={(e) =>
-                preenchendoRespostas("Unidade Federativa", e.target.value)
-              }
+              placeholder={"Confirme Nova Senha"}
+              type="password"
+              onChange={(e) => preenchendoRespostas("Confirme Senha", e.target.value)}
             />
           </ConjuntoTituloInput>
         </CaixaInputs>
@@ -112,10 +90,10 @@ function ModalAlterarDados(props) {
   );
 }
 
-ModalAlterarDados.propTypes = {
+ModalAlterarSenha.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   usuario: PropTypes.func.isRequired,
 };
 
-export default ModalAlterarDados;
+export default ModalAlterarSenha;
