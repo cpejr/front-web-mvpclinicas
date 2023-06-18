@@ -30,7 +30,7 @@ const Input = styled.input`
 
   /* Cor e estilo */
   background-color: ${(props) => props.backgroundColor};
-  border-color: ${(props) => props.borderColor ?? "#FFFFFF"};
+  border-color: ${(props) => props.borderColor ?? "#570B87"};
   border-style: solid;
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
