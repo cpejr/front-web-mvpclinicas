@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DatePicker } from 'antd';
+import { DatePicker, Switch } from 'antd';
 import {
   Body,
   BotoesEdicao,
@@ -50,8 +50,9 @@ const Cadastro = () => {
     nome_pai: ''
   };
   const [usuario, setUsuario] = useState(zeraInputs);
-
+ 
   function preenchendoDados(e) {
+
     const { name, value } = e.target;
     if (name === 'telefone') {
       setUsuario(prevState => ({
@@ -88,6 +89,14 @@ const Cadastro = () => {
     }
   }
 
+  const [toggle,setToggle]=useState(false);
+  const onChangeSwitch = (checked) => {
+    console.log(`switch to ${checked}`);
+    setToggle(checked)
+  
+  };
+  
+
  
   return (
     <Body>
@@ -119,6 +128,16 @@ const Cadastro = () => {
               onChange={preenchendoDados}
             ></Input>
           </ConjuntoTituloInput>
+
+          <CaixaInputs>
+          <ConjuntoTituloInput>
+          <TituloIcon>
+            <TituloInput >Deseja adicionar o nome dos seus pais?</TituloInput>
+            <Switch defaultChecked={false}  style={{background: "#570B87"}} onChange={onChangeSwitch} />
+          </TituloIcon>
+          </ConjuntoTituloInput>
+          </CaixaInputs>
+          {toggle && (
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
@@ -156,6 +175,8 @@ const Cadastro = () => {
               ></Input>
             </ConjuntoTituloInput>
           </InputDividido>
+         )}
+
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
