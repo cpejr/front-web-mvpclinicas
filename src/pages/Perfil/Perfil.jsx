@@ -23,23 +23,32 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { data, telefone } from '../../utils/masks';
+import { data, telefone } from "../../utils/masks";
+import ModalAlterarDados from "../../components/ModalAlterarDados";
 
-import fotoPerfil from "../../assets/montanha.jpg"
+import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 
-
-
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const id = '6466a62695e98cb373b670f4';
+  const [modalAlterarDados, setModalAlterarDados] = useState(false);
+  const id = "6466a62695e98cb373b670f4";
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(id);
     setUsuario(resposta.dadosUsuario);
   }
-  
+
+  function alterarDados() {
+    setModalAlterarDados(true);
+  }
+
+  function handleCancel() {
+    console.log("cancelou");
+    setModalAlterarDados(false);
+  }
+
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
@@ -52,7 +61,8 @@ function Perfil() {
             src={fotoPerfil}
             width="100%"
             height="100%"
-            style={{ borderRadius: '100%' }}
+            style={{ borderRadius: "100%" }}
+            alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
         <CaixaInputs>
@@ -154,7 +164,7 @@ function Perfil() {
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
-            <Botao>Alterar Dados</Botao>
+            <Botao onClick={alterarDados}>Alterar Dados</Botao>
             <Botao>Alterar Senha</Botao>
           </BotoesEdicao>
           <Botao
@@ -168,6 +178,8 @@ function Perfil() {
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+
+      <ModalAlterarDados open={modalAlterarDados} onClose={handleCancel} />
     </Body>
   );
 }
