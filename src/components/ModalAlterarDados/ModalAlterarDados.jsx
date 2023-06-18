@@ -11,6 +11,8 @@ import {
   TituloInput,
 } from "./Styles";
 
+import { data, telefone } from "../../utils/masks";
+
 function ModalAlterarDados(props) {
   const [carregando, setCarregando] = useState(false);
   const [respostas, setRespostas] = useState({});
@@ -35,6 +37,8 @@ function ModalAlterarDados(props) {
     props.onClose();
   };
 
+  console.log(props.usuario)
+
   return (
     <Modal
       open={props.open}
@@ -43,14 +47,13 @@ function ModalAlterarDados(props) {
       confirmLoading={carregando}
       centered
       destroyOnClose
-      wrapClassName="modal-wrapper"
     >
       <ConteudoModal>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloInput>Nome Completo</TituloInput>
             <Input
-              placeholder="Nome Completo"
+              placeholder={props.usuario.nome}
               onChange={(e) =>
                 preenchendoRespostas("Nome Completo", e.target.value)
               }
@@ -59,14 +62,14 @@ function ModalAlterarDados(props) {
           <ConjuntoTituloInput>
             <TituloInput>Telefone</TituloInput>
             <Input
-              placeholder="Telefone"
+              placeholder={telefone(props.usuario.telefone)}
               onChange={(e) => preenchendoRespostas("Telefone", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Data de Nascimento</TituloInput>
             <Input
-              placeholder="Data de Nascimento"
+              placeholder={data(props.usuario.data_nascimento)}
               onChange={(e) =>
                 preenchendoRespostas("Data de Nascimento", e.target.value)
               }
@@ -75,21 +78,21 @@ function ModalAlterarDados(props) {
           <ConjuntoTituloInput>
             <TituloInput>Email</TituloInput>
             <Input
-              placeholder="Email"
+              placeholder={props.usuario.email}
               onChange={(e) => preenchendoRespostas("Email", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>CRM</TituloInput>
             <Input
-              placeholder="CRM"
+              placeholder={props.usuario.crm}
               onChange={(e) => preenchendoRespostas("CRM", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Unidade Federativa</TituloInput>
             <Input
-              placeholder="Unidade Federativa"
+              placeholder={props.usuario.uni_federativa}
               onChange={(e) =>
                 preenchendoRespostas("Unidade Federativa", e.target.value)
               }
@@ -116,6 +119,7 @@ function ModalAlterarDados(props) {
 ModalAlterarDados.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  usuario: PropTypes.func.isRequired,
 };
 
 export default ModalAlterarDados;

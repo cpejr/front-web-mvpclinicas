@@ -21,6 +21,31 @@ export const CaixaInputs = styled.div`
   }
 `;
 
+export const Titulo = styled.div`
+  width: 100%;
+  height: 45%;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.4em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: darkpurple;
+`;
+
+export const SubTitulo = styled.div`
+  width: 100%;
+  height: 45%;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+`;
+
 export const ConjuntoTituloInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,22 +54,9 @@ export const ConjuntoTituloInput = styled.div`
   align-items: center;
   height: 100%;
   width: 70%;
-`;
 
-export const TituloInput = styled.div`
-  width: 100%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-weight: 400;
-  font-size: 1.2em;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: darkpurple;
-
-  @media (max-width: 900px) {
-    font-size: 1em;
+  @media (max-width: 700px) {
+    gap: 0px;
   }
 `;
 
@@ -54,7 +66,7 @@ export const CaixaBotoes = styled.div`
   justify-content: center;
   align-items: center;
   gap: 40px;
-  height: 20%;
+  height: 10%;
   width: 70%;
   padding: 2%;
 
@@ -64,7 +76,7 @@ export const CaixaBotoes = styled.div`
     width: 80%;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     flex-direction: column;
   }
 `;

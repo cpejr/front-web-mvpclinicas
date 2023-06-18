@@ -13,7 +13,7 @@ export const Conteudo = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   height: 100%;
 
   @media (max-width: 900px) {
