@@ -46,20 +46,6 @@ export const SubTitulo = styled.div`
   text-align: center;
 `;
 
-export const ConjuntoTituloInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 7px;
-  align-items: center;
-  height: 100%;
-  width: 70%;
-
-  @media (max-width: 700px) {
-    gap: 0px;
-  }
-`;
-
 export const CaixaBotoes = styled.div`
   display: flex;
   flex-direction: row;
