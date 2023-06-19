@@ -8,6 +8,39 @@ export const Body = styled.div`
   height: 100%;
 `;
 
+export const BotoesEdicao = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50%;
+  width: 70%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+`;
+
+
+export const CaixaBotoes = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 20%;
+  width: 70%;
+  padding: 2%;
+
+  @media (max-width: 900px) {
+    gap: 20px;
+    padding: 5%;
+    width: 90%;
+  }
+`;
+
 export const Conteudo = styled.div`
   display: flex;
   align-items: center;
@@ -120,34 +153,5 @@ export const TituloIcon = styled.div`
   width: 100%;
 `;
 
-export const CaixaBotoes = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  height: 20%;
-  width: 70%;
-  padding: 2%;
 
-  @media (max-width: 900px) {
-    gap: 20px;
-    padding: 5%;
-    width: 90%;
-  }
-`;
 
-export const BotoesEdicao = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 50%;
-  width: 70%;
-
-  @media (max-width: 700px) {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-`;

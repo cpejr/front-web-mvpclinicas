@@ -1,9 +1,9 @@
-import Perfil from "./pages/Perfil"
+import Routes from "./routes";
 
 function App() {
   return (
     <div>
-      <Perfil/>
+      <Routes/>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   BotoesEdicao,
@@ -34,6 +35,8 @@ import * as managerService from "../../services/ManagerService/managerService";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const id = '6466a62695e98cb373b670f4';
+
+  const navigate = useNavigate();
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(id);
@@ -154,8 +157,8 @@ function Perfil() {
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
-            <Botao>Alterar Dados</Botao>
-            <Botao>Alterar Senha</Botao>
+            <Botao onClick={() => navigate("/edit")}>Alterar Dados</Botao>
+            <Botao onClick={() => navigate("/editsenha")}>Alterar Senha</Botao>
           </BotoesEdicao>
           <Botao
             color="#ffffff"
