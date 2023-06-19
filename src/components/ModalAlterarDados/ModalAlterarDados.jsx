@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Modal } from "antd";
+import { Modal, DatePicker } from "antd";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import {
@@ -8,10 +8,13 @@ import {
   CaixaInputs,
   ConjuntoTituloInput,
   ConteudoModal,
+  Data,
   TituloInput,
 } from "./Styles";
 
-import { data, telefone } from "../../utils/masks";
+import { telefone } from "../../utils/masks";
+
+import * as managerService from "../../services/ManagerService/managerService";
 
 function ModalAlterarDados(props) {
   const [carregando, setCarregando] = useState(false);
@@ -22,27 +25,28 @@ function ModalAlterarDados(props) {
       ...respostasAnteriores,
       [pergunta]: valor,
     }));
+    console.log(respostas);
   }
 
-  const handleOk = () => {
+  async function alterandoDados() {
     setCarregando(true);
-    setTimeout(() => {
-      props.onClose();
-      setCarregando(false);
-    }, 2000);
-  };
+    console.log(respostas);
+    await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
+    setCarregando(false);
+  }
 
-  const handleCancel = () => {
+  const cancelar = () => {
     props.onClose();
   };
 
   return (
     <Modal
       open={props.open}
-      onCancel={handleCancel}
+      onCancel={cancelar}
       footer={null}
       confirmLoading={carregando}
       centered
+      destroyOnClose
     >
       <ConteudoModal>
         <CaixaInputs>
@@ -50,39 +54,42 @@ function ModalAlterarDados(props) {
             <TituloInput>Nome Completo</TituloInput>
             <Input
               placeholder={props.usuario.nome}
-              onChange={(e) =>
-                preenchendoRespostas("Nome Completo", e.target.value)
-              }
+              onChange={(e) => preenchendoRespostas("nome", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Telefone</TituloInput>
             <Input
               placeholder={telefone(props.usuario.telefone)}
-              onChange={(e) => preenchendoRespostas("Telefone", e.target.value)}
+              onChange={(e) => preenchendoRespostas("telefone", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Data de Nascimento</TituloInput>
-            <Input
-              placeholder={data(props.usuario.data_nascimento)}
-              onChange={(e) =>
-                preenchendoRespostas("Data de Nascimento", e.target.value)
-              }
-            />
+            <Data>
+              <DatePicker
+                placeholder="Selecione a data"
+                format="DD/MM/YYYY"
+                style={{ border: "none", boxShadow: "none", width: "100%" }}
+                suffixIcon={null}
+                onChange={(date, dateString) =>
+                  preenchendoRespostas("data_nascimento", dateString)
+                }
+              />
+            </Data>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Email</TituloInput>
             <Input
               placeholder={props.usuario.email}
-              onChange={(e) => preenchendoRespostas("Email", e.target.value)}
+              onChange={(e) => preenchendoRespostas("email", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>CRM</TituloInput>
             <Input
               placeholder={props.usuario.crm}
-              onChange={(e) => preenchendoRespostas("CRM", e.target.value)}
+              onChange={(e) => preenchendoRespostas("crm", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -90,7 +97,7 @@ function ModalAlterarDados(props) {
             <Input
               placeholder={props.usuario.uni_federativa}
               onChange={(e) =>
-                preenchendoRespostas("Unidade Federativa", e.target.value)
+                preenchendoRespostas("uni_federativa", e.target.value)
               }
             />
           </ConjuntoTituloInput>
@@ -101,11 +108,11 @@ function ModalAlterarDados(props) {
             backgroundColor="#ff0000c5"
             borderColor="#ff0000"
             width="30%"
-            onClick={handleCancel}
+            onClick={cancelar}
           >
             Cancelar
           </Botao>
-          <Botao onClick={handleOk}>Confirmar</Botao>
+          <Botao onClick={alterandoDados}>Confirmar</Botao>
         </CaixaBotoes>
       </ConteudoModal>
     </Modal>

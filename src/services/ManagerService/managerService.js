@@ -45,3 +45,16 @@ export const ExcluirPerfil = async (id) => {
       return false;
     });
 };
+
+export const UpdateDadosPerfil = async (id, respostas) => {
+  await requesterService
+    .updateDadosPerfil(id, respostas)
+    .then(() => {
+      alert("Dados alterados com sucesso.");
+      window.location.href = "/perfil";
+    })
+    .catch((error) => {
+      alert(error.message);
+      return false;
+    });
+};

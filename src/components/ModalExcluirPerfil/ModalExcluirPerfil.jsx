@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Modal, Spin } from "antd";
-import Botao from "../../Styles/Botao";
+
 import {
   CaixaBotoes,
   CaixaInputs,
@@ -11,10 +8,14 @@ import {
   Titulo,
 } from "./Styles";
 
+import PropTypes from "prop-types";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Modal, Spin } from "antd";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-import * as managerService from "../../services/ManagerService/managerService";
+import Botao from "../../Styles/Botao";
 
+import * as managerService from "../../services/ManagerService/managerService";
 function ModalAlterarDados(props) {
   const [carregando, setCarregando] = useState(false);
 

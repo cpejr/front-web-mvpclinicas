@@ -48,6 +48,28 @@ export const TituloInput = styled.div`
   }
 `;
 
+export const Data = styled.div`
+  display: flex;
+  font-family: "Roboto Condensed";
+  color: black;
+  border-bottom: 1px solid #570b87;
+  width: 100%;
+  padding: 0px 0px 0px;
+  .ant-picker-input input::placeholder {
+    color: #8b00ff;
+    font-family: "Roboto Condensed";
+    padding: 0px 0px 0px;
+  }
+
+  .ant-picker {
+    padding: 0px 0px 0px;
+  }
+
+  @media (max-width: 1300px) {
+    margin-bottom: 3px;
+  }
+`;
+
 export const CaixaBotoes = styled.div`
   display: flex;
   flex-direction: row;
