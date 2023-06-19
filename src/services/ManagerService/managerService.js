@@ -37,8 +37,9 @@ export const ExcluirPerfil = async (id) => {
   await requesterService
     .requisicaoDeletarUsuario(id)
     .then(() => {
-      alert("Usuário deletado com sucesso");
-      window.location.href = "/home";
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 3000);
     })
     .catch((error) => {
       alert(error.message);
@@ -50,8 +51,9 @@ export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)
     .then(() => {
-      alert("Dados alterados com sucesso.");
-      window.location.href = "/perfil";
+      setTimeout(() => {
+        window.location.href = "/perfil";
+      }, 3000);
     })
     .catch((error) => {
       alert(error.message);

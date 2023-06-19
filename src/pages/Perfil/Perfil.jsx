@@ -45,8 +45,8 @@ function Perfil() {
     setUsuario(resposta.dadosUsuario);
   }
 
-  function acionarModais(event) {
-    const botaoId = event.target.dataset.botaoId;
+  function acionarModais(e) {
+    const botaoId = e.target.dataset.botaoId;
 
     switch (botaoId) {
       case "alterarDados":

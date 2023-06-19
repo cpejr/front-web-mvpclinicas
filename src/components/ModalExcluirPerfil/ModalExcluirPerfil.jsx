@@ -12,8 +12,10 @@ import PropTypes from "prop-types";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Modal, Spin } from "antd";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+import { toast } from "react-toastify";
 
 import Botao from "../../Styles/Botao";
+import AddToast from "../../components/AddToast/AddToast";
 
 import * as managerService from "../../services/ManagerService/managerService";
 function ModalAlterarDados(props) {
@@ -22,7 +24,11 @@ function ModalAlterarDados(props) {
   async function deletarPerfil() {
     setCarregando(true);
     await managerService.ExcluirPerfil(props.usuario._id);
-    setCarregando(false);
+    toast.success("Sua conta foi excluída com sucesso!");
+
+    setTimeout(() => {
+      setCarregando(false);
+    }, 3000);
   }
 
   function cancelar() {
@@ -36,8 +42,10 @@ function ModalAlterarDados(props) {
       footer={null}
       confirmLoading={carregando}
       centered
+      destroyOnClose
     >
       <ConteudoModal>
+        <AddToast />
         <CaixaInputs>
           <Titulo>Você tem certeza que deseja excluir sua conta?</Titulo>
           <SubTitulo>

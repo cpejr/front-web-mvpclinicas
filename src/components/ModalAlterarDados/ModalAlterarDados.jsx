@@ -11,7 +11,9 @@ import {
   Data,
   TituloInput,
 } from "./Styles";
+import { toast } from "react-toastify";
 
+import AddToast from "../../components/AddToast/AddToast";
 import { telefone } from "../../utils/masks";
 
 import * as managerService from "../../services/ManagerService/managerService";
@@ -25,13 +27,16 @@ function ModalAlterarDados(props) {
       ...respostasAnteriores,
       [pergunta]: valor,
     }));
-    console.log(respostas);
   }
 
   async function alterandoDados() {
     setCarregando(true);
-    console.log(respostas);
-    await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
+    if (Object.keys(respostas).length === 0) {
+      toast.error("Altere algum campo.");
+    } else {
+      await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
+      toast.success("Perfil alterado com sucesso!")
+    }
     setCarregando(false);
   }
 
@@ -49,6 +54,7 @@ function ModalAlterarDados(props) {
       destroyOnClose
     >
       <ConteudoModal>
+        <AddToast />
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloInput>Nome Completo</TituloInput>

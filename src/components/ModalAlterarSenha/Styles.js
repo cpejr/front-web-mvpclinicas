@@ -68,3 +68,17 @@ export const CaixaBotoes = styled.div`
     flex-direction: column;
   }
 `;
+
+export const CaixaInputRotulo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+`;
+
+export const Rotulo = styled.div`
+  font-size: 1em;
+  color: #ff0000c5;
+  text-align: flex-start;
+  font-family: Roboto Condensed;
+`;
