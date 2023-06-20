@@ -33,7 +33,6 @@ function Edit(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(nome);
     
         try {
           const res = await api.put(`/usuarios/${id}`, {
