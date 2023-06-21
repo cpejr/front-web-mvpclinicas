@@ -51,6 +51,7 @@ function Local() {
 
   const id_local = "6469762610cc9138d78e6470";
 
+
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
       setComentarioAtual(0);
@@ -199,18 +200,20 @@ function Local() {
               </Esquerda>
               <UsuarioComentario>
                 <Usuario>
-                  <FotoUsuario>
-                    <a href="/perfil">
-                      <img
-                        src={fotoPerfil}
-                        width="100%"
-                        height="100%"
-                        style={{ borderRadius: "100%" }}
-                      />
-                    </a>
-                  </FotoUsuario>
+                  <a href="/perfil">
+                    <FotoUsuario>
+                        <img
+                          src={fotoPerfil}
+                          width="100%"
+                          height="100%"
+                          style={{ borderRadius: "100%" }}
+                        />
+                    </FotoUsuario>
+                  </a>
                   <NomeUsuario>
-                    {comentarios[comentarioAtual].id_usuario.nome}
+                    <a href="/perfil">
+                      {comentarios[comentarioAtual].id_usuario.nome}
+                    </a>
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
