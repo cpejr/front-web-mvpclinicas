@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
 
 import {
   Body,
@@ -46,6 +47,8 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
+  const navigate = useNavigate()
+
   const id_local = "6469762610cc9138d78e6470";
 
   const proxComentario = (comentarioAtual) => {
@@ -65,8 +68,8 @@ function Local() {
   };
   
   async function pegandoDadosLocal() {
-    const resposta = await managerService.GetDadosLocal(id_local);
-    setLocal(resposta.dadosLocal);
+    const resposta = await managerService.GetDadosLocais(id_local);
+    setLocal(resposta.dadosLocais);
   }
 
   async function pegandoComentariosLocal() {
@@ -225,7 +228,7 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%">
+          <Botao width="20%" widthMedia700="30%" onClick={() => navigate("/novocomentario")}>
             Adicionar Comentário
           </Botao>
         </CaixaBotoes>

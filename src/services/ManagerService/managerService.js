@@ -1,18 +1,27 @@
 import * as requesterService from "../RequesterService/requesterService";
+import { toast } from "react-toastify";
 
-export const GetDadosLocal = async (id_local) => {
-  let dadosLocal = {};
+export const GetDadosUsuario = async (id) => {
+    let dadosUsuario = {};
+    await requesterService
+      .requisicaoDadosUsuario(id)
+      .then((res) => {
+        dadosUsuario = res.data;
+      })
 
+    return { dadosUsuario };
+  };
+
+export const GetDadosLocais = async () => {
+  let dadosLocais = {};
   await requesterService
-    .requisicaoDadosLocal(id_local)
+    .requisicaoDadosLocais()
     .then((res) => {
-      dadosLocal = res.data;
+      dadosLocais = res.data;
     })
-    .catch((error) => {
-      alert(error.message);
-    });
+    
 
-  return { dadosLocal };
+  return { dadosLocais };
 };
 
 export const GetComentariosLocal = async (id_local) => {
@@ -29,3 +38,4 @@ export const GetComentariosLocal = async (id_local) => {
 
   return { comentariosLocal };
 };
+
