@@ -17,7 +17,9 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { Checkbox } from "antd";
+import { Checkbox, Rate } from "antd";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function NovoComentario() {
   const [checkPreenchido, setCheckPreenchido] = useState(false);
@@ -34,8 +36,8 @@ function NovoComentario() {
   }
 
   function preenchendoRespostas(pergunta, valor) {
-    setRespostas((prevRespostas) => ({
-      ...prevRespostas,
+    setRespostas((respostasAnteriores) => ({
+      ...respostasAnteriores,
       [pergunta]: valor,
     }));
   }
@@ -51,8 +53,8 @@ function NovoComentario() {
       respostas["Avaliação Geral"] < 0 ||
       respostas["Avaliação Geral"] > 5;
 
-    setErro((prevErro) => ({
-      ...prevErro,
+    setErro((erroAnterior) => ({
+      ...erroAnterior,
       cargo: cargoErro,
       salario: salarioErro,
       dia_salario: diaSalarioErro,
@@ -60,11 +62,9 @@ function NovoComentario() {
     }));
 
     if (cargoErro || salarioErro || diaSalarioErro || avaliacaoErro) {
-      alert("Preencha os campos obrigatórios corretamente!");
+      toast.error("Preencha os campos obrigatórios corretamente!");
       return;
     }
-
-    alert("uhuhuhuh");
   }
 
   function renderizaInput(pergunta) {
@@ -81,6 +81,7 @@ function NovoComentario() {
 
   return (
     <Body>
+      <AddToast />
       <Titulo>Responda as perguntas abaixo:</Titulo>
       <CaixaPerguntas>
         <ConjuntoTituloInput>
@@ -163,19 +164,21 @@ function NovoComentario() {
       </CaixaPerguntas>
       <CaixaAvaliacao>
         <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
+
         <CaixaInputRotulo>
-          <Input
-            width="100%"
-            textAlign="center"
-            fontSize="1.4em"
+         
+         <Rate count={5} 
+            
             erro={erro.avaliacao}
             onChange={(e) =>
               preenchendoRespostas("Avaliação Geral", e.target.value)
-            }
-          />
-          {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
+            }/>
+          
+         
         </CaixaInputRotulo>
+        
       </CaixaAvaliacao>
+      {erro.avaliacao && <Rotulo>Avalie com uma nota de 0 a 5</Rotulo>}
       <CaixaBotoes>
         <Botao
           color="#ffffff"

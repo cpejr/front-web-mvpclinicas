@@ -133,7 +133,7 @@ export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  width: 30%;
+  width:50%;
   padding: 2%;
   align-items: center;
   text-align: center;
@@ -152,27 +152,29 @@ export const CaixaCheckbox = styled.div`
   align-items: center;
   width: 70%;
   padding: 1%;
-
+  
   @media (max-width: 500px) {
-    width: 100%;
+    width: 70%;
+    align-self: center;
   }
 `;
 
 export const TituloAvaliacao = styled.div`
   display: flex;
-  width: 60%;
+  width: 50%;
   height: 50%;
   font-family: "Roboto Condensed";
   font-weight: 500;
   font-size: 1.4em;
   line-height: 20px;
   color: #570b87;
-  justify-content: center;
+  justify-content: right;
 
   @media (max-width: 900px) {
     width: 80%;
     font-size: 1.2em;
     text-align: center;
+    justify-content: center;
   }
 
 `;
@@ -196,9 +198,9 @@ export const CaixaBotoes = styled.div`
 
 export const CaixaInputRotulo = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: colunm;
   justify-content: space-evenly;
-  width: 30%;
+  width: 60%;
   gap: 10px;
 `;
 
