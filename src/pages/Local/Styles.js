@@ -271,6 +271,7 @@ export const FotoUsuario = styled.div`
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 2%;
+  cursor: pointer;
 
   @media (max-width: 500px) {
     width: 120px;
@@ -289,6 +290,7 @@ export const NomeUsuario = styled.div`
   align-items: center;
   justify-content: center;
   color: #000000;
+  cursor: pointer;
 
   @media (max-width: 500px) {
     font-size: 1.2em;

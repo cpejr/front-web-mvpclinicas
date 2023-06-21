@@ -63,7 +63,7 @@ function Local() {
       setComentarioAtual(comentarioAtual - 1);
     }
   };
-
+  
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocal(id_local);
     setLocal(resposta.dadosLocal);
@@ -197,12 +197,14 @@ function Local() {
               <UsuarioComentario>
                 <Usuario>
                   <FotoUsuario>
-                    <img
-                      src={fotoPerfil}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: "100%" }}
-                    />
+                    <a href="/perfil">
+                      <img
+                        src={fotoPerfil}
+                        width="100%"
+                        height="100%"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </a>
                   </FotoUsuario>
                   <NomeUsuario>
                     {comentarios[comentarioAtual].id_usuario.nome}

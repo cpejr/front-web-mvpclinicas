@@ -1,8 +1,10 @@
-import Local from "./pages/Local"
+import Routes from "./routes";
 
 function App() {
   return (
-    <Local/>
+    <div>
+      <Routes/>
+    </div>
   );
 }
 export default App;
