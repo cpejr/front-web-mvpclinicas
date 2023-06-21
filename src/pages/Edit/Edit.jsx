@@ -7,6 +7,7 @@ import{
     ConjuntoTituloInput,
     Conteudo,
     Form,
+    H1,
     InputDividido,
     TituloIcon,
     TituloInput,
@@ -71,6 +72,7 @@ function Edit(){
         <Body>
             <Form onSubmit={handleSubmit}>
                 <Conteudo>
+                    <H1>EDIÇÃO DOS DADOS PESSOAIS</H1>
                     <CaixaInputs>
                         <ConjuntoTituloInput>
                             <TituloIcon>

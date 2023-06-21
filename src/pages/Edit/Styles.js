@@ -9,25 +9,6 @@ export const Body = styled.div`
   margin: 10% 0;
 `;
 
-// export const BotaoConfirme = styled.button`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   height: 50%;
-//   width: 70%;
-//   background-color: white;
-//   border-radius: 3px;
-//   border: 1px solid #570B87;
-//   color: #570B87;
-
-//   @media (max-width: 700px) {
-//     flex-direction: column;
-//     gap: 20px;
-//     width: 100%;
-//   }
-// `;
-
 export const CaixaBotao = styled.div`
   display: flex;
   flex-direction: column;
@@ -119,6 +100,12 @@ export const Form = styled.form`
     justify-content: center;
     width: 100%;
     height: 100%;
+`;
+
+export const H1 = styled.h1`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5%;
 `;
 
 export const InputDividido = styled.div`

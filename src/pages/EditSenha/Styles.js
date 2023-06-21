@@ -125,6 +125,7 @@ export const H1 = styled.h1`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 5%;
 `;
 
 export const InputDividido = styled.div`
