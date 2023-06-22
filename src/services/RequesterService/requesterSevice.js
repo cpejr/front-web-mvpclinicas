@@ -7,3 +7,5 @@ export const criarUsuario = async (usuario) => {
    
     return resposta.data;
 };
+
+export const requisicaoDadosPessoais = () => api.get(`/usuarios/`);

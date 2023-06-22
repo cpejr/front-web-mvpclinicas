@@ -20,7 +20,7 @@ export const EstiloData = styled.div`
    .ant-picker-input input::placeholder {
     color: #8B00FF;
     font-family: 'Roboto Condensed';
-    font-size: 1.3em;
+    font-size: 1.4em;
     padding: 0px 0px 0px;
    } 
 
@@ -137,10 +137,8 @@ export const CaixaTitulo = styled.div`
   width: 70%;
   padding: 2%;
   gap: 200px;
-  
   @media (max-width: 400px) {
     gap:50px;
-    
   }
 
   @media (max-width: 1450px) {
@@ -169,16 +167,14 @@ export const CaixaInputs = styled.div`
   height: 70%;
   width: 70%;
   padding: 2%;
-
+   font-size: 1.3em;
   @media (max-width: 900px) {
     width: 90%;
+     font-size: 1.1em;
   }
-
   @media (max-width: 700px) {
     gap: 5px;
   }
-
-  
 `;
 
 export const ConjuntoTituloInput = styled.div`
@@ -188,7 +184,7 @@ export const ConjuntoTituloInput = styled.div`
   gap: 7px;
   align-items: center;
   width: 70%;
-
+  
   @media (max-width: 700px) {
     gap: 0px;
   }
@@ -201,7 +197,7 @@ export const InputDividido = styled.div`
   gap: 50px;
   height: 100%;
   width: 70%;
-
+ 
   @media (max-width: 700px) {
     flex-direction: column;
     width: 100%;
@@ -216,13 +212,13 @@ export const TituloInput = styled.div`
   height: 20px;
   font-family: "Roboto Condensed";
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1.6em;
   line-height: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   color: #570B87;
-
+  
   @media (max-width: 900px) {
     font-size: 1.1em;
   }
@@ -240,7 +236,7 @@ export const SubtituloInput = styled.div`
   height: 30px;
   font-family: "Roboto Condensed";
   font-weight: 400;
-  font-size: 1em;
+  font-size: 1.3em;
   line-height: 20px;
   display: flex;
   align-items: center;
@@ -316,9 +312,19 @@ export const BotoesEdicao = styled.div`
     flex-direction: column;
     gap: 20px;
   }
+`;
 
-
-
+export const Rotulo = styled.div`
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  font-weight: 200;
+  font-size: 1em;
+  color: #E00000;
 
 `;
 
+export const Fonte = styled.div`
+  font-family: "Barlow", sans-serif;
+  font-size: 1.7m;
+
+`;

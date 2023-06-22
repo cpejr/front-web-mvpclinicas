@@ -15,6 +15,7 @@ import {
   CaixaTitulo,
   Titulo,
   EstiloData,
+  Rotulo,
 } from "./Styles";
 
 import {
@@ -42,6 +43,7 @@ import * as managerService from '../../services/ManagerService/managerService';
 function Cadastro() {
 
   const [erro, setErro] = useState(false);
+  const [erroEmailIgual, setErroEmailIgual] = useState(false);
   const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
@@ -49,16 +51,16 @@ function Cadastro() {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   const [camposVazios, setCamposVazios] = useState({
-    nome: false,
-    telefone: false,
-    data_nascimento: false,
-    email: false,
-    crm: false,
-    uni_federativa: false,
-    senha: false,
-    confirmacao_senha: false,
+    nome: true,
+    telefone: true,
+    data_nascimento: true,
+    email: true,
+    crm: true,
+    uni_federativa: true,
+    senha: true,
+    confirmacao_senha: true,
   });
-  const testeOriginal = {
+  const verificaCamposVazios = {
     nome: false,
     telefone: false,
     data_nascimento: false,
@@ -68,7 +70,6 @@ function Cadastro() {
     senha: false,
     confirmacao_senha: false,
   };
-  let testeTemp = testeOriginal;
 
   async function validacaoEmail(e) {
     const { value, name } = e.target;
@@ -80,17 +81,28 @@ function Cadastro() {
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
     } else {
-      setErro({ ...erro, [name]: false });
+      const verificaEmailIgual = await managerService.GetDadosPessoais();
+      if (verificaEmailIgual.includes(value)) {
+        setErroEmailIgual(true);
+      } else {
+        setErro({ ...erro, [name]: false });
+        setUsuario({ ...usuario, [name]: value });
+        setErroEmailIgual(false);
+      }
     }
 
-    setUsuario({ ...usuario, [name]: value });
   }
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
+    if (value) {
+      setCamposVazios({ ...camposVazios, [name]: false });
+    } else
+      setCamposVazios({ ...camposVazios, [name]: true });
+
     if (
       (name === 'telefone' && value.length < 15) ||
-      ((name === 'senha' || name === 'confirmacao_senha') )
+      ((name === 'senha' || name === 'confirmacao_senha') && value.length < 6)
     ) {
       setErro({ ...erro, [name]: true });
     } else {
@@ -126,10 +138,14 @@ function Cadastro() {
   }
 
   function preenchendoData(name, value) {
+    if (value) {
+      setCamposVazios({ ...camposVazios, [name]: false });
+    }
     setUsuario({ ...usuario, [name]: value });
   }
 
   async function requisicaoCadastro() {
+
     setCarregando(true);
     if (!usuario.nome) errors.nome = true;
     if (!usuario.telefone) errors.telefone = true;
@@ -141,23 +157,36 @@ function Cadastro() {
     if (!usuario.confirmacao_senha) errors.confirmacao_senha = true;
 
 
-    if (_.isEqual(camposVazios, testeTemp)) {
-      if (usuario.senha === usuario.confirmacao_senha) {
+    if (_.isEqual(camposVazios, verificaCamposVazios)) {
+      if (usuario.senha !== usuario.confirmacao_senha) {
+        toast.error('As senhas digitadas são diferentes.');
+        setCarregando(false);
+
+      } else if (erroEmailIgual === true) {
+        toast.error('O email digitado já está cadastrado no sistema!');
+        setCarregando(false);
+
+      } else if (erro.telefone === true) {
+        toast.error('Digite o numero de telefone na formatação correta!');
+        setCarregando(false);
+      } else if (erro.senha === true) {
+        toast.error('Digite uma senha formatação correta!');
+        setCarregando(false);
+      } else {
         await managerService.CadastroUsuario(usuario);
         toast.success('Usuário cadastrado com sucesso!');
         setCarregando(false);
-      } else {
-        toast.error('As senhas digitadas são diferentes.');
-        setCarregando(false);
+
       }
     } else {
       toast.error('Preencha todos os campos obrigatórios');
+      setCarregando(false);
+
     }
 
-    testeTemp = testeOriginal;
     setCarregando(false);
   }
-console.log(usuario)
+
   return (
     <Body>
       <Conteudo>
@@ -189,7 +218,7 @@ console.log(usuario)
               onChange={preenchendoDados}
               erro={erro.nome}
               camposVazios={camposVazios.nome}
-              
+
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -211,6 +240,9 @@ console.log(usuario)
                 erro={erro.telefone}
                 camposVazios={camposVazios.telefone}
               ></Input>
+              {erro.telefone && (
+                <Rotulo>Digite um e-mail no formato (XX)XXXXX-XXXX</Rotulo>
+              )}
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TituloIcon>
@@ -239,6 +271,7 @@ console.log(usuario)
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
+
             <TituloIcon>
               <TituloInput>E-mail:</TituloInput>
               <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
@@ -254,6 +287,9 @@ console.log(usuario)
               camposVazios={camposVazios.email}
               onChange={validacaoEmail}
             ></Input>
+            {erro.email && (
+              <Rotulo>Digite um e-mail no formato email@email.com</Rotulo>
+            )}
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
@@ -316,6 +352,9 @@ console.log(usuario)
               onChange={preenchendoDados}
               camposVazios={camposVazios.senha}
             ></Input>
+            {erro.senha && (
+              <Rotulo>A senha deve ter no minimo 6 dígitos.</Rotulo>
+            )}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloIcon>
