@@ -132,8 +132,8 @@ const Cadastro = () => {
           <CaixaInputs>
           <ConjuntoTituloInput>
           <TituloIcon>
-            <TituloInput >Deseja adicionar o nome dos seus pais?</TituloInput>
-            <Switch defaultChecked={false}  style={{background: "#570B87"}} onChange={onChangeSwitch} />
+            <TituloInput>Deseja adicionar o nome dos seus pais?</TituloInput>
+            <Switch defaultChecked={false} size='small' style={{background: "#570B87"}} onChange={onChangeSwitch} />
           </TituloIcon>
           </ConjuntoTituloInput>
           </CaixaInputs>

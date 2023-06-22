@@ -304,9 +304,8 @@ export const BotoesEdicao = styled.div`
     flex-direction: column;
     gap: 20px;
   }
-
-
-
-
 `;
 
+
+
+ 
