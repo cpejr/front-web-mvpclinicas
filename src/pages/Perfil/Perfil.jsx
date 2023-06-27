@@ -32,16 +32,17 @@ import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import useAuthStore from "../../stores/auth";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
-  const id = "6466a62695e98cb373b670f4";
+  const usuarioLogado = useAuthStore((state) => state.usuario);
 
   async function pegandoDadosUsuario() {
-    const resposta = await managerService.GetDadosUsuario(id);
+    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
   }
 
