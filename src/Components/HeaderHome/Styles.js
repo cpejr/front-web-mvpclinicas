@@ -3,15 +3,16 @@ import { Cores } from "../../variaveis";
 import { Link } from 'react-router-dom';
 
 
-export const ContainerHeader = styled.div`
+export const ContainerHeader = styled.header`
 display: flex;
 flex-direction: row;
 align-items: center;
 background-color: #8B00FF;
-height: 90px;
+height: 100px;
+margin-top: -1%;
+margin-left: -1%;
 padding-left: 45%;
-padding-right: 45%;
-margin-bottom: 1%;
+padding-right: 47%;
 color:${Cores.branco};
 @media (max-width: 820px) {
   padding-right: 50%;
@@ -28,10 +29,14 @@ color:${Cores.branco};
 @media (max-width: 425px) {
   padding-right: 40%;
   padding-left: 40%;
+  margin-top: -2%;
 }
 @media (max-width: 375px) {
-  padding-right: 30%;
-  padding-left: 30%;
+  padding-right: 35%;
+  padding-left: 35%;
+  margin-top: -2%;
+  margin-left: -1%;
+
 }
 `;
 export const Texto = styled.p`
@@ -55,6 +60,10 @@ export const Texto2 = styled.p`
  white-space: nowrap;
  margin-right: 40%;
  width: 100%;
+`;
+export const Icone = styled.div`
+  margin-left: 10%;
+  padding-right: 10%;
 `;
 export const CaixaLink = styled.div`
   display: flex;

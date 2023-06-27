@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Cores } from "../../variaveis";
 import { Link } from 'react-router-dom';
-
+import { UserOutlined } from '@ant-design/icons';
 
 export const ContainerHeader = styled.div`
   display: flex;
@@ -10,7 +10,9 @@ export const ContainerHeader = styled.div`
   background-color: #8B00FF;
   height: 90px;
   padding-left: 45%;
-  padding-right: 45%;
+  padding-right: 47%;
+  margin-top: -1%;
+  margin-left: -1%;
   margin-bottom: 1%;
   color:${Cores.branco};
   @media (max-width: 820px) {
@@ -28,11 +30,22 @@ export const ContainerHeader = styled.div`
   @media (max-width: 425px) {
     padding-right: 40%;
     padding-left: 40%;
+    margin-top: -2%;
   }
   @media (max-width: 375px) {
-    padding-right: 30%;
-    padding-left: 30%;
+    padding-right: 35%;
+    padding-left: 35%;
+    margin-top: -2%;
+    margin-left: -1%;
   }
+`;
+export const UserIcone = styled(UserOutlined)`
+font-size: 1000px,
+position: absolute, 
+margin-left: 12% ,
+padding-bottom: 1.2%,
+padding-top: 0.9%, 
+
 `;
 export const Texto = styled.p`
  color: white;
@@ -206,6 +219,10 @@ export const MenuHeader = styled.div`
     display:flex;
     justify-content:center ;
   }
+`;
+export const Icone = styled.div`
+  margin-left: 10%;
+  padding-right: 10%;
 `;
 
 export const CaixaFotoPerfil = styled.div`
