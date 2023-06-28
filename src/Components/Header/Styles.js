@@ -15,6 +15,10 @@ export const ContainerHeader = styled.div`
   margin-left: -1%;
   margin-bottom: 1%;
   color:${Cores.branco};
+  @media (max-width: 912px) {
+    padding-right: 50%;
+    padding-left: 50%;
+  }
   @media (max-width: 820px) {
     padding-right: 50%;
     padding-left: 50%;
@@ -80,6 +84,9 @@ export const CaixaLink = styled.div`
   margin-left: 150%;
   background-color:#570B87;
   width: 200%;
+  @media (max-width: 912px) {
+    padding-right: 40%;
+  }
   @media (max-width: 820px) {
     margin: 250%;
     padding-right: 50%;
@@ -123,6 +130,9 @@ export const CaixaLink2 = styled.div`
   margin-left: -250%;
   background-color:#570B87;
   width: 200%;
+  @media (max-width: 912px) {
+    margin-left: -220%;
+  }
   @media (max-width: 820px) {
     margin: -150%;
   }
@@ -221,8 +231,27 @@ export const MenuHeader = styled.div`
   }
 `;
 export const Icone = styled.div`
-  margin-left: 10%;
-  padding-right: 10%;
+margin-left: 10%;
+padding-right: 10%;
+@media (max-width: 910px) {
+  margin-right: 10%;
+}
+  @media (max-width: 820px) {
+    margin-right: 10%;
+}
+
+@media (max-width: 425px) {
+  margin-right: 300%;
+  margin-top: 20%;
+}
+@media (max-width: 375px) {
+  margin-right: 300%;
+  margin-top: 20%;
+}
+@media (max-width: 280px) {
+  margin-right: 360%;
+  margin-top: 20%;
+}
 `;
 
 export const CaixaFotoPerfil = styled.div`
