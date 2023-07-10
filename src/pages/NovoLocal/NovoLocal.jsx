@@ -137,7 +137,15 @@ function CadastroNovoLocal() {
           <ConjuntoTituloInput>
             <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
           </ConjuntoTituloInput>
-
+          <iframe
+            width="600"
+            height="450"
+            
+            loading="lazy"
+            allowfullscreen
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I
+            &q=Space+Needle,Seattle+WA">
+          </iframe>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
