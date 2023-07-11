@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   BotoesEdicao,
@@ -31,6 +32,8 @@ function CadastroNovoLocal() {
   const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
   const [timeoutId, setTimeoutId] = useState(null);
 
+  const navigate = useNavigate();
+
   function preenchendoDados(e) {
     const { name, value } = e.target;
     if (name === 'telefone') {
@@ -39,7 +42,9 @@ function CadastroNovoLocal() {
         [name]: telefone(value)
       }
       ))
-    } else {
+
+      //atualiza o valor do campo
+    } else { 
       setNovoLocal(prevState => ({
         ...prevState,
         [name]: value
@@ -48,11 +53,24 @@ function CadastroNovoLocal() {
   }
 
   async function requisicaoCadastroNovoLocal() {
+    // Verifica se algum campo está vazio
+    if (
+      novoLocal.nome.trim() === '' ||
+      novoLocal.telefone.trim() === '' ||
+      novoLocal.setor.trim() === '' ||
+      novoLocal.empresa.trim() === '' ||
+      novoLocal.endereco.trim() === ''
+    ) {
+      alert('PREENCHA TODOS OS CAMPOS.');
+      return;
+    }
+
     const novoLocalCadastrado = await managerService.CadastroNovoLocal(
       novoLocal,
     )
     if (novoLocalCadastrado) {
       alert('Novo local cadastrado.')
+      navigate("/"); //navegação para página home
     } else {
       alert('Erro ao cadastrar novo local.');
     }
