@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { DatePicker } from 'antd';
+import React, { useState } from "react";
+import { DatePicker } from "antd";
 import {
   Body,
   BotoesEdicao,
@@ -29,24 +29,24 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
-import { apenasLetras, telefone } from '../../../utils/masks';
+import { apenasLetras, telefone } from "../../../utils/masks";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
-import { Spin } from 'antd';
-import * as managerService from '../../services/ManagerService/managerService';
-
-
+import { Spin } from "antd";
+import * as managerService from "../../services/ManagerService/managerService";
 
 function Cadastro() {
-
   const [erro, setErro] = useState(false);
   const [erroEmailIgual, setErroEmailIgual] = useState(false);
   const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
+  const [formacao, setFormacao] = useState("dentista");
+  const [stringRegistro, setStringRegistro] = useState("");
+
   const errors = {};
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
@@ -55,7 +55,7 @@ function Cadastro() {
     telefone: true,
     data_nascimento: true,
     email: true,
-    crm: true,
+    registro: true,
     uni_federativa: true,
     senha: true,
     confirmacao_senha: true,
@@ -65,7 +65,7 @@ function Cadastro() {
     telefone: false,
     data_nascimento: false,
     email: false,
-    crm: false,
+    registro: false,
     uni_federativa: false,
     senha: false,
     confirmacao_senha: false,
@@ -90,29 +90,26 @@ function Cadastro() {
         setErroEmailIgual(false);
       }
     }
-
   }
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
-    } else
-      setCamposVazios({ ...camposVazios, [name]: true });
+    } else setCamposVazios({ ...camposVazios, [name]: true });
 
     if (
-      (name === 'telefone' && value.length < 15) ||
-      ((name === 'senha' || name === 'confirmacao_senha') && value.length < 6)
+      (name === "telefone" && value.length < 15) ||
+      ((name === "senha" || name === "confirmacao_senha") && value.length < 6)
     ) {
       setErro({ ...erro, [name]: true });
     } else {
       setErro({ ...erro, [name]: false });
     }
-
     setUsuario({ ...usuario, [name]: value });
     setEstado({ ...estado, [name]: value });
 
-    if (name === 'nome') {
+    if (name === "nome") {
       setEstado({
         ...estado,
         [name]: apenasLetras(value),
@@ -120,21 +117,26 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
-    if (name === 'telefone') {
+    if (name === "telefone") {
       setEstado({ ...estado, [name]: telefone(value) });
       setUsuario({ ...usuario, [name]: telefone(value) });
     }
 
-    if (name === 'crm') {
-      setEstado({ ...estado, [name]: (value) });
-      setUsuario({ ...usuario, [name]: (value) });
+    if (name === "registro") {
+      console.log(name + " " + value);
+      setEstado({ ...estado, [name]: value });
+      setUsuario({ ...usuario, [name]: value });
     }
 
-    if (name === 'uni_federativa') {
+    if (name === "uni_federativa") {
       setEstado({ ...estado, [name]: apenasLetras(value) });
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
+    // tem que fazer um if (name === "formacao") e adicionar isso aqui
+    if (formacao == "medico") setStringRegistro("CRM");
+    else if (formacao == "dentista") setStringRegistro("CRO");
+    else if (formacao == "enfermeiro") setStringRegistro("COREN");
   }
 
   function preenchendoData(name, value) {
@@ -145,43 +147,37 @@ function Cadastro() {
   }
 
   async function requisicaoCadastro() {
-
     setCarregando(true);
     if (!usuario.nome) errors.nome = true;
     if (!usuario.telefone) errors.telefone = true;
     if (!usuario.data_nascimento) errors.data_nascimento = true;
     if (!usuario.email) errors.email = true;
-    if (!usuario.crm) errors.crm = true;
+    if (!usuario.registro) errors.registro = true;
     if (!usuario.uni_federativa) errors.uni_federativa = true;
     if (!usuario.senha) errors.senha = true;
     if (!usuario.confirmacao_senha) errors.confirmacao_senha = true;
 
-
     if (_.isEqual(camposVazios, verificaCamposVazios)) {
       if (usuario.senha !== usuario.confirmacao_senha) {
-        toast.error('As senhas digitadas são diferentes.');
+        toast.error("As senhas digitadas são diferentes.");
         setCarregando(false);
-
       } else if (erroEmailIgual === true) {
-        toast.error('O email digitado já está cadastrado no sistema!');
+        toast.error("O email digitado já está cadastrado no sistema!");
         setCarregando(false);
-
       } else if (erro.telefone === true) {
-        toast.error('Digite o numero de telefone na formatação correta!');
+        toast.error("Digite o numero de telefone na formatação correta!");
         setCarregando(false);
       } else if (erro.senha === true) {
-        toast.error('Digite uma senha formatação correta!');
+        toast.error("Digite uma senha formatação correta!");
         setCarregando(false);
       } else {
         await managerService.CadastroUsuario(usuario);
-        toast.success('Usuário cadastrado com sucesso!');
+        toast.success("Usuário cadastrado com sucesso!");
         setCarregando(false);
-
       }
     } else {
-      toast.error('Preencha todos os campos obrigatórios');
+      toast.error("Preencha todos os campos obrigatórios");
       setCarregando(false);
-
     }
 
     setCarregando(false);
@@ -196,10 +192,9 @@ function Cadastro() {
           </CaixaLogo>
           <Titulo>
             Faça seu
-            <br style={{ display: 'block' }} />
+            <br style={{ display: "block" }} />
             cadastro
           </Titulo>
-
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>
@@ -218,7 +213,7 @@ function Cadastro() {
               onChange={preenchendoDados}
               erro={erro.nome}
               camposVazios={camposVazios.nome}
-
+              fontSize="0.8em"
             ></Input>
           </ConjuntoTituloInput>
           <InputDividido>
@@ -239,6 +234,7 @@ function Cadastro() {
                 onChange={preenchendoDados}
                 erro={erro.telefone}
                 camposVazios={camposVazios.telefone}
+                fontSize="0.8em"
               ></Input>
               {erro.telefone && (
                 <Rotulo>Digite um e-mail no formato (XX)XXXXX-XXXX</Rotulo>
@@ -254,24 +250,23 @@ function Cadastro() {
               <TituloIcon>
                 <EstiloData>
                   <DatePicker
-                    style={{ border: '0px', width: '100%' }}
+                    style={{ border: "0px", width: "100%" }}
                     placeholder="Selecione sua data de nascimento"
                     locale="pt_BR"
                     format="DD/MM/YYYY"
                     value={estado.data_nascimento}
                     name="data_nascimento"
-                    onChange={(value) => preenchendoData('data_nascimento', value)}
+                    onChange={(value) =>
+                      preenchendoData("data_nascimento", value)
+                    }
                     erro={erro.data_nascimento}
                     suffixIcon={null}
-
                   />
                 </EstiloData>
-
               </TituloIcon>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
-
             <TituloIcon>
               <TituloInput>E-mail:</TituloInput>
               <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
@@ -286,54 +281,61 @@ function Cadastro() {
               erro={erro.email}
               camposVazios={camposVazios.email}
               onChange={validacaoEmail}
+              fontSize="0.8em"
             ></Input>
             {erro.email && (
               <Rotulo>Digite um e-mail no formato email@email.com</Rotulo>
             )}
           </ConjuntoTituloInput>
-          <InputDividido>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>CRM:</TituloInput>
-                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder="Digite seu CRM"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                name="crm"
-                value={estado.crm}
-                erro={erro.crm}
-                camposVazios={camposVazios.crm}
-                onChange={preenchendoDados}
-              ></Input>
-            </ConjuntoTituloInput>
-            <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Unidade Federativa</TituloInput>
-                <GlobalOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder="Digite a Unidade Federativa do CRM"
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                justifyContent="flex-start"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                name="uni_federativa"
-                erro={erro.uni_federativa}
-                camposVazios={camposVazios.uni_federativa}
-                value={estado.uni_federativa}
-                onChange={preenchendoDados}
-              ></Input>
-            </ConjuntoTituloInput>
-          </InputDividido>
+          {formacao ? (
+            <InputDividido>
+              <ConjuntoTituloInput>
+                <TituloIcon>
+                  <TituloInput>{stringRegistro}:</TituloInput>
+                  <CopyOutlined
+                    style={{ fontSize: "22px", color: "#570B87" }}
+                  />
+                </TituloIcon>
+                <Input
+                  placeholder={`Digite seu ${stringRegistro}`}
+                  backgroundColor="white"
+                  width="100%"
+                  heightMedia700="20px"
+                  alignSelf="flex-start"
+                  marginBottomMedia700="8%"
+                  name="registro"
+                  value={estado.registro}
+                  erro={erro.registro}
+                  camposVazios={camposVazios.registro}
+                  onChange={preenchendoDados}
+                  fontSize="0.8em"
+                ></Input>
+              </ConjuntoTituloInput>
+              <ConjuntoTituloInput>
+                <TituloIcon>
+                  <TituloInput>Unidade Federativa</TituloInput>
+                  <GlobalOutlined
+                    style={{ fontSize: "22px", color: "#570B87" }}
+                  />
+                </TituloIcon>
+                <Input
+                  placeholder="Digite a Unidade Federativa"
+                  backgroundColor="white"
+                  width="100%"
+                  heightMedia700="20px"
+                  justifyContent="flex-start"
+                  alignSelf="flex-start"
+                  marginBottomMedia700="8%"
+                  name="uni_federativa"
+                  erro={erro.uni_federativa}
+                  camposVazios={camposVazios.uni_federativa}
+                  value={estado.uni_federativa}
+                  onChange={preenchendoDados}
+                  fontSize="0.8em"
+                ></Input>
+              </ConjuntoTituloInput>
+            </InputDividido>
+          ) : null}
           <ConjuntoTituloInput>
             <TituloIcon>
               <TituloInput>Senha:</TituloInput>
@@ -351,6 +353,7 @@ function Cadastro() {
               erro={erro.senha}
               onChange={preenchendoDados}
               camposVazios={camposVazios.senha}
+              fontSize="0.8em"
             ></Input>
             {erro.senha && (
               <Rotulo>A senha deve ter no minimo 6 dígitos.</Rotulo>
@@ -373,10 +376,13 @@ function Cadastro() {
               camposVazios={camposVazios.senhaConfirmada}
               value={estado.confirmacao_senha}
               onChange={preenchendoDados}
+              fontSize="0.8em"
             ></Input>
-            <SubtituloInput>Informamos que nenhuma informação aqui preenchida além de seu nome será exibida para outros usuários!</SubtituloInput>
+            <SubtituloInput>
+              Informamos que nenhuma informação aqui preenchida além de seu nome
+              será exibida para outros usuários!
+            </SubtituloInput>
           </ConjuntoTituloInput>
-
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
@@ -386,13 +392,18 @@ function Cadastro() {
               color="#570B87"
               textDecoration="underline"
               onClick={() => {
-                window.location.href = "/Login"
+                window.location.href = "/Login";
               }}
-            >Já possui uma conta?</Botao>
+            >
+              Já possui uma conta?
+            </Botao>
             <Botao
               border-radius="10px"
-              onClick={() => { requisicaoCadastro(); }}>
-              {carregando ? <Spin indicator={antIcon} /> : 'Confirmar'}
+              onClick={() => {
+                requisicaoCadastro();
+              }}
+            >
+              {carregando ? <Spin indicator={antIcon} /> : "Confirmar"}
             </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
