@@ -20,6 +20,8 @@ import Input from "../../Styles/Input/Input";
 import { Checkbox } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 
 function NovoComentario() {
   const [checkPreenchido, setCheckPreenchido] = useState(false);
@@ -30,6 +32,10 @@ function NovoComentario() {
     dia_salario: false,
     avaliacao: false,
   });
+
+  const id_local = "6469762610cc9138d78e6470";
+  const id_usuario = '6466a62695e98cb373b670f4'
+  const navigate = useNavigate()
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -65,6 +71,21 @@ function NovoComentario() {
       toast.error("Preencha os campos obrigatórios corretamente!");
       return;
     }
+
+    const comentario = Object.assign({}, respostas);
+    const avaliacao = comentario["Avaliação Geral"];
+    delete comentario["Avaliação Geral"];
+
+    const body = {
+      id_usuario: id_usuario,
+      avaliacao: avaliacao,
+      comentario: comentario
+    }
+
+    console.log(comentario)
+
+    CriarNovoComentario(body, id_local);
+    navigate('/local');
   }
 
   function renderizaInput(pergunta) {
