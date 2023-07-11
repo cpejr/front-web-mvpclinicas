@@ -29,7 +29,7 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
-import { apenasLetras, telefone, crm } from "../../../utils/masks";
+import { apenasLetras, telefone, registro } from "../../../utils/masks";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import AddToast from "../../components/AddToast/AddToast";
@@ -44,7 +44,7 @@ function Cadastro() {
   const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
-  const [formacao, setFormacao] = useState("medico");
+  const [formacao, setFormacao] = useState("dentista");
   const [stringRegistro, setStringRegistro] = useState("");
 
   const errors = {};
@@ -122,11 +122,12 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: telefone(value) });
     }
 
-    if (name === "registro" && formacao == "medico") {
-      if (value.length <= 6) setErro({ ...erro, [name]: true });
+    if (name === "registro") {
+      if (value.length < 2 || value.length > 6)
+        setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
-      setEstado({ ...estado, [name]: crm(value) });
-      setUsuario({ ...usuario, [name]: crm(value) });
+      setEstado({ ...estado, [name]: registro(value) });
+      setUsuario({ ...usuario, [name]: registro(value) });
     }
 
     if (name === "uni_federativa") {
@@ -311,8 +312,8 @@ function Cadastro() {
                   onChange={preenchendoDados}
                   fontSize="0.8em"
                 ></Input>
-                {formacao == "medico" && erro.registro && (
-                  <Rotulo>Digite o CRM no formato XXXXXX</Rotulo>
+                {erro.registro && (
+                  <Rotulo>Digite um {stringRegistro} válido</Rotulo>
                 )}
               </ConjuntoTituloInput>
               <ConjuntoTituloInput>

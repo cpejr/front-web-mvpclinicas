@@ -18,6 +18,6 @@ export const apenasLetras = (value) => {
   return value.replace(/[0-9!@#¨$%^&*)(+=._-]+/g, "");
 };
 
-export const crm = (value) => {
+export const registro = (value) => {
   return value.replace(/[^0-9]/g, "");
 };
