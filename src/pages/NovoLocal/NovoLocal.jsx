@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -25,8 +25,11 @@ function CadastroNovoLocal() {
     telefone: '',
     setor: '',
     empresa: '',
+    endereco: ''
   };
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
+  const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
+  const [timeoutId, setTimeoutId] = useState(null);
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
@@ -42,7 +45,6 @@ function CadastroNovoLocal() {
         [name]: value
       }))
     }
-
   }
 
   async function requisicaoCadastroNovoLocal() {
@@ -56,24 +58,29 @@ function CadastroNovoLocal() {
     }
   }
 
+  function preenchendoEndereco(e) {
+    const { name, value } = e.target
 
-  /*const onPlaceSelected = (place) => {
-    console.log('Local selecionado:', place);
-    // Faça o que quiser com o local selecionado
-  };
+    setNovoLocal(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
 
-  const mapContainerStyle = {
-    width: '100%',
-    height: '400px',
+    clearTimeout(timeoutId);
 
-  };
+    const newTimeoutId = setTimeout(() => {
+      setEnderecoMapa(value);
+    }, 2000);
 
-  const center = {
-    lat: -23.5505, // Latitude inicial
-    lng: -46.6333, // Longitude inicial
-  };
+    setTimeoutId(newTimeoutId);
+  }
 
-  */
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId); // Clear the timeout when the component unmounts
+    };
+  }, [timeoutId]);
+
   return (
     <Body>
       <Conteudo>
@@ -135,17 +142,26 @@ function CadastroNovoLocal() {
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
+            <TituloInput>Digite o nome do endereço abaixo:</TituloInput>
+            <Input
+              placeholder="1234 Rua Fictícia, Cidade Imaginária"
+              backgroundColor="white"
+              heightMedia700="20px"
+              marginBottomMedia700="8%"
+              name="endereco"
+              value={novoLocal.endereco}
+              onChange={preenchendoEndereco}
+              style={{ borderBottom: '1px solid #570B87' }}
+            ></Input>
           </ConjuntoTituloInput>
           <iframe
+            id="mapIframe"
             width="600"
             height="450"
-            
             loading="lazy"
-            allowfullscreen
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I
-            &q=Space+Needle,Seattle+WA">
-          </iframe>
+            allowFullScreen
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"}`}
+          ></iframe>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
