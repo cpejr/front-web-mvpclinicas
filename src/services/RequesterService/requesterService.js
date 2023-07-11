@@ -13,3 +13,9 @@ export const criarNovoLocal = async (novoLocal) => {
 
   return resposta.data;
 };
+
+export const criarComentario = async (body, id_local) => {
+  await api.post(`/comentarios/${id_local}`, {
+    ...body,
+  });
+}
