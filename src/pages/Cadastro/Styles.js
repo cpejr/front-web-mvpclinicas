@@ -304,7 +304,7 @@ export const Rotulo = styled.div`
   width: 100%;
   font-family: "Barlow", sans-serif;
   font-weight: 200;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #e00000;
 `;
 

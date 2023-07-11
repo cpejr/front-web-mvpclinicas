@@ -29,7 +29,7 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
-import { apenasLetras, telefone } from "../../../utils/masks";
+import { apenasLetras, telefone, crm } from "../../../utils/masks";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import AddToast from "../../components/AddToast/AddToast";
@@ -44,7 +44,7 @@ function Cadastro() {
   const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
-  const [formacao, setFormacao] = useState("dentista");
+  const [formacao, setFormacao] = useState("medico");
   const [stringRegistro, setStringRegistro] = useState("");
 
   const errors = {};
@@ -122,10 +122,11 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: telefone(value) });
     }
 
-    if (name === "registro") {
-      console.log(name + " " + value);
-      setEstado({ ...estado, [name]: value });
-      setUsuario({ ...usuario, [name]: value });
+    if (name === "registro" && formacao == "medico") {
+      if (value.length <= 6) setErro({ ...erro, [name]: true });
+      else setErro({ ...erro, [name]: false });
+      setEstado({ ...estado, [name]: crm(value) });
+      setUsuario({ ...usuario, [name]: crm(value) });
     }
 
     if (name === "uni_federativa") {
@@ -237,7 +238,7 @@ function Cadastro() {
                 fontSize="0.8em"
               ></Input>
               {erro.telefone && (
-                <Rotulo>Digite um e-mail no formato (XX)XXXXX-XXXX</Rotulo>
+                <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>
               )}
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -287,7 +288,7 @@ function Cadastro() {
               <Rotulo>Digite um e-mail no formato email@email.com</Rotulo>
             )}
           </ConjuntoTituloInput>
-          {formacao ? (
+          {formacao && (
             <InputDividido>
               <ConjuntoTituloInput>
                 <TituloIcon>
@@ -310,6 +311,9 @@ function Cadastro() {
                   onChange={preenchendoDados}
                   fontSize="0.8em"
                 ></Input>
+                {formacao == "medico" && erro.registro && (
+                  <Rotulo>Digite o CRM no formato XXXXXX</Rotulo>
+                )}
               </ConjuntoTituloInput>
               <ConjuntoTituloInput>
                 <TituloIcon>
@@ -335,7 +339,7 @@ function Cadastro() {
                 ></Input>
               </ConjuntoTituloInput>
             </InputDividido>
-          ) : null}
+          )}
           <ConjuntoTituloInput>
             <TituloIcon>
               <TituloInput>Senha:</TituloInput>
