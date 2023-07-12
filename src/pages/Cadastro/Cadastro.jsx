@@ -31,7 +31,7 @@ import {
   LoadingOutlined,
 } from "@ant-design/icons";
 
-import { apenasLetras, telefone } from "../../../utils/masks";
+import { apenasLetras, telefone, registro } from "../../../utils/masks";
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
 import AddToast from "../../components/AddToast/AddToast";
@@ -125,9 +125,11 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      console.log(name + " " + value);
-      setEstado({ ...estado, [name]: value });
-      setUsuario({ ...usuario, [name]: value });
+      if (value.length < 2 || value.length > 6)
+        setErro({ ...erro, [name]: true });
+      else setErro({ ...erro, [name]: false });
+      setEstado({ ...estado, [name]: registro(value) });
+      setUsuario({ ...usuario, [name]: registro(value) });
     }
 
     if (name === "uni_federativa") {
@@ -239,7 +241,7 @@ function Cadastro() {
                 fontSize="0.8em"
               ></Input>
               {erro.telefone && (
-                <Rotulo>Digite um e-mail no formato (XX)XXXXX-XXXX</Rotulo>
+                <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>
               )}
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
@@ -300,7 +302,7 @@ function Cadastro() {
             </SelecaoFormacao>
             
           </TituloIcon>
-          {formacao ? (
+          {formacao && (
             <InputDividido>
               <ConjuntoTituloInput>
                 <TituloIcon>
@@ -323,6 +325,9 @@ function Cadastro() {
                   onChange={preenchendoDados}
                   fontSize="0.8em"
                 ></Input>
+                {erro.registro && (
+                  <Rotulo>Digite um {stringRegistro} válido</Rotulo>
+                )}
               </ConjuntoTituloInput>
               <ConjuntoTituloInput>
                 <TituloIcon>
@@ -348,7 +353,7 @@ function Cadastro() {
                 ></Input>
               </ConjuntoTituloInput>
             </InputDividido>
-          ) : null}
+          )}
           <ConjuntoTituloInput>
             <TituloIcon>
               <TituloInput>Senha:</TituloInput>
