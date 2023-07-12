@@ -6,6 +6,7 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+   
 `;
 
 export const EstiloData = styled.div`
@@ -166,6 +167,8 @@ export const CaixaInputs = styled.div`
   width: 70%;
   padding: 2%;
   font-size: 1.3rem;
+
+  
   @media (max-width: 900px) {
     width: 90%;
     font-size: 1.1rem;
@@ -182,6 +185,7 @@ export const ConjuntoTituloInput = styled.div`
   gap: 7px;
   align-items: center;
   width: 70%;
+  
 
   @media (max-width: 700px) {
     gap: 0px;
@@ -195,6 +199,7 @@ export const InputDividido = styled.div`
   gap: 50px;
   height: 100%;
   width: 70%;
+  
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -228,6 +233,24 @@ export const TituloInput = styled.div`
   @media (max-width: 306px) {
     font-size: 0.9rem;
   }
+`;
+
+export const SelecaoFormacao = styled.select`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #570b87;
+
+`;
+
+export const OpcaoFormacao = styled.option`
+  color: #570b87;
 `;
 
 export const SubtituloInput = styled.div`
@@ -268,6 +291,7 @@ export const TituloIcon = styled.div`
   justify-content: center;
   padding: 1%;
   width: 100%;
+
 `;
 
 export const CaixaBotoes = styled.div`

@@ -16,6 +16,8 @@ import {
   Titulo,
   EstiloData,
   Rotulo,
+  SelecaoFormacao,
+  OpcaoFormacao
 } from "./Styles";
 
 import {
@@ -287,6 +289,17 @@ function Cadastro() {
               <Rotulo>Digite um e-mail no formato email@email.com</Rotulo>
             )}
           </ConjuntoTituloInput>
+          
+          <TituloIcon>
+
+            <SelecaoFormacao name="formacao">
+              <OpcaoFormacao value="medico" >Médico</OpcaoFormacao>
+              <OpcaoFormacao value="dentista" >Dentista</OpcaoFormacao>
+              <OpcaoFormacao value="enfermeir" >Enfermeiro</OpcaoFormacao>
+              <OpcaoFormacao value="outros" >Outros</OpcaoFormacao>
+            </SelecaoFormacao>
+            
+          </TituloIcon>
           {formacao ? (
             <InputDividido>
               <ConjuntoTituloInput>
