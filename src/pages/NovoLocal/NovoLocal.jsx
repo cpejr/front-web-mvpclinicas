@@ -10,6 +10,7 @@ import {
   Subtitulo,
   Titulo,
   TituloInput,
+  Rotulo,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -45,7 +46,7 @@ function CadastroNovoLocal() {
     
     if (name === 'telefone' && value.length < 15) {
       setErro({ ...erro,[name]: true});
-      toast.warn("Preencha todos os campos!");
+     // toast.warn("Preencha todos os campos!");
       setErro('Preencha todos os campos');
       setNovoLocal(prevState => ({
         ...prevState,
@@ -62,24 +63,28 @@ function CadastroNovoLocal() {
   }
   
   async function requisicaoCadastroNovoLocal() {
-   
-    if(novoLocal.nome.trim()=== ''|| novoLocal.telefone.trim()=== ''|| novoLocal.setor.trim()=== ''){
-      
-      alert("preencha todos os campos");
-      toast.error("Preencha todos os campos!");
+  const nomeErro = !novoLocal.nome;
+  const telefoneErro = !novoLocal.telefone || novoLocal.telefone.length < 15;
+  const setorErro = !novoLocal.setor;
+  const empresaErro = !novoLocal.empresa;
+
+  setErro((erroAnterior)=> ({
+    ...erroAnterior,
+    nome: nomeErro,
+    telefone: telefoneErro,
+    setor: setorErro,
+    empresa: empresaErro,
+  }));
+    if(nomeErro|| telefoneErro|| setorErro || empresaErro){
+      toast.error("Preencha todos os campos corretamente!");
+
       return;
-    }
-    else{
+    }else{
+     
+      toast.success("Local Cadastrado com sucesso!");
       const novoLocalCadastrado = await managerService.CadastroNovoLocal(
         novoLocal,
       )
-      alert('Novo local cadastrado.');
-    }
-    
-    if (novoLocalCadastrado) {
-     
-    } else {
-      alert('Erro ao cadastrar novo local.');
     }
     
   }
@@ -111,16 +116,21 @@ function CadastroNovoLocal() {
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloInput>Nome:</TituloInput>
+          
             <Input
               placeholder="Digite o nome do local"
               backgroundColor="white"
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="nome"
+              erro={erro.nome}
               value={novoLocal.nome}
               onChange={preenchendoDados}
               style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
+         
+            
+            {erro.nome && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Telefone:</TituloInput>
@@ -134,6 +144,7 @@ function CadastroNovoLocal() {
               onChange={preenchendoDados}
               style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
+            {erro.telefone && <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Setor:</TituloInput>
@@ -183,6 +194,7 @@ function CadastroNovoLocal() {
 
         </CaixaBotoes>
       </Conteudo>
+      <AddToast/>
     </Body>
   );
 }
