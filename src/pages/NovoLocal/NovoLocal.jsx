@@ -18,6 +18,11 @@ import { telefone } from "../../utils/masks";
 import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 import * as managerService from "../../services/ManagerService/managerService";
+//import {ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.min.css';
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
+
 
 function CadastroNovoLocal() {
   const zeraInputs = {
@@ -26,11 +31,22 @@ function CadastroNovoLocal() {
     setor: '',
     empresa: '',
   };
+ 
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
-
+  const [erro, setErro] = useState({
+    nome: false,
+    telefone: false,
+    setor: false,
+    empresa: false,
+  });
   function preenchendoDados(e) {
     const { name, value } = e.target;
-    if (name === 'telefone') {
+
+    
+    if (name === 'telefone' && value.length < 15) {
+      setErro({ ...erro,[name]: true});
+      toast.warn("Preencha todos os campos!");
+      setErro('Preencha todos os campos');
       setNovoLocal(prevState => ({
         ...prevState,
         [name]: telefone(value)
@@ -44,18 +60,29 @@ function CadastroNovoLocal() {
     }
 
   }
-
+  
   async function requisicaoCadastroNovoLocal() {
-    const novoLocalCadastrado = await managerService.CadastroNovoLocal(
-      novoLocal,
-    )
+   
+    if(novoLocal.nome.trim()=== ''|| novoLocal.telefone.trim()=== ''|| novoLocal.setor.trim()=== ''){
+      
+      alert("preencha todos os campos");
+      toast.error("Preencha todos os campos!");
+      return;
+    }
+    else{
+      const novoLocalCadastrado = await managerService.CadastroNovoLocal(
+        novoLocal,
+      )
+      alert('Novo local cadastrado.');
+    }
+    
     if (novoLocalCadastrado) {
-      alert('Novo local cadastrado.')
+     
     } else {
       alert('Erro ao cadastrar novo local.');
     }
+    
   }
-
 
   /*const onPlaceSelected = (place) => {
     console.log('Local selecionado:', place);
@@ -142,8 +169,9 @@ function CadastroNovoLocal() {
         <CaixaBotoes>
           <BotoesEdicao>
             <Botao
-              onClick={() => { requisicaoCadastroNovoLocal(); }}>
-              Cadastrar</Botao>
+             onClick={() => { requisicaoCadastroNovoLocal() }}>
+              Cadastrar
+            </Botao>
             <Botao
               color="#000000"
               backgroundColor="white"
