@@ -17,7 +17,7 @@ import {
   EstiloData,
   Rotulo,
   SelecaoFormacao,
-  OpcaoFormacao
+  OpcaoFormacao,
 } from "./Styles";
 
 import {
@@ -125,8 +125,7 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      if (value.length < 2 || value.length > 6)
-        setErro({ ...erro, [name]: true });
+      if (value.length > 7) setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
       setEstado({ ...estado, [name]: registro(value) });
       setUsuario({ ...usuario, [name]: registro(value) });
@@ -291,16 +290,14 @@ function Cadastro() {
               <Rotulo>Digite um e-mail no formato email@email.com</Rotulo>
             )}
           </ConjuntoTituloInput>
-          
-          <TituloIcon>
 
+          <TituloIcon>
             <SelecaoFormacao name="formacao">
-              <OpcaoFormacao value="medico" >Médico</OpcaoFormacao>
-              <OpcaoFormacao value="dentista" >Dentista</OpcaoFormacao>
-              <OpcaoFormacao value="enfermeir" >Enfermeiro</OpcaoFormacao>
-              <OpcaoFormacao value="outros" >Outros</OpcaoFormacao>
+              <OpcaoFormacao value="medico">Médico</OpcaoFormacao>
+              <OpcaoFormacao value="dentista">Dentista</OpcaoFormacao>
+              <OpcaoFormacao value="enfermeir">Enfermeiro</OpcaoFormacao>
+              <OpcaoFormacao value="outros">Outros</OpcaoFormacao>
             </SelecaoFormacao>
-            
           </TituloIcon>
           {formacao && (
             <InputDividido>
