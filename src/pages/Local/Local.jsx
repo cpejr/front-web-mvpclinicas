@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 import {
   Body,
@@ -33,6 +33,7 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
+  PercentageOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -47,7 +48,7 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const id_local = "6469762610cc9138d78e6470";
 
@@ -74,6 +75,7 @@ function Local() {
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
+    console.log(resposta.comentariosLocal.comentarios);
     setComentarios(resposta.comentariosLocal.comentarios);
     setAvaliacao(resposta.comentariosLocal.media_avaliacao);
   }
@@ -212,7 +214,13 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {comentarios[comentarioAtual].comentario}
+                  {(() => {
+                    for (let key in comentarios[comentarioAtual].comentario) {
+                      console.log(
+                        key + " " + comentarios[comentarioAtual].comentario[key]
+                      );
+                    }
+                  })()}
                 </Comentario>
               </UsuarioComentario>
               <Direita
@@ -226,7 +234,11 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%" onClick={() => navigate("/novocomentario")}>
+          <Botao
+            width="20%"
+            widthMedia700="30%"
+            onClick={() => navigate("/novocomentario")}
+          >
             Adicionar Comentário
           </Botao>
         </CaixaBotoes>

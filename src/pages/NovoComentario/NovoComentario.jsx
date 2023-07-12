@@ -34,8 +34,8 @@ function NovoComentario() {
   });
 
   const id_local = "6469762610cc9138d78e6470";
-  const id_usuario = '6466a62695e98cb373b670f4'
-  const navigate = useNavigate()
+  const id_usuario = "64668ccfcf080fad87158da8";
+  const navigate = useNavigate();
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -79,13 +79,13 @@ function NovoComentario() {
     const body = {
       id_usuario: id_usuario,
       avaliacao: avaliacao,
-      comentario: comentario
-    }
+      comentario: comentario,
+    };
 
-    console.log(comentario)
+    console.log(comentario);
 
     CriarNovoComentario(body, id_local);
-    navigate('/local');
+    navigate("/local");
   }
 
   function renderizaInput(pergunta) {
