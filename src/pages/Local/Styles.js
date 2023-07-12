@@ -298,15 +298,18 @@ export const NomeUsuario = styled.div`
 export const Comentario = styled.div`
   width: 80%;
   height: 60%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 3%;
+
   font-size: 1.2em;
   overflow-y: auto;
   overflow-x: hidden;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  word-wrap: normal;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
 
   ::-webkit-scrollbar {
     width: 0px;
@@ -330,5 +333,13 @@ export const CaixaBotoes = styled.div`
   @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
+  }
+`;
+
+export const ItemComentario = styled.div`
+  font-size: 1rem;
+  gap: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
   }
 `;

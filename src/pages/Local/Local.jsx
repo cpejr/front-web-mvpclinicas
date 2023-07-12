@@ -23,6 +23,7 @@ import {
   TituloInput,
   Usuario,
   UsuarioComentario,
+  ItemComentario,
 } from "./Styles";
 
 import {
@@ -214,13 +215,13 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {(() => {
-                    for (let key in comentarios[comentarioAtual].comentario) {
-                      console.log(
-                        key + " " + comentarios[comentarioAtual].comentario[key]
-                      );
-                    }
-                  })()}
+                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                    ([pergunta, resposta]) => (
+                      <ItemComentario>
+                        <i>{pergunta}</i> {resposta}
+                      </ItemComentario>
+                    )
+                  )}
                 </Comentario>
               </UsuarioComentario>
               <Direita
