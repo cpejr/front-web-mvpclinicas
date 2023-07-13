@@ -11,6 +11,18 @@ export const GetDadosUsuario = async (id) => {
 
     return { dadosUsuario };
   };
+  export const GetDadosPessoais = async () => {
+    let dadosUsuario = {};
+    await requesterService
+      .requisicaoDadosPessoais()
+      .then((res) => {
+        dadosUsuario = res.data;
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    return dadosUsuario;
+  };
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
@@ -51,3 +63,17 @@ export const GetComentariosLocal = async (id_local) => {
   return { comentariosLocal };
 };
 
+
+export const requisicaoLogin = async (email, senha) => {
+  try {
+    const res = await requesterService.logarUsuario(email,senha);
+    sessionStorage.setItem('@clinicas-Token', res.data.token);
+    toast.success('Login realizado com sucesso!');
+    console.log(sessionStorage);
+  } catch (error) {
+  console.log(error);
+  toast.error(error.response.data.message); 
+  }
+
+  return;
+};
