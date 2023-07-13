@@ -35,9 +35,21 @@ const Input = styled.input`
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.boxShadow};
-  //border-bottom: 1px solid #570B87;
+  border-bottom: ${(props) => {
+    let cor;
+    if (!props.color) {
+      if (props.erro) {
+        cor = " 1px solid #ff0000c5";
+      } else {
+        cor = "1px solid #570B87";
+      }
+    } else {
+      cor = props.color;
+    }
+    return cor;
+  }};
   color: ${(props) => props.color };
-  
+
   &:focus {
     outline: none; 
   }
@@ -50,7 +62,19 @@ const Input = styled.input`
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
 ::placeholder {
-  color: #8B00FF;
+  color: ${(props) => {
+    let cor;
+    if (!props.color) {
+      if (props.erro) {
+        cor = " #ff0000c5";
+      } else {
+        cor = " #570B87";
+      }
+    } else {
+      cor = props.color;
+    }
+    return cor;
+  }};
 }
 
   /* Margem */

@@ -17,10 +17,7 @@ import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
 import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
-
 import * as managerService from "../../services/ManagerService/managerService";
-//import {ToastContainer, toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.min.css';
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 
@@ -39,15 +36,13 @@ function CadastroNovoLocal() {
     telefone: false,
     setor: false,
     empresa: false,
+    endereco: false,
   });
   function preenchendoDados(e) {
     const { name, value } = e.target;
 
-    
     if (name === 'telefone' && value.length < 15) {
-      setErro({ ...erro,[name]: true});
-     // toast.warn("Preencha todos os campos!");
-      setErro('Preencha todos os campos');
+     // setErro({ ...erro,[name]: true});
       setNovoLocal(prevState => ({
         ...prevState,
         [name]: telefone(value)
@@ -63,7 +58,7 @@ function CadastroNovoLocal() {
   }
   
   async function requisicaoCadastroNovoLocal() {
-  const nomeErro = !novoLocal.nome;
+  const nomeErro = !novoLocal.nome || /\d/.test(novoLocal.nome);
   const telefoneErro = !novoLocal.telefone || novoLocal.telefone.length < 15;
   const setorErro = !novoLocal.setor;
   const empresaErro = !novoLocal.empresa;
@@ -88,24 +83,6 @@ function CadastroNovoLocal() {
     }
     
   }
-
-  /*const onPlaceSelected = (place) => {
-    console.log('Local selecionado:', place);
-    // Faça o que quiser com o local selecionado
-  };
-
-  const mapContainerStyle = {
-    width: '100%',
-    height: '400px',
-
-  };
-
-  const center = {
-    lat: -23.5505, // Latitude inicial
-    lng: -46.6333, // Longitude inicial
-  };
-
-  */
   return (
     <Body>
       <Conteudo>
@@ -116,7 +93,6 @@ function CadastroNovoLocal() {
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloInput>Nome:</TituloInput>
-          
             <Input
               placeholder="Digite o nome do local"
               backgroundColor="white"
@@ -126,11 +102,10 @@ function CadastroNovoLocal() {
               erro={erro.nome}
               value={novoLocal.nome}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ color: '#570B87' }}
             ></Input>
-         
-            
-            {erro.nome && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
+      
+            {/\d/.test(novoLocal.nome) && <Rotulo>Digite um local válido</Rotulo>}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Telefone:</TituloInput>
@@ -140,11 +115,13 @@ function CadastroNovoLocal() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="telefone"
+              erro={erro.telefone}
               value={novoLocal.telefone}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ color: '#570B87' }}
             ></Input>
-            {erro.telefone && <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>}
+            {erro.telefone && novoLocal.telefone.length < 15 && <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>}
+
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Setor:</TituloInput>
@@ -155,8 +132,9 @@ function CadastroNovoLocal() {
               marginBottomMedia700="8%"
               name="setor"
               value={novoLocal.setor}
+              erro={erro.setor}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ color: '#570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -168,8 +146,9 @@ function CadastroNovoLocal() {
               marginBottomMedia700="8%"
               name="empresa"
               value={novoLocal.empresa}
+              erro={erro.empresa}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ color: '#570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
