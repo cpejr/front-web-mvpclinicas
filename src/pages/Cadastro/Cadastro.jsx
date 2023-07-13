@@ -58,6 +58,7 @@ function Cadastro() {
     data_nascimento: true,
     email: true,
     registro: true,
+    formacao: true,
     uni_federativa: true,
     senha: true,
     confirmacao_senha: true,
@@ -68,6 +69,7 @@ function Cadastro() {
     data_nascimento: false,
     email: false,
     registro: false,
+    formacao: false,
     uni_federativa: false,
     senha: false,
     confirmacao_senha: false,
@@ -141,7 +143,7 @@ function Cadastro() {
       setFormacao(value);
       if (value == "medico") setStringRegistro("CRM");
       else if (value == "dentista") setStringRegistro("CRO");
-      else if (value == "enfermeir") setStringRegistro("COREN");
+      else if (value == "enfermeiro") setStringRegistro("COREN");
       else if(value == "outros") setStringRegistro("Registro");
     }
 
@@ -306,9 +308,9 @@ function Cadastro() {
           <ConjuntoTituloInput> 
             <SelecaoFormacao id="formacao" name="formacao" onChange={preenchendoDados}>
                 <OpcaoFormacao value="" disabled selected hidden >Selecione sua Formação</OpcaoFormacao>
-                <OpcaoFormacao value="medico">Médico</OpcaoFormacao>
+                <OpcaoFormacao value="medico">Médico(a)</OpcaoFormacao>
                 <OpcaoFormacao value="dentista">Dentista</OpcaoFormacao>
-                <OpcaoFormacao value="enfermeir">Enfermeiro</OpcaoFormacao>
+                <OpcaoFormacao value="enfermeiro">Enfermeiro(a)</OpcaoFormacao>
                 <OpcaoFormacao value="outros">Outros</OpcaoFormacao>
               </SelecaoFormacao>        
           </ConjuntoTituloInput>
