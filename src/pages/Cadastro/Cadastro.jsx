@@ -137,13 +137,12 @@ function Cadastro() {
     }
 
     if (name === "formacao"){
-      const select = document.querySelector('#formacao');
-      setFormacao(select.value);
-      console.log(formacao);
-      if (formacao == "medico") setStringRegistro("CRM");
-      else if (formacao == "dentista") setStringRegistro("CRO");
-      else if (formacao == "enfermeir") setStringRegistro("COREN");
-      else if(formacao == "outros") setStringRegistro("Registro");
+     
+      setFormacao(value);
+      if (value == "medico") setStringRegistro("CRM");
+      else if (value == "dentista") setStringRegistro("CRO");
+      else if (value == "enfermeir") setStringRegistro("COREN");
+      else if(value == "outros") setStringRegistro("Registro");
     }
 
   }
