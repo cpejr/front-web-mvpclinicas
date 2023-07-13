@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const AvaliacaoEstrelas = styled.div`
+  align-items: baseline;
+  color: #570B87;
+  font-size: 15px;
+  width: 100%;
+`;
+
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
