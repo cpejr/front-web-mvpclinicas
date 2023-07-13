@@ -189,7 +189,9 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <TituloAvaliacao>
+            Avaliação Geral: {Math.trunc(avaliacao * 10) / 10}
+          </TituloAvaliacao>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>
