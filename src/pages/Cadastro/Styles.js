@@ -236,21 +236,25 @@ export const TituloInput = styled.div`
 `;
 
 export const SelecaoFormacao = styled.select`
+
   width: 100%;
-  height: 20px;
+  height: 30px;
   font-family: "Roboto Condensed";
   font-weight: 400;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   line-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: #570b87;
+  color: #8B00FF;
+  border-width: 0px 0px 1px 0px;
+  border-color: #570b87;
+  outline: none;
+  
+  
 
 `;
 
 export const OpcaoFormacao = styled.option`
-  color: #570b87;
+
+
 `;
 
 export const SubtituloInput = styled.div`

@@ -46,7 +46,7 @@ function Cadastro() {
   const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
-  const [formacao, setFormacao] = useState("dentista");
+  const [formacao, setFormacao] = useState("");
   const [stringRegistro, setStringRegistro] = useState("");
 
   const errors = {};
@@ -136,12 +136,25 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
-    // tem que fazer um if (name === "formacao") e adicionar isso aqui
-    if (formacao == "medico") setStringRegistro("CRM");
-    else if (formacao == "dentista") setStringRegistro("CRO");
-    else if (formacao == "enfermeiro") setStringRegistro("COREN");
+    if (name === "formacao"){
+      const select = document.querySelector('#formacao');
+      setFormacao(select.value);
+      console.log(formacao);
+      if (formacao == "medico") setStringRegistro("CRM");
+      else if (formacao == "dentista") setStringRegistro("CRO");
+      else if (formacao == "enfermeir") setStringRegistro("COREN");
+      else if(formacao == "outros") setStringRegistro("Registro");
+    }
+
   }
 
+  
+
+ 
+
+
+
+ 
   function preenchendoData(name, value) {
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
@@ -291,14 +304,16 @@ function Cadastro() {
             )}
           </ConjuntoTituloInput>
 
-          <TituloIcon>
-            <SelecaoFormacao name="formacao">
-              <OpcaoFormacao value="medico">Médico</OpcaoFormacao>
-              <OpcaoFormacao value="dentista">Dentista</OpcaoFormacao>
-              <OpcaoFormacao value="enfermeir">Enfermeiro</OpcaoFormacao>
-              <OpcaoFormacao value="outros">Outros</OpcaoFormacao>
-            </SelecaoFormacao>
-          </TituloIcon>
+          <ConjuntoTituloInput> 
+            <SelecaoFormacao id="formacao" name="formacao" onChange={preenchendoDados}>
+                <OpcaoFormacao value="" disabled selected hidden >Selecione sua Formação</OpcaoFormacao>
+                <OpcaoFormacao value="medico">Médico</OpcaoFormacao>
+                <OpcaoFormacao value="dentista">Dentista</OpcaoFormacao>
+                <OpcaoFormacao value="enfermeir">Enfermeiro</OpcaoFormacao>
+                <OpcaoFormacao value="outros">Outros</OpcaoFormacao>
+              </SelecaoFormacao>        
+          </ConjuntoTituloInput>
+
           {formacao && (
             <InputDividido>
               <ConjuntoTituloInput>
