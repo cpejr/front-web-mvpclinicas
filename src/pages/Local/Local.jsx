@@ -24,6 +24,7 @@ import {
   Usuario,
   UsuarioComentario,
   ItemComentario,
+  Pergunta,
 } from "./Styles";
 
 import {
@@ -106,7 +107,11 @@ function Local() {
               <TituloIcon>
                 <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#570B87",
+                    fontWeight: "bold",
+                  }}
                 />
               </TituloIcon>
               <Input
@@ -218,7 +223,8 @@ function Local() {
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
                     ([pergunta, resposta]) => (
                       <ItemComentario>
-                        <i>{pergunta}</i> {resposta}
+                        <Pergunta>{pergunta}</Pergunta>
+                        {resposta}
                       </ItemComentario>
                     )
                   )}

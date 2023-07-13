@@ -343,3 +343,8 @@ export const ItemComentario = styled.div`
     font-size: 0.8rem;
   }
 `;
+
+export const Pergunta = styled.div`
+  font-size: 1.1rem;
+  font-style: italic;
+`;
