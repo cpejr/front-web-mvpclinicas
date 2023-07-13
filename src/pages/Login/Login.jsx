@@ -28,12 +28,15 @@ function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
+  const [camposVaziosInicial, setCamposVaziosInicial] = useState({
+    senha: true,
+    email: true,
+  });
   const [camposVazios, setCamposVazios] = useState("");
   const [carregando, setCarregando] = useState(false);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-  const errors = {};
   const referenciaCamposNulos = {
     email: false,
     senha: false,
@@ -44,11 +47,12 @@ function Login() {
 
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
+      setCamposVaziosInicial({ ...camposVaziosInicial, [name]: false });
     } else {
       setCamposVazios({ ...camposVazios, [name]: true });
     }
 
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/;
+    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
@@ -64,6 +68,7 @@ function Login() {
 
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
+      setCamposVaziosInicial({ ...camposVaziosInicial, [name]: false });
     } else {
       setCamposVazios({ ...camposVazios, [name]: true });
     }
@@ -78,16 +83,26 @@ function Login() {
   }
 
   const logar = async (e) => {
-    if (!email.trim()) erro.email = true;
-    if (!senha) erro.senha = true;
-    setCamposVazios({ ...camposVazios, ...erro });
-
-    if (_.isEqual(camposVazios, referenciaCamposNulos)) {
+    console.log(erro);
+    console.log(camposVazios);
+    console.log(camposVaziosInicial);
+    if (
+      _.isEqual(camposVazios, referenciaCamposNulos) &&
+      _.isEqual(camposVaziosInicial, referenciaCamposNulos) &&
+      _.isEqual(erro, referenciaCamposNulos)
+    ) {
       await managerService.requisicaoLogin(email, senha);
+      setCarregando(false);
+    } else if (
+      !_.isEqual(camposVazios, referenciaCamposNulos) ||
+      !_.isEqual(camposVaziosInicial, referenciaCamposNulos)
+    ) {
+      setCarregando(true);
+      toast.warn("Preencha todos os campos");
       setCarregando(false);
     } else {
       setCarregando(true);
-      toast.warn("Preencha todos os campos");
+      toast.warn("Preencha todos os campos corretamente");
       setCarregando(false);
     }
   };
