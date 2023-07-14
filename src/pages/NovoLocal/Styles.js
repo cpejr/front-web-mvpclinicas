@@ -234,3 +234,16 @@ export const Rotulo = styled.div`
     font-size: 0.8em;
   }
 `;
+
+export const IFrame = styled.iframe`
+  width: 600px;
+  height: 450px;
+  @media (max-width: 1100px) {
+    width: 70%;
+    height: 300px;
+  }
+  @media (max-width: 700px) {
+    width: 80%;
+    height: auto;
+  }
+`

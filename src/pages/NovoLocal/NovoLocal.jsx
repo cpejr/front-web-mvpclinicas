@@ -12,6 +12,7 @@ import {
   Titulo,
   TituloInput,
   Rotulo,
+  IFrame,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -75,7 +76,6 @@ function CadastroNovoLocal() {
         return;
       }else{
         try {
-          console.log(novoLocal)
           await managerService.CadastroNovoLocal(
             novoLocal,
           )
@@ -172,7 +172,7 @@ function CadastroNovoLocal() {
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Digite o nome do endereço abaixo:</TituloInput>
+            <TituloInput>Endereço:</TituloInput>
             <Input
               placeholder="1234 Rua Fictícia, Cidade Imaginária"
               backgroundColor="white"
@@ -186,14 +186,12 @@ function CadastroNovoLocal() {
             ></Input>
             {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
           </ConjuntoTituloInput>
-          <iframe
+          <IFrame
             id="mapIframe"
-            width="600"
-            height="450"
             loading="lazy"
             allowFullScreen
             src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"}`}
-          ></iframe>
+          ></IFrame>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
