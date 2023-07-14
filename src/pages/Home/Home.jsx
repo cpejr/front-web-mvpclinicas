@@ -35,9 +35,7 @@ function Home() {
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState('');
-  // const [avaliacao, setAvaliacao] = useState(0);
   const [mediaAvaliacao, setMediaAvaliacao] = useState([]);
-
 
   const pesquisaAjustada = pesquisa
 		.toLowerCase()
@@ -62,51 +60,41 @@ function Home() {
     return local
 	});
 
-  // async function pegandoAvaliacaoLocal(idLocal)  {
-  //    const avaliacao = await managerService.GetComentariosLocal(idLocal);
-  //    arredondarValor(avaliacao.media_avaliacao);
-  // }
-
-  // async function pegandoDadosDeLocais() {
-  //   const resposta = await managerService.GetDadosLocais();
-  //   setLocais(resposta.dadosLocais);
-  //   for (let i=0; i < resposta.dadosLocais.length; i++) {
-  //     await pegandoAvaliacaoLocal(resposta.dadosLocais[i].id);
-  //   }
-  // }
+  async function pegandoAvaliacaoLocal(idLocal) {
+    try{
+      const resposta = await managerService.GetComentariosLocal(idLocal);
+      return Math.round(resposta.comentariosLocal.media_avaliacao * 2) / 2;
+    } catch (error) {
+      console.error("Erro ao obter a avaliação do local:", error);
+      return 0;
+    }
+  }
 
   async function pegandoDadosDeLocais() {
     try {
       const resposta = await managerService.GetDadosLocais();
       setLocais(resposta.dadosLocais);
-      console.log(locais);
 
-      // const mediaAvaliacoes = await Promise.all(
-      //   resposta.dadosLocais.map((local) =>
-      //     managerService.GetComentariosLocal(local.id)
-      //   )
-      // );
-
-      const mediaAvaliacao = mediaAvaliacoes.map((avaliacao) =>
-        Math.round(avaliacao.media_avaliacao * 2) / 2
+      const mediaAvaliacoes = await Promise.all(
+        resposta.dadosLocais.map((local) => {
+          pegandoAvaliacaoLocal(local.id);
+        })
       );
-      setMediaAvaliacao(mediaAvaliacao);
+      
+      setMediaAvaliacao(mediaAvaliacoes);
+      console.log("Deu certo");
     } catch (error) {
       console.error("Erro ao carregar os dados:", error);
     }
   }
 
-  function MudarBuscaTipo(tipo){
-    setBuscaTipo(tipo)
-  }
-
-  // function arredondarValor(valor) {
-  //   setMediaAvaliacao((prevMediaAvaliacao) => [...prevMediaAvaliacao, Math.round(valor * 2) / 2]);
-  // } 
-
   useEffect(() => {
     pegandoDadosDeLocais();
   }, []);
+
+  function MudarBuscaTipo(tipo){
+    setBuscaTipo(tipo)
+  }
 
   return (
     <Body>
@@ -177,8 +165,17 @@ function Home() {
                   <NomeLocal>{value?.nome}</NomeLocal>
                   <EnderecoLocal>{value?.endereco}</EnderecoLocal>
                   <EstrelasLocal>
-                    {/* {value?.estrelas}<Rate value={value?.estrelas} style={{ color: "#570B87", display: "flex", justifyContent: "row"}} allowHalf defaultValue={value?.estrelas} disabled />
-                    <AvaliacaoEstrelas>{mediaAvaliacao[index]}</AvaliacaoEstrelas> */}
+                    {value?.estrelas}
+                    <Rate 
+                      value={value?.estrelas} 
+                      style={{ color: "#570B87", display: "flex", justifyContent: "row"}} 
+                      allowHalf 
+                      defaultValue={value?.estrelas} 
+                      disabled 
+                    />
+                    <AvaliacaoEstrelas>
+                      {mediaAvaliacao[index]}
+                    </AvaliacaoEstrelas>
                   </EstrelasLocal>
                 </CaixaDados>
               </Local>
