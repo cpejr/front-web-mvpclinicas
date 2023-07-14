@@ -1,5 +1,4 @@
 import * as requesterService from "../RequesterService/requesterService";
-import { toast } from "react-toastify";
 
 export const GetDadosUsuario = async (id) => {
     let dadosUsuario = {};

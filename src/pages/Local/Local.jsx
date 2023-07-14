@@ -35,7 +35,6 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
-  PercentageOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
