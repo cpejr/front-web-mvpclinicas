@@ -6,6 +6,14 @@ export const requisicaoDadosUsuario = (id) =>
 export const requisicaoDadosLocais = () =>
   api.get(`/locais`);
 
+export const criarNovoLocal = async (novoLocal) => {
+  const resposta = await api.post("/locais", {
+    ...novoLocal,
+  });
+
+  return resposta.data;
+};
+
 export const requisicaoDadosLocal = (id_local) =>
   api.get(`/locais/${id_local}`);
 
