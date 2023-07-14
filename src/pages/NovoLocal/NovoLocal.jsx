@@ -11,11 +11,14 @@ import {
   Subtitulo,
   Titulo,
   TituloInput,
+  Rotulo,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 import * as managerService from "../../services/ManagerService/managerService";
@@ -31,6 +34,9 @@ function CadastroNovoLocal() {
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
   const [timeoutId, setTimeoutId] = useState(null);
+  const [erro, setErro] = useState({
+    endereco: false,
+  });
 
   const navigate = useNavigate();
 
@@ -52,29 +58,35 @@ function CadastroNovoLocal() {
     }
   }
 
-  async function requisicaoCadastroNovoLocal() {
-    // Verifica se algum campo está vazio
-    if (
-      novoLocal.nome.trim() === '' ||
-      novoLocal.telefone.trim() === '' ||
-      novoLocal.setor.trim() === '' ||
-      novoLocal.empresa.trim() === '' ||
-      novoLocal.endereco.trim() === ''
-    ) {
-      alert('PREENCHA TODOS OS CAMPOS.');
-      return;
-    }
+  const style = {
+    borderBottom: props => (props.erro ? '1px solid #ff0000c5' : '1px solid #570B87')
+  };
 
-    const novoLocalCadastrado = await managerService.CadastroNovoLocal(
-      novoLocal,
-    )
-    if (novoLocalCadastrado) {
-      alert('Novo local cadastrado.')
-      navigate("/"); //navegação para página home
-    } else {
-      alert('Erro ao cadastrar novo local.');
-    }
-  }
+  async function requisicaoCadastroNovoLocal() {
+    const enderecoErro = !novoLocal.endereco;
+  
+    setErro((erroAnterior)=> ({
+      ...erroAnterior,
+      endereco: enderecoErro,
+    }));
+      if(enderecoErro){
+        toast.error("Preencha todos os campos corretamente!");
+  
+        return;
+      }else{
+        try {
+          console.log(novoLocal)
+          await managerService.CadastroNovoLocal(
+            novoLocal,
+          )
+          toast.success("Local Cadastrado com sucesso!");
+          navigate("/local");
+        } catch (err) {
+          toast.error("Erro na validação!");
+        }
+      }
+      
+}
 
   function preenchendoEndereco(e) {
     const { name, value } = e.target
@@ -86,16 +98,16 @@ function CadastroNovoLocal() {
 
     clearTimeout(timeoutId);
 
-    const newTimeoutId = setTimeout(() => {
+    const novoTimeoutId = setTimeout(() => {
       setEnderecoMapa(value);
     }, 2000);
 
-    setTimeoutId(newTimeoutId);
+    setTimeoutId(novoTimeoutId);
   }
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutId); // Clear the timeout when the component unmounts
+      clearTimeout(timeoutId);
     };
   }, [timeoutId]);
 
@@ -168,9 +180,11 @@ function CadastroNovoLocal() {
               marginBottomMedia700="8%"
               name="endereco"
               value={novoLocal.endereco}
+              erro={false}
               onChange={preenchendoEndereco}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: `${(erro.endereco ? "1px solid #ff0000c5" : "1px solid #570B87")}` }}
             ></Input>
+            {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
           </ConjuntoTituloInput>
           <iframe
             id="mapIframe"
@@ -197,6 +211,7 @@ function CadastroNovoLocal() {
 
         </CaixaBotoes>
       </Conteudo>
+      <AddToast/>
     </Body>
   );
 }

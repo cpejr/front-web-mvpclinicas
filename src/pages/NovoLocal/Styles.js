@@ -223,3 +223,14 @@ export const BotoesEdicao = styled.div`
     gap: 20px;
   }
 `;
+
+export const Rotulo = styled.div`
+  font-size: 1em;
+  color: #ff0000c5;
+ // text-align: left;
+  font-family: Roboto Condensed;
+
+  @media (max-width: 900px) {
+    font-size: 0.8em;
+  }
+`;
