@@ -1,62 +1,51 @@
-import * as requesterService from "../RequesterService/requesterSevice";
-
-export const CadastroUsuario = async (usuario) => {
-    const dados = await requesterService
-    .criarUsuario(usuario)
-    .then((res) => {
-        return res;
-    });
-    return dados;
-}
-
-export const GetDadosPessoais = async () => {
-    let dadosUsuario = {};
-    await requesterService
-      .requisicaoDadosPessoais()
-      .then((res) => {
-        // Filtrar apenas os e-mails dos dados retornados
-        const emails = res.data.map((usuario) => usuario.email);
-        dadosUsuario = emails;
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-    return dadosUsuario;
-  };
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
 
-export const GetDadosUsuario = async (id) => {
-    let dadosUsuario = {};
-    await requesterService
-      .requisicaoDadosUsuario(id)
-      .then((res) => {
-        dadosUsuario = res.data;
-      })
+export const CadastroUsuario = async (usuario) => {
+  const dados = await requesterService.criarUsuario(usuario).then((res) => {
+    return res;
+  });
+  return dados;
+};
 
-    return { dadosUsuario };
-  };
+export const GetDadosPessoais = async () => {
+  let dadosUsuario = {};
+  await requesterService
+    .requisicaoDadosPessoais()
+    .then((res) => {
+      // Filtrar apenas os e-mails dos dados retornados
+      const emails = res.data.map((usuario) => usuario.email);
+      dadosUsuario = emails;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+  return dadosUsuario;
+};
+
+export const GetDadosUsuario = async (id) => {
+  let dadosUsuario = {};
+  await requesterService.requisicaoDadosUsuario(id).then((res) => {
+    dadosUsuario = res.data;
+  });
+
+  return { dadosUsuario };
+};
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocais()
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocais().then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocal(id_local)
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocal(id_local).then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
@@ -75,4 +64,3 @@ export const GetComentariosLocal = async (id_local) => {
 
   return { comentariosLocal };
 };
-
