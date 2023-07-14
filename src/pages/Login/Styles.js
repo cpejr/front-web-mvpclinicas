@@ -67,7 +67,11 @@ export const TituloInput = styled.div`
   color: #570B87;
   font-weight: 600;
   font-size: 1em;
-  margin-top: 9%
+  margin-top: 9%;
+
+  @media (max-width: 700px){
+    font-size: 0.8em;
+  }
 `;
 export const TituloIcon = styled.div`
   display: flex;
@@ -100,6 +104,11 @@ export const BotoesEdicao = styled.div`
   height: 50%;
   width: 70%;
   background-color: white;
+
+  @media(max-width: 500px){
+    height: 30%;
+    width: 50%;
+  }
 `;
 
 export const BotaoCadastro = styled.button`
@@ -144,17 +153,20 @@ export const BotaoCadastro = styled.button`
 
   @media (max-width: 500px) {
     width: ${(props) => props.widthMedia500 ?? '180px'};
+    
+    
   }
 
   @media (max-width: 500px) {
     height: ${(props) => props.HeightMedia500 ?? '35px'};
   }
    @media (max-width: 280px) {
-    height: ${(props) => props.heightMedia280 ?? '35px'};
+    height: ${(props) => props.heightMedia280 ?? '25px'};
   }
   @media (max-width: 280px) {
     width: ${(props) => props.widthMedia280 ?? '100px'};
   }
+  
 `;
 export const Rotulo = styled.div`
   width: 100%;
@@ -164,6 +176,15 @@ export const Rotulo = styled.div`
   margin-top: 2%;
   font-size: 1em;
   color: #E00000;
+  @media (max-width: 1050px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 900px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 650px) {
+    font-size: 0.6em;
+  }
 `;
 export const RotuloSenha = styled.div`
   width: 100%;
@@ -172,4 +193,13 @@ export const RotuloSenha = styled.div`
   margin-left: 51%;
   font-size: 1em;
   color: #E00000;
+  @media (max-width: 1050px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 900px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 650px) {
+    font-size: 0.6em;
+  }
 `;
