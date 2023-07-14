@@ -32,10 +32,10 @@ function NovoComentario() {
     dia_salario: false,
     avaliacao: false,
   });
-
-  const id_local = "6469762610cc9138d78e6470";
-  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
   const navigate = useNavigate();
+
+  const id_local = "6469762610cc9138d78e6471";
+  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -48,7 +48,7 @@ function NovoComentario() {
     }));
   }
 
-  function validarComentario() {
+  async function validarComentario() {
     const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
     const salarioErro =
       !checkPreenchido && !respostas["De quanto era o salário pago?"];
@@ -82,11 +82,16 @@ function NovoComentario() {
       comentario: comentario,
     };
 
-    console.log(comentario);
-
-    CriarNovoComentario(body, id_local);
-    navigate("/local");
-  }
+    try {
+      await CriarNovoComentario(body, id_local);
+      navigate("/local");
+    } catch (err) {
+      if (err.response.status === 400) {
+        return toast.error("O id do local está incorreto!");
+      }
+      toast.error("Erro no servidor!");
+    }
+}
 
   function renderizaInput(pergunta) {
     return (

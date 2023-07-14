@@ -29,7 +29,7 @@ export const CriarNovoComentario = async (body, id_local) => {
   .criarComentario(body, id_local)
   .then((res) => {
     return res;
-  });
+  })
 
   return resposta;
 }

@@ -77,7 +77,7 @@ function CadastroNovoLocal() {
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutId); // Clear the timeout when the component unmounts
+      clearTimeout(timeoutId);
     };
   }, [timeoutId]);
 
