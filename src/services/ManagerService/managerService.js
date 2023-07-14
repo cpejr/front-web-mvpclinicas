@@ -1,8 +1,8 @@
 import * as requesterService from "../RequesterService/requesterService";
+import { toast } from "react-toastify";
 
 export const GetDadosUsuario = async (id) => {
     let dadosUsuario = {};
-  
     await requesterService
       .requisicaoDadosUsuario(id)
       .then((res) => {
@@ -14,18 +14,15 @@ export const GetDadosUsuario = async (id) => {
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
-
   await requesterService
     .requisicaoDadosLocais()
     .then((res) => {
       dadosLocais = res.data;
-      console.log(JSON.stringify(res))
     })
     
 
   return { dadosLocais };
 };
-
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
   .criarNovoLocal(novoLocal)
@@ -35,3 +32,30 @@ export const CadastroNovoLocal = async (novoLocal) => {
   });
   return dadosNovoLocal;
 }
+
+export const GetDadosLocalPorId = async (id_local) => {
+  let dadosLocais = {};
+  await requesterService
+    .requisicaoDadosLocal(id_local)
+    .then((res) => {
+      dadosLocais = res.data;
+    })
+    
+
+  return { dadosLocais };
+};
+
+export const GetComentariosLocal = async (id_local) => {
+  let comentariosLocal = {};
+
+  await requesterService
+    .requisicaoComentariosLocal(id_local)
+    .then((res) => {
+      comentariosLocal = res.data;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+
+  return { comentariosLocal };
+};

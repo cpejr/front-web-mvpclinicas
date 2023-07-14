@@ -20,7 +20,6 @@ import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 import * as managerService from "../../services/ManagerService/managerService";
 
@@ -58,10 +57,6 @@ function CadastroNovoLocal() {
       }))
     }
   }
-
-  const style = {
-    borderBottom: props => (props.erro ? '1px solid #ff0000c5' : '1px solid #570B87')
-  };
 
   async function requisicaoCadastroNovoLocal() {
     const enderecoErro = !novoLocal.endereco;
