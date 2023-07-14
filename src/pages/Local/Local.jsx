@@ -77,7 +77,6 @@ function Local() {
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    console.log(resposta.comentariosLocal.comentarios);
     setComentarios(resposta.comentariosLocal.comentarios);
     setAvaliacao(resposta.comentariosLocal.media_avaliacao);
   }
@@ -224,7 +223,7 @@ function Local() {
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
                     ([pergunta, resposta]) => (
-                      <ItemComentario>
+                      <ItemComentario key={pergunta}>
                         <Pergunta>{pergunta}</Pergunta>
                         {resposta}
                       </ItemComentario>

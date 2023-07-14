@@ -81,9 +81,6 @@ function NovoComentario() {
       avaliacao: avaliacao,
       comentario: comentario,
     };
-
-    console.log(comentario);
-
     CriarNovoComentario(body, id_local);
     navigate("/local");
   }

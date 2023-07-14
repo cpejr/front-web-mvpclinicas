@@ -347,4 +347,7 @@ export const ItemComentario = styled.div`
 export const Pergunta = styled.div`
   font-size: 1.1rem;
   font-style: italic;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
 `;
