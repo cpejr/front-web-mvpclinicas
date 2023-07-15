@@ -163,8 +163,8 @@ export const TextoAlterarFoto = styled.div`
   align-items: center;
   justify-content: center;
   text-decoration: underline;
-  color: #570B87;
-
+  color: #570b87;
+  cursor: pointer;
   @media (max-width: 900px) {
     font-size: 1em;
   }
