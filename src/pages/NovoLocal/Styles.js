@@ -116,8 +116,8 @@ export const CaixaInputs = styled.div`
 export const ConjuntoTituloInput = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 7px;
+  justify-content: space-between;
+  gap: 3px;
   align-items: center;
   height: 100%;
   width: 70%;
@@ -227,7 +227,7 @@ export const BotoesEdicao = styled.div`
 export const Rotulo = styled.div`
   font-size: 1em;
   color: #ff0000c5;
- // text-align: left;
+  margin: auto;
   font-family: Roboto Condensed;
 
   @media (max-width: 900px) {
