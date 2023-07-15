@@ -11,8 +11,10 @@ import {
   Subtitulo,
   Titulo,
   TituloInput,
+  TextoCarregando,
   Rotulo,
-  IFrame,
+  Mapa,
+  MensagemCarregando,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -32,13 +34,14 @@ function CadastroNovoLocal() {
     endereco: ''
   };
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
-  const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
+  const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);
+  const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState({
     endereco: false,
   });
 
-  const navigate = useNavigate();
+  const navegar = useNavigate();
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
@@ -49,7 +52,6 @@ function CadastroNovoLocal() {
       }
       ))
 
-      //atualiza o valor do campo
     } else { 
       setNovoLocal(prevState => ({
         ...prevState,
@@ -70,17 +72,21 @@ function CadastroNovoLocal() {
   
         return;
       }else{
+        setCarregando(true);
+
         try {
-          await managerService.CadastroNovoLocal(
-            novoLocal,
-          )
+          await managerService.CadastroNovoLocal(novoLocal);
+
           toast.success("Local Cadastrado com sucesso!");
-          navigate("/local");
+          setTimeout(() => {
+            navegar("/home");
+          }, 3000)
         } catch (err) {
           toast.error("Erro na validação!");
         }
+
+        setCarregando(false);
       }
-      
 }
 
   function preenchendoEndereco(e) {
@@ -106,6 +112,13 @@ function CadastroNovoLocal() {
     };
   }, [timeoutId]);
 
+  if(carregando)
+    return(
+      <MensagemCarregando>
+        <TextoCarregando>Carregando...</TextoCarregando>
+      </MensagemCarregando>
+    );
+
   return (
     <Body>
       <Conteudo>
@@ -124,7 +137,6 @@ function CadastroNovoLocal() {
               name="nome"
               value={novoLocal.nome}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -137,7 +149,6 @@ function CadastroNovoLocal() {
               name="telefone"
               value={novoLocal.telefone}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -150,7 +161,6 @@ function CadastroNovoLocal() {
               name="setor"
               value={novoLocal.setor}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -163,7 +173,6 @@ function CadastroNovoLocal() {
               name="empresa"
               value={novoLocal.empresa}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -175,18 +184,17 @@ function CadastroNovoLocal() {
               marginBottomMedia700="8%"
               name="endereco"
               value={novoLocal.endereco}
-              erro={false}
+              erro={erro.endereco}
               onChange={preenchendoEndereco}
-              style={{ borderBottom: `${(erro.endereco ? "1px solid #ff0000c5" : "1px solid #570B87")}` }}
             ></Input>
             {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
           </ConjuntoTituloInput>
-          <IFrame
+          <Mapa
             id="mapIframe"
             loading="lazy"
             allowFullScreen
-            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"}`}
-          ></IFrame>
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "Brasil"}`}
+          ></Mapa>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
@@ -201,7 +209,6 @@ function CadastroNovoLocal() {
               Excluir
             </Botao>
           </BotoesEdicao>
-
         </CaixaBotoes>
       </Conteudo>
       <AddToast/>

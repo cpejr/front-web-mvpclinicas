@@ -235,7 +235,7 @@ export const Rotulo = styled.div`
   }
 `;
 
-export const IFrame = styled.iframe`
+export const Mapa = styled.iframe`
   width: 600px;
   height: 450px;
   @media (max-width: 1100px) {
@@ -246,4 +246,21 @@ export const IFrame = styled.iframe`
     width: 80%;
     height: auto;
   }
-`
+`;
+
+export const MensagemCarregando = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  
+`;
+
+export const TextoCarregando = styled.h1`
+  font-family: "Roboto Condensed";
+  color: #570B87;
+  font-size: 18px;
+  font-weight: bold;
+`;
