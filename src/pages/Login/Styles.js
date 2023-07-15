@@ -22,6 +22,8 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 80%;
   height: 100%;
+
+
 `;
 
 export const CaixaFoto = styled.div`
@@ -34,6 +36,11 @@ export const CaixaFoto = styled.div`
   background-color: #8B00FF;
   margin-top: 2%;
   margin-bottom: -5%;
+
+  @media(max-width: 800px){
+    width: 30%;
+    height: 60px;
+  }
 `;
 export const Form = styled.form``;
 
@@ -47,6 +54,10 @@ export const CaixaInput = styled.div`
   padding: 2%;
   background-color: white;
   margin-top: 3%;
+
+  @media(max-width: 800px){
+    width: 100%;
+  }
 `;
 
 export const InputDividido = styled.div`
