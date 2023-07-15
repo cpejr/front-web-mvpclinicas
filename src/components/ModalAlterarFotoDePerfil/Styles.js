@@ -18,7 +18,6 @@ export const ContainerModalExcluir = styled.div`
   }
 `;
 
-
 export const Titulo = styled.h3`
   font-family: ${Fontes.barlow};
   font-weight: 500;
@@ -44,8 +43,6 @@ export const CaixaBotaoUpload = styled.div`
   height: auto;
 `;
 
-
-
 export const ConteudoModalExcluir = styled.h3`
   font-family: ${Fontes.barlow};
   font-weight: 500;
@@ -67,9 +64,9 @@ export const ContainerFooterModalExcluir = styled.h3`
   flex-direction: row;
   justify-content: center;
   gap: 15%;
-  width:100%;
+  width: 100%;
   margin-top: 5%;
-`
+`;
 
 export const CaixaLoader = styled.div`
   padding-bottom: 4%;

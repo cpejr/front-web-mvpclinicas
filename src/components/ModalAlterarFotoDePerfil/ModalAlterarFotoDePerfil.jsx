@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Botao from '../../Styles/Botao/Botao';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Spin, Upload } from 'antd';
-import AddToast from '../AddToast/AddToast';
-import * as managerService from '../../services/ManagerService/managerService';
-import { Cores } from '../../variaveis';
+import React, { useState, useEffect } from "react";
+import Botao from "../../Styles/Botao/Botao";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { Spin, Upload } from "antd";
+import AddToast from "../AddToast/AddToast";
+import * as managerService from "../../services/ManagerService/managerService";
+import { Cores } from "../../variaveis";
 import {
   ContainerModalExcluir,
   ContainerFooterModalExcluir,
   CaixaLoader,
   CaixaBotaoUpload,
-  Titulo
-} from './Styles';
-import { toast } from 'react-toastify';
+  Titulo,
+} from "./Styles";
+import { toast } from "react-toastify";
 
 function ModalAlterarFotoDePerfil(props) {
   const [carregandoDeletar, setCarregandoDeletar] = useState(false);
@@ -24,7 +24,7 @@ function ModalAlterarFotoDePerfil(props) {
 
   const getBase64 = (img, callback) => {
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
+    reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
   };
 
@@ -42,17 +42,17 @@ function ModalAlterarFotoDePerfil(props) {
   );
 
   const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
 
     if (!isJpgOrPng) {
-      toast.error('You can only upload JPG/PNG file!');
+      toast.error("You can only upload JPG/PNG file!");
       setCarregando(true);
     }
 
     const isLt2M = file.size / 1024 / 1024 < 2;
 
     if (!isLt2M) {
-      toast.error('Image must smaller than 2MB!');
+      toast.error("Image must smaller than 2MB!");
       setCarregando(true);
     }
 
@@ -77,21 +77,19 @@ function ModalAlterarFotoDePerfil(props) {
       document.location.reload(true);
       setCarregandoDeletar(false);
     } else {
-      toast.error('Selecione uma foto para enviar!');
+      toast.error("Selecione uma foto para enviar!");
     }
   }
 
   return (
     <div>
       <ContainerModalExcluir>
-        <Titulo>
-          Selecione uma imagem para personalizar seu perfil:
-        </Titulo>
+        <Titulo>Selecione uma imagem para personalizar seu perfil:</Titulo>
         <CaixaBotaoUpload>
           <Upload
-            name='avatar'
-            listType='picture-card'
-            className='avatar-uploader'
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
             showUploadList={false}
             beforeUpload={beforeUpload}
             onChange={handleChange}
@@ -99,10 +97,10 @@ function ModalAlterarFotoDePerfil(props) {
             {imageUrl ? (
               <img
                 src={imageUrl}
-                alt='avatar'
+                alt="avatar"
                 style={{
-                  width: '100%',
-                  height: '100%',
+                  width: "100%",
+                  height: "100%",
                 }}
               />
             ) : (
@@ -113,27 +111,28 @@ function ModalAlterarFotoDePerfil(props) {
 
         <ContainerFooterModalExcluir>
           <Botao
-            color={Cores.azulEscuro}
-            fontWeight='normal'
-            borderColor={Cores.cinza[3]}
-            height='28px'
-            width='35%'
-            widthMedia670='50%'
-            fontSize='13px'
+            color="white"
+            fontWeight="bold"
+            borderColor={Cores.vermelhoIntermediario}
+            backgroundColor={Cores.vermelhoIntermediario}
+            height="28px"
+            width="6rem"
+            widthMedia670="50%"
+            fontSize="13px"
             onClick={props.fecharModal}
           >
             Cancelar
           </Botao>
 
           <Botao
-            backgroundColor={Cores.lilas[2]}
-            color={Cores.azulEscuro}
-            borderColor={Cores.azulEscuro}
-            fontWeight='normal'
-            height='28px'
-            width='35%'
-            widthMedia670='50%'
-            fontSize='13px'
+            backgroundColor={Cores.lilas[5]}
+            color="white"
+            borderColor={Cores.lilas[5]}
+            fontWeight="bold"
+            height="28px"
+            width="6rem"
+            widthMedia670="50%"
+            fontSize="13px"
             onClick={() => {
               updateFoto();
             }}
@@ -143,7 +142,7 @@ function ModalAlterarFotoDePerfil(props) {
                 <Spin indicator={antIconModal} />
               </CaixaLoader>
             ) : (
-              'Confirmar'
+              "Confirmar"
             )}
           </Botao>
         </ContainerFooterModalExcluir>
