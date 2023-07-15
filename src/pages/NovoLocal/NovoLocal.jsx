@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -16,7 +16,6 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
-import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
@@ -42,7 +41,6 @@ function CadastroNovoLocal() {
     const { name, value } = e.target;
 
     if (name === 'telefone' && value.length < 15) {
-     // setErro({ ...erro,[name]: true});
       setNovoLocal(prevState => ({
         ...prevState,
         [name]: telefone(value)
@@ -77,7 +75,7 @@ function CadastroNovoLocal() {
     }else{
      
       toast.success("Local Cadastrado com sucesso!");
-      const novoLocalCadastrado = await managerService.CadastroNovoLocal(
+      await managerService.CadastroNovoLocal(
         novoLocal,
       )
     }
