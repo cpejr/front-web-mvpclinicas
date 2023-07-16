@@ -23,6 +23,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
+import useAuthStore from "../../stores/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -36,6 +37,11 @@ function Login() {
   const [carregando, setCarregando] = useState(false);
 
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+  async function logar() {
+    const resposta = await managerService.requisicaoLogin(email, senha);
+    const { token } = resposta.data;
+    setToken(token);
+  }
 
   const referenciaCamposNulos = {
     email: false,

@@ -62,7 +62,19 @@ const Input = styled.input`
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
   ::placeholder {
-    color: #8b00ff;
+    color: ${(props) => {
+      let cor;
+      if (!props.color) {
+        if (props.erro) {
+          cor = "#ff0000c5";
+        } else {
+          cor = "#8b00ff";
+        }
+      } else {
+        cor = props.color;
+      }
+      return cor;
+    }};
   }
 
   /* Margem */

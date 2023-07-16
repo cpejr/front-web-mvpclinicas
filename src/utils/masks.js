@@ -18,3 +18,8 @@ export const data = (value) => {
   return value;
 };
 
+export const senha = (value) => {
+  return value ? value.replace(/./g, "*") : value;
+};
+
+

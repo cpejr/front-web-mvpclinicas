@@ -1,13 +1,10 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
-
 export const GetDadosUsuario = async (id) => {
-    let dadosUsuario = {};
-    await requesterService
-      .requisicaoDadosUsuario(id)
-      .then((res) => {
-        dadosUsuario = res.data;
-      })
+  let dadosUsuario = {};
+  await requesterService.requisicaoDadosUsuario(id).then((res) => {
+    dadosUsuario = res.data;
+  });
 
     return { dadosUsuario };
   };
@@ -26,12 +23,9 @@ export const GetDadosUsuario = async (id) => {
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocais()
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocais().then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
@@ -63,16 +57,43 @@ export const GetComentariosLocal = async (id_local) => {
   return { comentariosLocal };
 };
 
+export const ExcluirPerfil = async (id) => {
+  await requesterService
+    .requisicaoDeletarUsuario(id)
+    .then(() => {
+      setTimeout(() => {
+        window.location.href = "/home";
+      }, 3000);
+    })
+    .catch((error) => {
+      alert(error.message);
+      return false;
+    });
+};
+
+export const UpdateDadosPerfil = async (id, respostas) => {
+  await requesterService
+    .updateDadosPerfil(id, respostas)
+    .then(() => {
+      setTimeout(() => {
+        window.location.href = "/perfil";
+      }, 3000);
+    })
+    .catch((error) => {
+      alert(error.message);
+      return false;
+    });
+};
 
 export const requisicaoLogin = async (email, senha) => {
   try {
-    const res = await requesterService.logarUsuario(email,senha);
-    sessionStorage.setItem('@clinicas-Token', res.data.token);
-    toast.success('Login realizado com sucesso!');
-    console.log(sessionStorage);
+    const res = await requesterService.logarUsuario(email, senha);
+    sessionStorage.setItem("@clinicas-Token", res.data.token);
+    return res;
+    //window.location.href = "/home";
   } catch (error) {
-  console.log(error);
-  toast.error(error.response.data.message); 
+    console.log(error);
+    toast.error(error.response.data.message);
   }
 
   return;
