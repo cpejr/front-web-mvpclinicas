@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import Icon from "@ant-design/icons/lib/components/Icon";
+
 import {
   Body,
   BotoesEdicao,
@@ -12,14 +12,13 @@ import {
   TituloInput,
   TituloIcon,
   InputNovo,
-  Form,
   Rotulo,
   RotuloSenha,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import * as managerService from "../../services/ManagerService/managerService";
-import { LoadingOutlined } from "@ant-design/icons";
+import {LoadingOutlined} from  "@ant-design/icons";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
@@ -35,14 +34,8 @@ function Login() {
   });
   const [camposVazios, setCamposVazios] = useState("");
   const [carregando, setCarregando] = useState(false);
-
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-  async function logar() {
-    const resposta = await managerService.requisicaoLogin(email, senha);
-    const { token } = resposta.data;
-    setToken(token);
-  }
-
+  const setToken = useAuthStore((state) => state.setToken);
+ 
   const referenciaCamposNulos = {
     email: false,
     senha: false,
@@ -87,11 +80,12 @@ function Login() {
 
     setSenha(value);
   }
+ 
 
-  const logar = async (e) => {
-    console.log(erro);
-    console.log(camposVazios);
-    console.log(camposVaziosInicial);
+  const logar = async () => {
+    const resposta = await managerService.requisicaoLogin(email, senha);
+    const { token } = resposta.data;
+    setToken(token);
     if (
       _.isEqual(camposVazios, referenciaCamposNulos) &&
       _.isEqual(camposVaziosInicial, referenciaCamposNulos) &&
@@ -99,6 +93,7 @@ function Login() {
     ) {
       await managerService.requisicaoLogin(email, senha);
       setCarregando(false);
+      toast.success("Login realizado com sucesso");
     } else if (
       !_.isEqual(camposVazios, referenciaCamposNulos) ||
       !_.isEqual(camposVaziosInicial, referenciaCamposNulos)
@@ -112,7 +107,11 @@ function Login() {
       setCarregando(false);
     }
   };
-
+  if(carregando){
+    return(
+      <LoadingOutlined />
+    )
+  }
   return (
     <Body>
       <Conteudo>

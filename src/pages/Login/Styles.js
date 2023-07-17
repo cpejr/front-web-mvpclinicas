@@ -22,8 +22,9 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 80%;
   height: 100%;
-
-
+  @media (max-width: 700px){
+    width: 100%;
+  }
 `;
 
 export const CaixaFoto = styled.div`
@@ -38,8 +39,8 @@ export const CaixaFoto = styled.div`
   margin-bottom: -5%;
 
   @media(max-width: 800px){
-    width: 30%;
-    height: 60px;
+    width: 20%;
+    height: 50px;
   }
 `;
 export const Form = styled.form``;
@@ -80,7 +81,7 @@ export const TituloInput = styled.div`
   font-size: 1em;
   margin-top: 9%;
 
-  @media (max-width: 700px){
+  @media (max-width: 600px){
     font-size: 0.8em;
   }
 `;
@@ -164,8 +165,6 @@ export const BotaoCadastro = styled.button`
 
   @media (max-width: 500px) {
     width: ${(props) => props.widthMedia500 ?? '180px'};
-    
-    
   }
 
   @media (max-width: 500px) {
@@ -191,9 +190,12 @@ export const Rotulo = styled.div`
     font-size: 0.9em;
   }
   @media (max-width: 900px) {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
   @media (max-width: 650px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 550px) {
     font-size: 0.6em;
   }
 `;
@@ -208,9 +210,12 @@ export const RotuloSenha = styled.div`
     font-size: 0.9em;
   }
   @media (max-width: 900px) {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
   @media (max-width: 650px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 550px) {
     font-size: 0.6em;
   }
 `;

@@ -92,7 +92,6 @@ export const requisicaoLogin = async (email, senha) => {
     return res;
     //window.location.href = "/home";
   } catch (error) {
-    console.log(error);
     toast.error(error.response.data.message);
   }
 
