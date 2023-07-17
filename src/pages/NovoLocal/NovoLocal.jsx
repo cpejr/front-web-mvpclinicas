@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Body,
@@ -11,10 +11,8 @@ import {
   Subtitulo,
   Titulo,
   TituloInput,
-  TextoCarregando,
   Rotulo,
-  Mapa,
-  MensagemCarregando,
+  Mapa
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -22,7 +20,8 @@ import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
 
 function CadastroNovoLocal() {
@@ -34,7 +33,7 @@ function CadastroNovoLocal() {
     endereco: ''
   };
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
-  const [enderecoMapa, setEnderecoMapa] = useState("Belo Horizonte");
+  const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState({
@@ -42,6 +41,8 @@ function CadastroNovoLocal() {
   });
 
   const navegar = useNavigate();
+
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
@@ -81,7 +82,7 @@ function CadastroNovoLocal() {
           setTimeout(() => {
             navegar("/home");
             setCarregando(false);
-          }, 500)
+          }, 3000)
         } catch (err) {
           toast.error("Erro na validação!");
           setCarregando(false);
@@ -101,7 +102,7 @@ function CadastroNovoLocal() {
 
     const novoTimeoutId = setTimeout(() => {
       setEnderecoMapa(value);
-    }, 2000);
+    }, 3000);
 
     setTimeoutId(novoTimeoutId);
   }
@@ -186,7 +187,7 @@ function CadastroNovoLocal() {
               id="mapIframe"
               loading="lazy"
               allowFullScreen
-              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "Belo Horizonte"}`}
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "Brasil"}`}
             ></Mapa>
           </CaixaInputs>
           <CaixaBotoes>
@@ -200,7 +201,7 @@ function CadastroNovoLocal() {
               </Botao>
               <Botao
                 onClick={() => { requisicaoCadastroNovoLocal(); }}>
-                {carregando ? "Carregando..." : "Cadastrar"}
+                {carregando ? <Spin indicator={antIcon}/> : "Cadastrar"}
                 </Botao>
             </BotoesEdicao>
           </CaixaBotoes>
