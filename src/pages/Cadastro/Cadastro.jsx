@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { DatePicker } from "antd";
 import {
   Body,
@@ -17,7 +17,6 @@ import {
   EstiloData,
   Rotulo,
   SelecaoFormacao,
-  OpcaoFormacao,
 } from "./Styles";
 
 import {
@@ -49,7 +48,6 @@ function Cadastro() {
   const [formacao, setFormacao] = useState("");
   const [stringRegistro, setStringRegistro] = useState("");
 
-  const errors = {};
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   const [camposVazios, setCamposVazios] = useState({
@@ -74,6 +72,8 @@ function Cadastro() {
     senha: false,
     confirmacao_senha: false,
   };
+  const [camposVaziosErro, setCamposVaziosErro] =
+    useState(verificaCamposVazios);
 
   async function validacaoEmail(e) {
     const { value, name } = e.target;
@@ -100,7 +100,9 @@ function Cadastro() {
     const { name, value } = e.target;
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
-    } else setCamposVazios({ ...camposVazios, [name]: true });
+    } else {
+      setCamposVazios({ ...camposVazios, [name]: true });
+    }
 
     if (
       (name === "telefone" && value.length < 15) ||
@@ -138,24 +140,15 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
-    if (name === "formacao"){
-     
+    if (name === "formacao") {
       setFormacao(value);
       if (value == "medico") setStringRegistro("CRM");
       else if (value == "dentista") setStringRegistro("CRO");
       else if (value == "enfermeiro") setStringRegistro("COREN");
-      else if(value == "outros") setStringRegistro("Registro");
+      else if (value == "outros") setStringRegistro("Registro");
     }
-
   }
 
-  
-
- 
-
-
-
- 
   function preenchendoData(name, value) {
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
@@ -165,14 +158,6 @@ function Cadastro() {
 
   async function requisicaoCadastro() {
     setCarregando(true);
-    if (!usuario.nome) errors.nome = true;
-    if (!usuario.telefone) errors.telefone = true;
-    if (!usuario.data_nascimento) errors.data_nascimento = true;
-    if (!usuario.email) errors.email = true;
-    if (!usuario.registro) errors.registro = true;
-    if (!usuario.uni_federativa) errors.uni_federativa = true;
-    if (!usuario.senha) errors.senha = true;
-    if (!usuario.confirmacao_senha) errors.confirmacao_senha = true;
 
     if (_.isEqual(camposVazios, verificaCamposVazios)) {
       if (usuario.senha !== usuario.confirmacao_senha) {
@@ -193,6 +178,7 @@ function Cadastro() {
         setCarregando(false);
       }
     } else {
+      setCamposVaziosErro(camposVazios);
       toast.error("Preencha todos os campos obrigatórios");
       setCarregando(false);
     }
@@ -228,7 +214,7 @@ function Cadastro() {
               name="nome"
               value={estado.nome}
               onChange={preenchendoDados}
-              erro={erro.nome}
+              erro={erro.nome || camposVaziosErro.nome}
               camposVazios={camposVazios.nome}
               fontSize="0.8em"
             ></Input>
@@ -249,7 +235,7 @@ function Cadastro() {
                 name="telefone"
                 value={estado.telefone}
                 onChange={preenchendoDados}
-                erro={erro.telefone}
+                erro={erro.telefone || camposVaziosErro.telefone}
                 camposVazios={camposVazios.telefone}
                 fontSize="0.8em"
               ></Input>
@@ -265,7 +251,11 @@ function Cadastro() {
                 />
               </TituloIcon>
               <TituloIcon>
-                <EstiloData>
+                <EstiloData
+                  erro={
+                    erro.data_nascimento || camposVaziosErro.data_nascimento
+                  }
+                >
                   <DatePicker
                     style={{ border: "0px", width: "100%" }}
                     placeholder="Selecione sua data de nascimento"
@@ -276,7 +266,6 @@ function Cadastro() {
                     onChange={(value) =>
                       preenchendoData("data_nascimento", value)
                     }
-                    erro={erro.data_nascimento}
                     suffixIcon={null}
                   />
                 </EstiloData>
@@ -295,7 +284,7 @@ function Cadastro() {
               marginBottomMedia700="8%"
               name="email"
               value={estado.email}
-              erro={erro.email}
+              erro={erro.email || camposVaziosErro.email}
               camposVazios={camposVazios.email}
               onChange={validacaoEmail}
               fontSize="0.8em"
@@ -305,14 +294,21 @@ function Cadastro() {
             )}
           </ConjuntoTituloInput>
 
-          <ConjuntoTituloInput> 
-            <SelecaoFormacao id="formacao" name="formacao" onChange={preenchendoDados}>
-                <OpcaoFormacao value="" disabled selected hidden >Selecione sua Formação</OpcaoFormacao>
-                <OpcaoFormacao value="medico">Médico(a)</OpcaoFormacao>
-                <OpcaoFormacao value="dentista">Dentista</OpcaoFormacao>
-                <OpcaoFormacao value="enfermeiro">Enfermeiro(a)</OpcaoFormacao>
-                <OpcaoFormacao value="outros">Outros</OpcaoFormacao>
-              </SelecaoFormacao>        
+          <ConjuntoTituloInput>
+            <SelecaoFormacao
+              id="formacao"
+              name="formacao"
+              onChange={preenchendoDados}
+              erro={camposVaziosErro.formacao}
+            >
+              <option value="" disabled selected hidden>
+                Selecione sua Formação
+              </option>
+              <option value="medico">Médico(a)</option>
+              <option value="dentista">Dentista</option>
+              <option value="enfermeiro">Enfermeiro(a)</option>
+              <option value="outros">Outros</option>
+            </SelecaoFormacao>
           </ConjuntoTituloInput>
 
           {formacao && (
@@ -333,7 +329,7 @@ function Cadastro() {
                   marginBottomMedia700="8%"
                   name="registro"
                   value={estado.registro}
-                  erro={erro.registro}
+                  erro={erro.registro || camposVaziosErro.registro}
                   camposVazios={camposVazios.registro}
                   onChange={preenchendoDados}
                   fontSize="0.8em"
@@ -358,7 +354,7 @@ function Cadastro() {
                   alignSelf="flex-start"
                   marginBottomMedia700="8%"
                   name="uni_federativa"
-                  erro={erro.uni_federativa}
+                  erro={erro.uni_federativa || camposVaziosErro.uni_federativa}
                   camposVazios={camposVazios.uni_federativa}
                   value={estado.uni_federativa}
                   onChange={preenchendoDados}
@@ -381,7 +377,7 @@ function Cadastro() {
               marginBottomMedia700="8%"
               name="senha"
               value={estado.senha}
-              erro={erro.senha}
+              erro={erro.senha || camposVaziosErro.senha}
               onChange={preenchendoDados}
               camposVazios={camposVazios.senha}
               fontSize="0.8em"
@@ -403,7 +399,9 @@ function Cadastro() {
               name="confirmacao_senha"
               id="confirmacao_senha"
               type="password"
-              erro={erro.confirmacao_senha}
+              erro={
+                erro.confirmacao_senha || camposVaziosErro.confirmacao_senha
+              }
               camposVazios={camposVazios.senhaConfirmada}
               value={estado.confirmacao_senha}
               onChange={preenchendoDados}

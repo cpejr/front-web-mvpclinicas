@@ -6,14 +6,13 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-   
 `;
 
 export const EstiloData = styled.div`
   display: flex;
   font-family: "Roboto Condensed";
   color: black;
-  border-bottom: 1px solid #570b87;
+  border-bottom: 1px solid ${(props) => (props.erro ? "red" : "#570b87")};
   width: 100%;
   padding: 0px 0px 0px;
   margin-bottom: 4px;
@@ -94,32 +93,8 @@ export const Titulo = styled.div`
     font-size: 2.5rem;
   }
 
-  @media (max-width: 578px) {
-    font-size: 2.3rem;
-  }
-
   @media (max-width: 520px) {
     font-size: 2rem;
-  }
-
-  @media (max-width: 460px) {
-    font-size: 1.7rem;
-  }
-
-  @media (max-width: 381px) {
-    font-size: 1.8rem;
-  }
-
-  @media (max-width: 358px) {
-    font-size: 1.6rem;
-  }
-
-  @media (max-width: 335px) {
-    font-size: 1.4rem;
-  }
-
-  @media (max-width: 335px) {
-    font-size: 1.3rem;
   }
 
   @media (max-width: 299px) {
@@ -168,7 +143,6 @@ export const CaixaInputs = styled.div`
   padding: 2%;
   font-size: 1.3rem;
 
-  
   @media (max-width: 900px) {
     width: 90%;
     font-size: 1.1rem;
@@ -185,7 +159,6 @@ export const ConjuntoTituloInput = styled.div`
   gap: 7px;
   align-items: center;
   width: 70%;
-  
 
   @media (max-width: 700px) {
     gap: 0px;
@@ -199,7 +172,6 @@ export const InputDividido = styled.div`
   gap: 50px;
   height: 100%;
   width: 70%;
-  
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -236,25 +208,17 @@ export const TituloInput = styled.div`
 `;
 
 export const SelecaoFormacao = styled.select`
-
   width: 100%;
   height: 30px;
   font-family: "Roboto Condensed";
   font-weight: 400;
   font-size: 1.1rem;
   line-height: 20px;
-  color: #8B00FF;
+  color: #8b00ff;
   border-width: 0px 0px 1px 0px;
-  border-color: #570b87;
+  border-bottom: 1px solid ${(props) => (props.erro ? "red" : "#570b87")};
+
   outline: none;
-  
-  
-
-`;
-
-export const OpcaoFormacao = styled.option`
-
-
 `;
 
 export const SubtituloInput = styled.div`
@@ -295,7 +259,6 @@ export const TituloIcon = styled.div`
   justify-content: center;
   padding: 1%;
   width: 100%;
-
 `;
 
 export const CaixaBotoes = styled.div`
