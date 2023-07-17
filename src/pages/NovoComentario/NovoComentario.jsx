@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -13,6 +13,7 @@ import {
   Titulo,
   TituloAvaliacao,
   TituloInput,
+  NaoObrigatorio,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -91,7 +92,7 @@ function NovoComentario() {
       }
       toast.error("Erro no servidor!");
     }
-}
+  }
 
   function renderizaInput(pergunta) {
     return (
@@ -101,6 +102,7 @@ function NovoComentario() {
           placeholder="Área do texto"
           onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
         />
+        <NaoObrigatorio>Não obrigatório*</NaoObrigatorio>
       </ConjuntoTituloInput>
     );
   }

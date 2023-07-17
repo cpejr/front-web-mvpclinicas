@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -15,71 +15,69 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
-import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
 
 import * as managerService from "../../services/ManagerService/managerService";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
-    nome: '',
-    telefone: '',
-    setor: '',
-    empresa: '',
-    endereco: ''
+    nome: "",
+    telefone: "",
+    setor: "",
+    empresa: "",
+    endereco: "",
   };
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
-  const [timeoutId, setTimeoutId] = useState(null);
+  const [tempoDeEsperaID, setTempoDeEsperaID] = useState(null);
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
-    if (name === 'telefone') {
-      setNovoLocal(prevState => ({
+    if (name === "telefone") {
+      setNovoLocal((prevState) => ({
         ...prevState,
-        [name]: telefone(value)
-      }
-      ))
+        [name]: telefone(value),
+      }));
     } else {
-      setNovoLocal(prevState => ({
+      setNovoLocal((prevState) => ({
         ...prevState,
-        [name]: value
-      }))
+        [name]: value,
+      }));
     }
   }
 
   async function requisicaoCadastroNovoLocal() {
     const novoLocalCadastrado = await managerService.CadastroNovoLocal(
-      novoLocal,
-    )
+      novoLocal
+    );
     if (novoLocalCadastrado) {
-      alert('Novo local cadastrado.')
+      alert("Novo local cadastrado.");
     } else {
-      alert('Erro ao cadastrar novo local.');
+      alert("Erro ao cadastrar novo local.");
     }
   }
 
   function preenchendoEndereco(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    setNovoLocal(prevState => ({
+    setNovoLocal((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
+      [name]: value,
+    }));
 
-    clearTimeout(timeoutId);
+    clearTimeout(tempoDeEsperaID);
 
-    const newTimeoutId = setTimeout(() => {
+    const newTempoDeEsperaID = setTimeout(() => {
       setEnderecoMapa(value);
     }, 2000);
 
-    setTimeoutId(newTimeoutId);
+    setTempoDeEsperaID(newTempoDeEsperaID);
   }
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutId);
+      clearTimeout(tempoDeEsperaID);
     };
-  }, [timeoutId]);
+  }, [tempoDeEsperaID]);
 
   return (
     <Body>
@@ -99,7 +97,7 @@ function CadastroNovoLocal() {
               name="nome"
               value={novoLocal.nome}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: "1px solid #570B87" }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -112,7 +110,7 @@ function CadastroNovoLocal() {
               name="telefone"
               value={novoLocal.telefone}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: "1px solid #570B87" }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -125,7 +123,7 @@ function CadastroNovoLocal() {
               name="setor"
               value={novoLocal.setor}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: "1px solid #570B87" }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -138,7 +136,7 @@ function CadastroNovoLocal() {
               name="empresa"
               value={novoLocal.empresa}
               onChange={preenchendoDados}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: "1px solid #570B87" }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -151,7 +149,7 @@ function CadastroNovoLocal() {
               name="endereco"
               value={novoLocal.endereco}
               onChange={preenchendoEndereco}
-              style={{ borderBottom: '1px solid #570B87' }}
+              style={{ borderBottom: "1px solid #570B87" }}
             ></Input>
           </ConjuntoTituloInput>
           <iframe
@@ -160,14 +158,20 @@ function CadastroNovoLocal() {
             height="450"
             loading="lazy"
             allowFullScreen
-            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"}`}
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${
+              enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"
+            }`}
           ></iframe>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
             <Botao
-              onClick={() => { requisicaoCadastroNovoLocal(); }}>
-              Cadastrar</Botao>
+              onClick={() => {
+                requisicaoCadastroNovoLocal();
+              }}
+            >
+              Cadastrar
+            </Botao>
             <Botao
               color="#000000"
               backgroundColor="white"
@@ -176,7 +180,6 @@ function CadastroNovoLocal() {
               Excluir
             </Botao>
           </BotoesEdicao>
-
         </CaixaBotoes>
       </Conteudo>
     </Body>
