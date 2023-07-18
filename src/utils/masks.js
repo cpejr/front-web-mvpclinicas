@@ -4,9 +4,19 @@ export const telefone = (valor) => {
   const partePrimeirosDigitos = valorLimpo.slice(2, 7);
   const parteUltimosDigitos = valorLimpo.slice(7, 11);
 
-  return `${parteCodigoArea ? `(${parteCodigoArea}) ` : ""}${partePrimeirosDigitos ? `${partePrimeirosDigitos}-` : ""}${parteUltimosDigitos || ""}`;
+  let telefoneFormatado = "";
+  if (parteCodigoArea) {
+    telefoneFormatado += `(${parteCodigoArea}`;
+  }
+  if (partePrimeirosDigitos) {
+    telefoneFormatado += `) ${partePrimeirosDigitos}`;
+  }
+  if (parteUltimosDigitos) {
+    telefoneFormatado += `-${parteUltimosDigitos}`;
+  }
+  
+  return telefoneFormatado;
 };
-
 export const data = (value) => {
   if (value) {
     const data = new Date(value);

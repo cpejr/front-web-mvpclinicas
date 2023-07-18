@@ -115,6 +115,7 @@ function CadastroNovoLocal() {
               name="telefone"
               erro={erro.telefone}
               value={novoLocal.telefone}
+              maxLength={15}
               onChange={preenchendoDados}
               style={{ color: '#570B87' }}
             ></Input>
