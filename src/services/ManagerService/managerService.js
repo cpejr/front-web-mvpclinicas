@@ -71,6 +71,15 @@ export const ExcluirPerfil = async (id) => {
     });
 };
 
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+  .criarNovoLocal(novoLocal)
+  .then((res) => {
+      return res;
+     
+  });
+  return dadosNovoLocal;
+}
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)

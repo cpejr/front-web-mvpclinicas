@@ -47,8 +47,7 @@ const Input = styled.input`
     }
     return cor;
   }};
-  color: ${(props) => props.color};
-  color: ${(props) => props.color};
+  color: ${(props) => props.color };
 
   &:focus {
     outline: none;
