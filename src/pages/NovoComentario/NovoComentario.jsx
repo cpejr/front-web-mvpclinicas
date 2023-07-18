@@ -18,22 +18,25 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { Checkbox } from "antd";
+import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function NovoComentario() {
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
+  const [carregando, setCarregando] = useState(false)
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
   const [erro, setErro] = useState({
     cargo: false,
     salario: false,
     dia_salario: false,
     avaliacao: false,
   });
-  const navigate = useNavigate();
+  const navegar = useNavigate();
 
   const id_local = "6469762610cc9138d78e6470";
   const id_usuario = "64ae9e9eb163ec6a9b9ed270";
@@ -50,6 +53,7 @@ function NovoComentario() {
   }
 
   async function validarComentario() {
+    setCarregando(true);
     const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
     const salarioErro =
       !checkPreenchido && !respostas["De quanto era o salário pago?"];
@@ -69,6 +73,7 @@ function NovoComentario() {
     }));
 
     if (cargoErro || salarioErro || diaSalarioErro || avaliacaoErro) {
+      setCarregando(false);
       toast.error("Preencha os campos obrigatórios corretamente!");
       return;
     }
@@ -85,11 +90,19 @@ function NovoComentario() {
 
     try {
       await CriarNovoComentario(body, id_local);
-      navigate("/local");
+
+      toast.success("Local Cadastrado com sucesso!");
+      setTimeout(() => {
+        navegar("/home");
+        setCarregando(false);
+      }, 3000)
     } catch (err) {
       if (err.response.status === 400) {
+        setCarregando(false);
         return toast.error("O id do local está incorreto!");
       }
+      setCarregando(false);
+      console.log(err.response.data);
       toast.error("Erro no servidor!");
     }
   }
@@ -214,8 +227,8 @@ function NovoComentario() {
         >
           Excluir
         </Botao>
-        <Botao width="40%" onClick={validarComentario}>
-          Comentar
+        <Botao width="40%" onClick={() => { validarComentario(); }}>
+          {carregando ? <Spin indicator={antIcon}/> : "Cadastrar"}
         </Botao>
       </CaixaBotoes>
     </Body>
