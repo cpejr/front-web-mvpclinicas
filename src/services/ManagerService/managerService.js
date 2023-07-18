@@ -18,9 +18,8 @@ export const GetDadosLocais = async () => {
     .requisicaoDadosLocais()
     .then((res) => {
       dadosLocais = res.data;
+      console.log(dadosLocais);
     })
-    
-
   return { dadosLocais };
 };
 

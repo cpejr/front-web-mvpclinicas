@@ -35,29 +35,30 @@ function Home() {
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState('');
-  const [mediaAvaliacao, setMediaAvaliacao] = useState([]);
 
   const pesquisaAjustada = pesquisa
 		.toLowerCase()
 		.normalize("NFD")
 		.replace(/[\u0300-\u036f]/g, "");
+
+  console.log(locais);
   
-  const locaisFiltrados = locais.filter((local) => {
+  const locaisFiltrados = locais.filter((locais) => {
     if (buscaTipo === "nome"){ 
-      return (local?.nome
+      return (locais?.nome
       ?.toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .includes(pesquisaAjustada) 
     )}
     if (buscaTipo === "endereco") {
-    return (local?.endereco
+    return (locais?.endereco
       ?.toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .includes(pesquisaAjustada) 
     )}
-    return local
+    return locais;
 	});
 
   async function pegandoAvaliacaoLocal(idLocal) {
@@ -73,16 +74,9 @@ function Home() {
   async function pegandoDadosDeLocais() {
     try {
       const resposta = await managerService.GetDadosLocais();
+      console.log(resposta);
+  
       setLocais(resposta.dadosLocais);
-
-      const mediaAvaliacoes = await Promise.all(
-        resposta.dadosLocais.map((local) => {
-          pegandoAvaliacaoLocal(local.id);
-        })
-      );
-      
-      setMediaAvaliacao(mediaAvaliacoes);
-      console.log("Deu certo");
     } catch (error) {
       console.error("Erro ao carregar os dados:", error);
     }
@@ -170,11 +164,11 @@ function Home() {
                       value={value?.estrelas} 
                       style={{ color: "#570B87", display: "flex", justifyContent: "row"}} 
                       allowHalf 
-                      defaultValue={value?.estrelas} 
+                      defaultValue={value?.mediaAvaliacoes} 
                       disabled 
                     />
                     <AvaliacaoEstrelas>
-                      {mediaAvaliacao[index]}
+                      {value.mediaAvaliacoes}
                     </AvaliacaoEstrelas>
                   </EstrelasLocal>
                 </CaixaDados>
