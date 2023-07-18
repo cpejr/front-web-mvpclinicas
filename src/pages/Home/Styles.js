@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
 export const AvaliacaoEstrelas = styled.div`
-  align-items: baseline;
   color: #570B87;
-  font-size: 15px;
-  width: 100%;
 `;
 
 export const Body = styled.div`
@@ -269,8 +266,7 @@ export const EnderecoLocal = styled.div`
 
 export const EstrelasLocal = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
   gap: 30px;
   height: 20%;
   margin-top: 7%;

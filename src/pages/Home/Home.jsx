@@ -15,14 +15,14 @@ import {
   CaixaDados,
   CaixaSelect,
   CaixaConteudo,
-  AvaliacaoEstrelas
+  AvaliacaoEstrelas,
 } from "./Styles";
 import { Cores } from "../../variaveis";
 import {
   SearchOutlined,
   StarFilled,
   StarOutlined,
-  PlusOutlined
+  PlusOutlined,
 } from "@ant-design/icons";
 import { Rate } from 'antd';
 import Input from "../../Styles/Input/Input";
@@ -40,8 +40,6 @@ function Home() {
 		.toLowerCase()
 		.normalize("NFD")
 		.replace(/[\u0300-\u036f]/g, "");
-
-  console.log(locais);
   
   const locaisFiltrados = locais.filter((locais) => {
     if (buscaTipo === "nome"){ 
@@ -61,20 +59,9 @@ function Home() {
     return locais;
 	});
 
-  async function pegandoAvaliacaoLocal(idLocal) {
-    try{
-      const resposta = await managerService.GetComentariosLocal(idLocal);
-      return Math.round(resposta.comentariosLocal.media_avaliacao * 2) / 2;
-    } catch (error) {
-      console.error("Erro ao obter a avaliação do local:", error);
-      return 0;
-    }
-  }
-
   async function pegandoDadosDeLocais() {
     try {
       const resposta = await managerService.GetDadosLocais();
-      console.log(resposta);
   
       setLocais(resposta.dadosLocais);
     } catch (error) {
@@ -167,9 +154,6 @@ function Home() {
                       defaultValue={value?.mediaAvaliacoes} 
                       disabled 
                     />
-                    <AvaliacaoEstrelas>
-                      {value.mediaAvaliacoes}
-                    </AvaliacaoEstrelas>
                   </EstrelasLocal>
                 </CaixaDados>
               </Local>

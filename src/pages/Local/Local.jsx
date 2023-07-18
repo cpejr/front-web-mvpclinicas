@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 import {
+  AvaliacaoEstrelas,
   Body,
   BoxCarrossel,
   CaixaBotoes,
@@ -13,6 +14,7 @@ import {
   ConteudoAvaliacao,
   Direita,
   Esquerda,
+  EstrelasLocal,
   FotoNome,
   FotoUsuario,
   InputDividido,
@@ -25,6 +27,7 @@ import {
   UsuarioComentario,
 } from "./Styles";
 
+import { Rate } from 'antd';
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -75,7 +78,9 @@ function Local() {
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
-    setAvaliacao(resposta.comentariosLocal.media_avaliacao);
+    let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
+    let avaliacaoArredondada = recebeAvaliacao.toFixed(2);
+    setAvaliacao(avaliacaoArredondada);
   }
 
   useEffect(() => {
@@ -182,6 +187,15 @@ function Local() {
         </CaixaInputs>
         <ConteudoAvaliacao>
           <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <EstrelasLocal>
+            <Rate 
+              value={Math.floor(avaliacao) + 0.5}
+              style={{ color: "#570B87", display: "flex", justifyContent: "row"}} 
+              allowHalf 
+              defaultValue={avaliacao} 
+              disabled 
+            />
+          </EstrelasLocal>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>

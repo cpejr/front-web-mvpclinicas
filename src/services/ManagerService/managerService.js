@@ -18,8 +18,8 @@ export const GetDadosLocais = async () => {
     .requisicaoDadosLocais()
     .then((res) => {
       dadosLocais = res.data;
-      console.log(dadosLocais);
     })
+
   return { dadosLocais };
 };
 
@@ -31,7 +31,6 @@ export const GetDadosLocalPorId = async (id_local) => {
       dadosLocais = res.data;
     })
     
-
   return { dadosLocais };
 };
 
