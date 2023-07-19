@@ -159,7 +159,8 @@ export const ConjuntoTituloInput = styled.div`
   gap: 7px;
   align-items: center;
   width: 70%;
-
+  height: 100%;
+  
   @media (max-width: 700px) {
     gap: 0px;
   }
@@ -170,7 +171,6 @@ export const InputDividido = styled.div`
   flex-direction: row;
   justify-content: space-between;
   gap: 50px;
-  height: 100%;
   width: 70%;
 
   @media (max-width: 700px) {

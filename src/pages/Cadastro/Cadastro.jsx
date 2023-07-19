@@ -42,7 +42,6 @@ import * as managerService from "../../services/ManagerService/managerService";
 function Cadastro() {
   const [erro, setErro] = useState(false);
   const [erroEmailIgual, setErroEmailIgual] = useState(false);
-  const [estado, setEstado] = useState({});
   const [usuario, setUsuario] = useState({});
   const [carregando, setCarregando] = useState(false);
   const [formacao, setFormacao] = useState("");
@@ -113,30 +112,22 @@ function Cadastro() {
       setErro({ ...erro, [name]: false });
     }
     setUsuario({ ...usuario, [name]: value });
-    setEstado({ ...estado, [name]: value });
 
     if (name === "nome") {
-      setEstado({
-        ...estado,
-        [name]: apenasLetras(value),
-      });
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
     if (name === "telefone") {
-      setEstado({ ...estado, [name]: telefone(value) });
       setUsuario({ ...usuario, [name]: telefone(value) });
     }
 
     if (name === "registro") {
       if (value.length > 7) setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
-      setEstado({ ...estado, [name]: registro(value) });
       setUsuario({ ...usuario, [name]: registro(value) });
     }
 
     if (name === "uni_federativa") {
-      setEstado({ ...estado, [name]: apenasLetras(value) });
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
 
@@ -212,7 +203,6 @@ function Cadastro() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="nome"
-              value={estado.nome}
               onChange={preenchendoDados}
               erro={erro.nome || camposVaziosErro.nome}
               camposVazios={camposVazios.nome}
@@ -233,7 +223,6 @@ function Cadastro() {
                 alignSelf="flex-start"
                 marginBottomMedia700="8%"
                 name="telefone"
-                value={estado.telefone}
                 onChange={preenchendoDados}
                 erro={erro.telefone || camposVaziosErro.telefone}
                 camposVazios={camposVazios.telefone}
@@ -261,7 +250,6 @@ function Cadastro() {
                     placeholder="Selecione sua data de nascimento"
                     locale="pt_BR"
                     format="DD/MM/YYYY"
-                    value={estado.data_nascimento}
                     name="data_nascimento"
                     onChange={(value) =>
                       preenchendoData("data_nascimento", value)
@@ -283,7 +271,6 @@ function Cadastro() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="email"
-              value={estado.email}
               erro={erro.email || camposVaziosErro.email}
               camposVazios={camposVazios.email}
               onChange={validacaoEmail}
@@ -328,7 +315,6 @@ function Cadastro() {
                   alignSelf="flex-start"
                   marginBottomMedia700="8%"
                   name="registro"
-                  value={estado.registro}
                   erro={erro.registro || camposVaziosErro.registro}
                   camposVazios={camposVazios.registro}
                   onChange={preenchendoDados}
@@ -356,7 +342,6 @@ function Cadastro() {
                   name="uni_federativa"
                   erro={erro.uni_federativa || camposVaziosErro.uni_federativa}
                   camposVazios={camposVazios.uni_federativa}
-                  value={estado.uni_federativa}
                   onChange={preenchendoDados}
                   fontSize="0.8em"
                 ></Input>
@@ -376,7 +361,6 @@ function Cadastro() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="senha"
-              value={estado.senha}
               erro={erro.senha || camposVaziosErro.senha}
               onChange={preenchendoDados}
               camposVazios={camposVazios.senha}
@@ -403,7 +387,6 @@ function Cadastro() {
                 erro.confirmacao_senha || camposVaziosErro.confirmacao_senha
               }
               camposVazios={camposVazios.senhaConfirmada}
-              value={estado.confirmacao_senha}
               onChange={preenchendoDados}
               fontSize="0.8em"
             ></Input>
