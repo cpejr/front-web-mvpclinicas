@@ -15,13 +15,10 @@ import {
   CaixaDados,
   CaixaSelect,
   CaixaConteudo,
-  AvaliacaoEstrelas,
 } from "./Styles";
 import { Cores } from "../../variaveis";
 import {
   SearchOutlined,
-  StarFilled,
-  StarOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import { Rate } from 'antd';
