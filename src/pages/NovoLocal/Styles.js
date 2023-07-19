@@ -8,89 +8,39 @@ export const Body = styled.div`
   height: 100%;
 `;
 
-export const Conteudo = styled.div`
+export const BotoesEdicao = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 90%;
-  height: 100%;
-
-  @media (max-width: 900px) {
-    width: 100%;
-  }
-`;
-
-export const Titulo = styled.div`
+  height: 50%;
   width: 100%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-size: 2.5em;
-  display: flex;
-  color: #570B87;
-  justify-content: center;
-  align-items: center;
 
   @media (max-width: 900px) {
-    font-size: 2.3em;
-  }
-
-  @media (max-width: 800px) {
-    font-size: 2.1em;
-  }
-
-  @media (max-width: 650px) {
-    font-size: 2em;
-  }
-
-  @media (max-width: 450px) {
-    font-size: 1.7em;
-  }
-
-  @media (max-width: 350px) {
-    font-size: 1.5em;
+    gap: 20px;
   }
 `;
 
-export const Subtitulo = styled.div`
-  width: 70%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-weight: 400;
-  font-size: 1.3em;
-  display: flex;
-  color: #8B00FF;
-  justify-content: center;
-  align-items: center;
-  @media (max-width: 900px) {
-    font-size: 1em;
-  }
-
-  @media (max-width: 650px) {
-    font-size: 1em;
-  }
-
-  @media (max-width: 306px) {
-    font-size: 0.8em;
-  }
-`;
-
-export const CaixaTitulo = styled.div`
+export const CaixaBotoes = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  height: 70%;
+  gap: 40px;
+  height: 20%;
   width: 70%;
   padding: 2%;
-  gap: 15px;
-  justify-content: center;
-  
+
   @media (max-width: 900px) {
-    width: 90%;
+    gap: 10px;
+    padding: 5%;
+    width: 85%;
   }
 
-  @media (max-width: 700px) {
-    gap: 5px;
+  @media (max-width: 500px) {
+    gap: 10px;
+    padding: 5%;
+    width: 65%;
   }
 `;
 
@@ -104,6 +54,25 @@ export const CaixaInputs = styled.div`
   width: 70%;
   padding: 2%;
 
+  @media (max-width: 900px) {
+    width: 90%;
+  }
+
+  @media (max-width: 700px) {
+    gap: 5px;
+  }
+`;
+
+export const CaixaTitulo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 70%;
+  width: 70%;
+  padding: 2%;
+  gap: 15px;
+  justify-content: center;
+  
   @media (max-width: 900px) {
     width: 90%;
   }
@@ -127,27 +96,65 @@ export const ConjuntoTituloInput = styled.div`
   }
 `;
 
-export const TituloInput = styled.div`
-  width: 100%;
+export const Conteudo = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+`;
+
+export const Mapa = styled.iframe`
+  width: 600px;
+  height: 450px;
+  @media (max-width: 1100px) {
+    width: 70%;
+    height: 300px;
+  }
+  @media (max-width: 700px) {
+    width: 80%;
+    height: auto;
+  }
+`;
+
+export const Rotulo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  color: #ff0000c5;
+  margin-bottom: 5%;
+  font-family: "Roboto Condensed";
+
+  @media (max-width: 900px) {
+    font-size: 0.8em;
+  }
+`;
+
+export const Subtitulo = styled.div`
+  width: 70%;
   height: 20px;
   font-family: "Roboto Condensed";
   font-weight: 400;
-  font-size: 1.2em;
-  line-height: 20px;
+  font-size: 1.3em;
   display: flex;
+  color: #8B00FF;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  color: #570B87;
-
   @media (max-width: 900px) {
     font-size: 1em;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 650px) {
     font-size: 1em;
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 306px) {
     font-size: 0.8em;
   }
 `;
@@ -188,79 +195,59 @@ export const SubtituloInput = styled.div`
   }
 `;
 
-export const CaixaBotoes = styled.div`
+export const Titulo = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-size: 2.5em;
   display: flex;
-  flex-direction: column;
+  color: #570B87;
   justify-content: center;
   align-items: center;
-  gap: 40px;
-  height: 20%;
-  width: 70%;
-  padding: 2%;
 
   @media (max-width: 900px) {
-    gap: 10px;
-    padding: 5%;
-    width: 85%;
+    font-size: 2.3em;
+  }
+
+  @media (max-width: 800px) {
+    font-size: 2.1em;
+  }
+
+  @media (max-width: 650px) {
+    font-size: 2em;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 1.7em;
+  }
+
+  @media (max-width: 350px) {
+    font-size: 1.5em;
+  }
+`;
+
+export const TituloInput = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #570B87;
+
+  @media (max-width: 900px) {
+    font-size: 1em;
   }
 
   @media (max-width: 500px) {
-    gap: 10px;
-    padding: 5%;
-    width: 65%;
+    font-size: 1em;
   }
-`;
 
-export const BotoesEdicao = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 50%;
-  width: 100%;
-
-  @media (max-width: 900px) {
-    gap: 20px;
-  }
-`;
-
-export const Rotulo = styled.div`
-  font-size: 1em;
-  color: #ff0000c5;
-  margin: auto;
-  font-family: Roboto Condensed;
-
-  @media (max-width: 900px) {
+  @media (max-width: 350px) {
     font-size: 0.8em;
   }
 `;
 
-export const Mapa = styled.iframe`
-  width: 600px;
-  height: 450px;
-  @media (max-width: 1100px) {
-    width: 70%;
-    height: 300px;
-  }
-  @media (max-width: 700px) {
-    width: 80%;
-    height: auto;
-  }
-`;
-
-export const MensagemCarregando = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 25px;
-  
-`;
-
-export const TextoCarregando = styled.h1`
-  font-family: "Roboto Condensed";
-  color: #570B87;
-  font-size: 18px;
-  font-weight: bold;
-`;

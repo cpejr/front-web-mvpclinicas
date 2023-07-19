@@ -8,11 +8,11 @@ import {
   CaixaTitulo,
   ConjuntoTituloInput,
   Conteudo,
+  Mapa,
+  Rotulo,
   Subtitulo,
   Titulo,
-  TituloInput,
-  Rotulo,
-  Mapa
+  TituloInput
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
