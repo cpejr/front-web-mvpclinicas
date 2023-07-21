@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import Botao from "../../Styles/Botao/Botao";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Spin, Upload } from "antd";
-import AddToast from "../AddToast/AddToast";
 import * as managerService from "../../services/ManagerService/managerService";
 import { Cores } from "../../variaveis";
 import {
@@ -67,7 +66,6 @@ function ModalAlterarFotoDePerfil(props) {
       setImageUrl(url);
     });
   }
-
   async function updateFoto() {
     if (imageUrl) {
       setCarregandoDeletar(true);

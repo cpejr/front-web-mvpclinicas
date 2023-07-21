@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -24,27 +24,24 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { data, telefone } from '../../utils/masks';
+import { data, telefone } from "../../utils/masks";
 import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/ModalAlterarFotoDePerfil";
 import { Modal } from "antd";
 
-import fotoPerfil from "../../assets/montanha.jpg"
+import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 
-
-
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const _id = '64668ccfcf080fad87158da8';
+  const _id = "64668ccfcf080fad87158da8";
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(_id);
     setUsuario(resposta.dadosUsuario);
-    console.log(JSON.stringify(usuario._id))
   }
-  
+
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
@@ -62,13 +59,16 @@ function Perfil() {
             src={fotoPerfil}
             width="100%"
             height="100%"
-            style={{ borderRadius: '100%' }}
+            style={{ borderRadius: "100%" }}
           ></img>
         </CaixaFoto>
-        <TextoAlterarFoto 
-        onClick={() => {
-        setModalAlterarFotoPerfil(true);}}>
-        Alterar imagem de Perfil</TextoAlterarFoto>
+        <TextoAlterarFoto
+          onClick={() => {
+            setModalAlterarFotoPerfil(true);
+          }}
+        >
+          Alterar imagem de Perfil
+        </TextoAlterarFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
