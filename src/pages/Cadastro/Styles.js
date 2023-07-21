@@ -119,10 +119,6 @@ export const CaixaTitulo = styled.div`
     gap: 100px;
   }
 
-  @media (max-width: 1450px) {
-    gap: 100px;
-  }
-
   @media (max-width: 1000px) {
     gap: 80px;
   }
@@ -160,7 +156,7 @@ export const ConjuntoTituloInput = styled.div`
   align-items: center;
   width: 70%;
   height: 100%;
-  
+
   @media (max-width: 700px) {
     gap: 0px;
   }

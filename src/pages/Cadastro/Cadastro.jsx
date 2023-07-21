@@ -46,7 +46,6 @@ function Cadastro() {
   const [carregando, setCarregando] = useState(false);
   const [formacao, setFormacao] = useState("");
   const [stringRegistro, setStringRegistro] = useState("");
-
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
   const [camposVazios, setCamposVazios] = useState({
@@ -105,7 +104,7 @@ function Cadastro() {
 
     if (
       (name === "telefone" && value.length < 15) ||
-      ((name === "senha" || name === "confirmacao_senha") && value.length < 6)
+      ((name === "senha" || name === "confirmacao_senha") && value.length < 8)
     ) {
       setErro({ ...erro, [name]: true });
     } else {
@@ -122,7 +121,8 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      if (value.length > 7) setErro({ ...erro, [name]: true });
+      if (value.length > 7 || registro(value) == 0)
+        setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
       setUsuario({ ...usuario, [name]: registro(value) });
     }
@@ -226,6 +226,7 @@ function Cadastro() {
                 onChange={preenchendoDados}
                 erro={erro.telefone || camposVaziosErro.telefone}
                 camposVazios={camposVazios.telefone}
+                value={usuario.telefone}
                 fontSize="0.8em"
               ></Input>
               {erro.telefone && (
@@ -318,6 +319,7 @@ function Cadastro() {
                   erro={erro.registro || camposVaziosErro.registro}
                   camposVazios={camposVazios.registro}
                   onChange={preenchendoDados}
+                  value={usuario.registro}
                   fontSize="0.8em"
                 ></Input>
                 {erro.registro && (
@@ -367,7 +369,7 @@ function Cadastro() {
               fontSize="0.8em"
             ></Input>
             {erro.senha && (
-              <Rotulo>A senha deve ter no minimo 6 dígitos.</Rotulo>
+              <Rotulo>A senha deve ter no minimo 8 dígitos.</Rotulo>
             )}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
