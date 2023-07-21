@@ -101,7 +101,8 @@ function ModalAlterarSenha(props) {
 
     setCarregando(true);
     setErro(false);
-    await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
+   await managerService.UpdateSenha(props.usuario._id, respostas);
+   //await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
     toast.success("Senha alterada com sucesso!");
     setTimeout(() => {
       setCarregando(false);

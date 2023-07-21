@@ -19,3 +19,5 @@ export const requisicaoComentariosLocal = (id_local) =>
 export const requisicaoDeletarUsuario = (id) => api.delete(`/usuarios/${id}`);
 
 export const updateDadosPerfil = (id, respostas) => api.put(`/usuarios/${id}`, respostas);
+
+export const updateSenha = (id, respostas)=> api.put(`/usuarios/alterar_senha/${id}`,respostas);

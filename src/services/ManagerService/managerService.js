@@ -60,6 +60,19 @@ export const UpdateDadosPerfil = async (id, respostas) => {
       return false;
     });
 };
+export const UpdateSenha = async (id, respostas) => {
+  await requesterService
+    .updateSenha(id, respostas)
+    .then(() => {
+      setTimeout(() => {
+        window.location.href = "/perfil";
+      }, 3000);
+    })
+    .catch((error) => {
+      alert(error.message);
+      return false;
+    });
+};
 
 export const requisicaoLogin = async (email, senha) => {
   try {
