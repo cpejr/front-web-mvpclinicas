@@ -4,6 +4,7 @@ export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
   await requesterService.requisicaoDadosUsuario(id).then((res) => {
     dadosUsuario = res.data;
+    
   });
 
   return { dadosUsuario };
@@ -61,6 +62,7 @@ export const UpdateDadosPerfil = async (id, respostas) => {
     });
 };
 export const UpdateSenha = async (id, respostas) => {
+ 
   await requesterService
     .updateSenha(id, respostas)
     .then(() => {
@@ -69,9 +71,9 @@ export const UpdateSenha = async (id, respostas) => {
       }, 3000);
     })
     .catch((error) => {
-      alert(error.message);
-      return false;
-    });
+     alert(error.message);
+     return false;
+   });
 };
 
 export const requisicaoLogin = async (email, senha) => {

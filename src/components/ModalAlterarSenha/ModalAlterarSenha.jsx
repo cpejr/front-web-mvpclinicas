@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CaixaBotoes,
   CaixaInputRotulo,
@@ -39,7 +39,7 @@ function ModalAlterarSenha(props) {
   }
 
   async function alterandoSenha() {
-    if (!respostas.senhaAtual || respostas.senhaAtual !== props.usuario.senha) {
+    if (!respostas.senhaAtual ) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senhaAtual: true,

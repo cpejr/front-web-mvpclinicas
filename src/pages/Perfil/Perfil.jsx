@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -44,6 +44,7 @@ function Perfil() {
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
+   
   }
 
   function acionarModais(e) {
@@ -77,7 +78,7 @@ function Perfil() {
 
   return (
     <Body>
-      <Conteudo>
+       <Conteudo>
         <CaixaFoto>
           <img
             src={fotoPerfil}
@@ -227,7 +228,7 @@ function Perfil() {
         usuario={usuario}
         centered
         destroyOnClose
-      />
+      /> 
     </Body>
   );
 }
