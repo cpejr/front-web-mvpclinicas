@@ -79,7 +79,7 @@ function Local() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
-    let avaliacaoArredondada = recebeAvaliacao.toFixed(2);
+    let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
   }
 

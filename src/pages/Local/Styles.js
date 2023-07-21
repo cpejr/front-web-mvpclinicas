@@ -30,7 +30,7 @@ export const EstrelasLocal = styled.div`
   align-items: center;
   gap: 30px;
   height: 20%;
-  margin-top: 7%;
+  margin-bottom: 7%;
   width: 100%;
   padding: 0%;
   color: #570B87;
