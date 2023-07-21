@@ -131,8 +131,7 @@ export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
   align-items: start !important;
-  justify-content: space-evenly;
-  width: 30%;
+  width: 18%;
   padding: 2%;
   align-items: center;
   text-align: center;
