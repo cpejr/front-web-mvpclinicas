@@ -183,12 +183,16 @@ function CadastroNovoLocal() {
               ></Input>
               {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
             </ConjuntoTituloInput>
-            <Mapa
+            {/* <Mapa
               id="mapIframe"
               loading="lazy"
               allowFullScreen
               src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "Brasil"}`}
-            ></Mapa>
+            ></Mapa> */}
+            <img src="https://maps.googleapis.com/maps/api/place/photo
+  ?maxwidth=400
+  &photo_reference=Aap_uEA7vb0DDYVJWEaX3O-AtYp77AaswQKSGtDaimt3gt7QCNpdjp1BkdM6acJ96xTec3tsV_ZJNL_JP-lqsVxydG3nh739RE_hepOOL05tfJh2_ranjMadb3VoBYFvF0ma6S24qZ6QJUuV6sSRrhCskSBP5C1myCzsebztMfGvm7ij3gZT
+  &key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I" />
           </CaixaInputs>
           <CaixaBotoes>
             <BotoesEdicao>
