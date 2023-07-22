@@ -6,20 +6,20 @@ export const GetDadosUsuario = async (id) => {
     dadosUsuario = res.data;
   });
 
-    return { dadosUsuario };
-  };
-  export const GetDadosPessoais = async () => {
-    let dadosUsuario = {};
-    await requesterService
-      .requisicaoDadosPessoais()
-      .then((res) => {
-        dadosUsuario = res.data;
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-    return dadosUsuario;
-  };
+  return { dadosUsuario };
+};
+export const GetDadosPessoais = async () => {
+  let dadosUsuario = {};
+  await requesterService
+    .requisicaoDadosPessoais()
+    .then((res) => {
+      dadosUsuario = res.data;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+  return dadosUsuario;
+};
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
@@ -32,12 +32,9 @@ export const GetDadosLocais = async () => {
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocal(id_local)
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocal(id_local).then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
@@ -73,13 +70,12 @@ export const ExcluirPerfil = async (id) => {
 
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)

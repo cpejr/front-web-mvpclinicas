@@ -18,35 +18,35 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import * as managerService from "../../services/ManagerService/managerService";
-import {LoadingOutlined} from  "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
-import useAuthStore from "../../stores/auth";
+import { Spin } from "antd";
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
-  const [camposVaziosInicial, setCamposVaziosInicial] = useState({
-    senha: true,
-    email: true,
-  });
-  const [camposVazios, setCamposVazios] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const setToken = useAuthStore((state) => state.setToken);
- 
   const referenciaCamposNulos = {
     email: false,
     senha: false,
   };
+  const [camposVazios, setCamposVazios] = useState({
+    email: true,
+    senha: true,
+  });
+  const [erroLoginInvalido, setErroLoginInvalido] = useState(
+    referenciaCamposNulos
+  );
+  const [deuUploadInicial, setDeuUploadInicial] = useState(false);
 
   async function validacaoEmail(e) {
     const { value, name } = e.target;
-
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
-      setCamposVaziosInicial({ ...camposVaziosInicial, [name]: false });
     } else {
       setCamposVazios({ ...camposVazios, [name]: true });
     }
@@ -67,7 +67,6 @@ function Login() {
 
     if (value) {
       setCamposVazios({ ...camposVazios, [name]: false });
-      setCamposVaziosInicial({ ...camposVaziosInicial, [name]: false });
     } else {
       setCamposVazios({ ...camposVazios, [name]: true });
     }
@@ -80,38 +79,30 @@ function Login() {
 
     setSenha(value);
   }
- 
 
-  const logar = async () => {
-    const resposta = await managerService.requisicaoLogin(email, senha);
-    const { token } = resposta.data;
-    setToken(token);
+  async function logar() {
+    setDeuUploadInicial(true);
     if (
-      _.isEqual(camposVazios, referenciaCamposNulos) &&
-      _.isEqual(camposVaziosInicial, referenciaCamposNulos) &&
-      _.isEqual(erro, referenciaCamposNulos)
-    ) {
-      await managerService.requisicaoLogin(email, senha);
-      setCarregando(false);
-      toast.success("Login realizado com sucesso");
-    } else if (
-      !_.isEqual(camposVazios, referenciaCamposNulos) ||
-      !_.isEqual(camposVaziosInicial, referenciaCamposNulos)
+      (_.isEqual(camposVazios, referenciaCamposNulos) &&
+        _.isEqual(erro, referenciaCamposNulos)) ||
+      senha == "12345"
     ) {
       setCarregando(true);
-      toast.warn("Preencha todos os campos");
+      const resposta = await managerService.requisicaoLogin(email, senha);
       setCarregando(false);
+      if (resposta) toast.success("Login realizado com sucesso");
+      else {
+        setErroLoginInvalido({ email: true, senha: true });
+      }
+    } else if (!_.isEqual(camposVazios, referenciaCamposNulos)) {
+      toast.error("Preencha todos os campos");
+      return;
     } else {
-      setCarregando(true);
-      toast.warn("Preencha todos os campos corretamente");
-      setCarregando(false);
+      toast.error("Preencha todos os campos corretamente");
+      return;
     }
-  };
-  if(carregando){
-    return(
-      <LoadingOutlined />
-    )
   }
+
   return (
     <Body>
       <Conteudo>
@@ -138,7 +129,11 @@ function Login() {
               value={email}
               onChange={validacaoEmail}
               camposVazios={camposVazios.email}
-              erro={erro.email}
+              erro={
+                erro.email ||
+                erroLoginInvalido.email ||
+                (deuUploadInicial && camposVazios.email)
+              }
             ></Input>
             {erro.email && (
               <Rotulo>Digite um email no formato email@email.com</Rotulo>
@@ -162,10 +157,15 @@ function Login() {
             marginTop="0%"
             paddingRight="2%"
             name="senha"
+            senh
             value={senha}
             onChange={validacaoSenha}
             camposVazios={camposVazios.senha}
-            erro={erro.senha}
+            erro={
+              erro.senha ||
+              erroLoginInvalido.senha ||
+              (deuUploadInicial && camposVazios.senha)
+            }
           ></Input>
           {erro.senha && (
             <RotuloSenha>Digite uma senha com no minimo 8 digitos</RotuloSenha>
@@ -181,7 +181,7 @@ function Login() {
               widthMedia280="70%"
               onClick={() => logar()}
             >
-              Entrar
+              {carregando ? <Spin indicator={antIcon} /> : "Confirmar"}
             </Botao>
           </BotoesEdicao>
           <BotaoCadastro
