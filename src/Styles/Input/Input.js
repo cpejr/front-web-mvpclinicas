@@ -34,7 +34,6 @@ const Input = styled.input`
   border-width: ${(props) => props.borderWidth};
   border-radius: ${(props) => props.borderRadius};
   box-shadow: ${(props) => props.boxShadow};
-  border-bottom: 1px solid #570b87;
   border-bottom: ${(props) => {
     let cor;
     if (!props.color) {
@@ -48,7 +47,7 @@ const Input = styled.input`
     }
     return cor;
   }};
-  color: ${(props) => props.color};
+  color: ${(props) => props.color };
 
   &:focus {
     outline: none;
@@ -61,21 +60,21 @@ const Input = styled.input`
   font-weight: ${(props) => props.fontWeight};
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
-  ::placeholder {
-    color: ${(props) => {
-      let cor;
-      if (!props.color) {
-        if (props.erro) {
-          cor = "#ff0000c5";
-        } else {
-          cor = "#8b00ff";
-        }
+::placeholder {
+  color: ${(props) => {
+    let cor;
+    if (!props.color) {
+      if (props.erro) {
+        cor = " #ff0000c5";
       } else {
-        cor = props.color;
+        cor = " #570B87";
       }
-      return cor;
-    }};
-  }
+    } else {
+      cor = props.color;
+    }
+    return cor;
+  }};
+}
 
   /* Margem */
   margin-bottom: ${(props) => props.marginBottom};

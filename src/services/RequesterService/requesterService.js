@@ -10,7 +10,15 @@ export const logarUsuario = (email, senha) =>
 
 export const requisicaoDadosLocais = () => api.get(`/locais`);
 
-export const requisicaoDadosLocalPorId = (id_local) =>
+export const criarNovoLocal = async (novoLocal) => {
+  const resposta = await api.post("/locais", {
+    ...novoLocal,
+  });
+
+  return resposta.data;
+};
+
+export const requisicaoDadosLocal = (id_local) =>
   api.get(`/locais/${id_local}`);
 
 export const requisicaoComentariosLocal = (id_local) =>
