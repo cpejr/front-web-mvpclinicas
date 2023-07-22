@@ -183,7 +183,7 @@ function Perfil() {
         </CaixaBotoes>
       </Conteudo>
       <Modal
-        visible={modalAlterarFotoPerfil}
+        open={modalAlterarFotoPerfil}
         onCancel={fechandoModalAlterarFotoPerfil}
         footer={null}
         width={"50%"}

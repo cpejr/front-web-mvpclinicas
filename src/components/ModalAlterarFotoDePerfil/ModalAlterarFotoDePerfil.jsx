@@ -12,20 +12,20 @@ import {
   Titulo,
 } from "./Styles";
 import { toast } from "react-toastify";
-
+import PropTypes from "prop-types";
 function ModalAlterarFotoDePerfil(props) {
   const [carregandoDeletar, setCarregandoDeletar] = useState(false);
   const [carregando, setCarregando] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
+  const [imagemUrl, setImagemUrl] = useState();
   const antIconModal = (
     <LoadingOutlined style={{ fontSize: 15, color: Cores.azul }} spin />
   );
 
-  const getBase64 = (img, callback) => {
+  function pegarBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener("load", () => callback(reader.result));
     reader.readAsDataURL(img);
-  };
+  }
 
   const uploadButton = (
     <div>
@@ -40,37 +40,36 @@ function ModalAlterarFotoDePerfil(props) {
     </div>
   );
 
-  const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  function antesDoUpload(file) {
+    const eJpgOuPng = file.type === "image/jpeg" || file.type === "image/png";
 
-    if (!isJpgOrPng) {
-      toast.error("You can only upload JPG/PNG file!");
+    if (!eJpgOuPng) {
+      toast.error("Você só pode fazer o upload de JPGS ou PNGS!");
       setCarregando(true);
     }
 
-    const isLt2M = file.size / 1024 / 1024 < 2;
+    const eMenorQue2M = file.size / 1024 / 1024 < 2;
 
-    if (!isLt2M) {
-      toast.error("Image must smaller than 2MB!");
+    if (!eMenorQue2M) {
+      toast.error("A imagem precisa ser menor que 2MB!");
       setCarregando(true);
     }
 
-    return isJpgOrPng && isLt2M;
-  };
+    return eJpgOuPng && eMenorQue2M;
+  }
 
-  async function handleChange(info) {
-    // Get this url from response in real world.
+  async function aposMudanca(info) {
     setCarregando(true);
-    getBase64(info.file.originFileObj, (url) => {
+    pegarBase64(info.file.originFileObj, (url) => {
       setCarregando(false);
-      setImageUrl(url);
+      setImagemUrl(url);
     });
   }
   async function updateFoto() {
-    if (imageUrl) {
+    if (imagemUrl) {
       setCarregandoDeletar(true);
-      await managerService.UpdateFotoDePerfil(props.idUsuario, imageUrl);
-      setImageUrl(null);
+      await managerService.UpdateFotoDePerfil(props.idUsuario, imagemUrl);
+      setImagemUrl(null);
       props.fecharModal();
       document.location.reload(true);
       setCarregandoDeletar(false);
@@ -89,12 +88,12 @@ function ModalAlterarFotoDePerfil(props) {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
+            antesDoUpload={antesDoUpload}
+            onChange={aposMudanca}
           >
-            {imageUrl ? (
+            {imagemUrl ? (
               <img
-                src={imageUrl}
+                src={imagemUrl}
                 alt="avatar"
                 style={{
                   width: "100%",
@@ -149,4 +148,9 @@ function ModalAlterarFotoDePerfil(props) {
   );
 }
 
+ModalAlterarFotoDePerfil.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+  usuario: PropTypes.func,
+};
 export default ModalAlterarFotoDePerfil;
