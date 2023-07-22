@@ -62,20 +62,17 @@ export const UpdateDadosPerfil = async (id, respostas) => {
     });
 };
 export const UpdateSenha = async (id, respostas) => {
- 
-  await requesterService
-    .updateSenha(id, respostas)
-    .then(() => {
-      setTimeout(() => {
-        window.location.href = "/perfil";
-      }, 3000);
-    })
-    .catch((error) => {
-     alert(error.message);
-     return false;
-   });
+  try {
+    await requesterService.updateSenha(id, respostas);
+    setTimeout(() => {
+      window.location.href = "/perfil";
+    }, 3000);
+    return true;
+  } catch (error) {
+    alert(error.message);
+    return false;
+  }
 };
-
 export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);

@@ -16,7 +16,6 @@ import { Modal, Spin } from "antd";
 
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
-import { senha } from "../../utils/masks";
 import AddToast from "../../components/AddToast/AddToast";
 
 import * as managerService from "../../services/ManagerService/managerService";
@@ -37,9 +36,10 @@ function ModalAlterarSenha(props) {
       [pergunta]: valor,
     }));
   }
-
+  
   async function alterandoSenha() {
-    if (!respostas.senhaAtual ) {
+      
+    if (!respostas.senhaAtual) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senhaAtual: true,
@@ -99,11 +99,29 @@ function ModalAlterarSenha(props) {
       }));
     }
 
+   
+    const resultado = await managerService.UpdateSenha(props.usuario._id, respostas);
+
+    if(!resultado) {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senhaAtual: true,
+      }));
+      toast.error("Senha atual incorreta.");
+      setCarregando(false);
+      return;
+    }
+    else{
+      toast.success("Senha alterada com sucesso!");
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senhaAtual: false,
+      }));
+    }
+    
     setCarregando(true);
     setErro(false);
-   await managerService.UpdateSenha(props.usuario._id, respostas);
-   //await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-    toast.success("Senha alterada com sucesso!");
+   
     setTimeout(() => {
       setCarregando(false);
     }, 3000);
@@ -129,7 +147,7 @@ function ModalAlterarSenha(props) {
             <TituloInput>Insira a senha atual:</TituloInput>
             <CaixaInputRotulo>
               <Input
-                placeholder={senha(props.usuario.senha)}
+                placeholder={"Senha atual"}
                 type="password"
                 erro={erro.senhaAtual}
                 onChange={(e) =>
