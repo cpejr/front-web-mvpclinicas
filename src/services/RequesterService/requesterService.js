@@ -17,3 +17,6 @@ export const requisicaoDadosLocal = (id_local) =>
 
 export const requisicaoComentariosLocal = (id_local) =>
   api.get(`/comentarios/${id_local}`);
+
+export const deletarLocal = (id_local) =>
+  api.delete(`/locais/${id_local}`);

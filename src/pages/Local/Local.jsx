@@ -80,6 +80,15 @@ function Local() {
     setAvaliacao(resposta.comentariosLocal.media_avaliacao);
   }
 
+  async function deletaLocal() {
+    try{
+      await managerService.DeletaLocal(id_local);
+      navigate("/");
+    } catch(error){
+      console.error("Erro ao deletar local", error);
+    }
+  }
+
   useEffect(() => {
     pegandoDadosLocal();
   }, []);
@@ -247,6 +256,16 @@ function Local() {
             onClick={() => navigate("/novocomentario")}
           >
             Adicionar Comentário
+          </Botao>
+          <Botao
+              width="20%"
+              widthMedia700="30%"
+              color="#000000"
+              backgroundColor="white"
+              borderColor="#FF000080"
+              onClick={() => deletaLocal()}
+          >
+            Excluir
           </Botao>
         </CaixaBotoes>
       </Conteudo>

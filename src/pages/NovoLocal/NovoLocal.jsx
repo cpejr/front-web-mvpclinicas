@@ -172,13 +172,6 @@ function CadastroNovoLocal() {
             >
               Cadastrar
             </Botao>
-            <Botao
-              color="#000000"
-              backgroundColor="white"
-              borderColor="#FF000080"
-            >
-              Excluir
-            </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
       </Conteudo>
