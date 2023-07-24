@@ -17,4 +17,3 @@ export const data = (value) => {
   }
   return value;
 };
-

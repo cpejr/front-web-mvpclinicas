@@ -1,5 +1,4 @@
 import * as requesterService from "../RequesterService/requesterService";
-import { toast } from "react-toastify";
 
 export const GetDadosUsuario = async (id) => {
     let dadosUsuario = {};
@@ -23,6 +22,16 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+
+export const CriarNovoComentario = async (body, id_local) => {
+  const resposta = await requesterService
+  .criarComentario(body, id_local)
+  .then((res) => {
+    return res;
+  })
+
+  return resposta;
+}
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
@@ -50,4 +59,3 @@ export const GetComentariosLocal = async (id_local) => {
 
   return { comentariosLocal };
 };
-
