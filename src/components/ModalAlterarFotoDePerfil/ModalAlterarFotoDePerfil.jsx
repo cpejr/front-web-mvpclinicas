@@ -149,8 +149,7 @@ function ModalAlterarFotoDePerfil(props) {
 }
 
 ModalAlterarFotoDePerfil.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func,
-  usuario: PropTypes.func,
+  fecharModal: PropTypes.func,
+  idUsuario: PropTypes.string,
 };
 export default ModalAlterarFotoDePerfil;
