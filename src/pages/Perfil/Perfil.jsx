@@ -28,11 +28,15 @@ import { data, telefone } from "../../utils/masks";
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
+import { redirecionamento, sleep } from '../../utils/sleep';
 
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 import useAuthStore from "../../stores/auth";
+import { logout } from '../../services/auth';
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
@@ -44,6 +48,17 @@ function Perfil() {
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
+  }
+
+  async function handleLogout() {
+    try {
+      logout();
+      toast.success('Usuario deslogado com sucesso');
+      await sleep(1500);
+      redirecionamento('/login');
+    } catch (error) {
+      alert(error);
+    }
   }
 
   function acionarModais(e) {
@@ -195,6 +210,17 @@ function Perfil() {
           </BotoesEdicao>
           <Botao
             color="#ffffff"
+            backgroundColor="#8B00FF"
+            borderColor="#570B87"
+            width="30%"
+            widthMedia700="40%"
+            data-botao-id="excluirPerfil"
+            onClick={handleLogout}
+          >
+            Sair
+          </Botao>
+          <Botao
+            color="#ffffff"
             backgroundColor="#ff0000c5"
             borderColor="#ff0000"
             width="30%"
@@ -204,6 +230,7 @@ function Perfil() {
           >
             Excluir
           </Botao>
+          
         </CaixaBotoes>
       </Conteudo>
 
@@ -228,6 +255,7 @@ function Perfil() {
         centered
         destroyOnClose
       />
+      <AddToast />
     </Body>
   );
 }
