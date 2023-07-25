@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
+import axios from "axios";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
@@ -30,7 +31,8 @@ function CadastroNovoLocal() {
     telefone: '',
     setor: '',
     empresa: '',
-    endereco: ''
+    endereco: '',
+    foto_url: ''
   };
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
@@ -68,27 +70,37 @@ function CadastroNovoLocal() {
       ...erroAnterior,
       endereco: enderecoErro,
     }));
-      if(enderecoErro){
-        toast.error("Preencha todos os campos corretamente!");
-  
-        return;
-      }else{
-        setCarregando(true);
+    if (enderecoErro){
+      toast.error("Preencha todos os campos corretamente!");
 
-        try {
-          await managerService.CadastroNovoLocal(novoLocal);
+      return;
+    } else{
+      setCarregando(true);
 
-          toast.success("Local Cadastrado com sucesso!");
-          setTimeout(() => {
-            navegar("/home");
-            setCarregando(false);
-          }, 3000)
-        } catch (err) {
-          toast.error("Erro na validação!");
+      const proxyUrl = "http://localhost:8080/";
+
+      const placesRequestUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${novoLocal.nome}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&inputtype=textquery&fields=name,photos`;
+
+      try {
+        const response = await axios.get(proxyUrl + placesRequestUrl);
+        setNovoLocal(prevState => ({
+          ...prevState,
+          foto_url: response.data.candidates[0].photos[0].photo_reference
+        }))
+        console.log(novoLocal);
+        await managerService.CadastroNovoLocal(novoLocal);
+
+        toast.success("Local Cadastrado com sucesso!");
+        setTimeout(() => {
+          navegar("/home");
           setCarregando(false);
-        }
+        }, 3000)
+      } catch (err) {
+        toast.error("Erro na validação!");
+        setCarregando(false);
       }
-}
+    }
+  }
 
   function preenchendoEndereco(e) {
     const { name, value } = e.target
@@ -107,11 +119,13 @@ function CadastroNovoLocal() {
     setTimeoutId(novoTimeoutId);
   }
 
+  
   useEffect(() => {
     return () => {
       clearTimeout(timeoutId);
     };
   }, [timeoutId]);
+  
 
     return (
       <Body>
@@ -183,16 +197,12 @@ function CadastroNovoLocal() {
               ></Input>
               {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
             </ConjuntoTituloInput>
-            {/* <Mapa
+            <Mapa
               id="mapIframe"
               loading="lazy"
               allowFullScreen
               src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${enderecoMapa ? enderecoMapa : "Brasil"}`}
-            ></Mapa> */}
-            <img src="https://maps.googleapis.com/maps/api/place/photo
-  ?maxwidth=400
-  &photo_reference=Aap_uEA7vb0DDYVJWEaX3O-AtYp77AaswQKSGtDaimt3gt7QCNpdjp1BkdM6acJ96xTec3tsV_ZJNL_JP-lqsVxydG3nh739RE_hepOOL05tfJh2_ranjMadb3VoBYFvF0ma6S24qZ6QJUuV6sSRrhCskSBP5C1myCzsebztMfGvm7ij3gZT
-  &key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I" />
+            ></Mapa>
           </CaixaInputs>
           <CaixaBotoes>
             <BotoesEdicao>
