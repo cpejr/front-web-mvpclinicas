@@ -28,7 +28,7 @@ import { data, telefone } from "../../utils/masks";
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
-import { redirecionamento, sleep } from '../../utils/sleep';
+import { redirecionamento} from '../../utils/redirecionamento';
 
 import fotoPerfil from "../../assets/montanha.jpg";
 
@@ -54,8 +54,10 @@ function Perfil() {
     try {
       logout();
       toast.success('Usuario deslogado com sucesso');
-      await sleep(1500);
-      redirecionamento('/login');
+      setTimeout(() => {
+        redirecionamento('/login');
+      }, 3000);
+      
     } catch (error) {
       alert(error);
     }
