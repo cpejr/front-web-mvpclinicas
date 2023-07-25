@@ -43,6 +43,8 @@ import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 
+import { verificarPermissaoAdmin } from "../../services/api";
+
 function Local() {
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
@@ -81,10 +83,16 @@ function Local() {
   }
 
   async function deletaLocal() {
-    try{
+    try {
+      const isAdmin = await verificarPermissaoAdmin(id_local);
+  
+      if (!isAdmin) {
+        return console.log("Usuário não é administrador. Não pode deletar local.");
+      }
+  
       await managerService.DeletaLocal(id_local);
       navigate("/");
-    } catch(error){
+    } catch (error) {
       console.error("Erro ao deletar local", error);
     }
   }
