@@ -94,8 +94,8 @@ export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);
     sessionStorage.setItem("@clinicas-Token", res.data.token);
+    window.location.href = "/home";
     return res;
-    //window.location.href = "/home";
   } catch (error) {
     toast.error(error.response.data.message);
   }

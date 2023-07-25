@@ -83,9 +83,8 @@ function Login() {
   async function logar() {
     setDeuUploadInicial(true);
     if (
-      (_.isEqual(camposVazios, referenciaCamposNulos) &&
-        _.isEqual(erro, referenciaCamposNulos)) ||
-      senha == "12345"
+      _.isEqual(camposVazios, referenciaCamposNulos) &&
+      _.isEqual(erro, referenciaCamposNulos)
     ) {
       setCarregando(true);
       const resposta = await managerService.requisicaoLogin(email, senha);
