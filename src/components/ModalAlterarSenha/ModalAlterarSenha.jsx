@@ -54,7 +54,7 @@ function ModalAlterarSenha(props) {
       }));
     }
 
-    if (!respostas.senha) {
+    if (!respostas.senha || respostas.senha.length < 8) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senha: true,
@@ -151,7 +151,7 @@ function ModalAlterarSenha(props) {
                 type="password"
                 erro={erro.senhaAtual}
                 onChange={(e) =>
-                  preenchendoRespostas("senhaAtual", e.target.value)
+                  preenchendoRespostas("senhaAtual", e.target.value)  
                 }
               />
               {erro.senhaAtual && <Rotulo>Senha atual incorreta</Rotulo>}
@@ -166,7 +166,7 @@ function ModalAlterarSenha(props) {
                 erro={erro.senha}
                 onChange={(e) => preenchendoRespostas("senha", e.target.value)}
               />
-              {erro.senha && <Rotulo>Insira uma nova senha</Rotulo>}
+              {erro.senha && <Rotulo>Insira uma nova senha com no minimo 8 digitos</Rotulo>}
             </CaixaInputRotulo>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>

@@ -69,7 +69,6 @@ export const UpdateSenha = async (id, respostas) => {
     }, 3000);
     return true;
   } catch (error) {
-    alert(error.message);
     return false;
   }
 };
