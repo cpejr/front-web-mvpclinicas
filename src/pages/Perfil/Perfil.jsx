@@ -36,10 +36,13 @@ function Perfil() {
   const [usuario, setUsuario] = useState({});
   const _id = "64668ccfcf080fad87158da8";
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
+  const [imagem, setImagem] = useState("");
 
   async function pegandoDadosUsuario() {
     const resposta = await managerService.GetDadosUsuario(_id);
+    const respostaImagem = await managerService.GetFotoDePerfil(_id);
     setUsuario(resposta.dadosUsuario);
+    setImagem(respostaImagem);
   }
 
   useEffect(() => {
@@ -56,7 +59,7 @@ function Perfil() {
       <Conteudo>
         <CaixaFoto>
           <img
-            src={fotoPerfil}
+            src={imagem}
             width="100%"
             height="100%"
             style={{ borderRadius: "100%" }}
