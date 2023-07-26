@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -25,6 +25,7 @@ import {
   UsuarioComentario,
   ItemComentario,
   Pergunta,
+  TextoBotao,
 } from "./Styles";
 
 import {
@@ -85,11 +86,13 @@ function Local() {
   async function deletaLocal() {
     try {
       const isAdmin = await verificarPermissaoAdmin(id_local);
-  
+
       if (!isAdmin) {
-        return console.log("Usuário não é administrador. Não pode deletar local.");
+        return console.log(
+          "Usuário não é administrador. Não pode deletar local."
+        );
       }
-  
+
       await managerService.DeletaLocal(id_local);
       navigate("/");
     } catch (error) {
@@ -259,21 +262,22 @@ function Local() {
         </ConteudoAvaliacao>
         <CaixaBotoes>
           <Botao
-            width="20%"
+            width="12.5rem !important"
             widthMedia700="30%"
+            height="2.5rem !important"
             onClick={() => navigate("/novocomentario")}
           >
-            Adicionar Comentário
+            <TextoBotao>Adicionar Comentário</TextoBotao>
           </Botao>
           <Botao
-              width="20%"
-              widthMedia700="30%"
-              color="#000000"
-              backgroundColor="white"
-              borderColor="#FF000080"
-              onClick={() => deletaLocal()}
+            width="12.5rem !important"
+            widthMedia700="30%"
+            color="white"
+            backgroundColor="#ff3a3a"
+            borderColor="#ff3a3a"
+            onClick={() => deletaLocal()}
           >
-            Excluir
+            <TextoBotao>Excluir</TextoBotao>
           </Botao>
         </CaixaBotoes>
       </Conteudo>

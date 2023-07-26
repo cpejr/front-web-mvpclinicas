@@ -311,6 +311,7 @@ export const Comentario = styled.div`
   justify-content: center;
   gap: 0.6rem;
 
+  font-family: "Barlow";
   ::-webkit-scrollbar {
     width: 0px;
   }
@@ -327,7 +328,7 @@ export const CaixaBotoes = styled.div`
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 100%;
+  width: 80%;
   padding: 2%;
 
   @media (max-width: 900px) {
@@ -349,5 +350,15 @@ export const Pergunta = styled.div`
   font-style: italic;
   @media (max-width: 600px) {
     font-size: 0.9rem;
+  }
+`;
+
+export const TextoBotao = styled.div`
+  font-size: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+  @media (max-width: 400px) {
+    font-size: 0.8rem;
   }
 `;
