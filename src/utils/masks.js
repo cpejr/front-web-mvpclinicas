@@ -8,7 +8,6 @@ export const telefone = (valor) => {
     partePrimeirosDigitos ? `${partePrimeirosDigitos}-` : ""
   }${parteUltimosDigitos || ""}`;
 };
-
 export const data = (value) => {
   if (value) {
     const data = new Date(value);
