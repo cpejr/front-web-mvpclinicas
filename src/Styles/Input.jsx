@@ -1,15 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Input = styled.input`
+
   /* Posição */
   display: flex;
   flex-direction: ${(props) => props.flexDirection};
   align-items: center;
-  justify-content: ${(props) => props.justifyContent ?? "center"};
-  align-self: ${(props) => props.alignSelf ?? "center"};
+  justify-content: ${(props) => props.justifyContent ?? 'center'};
+  align-self: ${(props) => props.alignSelf ?? 'center'};
 
   /* Medidas */
-  margin-top: ${(props) => props.marginTop};
+  margin-top: ${(props) => props.marginTop };
   margin-bottom: ${(props) => props.marginBottom};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
@@ -20,8 +21,8 @@ const Input = styled.input`
   padding-right: ${(props) => props.paddingRight};
   padding-bottom: ${(props) => props.paddingBottom};
   padding: ${(props) => props.padding};
-  height: ${(props) => props.height ?? "20px"};
-  width: ${(props) => props.width ?? "100%"};
+  height: ${(props) => props.height ?? '20px'};
+  width: ${(props) => props.width ?? '100%'};
 
   @media (max-width: 700px) {
     height: ${(props) => props.heightMedia700};
@@ -47,10 +48,11 @@ const Input = styled.input`
     }
     return cor;
   }};
+  color: ${(props) => props.color};
   color: ${(props) => props.color };
-
+  
   &:focus {
-    outline: none;
+    outline: none; 
   }
 
   /* Características de texto */
@@ -61,26 +63,14 @@ const Input = styled.input`
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
 ::placeholder {
-  color: ${(props) => {
-    let cor;
-    if (!props.color) {
-      if (props.erro) {
-        cor = " #ff0000c5";
-      } else {
-        cor = " #570B87";
-      }
-    } else {
-      cor = props.color;
-    }
-    return cor;
-  }};
+  color: #8B00FF;
 }
 
   /* Margem */
-  margin-bottom: ${(props) => props.marginBottom ?? "2%"};
+  margin-bottom: ${(props) => props.marginBottom ?? '2%'};
   margin-left: ${(props) => props.marginLeft};
   margin-right: ${(props) => props.marginRight};
-  margin-top: ${(props) => props.marginTop};
+  margin-top: ${(props) => props.marginTop };
 
   @media (max-width: 700px) {
     margin-bottom: ${(props) => props.marginBottomMedia700};
