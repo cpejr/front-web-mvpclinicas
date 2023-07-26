@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useEffect, useState } from "react";
 import {
   Body,
@@ -73,12 +72,9 @@ function CadastroNovoLocal() {
     }));
     if (nomeErro || telefoneErro || setorErro || empresaErro) {
       toast.error("Preencha todos os campos corretamente!");
-
       return;
-    const novoLocalCadastrado = await managerService.CadastroNovoLocal(
-      novoLocal
-    );
     } else {
+      await managerService.CadastroNovoLocal(novoLocal);
       toast.success("Local Cadastrado com sucesso!");
     }
   }
