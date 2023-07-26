@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 import {
   Body,
@@ -52,9 +54,9 @@ function Local() {
   const [comentarioAtual, setComentarioAtual] = useState(0);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
-  const navigate = useNavigate();
+  const navegar = useNavigate();
 
-  const id_local = "64bfeb1b46f359c7844ccdfb";
+  const id_local = "64b1d06733776c925c899bca";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -84,17 +86,19 @@ function Local() {
   }
 
   async function deletaLocal() {
-    try {
-      if (usuarioLogado.admin === false) {
-        return console.log(
-          "Usuário não é administrador. Não pode deletar local."
-        );
-      }
+    if (usuarioLogado.admin === false) {
+      toast.error("Usuário não é administrador.");
+      return;
+    }
 
+    try {
       await managerService.DeletaLocal(id_local);
-      navigate("/");
+      toast.success("Local deletado com sucesso!");
+      setTimeout(() => {
+        navegar("/");
+      }, 3000)
     } catch (error) {
-      console.error("Erro ao deletar local", error);
+      toast.error("Erro ao deletar local");
     }
   }
 
@@ -263,7 +267,7 @@ function Local() {
             width="12.5rem !important"
             widthMedia700="30%"
             height="2.5rem !important"
-            onClick={() => navigate("/novocomentario")}
+            onClick={() => navegar("/novocomentario")}
           >
             <TextoBotao>Adicionar Comentário</TextoBotao>
           </Botao>
