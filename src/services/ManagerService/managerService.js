@@ -62,6 +62,9 @@ export const DeletaLocal = async (id_local) => {
     .then((res) => {
       return res;
     })
+    return resposta;
+};
+
 export const ExcluirPerfil = async (id) => {
   await requesterService
     .requisicaoDeletarUsuario(id)
@@ -76,8 +79,6 @@ export const ExcluirPerfil = async (id) => {
     });
 };
 
-    return resposta;
-}
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)

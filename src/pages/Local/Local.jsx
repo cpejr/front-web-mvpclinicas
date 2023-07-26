@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../stores/auth";
 
 import {
   Body,
@@ -44,17 +45,16 @@ import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 
-import { verificarPermissaoAdmin } from "../../services/api";
-
 function Local() {
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const usuarioLogado = useAuthStore((state) => state.usuario);
 
   const navigate = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64c1688fc69ca944457e4af6";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -85,9 +85,7 @@ function Local() {
 
   async function deletaLocal() {
     try {
-      const isAdmin = await verificarPermissaoAdmin(id_local);
-
-      if (!isAdmin) {
+      if (usuarioLogado.admin === false) {
         return console.log(
           "Usuário não é administrador. Não pode deletar local."
         );
@@ -106,6 +104,10 @@ function Local() {
 
   useEffect(() => {
     pegandoComentariosLocal();
+  }, []);
+
+  useEffect(() => {
+    console.log(usuarioLogado);
   }, []);
 
   return (
