@@ -141,7 +141,7 @@ function Home() {
                 </CaixaFoto>
                 <CaixaDados>
                   <NomeLocal
-                    onClick={() =>navigate("/local")}
+                    onClick={() => navigate(`local/${value?._id}`)}
                   >{value?.nome}
                   </NomeLocal>
                   <EnderecoLocal>{value?.endereco}</EnderecoLocal>

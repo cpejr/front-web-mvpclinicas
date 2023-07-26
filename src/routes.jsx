@@ -19,7 +19,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<Home />}/>
       <Route path="/cadastro" element={<Cadastro />}/>
-      <Route path="/local" element={<Local />}/>
+      <Route path="/local/:id_local" element={<Local />}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/novocomentario" element={<NovoComentario />}/>
       <Route path="/novolocal" element={<NovoLocal />}/>
