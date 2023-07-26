@@ -5,7 +5,6 @@ export const CadastroUsuario = async (usuario) => {
     return res;
   });
   return dados;
-
 };
 export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
