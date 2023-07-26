@@ -63,13 +63,11 @@ export const GetComentariosLocal = async (id_local) => {
   return { comentariosLocal };
 };
 
-
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};
