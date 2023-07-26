@@ -47,7 +47,7 @@ const Input = styled.input`
     }
     return cor;
   }};
-  color: ${(props) => props.color};
+  color: ${(props) => props.color };
 
   &:focus {
     outline: none;
@@ -60,9 +60,21 @@ const Input = styled.input`
   font-weight: ${(props) => props.fontWeight};
   line-height: ${(props) => props.lineHeight ?? "50px"};
 
-  ::placeholder {
-    color: #8b00ff;
-  }
+::placeholder {
+  color: ${(props) => {
+    let cor;
+    if (!props.color) {
+      if (props.erro) {
+        cor = " #ff0000c5";
+      } else {
+        cor = " #570B87";
+      }
+    } else {
+      cor = props.color;
+    }
+    return cor;
+  }};
+}
 
   /* Margem */
   margin-bottom: ${(props) => props.marginBottom ?? "2%"};
