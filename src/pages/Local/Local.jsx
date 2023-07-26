@@ -54,7 +54,7 @@ function Local() {
 
   const navigate = useNavigate();
 
-  const id_local = "64c1688fc69ca944457e4af6";
+  const id_local = "64bfeb1b46f359c7844ccdfb";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -104,10 +104,6 @@ function Local() {
 
   useEffect(() => {
     pegandoComentariosLocal();
-  }, []);
-
-  useEffect(() => {
-    console.log(usuarioLogado);
   }, []);
 
   return (

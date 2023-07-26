@@ -104,7 +104,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: darkpurple;
+  color: #570b87;
 
   @media (max-width: 900px) {
     font-size: 1em;

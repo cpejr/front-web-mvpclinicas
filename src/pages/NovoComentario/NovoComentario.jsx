@@ -40,7 +40,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64bfeb1b46f359c7844ccdfb";
   const id_usuario = "64ae9e9eb163ec6a9b9ed270";
 
   function estadoCheckbox() {
@@ -93,15 +93,15 @@ function NovoComentario() {
     try {
       await CriarNovoComentario(body, id_local);
 
-      toast.success("Local Cadastrado com sucesso!");
+      toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
-        navegar("/home");
+        navegar("/local");
         setCarregando(false);
       }, 3000);
     } catch (err) {
       if (err.response.status === 400) {
         setCarregando(false);
-        return toast.error("O id do local está incorreto!");
+        return toast.error("O local está incorreto!");
       }
       setCarregando(false);
       console.log(err.response.data);
