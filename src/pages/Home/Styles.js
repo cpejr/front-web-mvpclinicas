@@ -30,12 +30,21 @@ export const CaixaBotoes = styled.div`
   width: 15%;
   position: relative;
   left: 70%;
+
   &.botoes-direita {
     justify-content: flex-end;
+    font-size: 5px;
   }
-  @media (max-width: 900px) {
-    width: 50%;
-    left: 25%;
+  &.add-local{
+    left: 55%;
+    width: 30%;
+    
+
+    @media (max-width: 900px){
+    width: 33%;
+    left: 52%;
+    }
+
   }
 `;
 
@@ -197,7 +206,7 @@ export const Local = styled.div`
   width: 97%;
 `;
 
-export const NomeLocal = styled.div`
+export const NomeLocal = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,6 +217,8 @@ export const NomeLocal = styled.div`
   padding-bottom: 2%;
   color: #570B87;
   font-size: 32px;
+  border: none;
+  cursor: pointer;
 
   @media (max-width: 900px) {
     font-size: 20px;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   CaixaInputs,
@@ -31,6 +32,8 @@ import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
 
 function Home() {
+
+  const navigate = useNavigate();
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState('');
@@ -137,7 +140,10 @@ function Home() {
                   ></img>
                 </CaixaFoto>
                 <CaixaDados>
-                  <NomeLocal>{value?.nome}</NomeLocal>
+                  <NomeLocal
+                    onClick={() =>navigate("/local")}
+                  >{value?.nome}
+                  </NomeLocal>
                   <EnderecoLocal>{value?.endereco}</EnderecoLocal>
                   <EstrelasLocal>
                     {value?.estrelas}<Rate value={value?.estrelas} style={{ color: "#570B87" }} disabled />
@@ -149,20 +155,21 @@ function Home() {
         )}
         </CaixaConteudo>
         <div className="botoes-direita" style={{ width: "100%", justifyContent: "flex-end" }}>
-          <CaixaBotoes>
+          <CaixaBotoes className="add-local">
             <Botao
               borderRadius="10px"
               width="100%"
               alignSelf="flex-end"
-              fontSize="25px"
+              fontSize="20px"
               height="50px"
               HeightMedia500="50px"
               widthMedia500="100%"
-
+              paddingRight="30px"
+              onClick={() => navigate("/novolocal")}          
             >
               Adicionar Local
             </Botao>
-            <PlusOutlined style={{ fontSize: "26px", color: "#fdfdfd", position: "absolute", right: "4%", top: "23%" }}/>
+            <PlusOutlined style={{ fontSize: "20px", color: "#fdfdfd", position: "absolute", right: "4%",  top: "33%" }}/>
           </CaixaBotoes></div>
       </Conteudo>
       <AddToast />

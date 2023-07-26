@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   Body,
@@ -47,9 +47,10 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64bfeb1b46f359c7844ccdfb";
+  
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
