@@ -6,7 +6,7 @@ const Botao = styled.button`
   display: ${(props) => props.display ?? "inline-block"};
   flex-direction: ${(props) => props.flexDirection};
   justify-content: ${(props) => props.justifyContent ?? "center"};
-  align-self:  ${(props) => props.alignSelf};
+  align-self: ${(props) => props.alignSelf};
 
   /* Medidas */
   gap: ${(props) => props.gap};

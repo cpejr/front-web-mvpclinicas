@@ -23,6 +23,8 @@ import {
   TituloInput,
   Usuario,
   UsuarioComentario,
+  ItemComentario,
+  Pergunta,
 } from "./Styles";
 
 import {
@@ -104,7 +106,11 @@ function Local() {
               <TituloIcon>
                 <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#570B87",
+                    fontWeight: "bold",
+                  }}
                 />
               </TituloIcon>
               <Input
@@ -182,7 +188,9 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <TituloAvaliacao>
+            Avaliação Geral: {Math.trunc(avaliacao * 10) / 10}
+          </TituloAvaliacao>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>
@@ -213,7 +221,14 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {comentarios[comentarioAtual].comentario}
+                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                    ([pergunta, resposta]) => (
+                      <ItemComentario key={pergunta}>
+                        <Pergunta>{pergunta}</Pergunta>
+                        {resposta}
+                      </ItemComentario>
+                    )
+                  )}
                 </Comentario>
               </UsuarioComentario>
               <Direita
@@ -227,7 +242,11 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%" onClick={() => navigate("/novocomentario")}>
+          <Botao
+            width="20%"
+            widthMedia700="30%"
+            onClick={() => navigate("/novocomentario")}
+          >
             Adicionar Comentário
           </Botao>
         </CaixaBotoes>
