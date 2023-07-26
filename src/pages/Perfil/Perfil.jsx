@@ -10,6 +10,7 @@ import {
   InputDividido,
   TituloIcon,
   TituloInput,
+  SairTexto
 } from "./Styles";
 
 import {
@@ -96,7 +97,10 @@ function Perfil() {
   return (
     <Body>
       <Conteudo>
-        <ExportOutlined style={{ fontSize: "40px", marginLeft:"60%", color: "#570B87"}} onClick={handleLogout} />
+        <div style={{left:"77%", alignItems:"center", position:"absolute", top:"3%"}}>
+        <ExportOutlined style={{ fontSize: "40px", color: "#570B87"}} onClick={handleLogout} />
+        <SairTexto onClick={handleLogout}>Sair</SairTexto>
+        </div>
         <CaixaFoto>
           <img
             src={fotoPerfil}
