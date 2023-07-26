@@ -19,6 +19,7 @@ import {
   MailOutlined,
   CopyOutlined,
   GlobalOutlined,
+  ExportOutlined
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -95,6 +96,7 @@ function Perfil() {
   return (
     <Body>
       <Conteudo>
+        <ExportOutlined style={{ fontSize: "40px", marginLeft:"60%", color: "#570B87"}} onClick={handleLogout} />
         <CaixaFoto>
           <img
             src={fotoPerfil}
@@ -104,6 +106,7 @@ function Perfil() {
             alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
+        
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
@@ -210,17 +213,6 @@ function Perfil() {
               Alterar Senha
             </Botao>
           </BotoesEdicao>
-          <Botao
-            color="#ffffff"
-            backgroundColor="#8B00FF"
-            borderColor="#570B87"
-            width="30%"
-            widthMedia700="40%"
-            data-botao-id="excluirPerfil"
-            onClick={handleLogout}
-          >
-            Sair
-          </Botao>
           <Botao
             color="#ffffff"
             backgroundColor="#ff0000c5"
