@@ -39,6 +39,16 @@ export const GetDadosLocais = async () => {
   return { dadosLocais };
 };
 
+export const CriarNovoComentario = async (body, id_local) => {
+  const resposta = await requesterService
+    .criarComentario(body, id_local)
+    .then((res) => {
+      return res;
+    });
+
+  return resposta;
+};
+
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
   await requesterService.requisicaoDadosLocal(id_local).then((res) => {

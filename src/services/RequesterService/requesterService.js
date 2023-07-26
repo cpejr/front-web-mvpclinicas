@@ -4,11 +4,15 @@ export const requisicaoDadosUsuario = (id) => api.get(`/usuarios/${id}`);
 
 export const requisicaoDadosLocais = () => api.get(`/locais`);
 
+export const criarComentario = async (body, id_local) => {
+  await api.post(`/comentarios/${id_local}`, {
+    ...body,
+  });
+};
 export const criarNovoLocal = async (novoLocal) => {
   const resposta = await api.post("/locais", {
     ...novoLocal,
   });
-
   return resposta.data;
 };
 

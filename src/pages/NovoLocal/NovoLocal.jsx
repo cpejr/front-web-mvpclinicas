@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -16,6 +16,7 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
+
 import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
@@ -26,6 +27,7 @@ function CadastroNovoLocal() {
     telefone: "",
     setor: "",
     empresa: "",
+    endereco: "",
   };
 
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
@@ -36,6 +38,9 @@ function CadastroNovoLocal() {
     empresa: false,
     endereco: false,
   });
+  const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
+  const [tempoDeEsperaID, setTempoDeEsperaID] = useState(null);
+
   function preenchendoDados(e) {
     const { name, value } = e.target;
 
@@ -67,13 +72,36 @@ function CadastroNovoLocal() {
     }));
     if (nomeErro || telefoneErro || setorErro || empresaErro) {
       toast.error("Preencha todos os campos corretamente!");
-
       return;
     } else {
-      toast.success("Local Cadastrado com sucesso!");
       await managerService.CadastroNovoLocal(novoLocal);
+      toast.success("Local Cadastrado com sucesso!");
     }
   }
+
+  function preenchendoEndereco(e) {
+    const { name, value } = e.target;
+
+    setNovoLocal((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    clearTimeout(tempoDeEsperaID);
+
+    const newTempoDeEsperaID = setTimeout(() => {
+      setEnderecoMapa(value);
+    }, 2000);
+
+    setTempoDeEsperaID(newTempoDeEsperaID);
+  }
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(tempoDeEsperaID);
+    };
+  }, [tempoDeEsperaID]);
+
   return (
     <Body>
       <Conteudo>
@@ -147,8 +175,28 @@ function CadastroNovoLocal() {
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
+            <TituloInput>Digite o nome do endereço abaixo:</TituloInput>
+            <Input
+              placeholder="1234 Rua Fictícia, Cidade Imaginária"
+              backgroundColor="white"
+              heightMedia700="20px"
+              marginBottomMedia700="8%"
+              name="endereco"
+              value={novoLocal.endereco}
+              onChange={preenchendoEndereco}
+              style={{ borderBottom: "1px solid #570B87" }}
+            ></Input>
           </ConjuntoTituloInput>
+          <iframe
+            id="mapIframe"
+            width="600"
+            height="450"
+            loading="lazy"
+            allowFullScreen
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${
+              enderecoMapa ? enderecoMapa : "UFMGBeloHorizonte"
+            }`}
+          ></iframe>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
