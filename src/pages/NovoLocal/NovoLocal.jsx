@@ -176,8 +176,11 @@ function CadastroNovoLocal() {
               color="#000000"
               backgroundColor="white"
               borderColor="#FF000080"
+              onClick={() => {
+                window.location.href = "/Local";
+              }}
             >
-              Excluir
+              Cancelar
             </Botao>
           </BotoesEdicao>
         </CaixaBotoes>

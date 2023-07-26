@@ -59,3 +59,12 @@ export const GetComentariosLocal = async (id_local) => {
 
   return { comentariosLocal };
 };
+
+export const DeletarComentario = async (id_comentario) =>{
+  const resposta = await requesterService
+    .deletarComentario(id_comentario)
+    .then((res)=>{ 
+      return res;
+    })
+  return resposta;
+}

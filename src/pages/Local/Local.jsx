@@ -52,6 +52,7 @@ function Local() {
   const navigate = useNavigate();
 
   const id_local = "6469762610cc9138d78e6470";
+  const id_comentario ="64aec33a255c452d1561bb18"
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -78,6 +79,15 @@ function Local() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
     setAvaliacao(resposta.comentariosLocal.media_avaliacao);
+  }
+
+  async function deletarComentario() {
+    try{
+      await managerService.DeletarComentario(id_comentario);
+      navigate("/");
+    } catch(error){
+      console.error("Erro ao deletar comentario", error);
+    }
   }
 
   useEffect(() => {
