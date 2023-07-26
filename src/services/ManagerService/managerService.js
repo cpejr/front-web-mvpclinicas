@@ -1,5 +1,4 @@
 import * as requesterService from "../RequesterService/requesterService";
-import { toast } from "react-toastify";
 
 export const CadastroUsuario = async (usuario) => {
   const dados = await requesterService.criarUsuario(usuario).then((res) => {
@@ -13,7 +12,6 @@ export const GetDadosPessoais = async () => {
   await requesterService
     .requisicaoDadosPessoais()
     .then((res) => {
-      // Filtrar apenas os e-mails dos dados retornados
       const emails = res.data.map((usuario) => usuario.email);
       dadosUsuario = emails;
     })
