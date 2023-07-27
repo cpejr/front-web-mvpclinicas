@@ -283,6 +283,7 @@ function Local() {
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }
