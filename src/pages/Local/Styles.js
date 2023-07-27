@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const AvaliacaoEstrelas = styled.div`
+  align-items: baseline;
+  color: #570b87;
+  font-size: 15px;
+  width: 100%;
+`;
+
 export const Body = styled.div`
   display: flex;
   align-items: center;
@@ -15,6 +22,25 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
+`;
+
+export const EstrelasLocal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 20%;
+  margin-bottom: 7%;
+  width: 100%;
+  padding: 0%;
+  color: #570b87;
+  font-size: 32px;
+  @media (max-width: 900px) {
+    font-size: 20px;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const FotoNome = styled.div`
@@ -298,15 +324,18 @@ export const NomeUsuario = styled.div`
 export const Comentario = styled.div`
   width: 80%;
   height: 60%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 3%;
+
   font-size: 1.2em;
   overflow-y: auto;
   overflow-x: hidden;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  word-wrap: normal;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
 
   ::-webkit-scrollbar {
     width: 0px;
@@ -330,5 +359,21 @@ export const CaixaBotoes = styled.div`
   @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
+  }
+`;
+
+export const ItemComentario = styled.div`
+  font-size: 1rem;
+  gap: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const Pergunta = styled.div`
+  font-size: 1.1rem;
+  font-style: italic;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
   }
 `;

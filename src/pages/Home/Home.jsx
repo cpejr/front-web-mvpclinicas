@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   CaixaInputs,
@@ -14,16 +14,11 @@ import {
   CaixaFoto,
   CaixaDados,
   CaixaSelect,
-  CaixaConteudo
+  CaixaConteudo,
 } from "./Styles";
-import { Cores } from "../../variaveis";
-import {
-  SearchOutlined,
-  StarFilled,
-  StarOutlined,
-  PlusOutlined
-} from "@ant-design/icons";
-import { Rate } from 'antd';
+import { Cores } from "../../utils/variaveis";
+import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import { Rate } from "antd";
 import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
@@ -33,43 +28,48 @@ import AddToast from "../../components/AddToast/AddToast";
 function Home() {
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
-  const [pesquisa, setPesquisa] = useState('');
-
+  const [pesquisa, setPesquisa] = useState("");
 
   const pesquisaAjustada = pesquisa
-		.toLowerCase()
-		.normalize("NFD")
-		.replace(/[\u0300-\u036f]/g, "");
-  
-  const locaisFiltrados = locais.filter((local) => {
-    if (buscaTipo === "nome"){ 
-      return (local?.nome
-      ?.toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .includes(pesquisaAjustada) 
-    )}
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  const locaisFiltrados = locais.filter((locais) => {
+    if (buscaTipo === "nome") {
+      return locais?.nome
+        ?.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .includes(pesquisaAjustada);
+    }
     if (buscaTipo === "endereco") {
-    return (local?.endereco
-      ?.toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .includes(pesquisaAjustada) 
-    )}
-    return local
-	});
+      return locais?.endereco
+        ?.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .includes(pesquisaAjustada);
+    }
+    return locais;
+  });
 
   async function pegandoDadosDeLocais() {
-    const resposta = await managerService.GetDadosLocais();
-    setLocais(resposta.dadosLocais);
-  }
-  function MudarBuscaTipo(tipo){
-    setBuscaTipo(tipo)
+    try {
+      const resposta = await managerService.GetDadosLocais();
+
+      setLocais(resposta.dadosLocais);
+    } catch (error) {
+      console.error("Erro ao carregar os dados:", error);
+    }
   }
 
   useEffect(() => {
     pegandoDadosDeLocais();
   }, []);
+
+  function MudarBuscaTipo(tipo) {
+    setBuscaTipo(tipo);
+  }
 
   return (
     <Body>
@@ -89,10 +89,17 @@ function Home() {
             paddingBottom="10px"
             paddingLeft="2%"
             value={pesquisa}
-            onChange={e => setPesquisa(e.target.value)}
-            >
-          </Input>
-          <SearchOutlined style={{ fontSize: "28px", color: "#570B87", position: "absolute", right: "19%", paddingBottom: "1.8%" }} />
+            onChange={(e) => setPesquisa(e.target.value)}
+          ></Input>
+          <SearchOutlined
+            style={{
+              fontSize: "28px",
+              color: "#570B87",
+              position: "absolute",
+              right: "19%",
+              paddingBottom: "1.8%",
+            }}
+          />
         </CaixaInputs>
         <CaixaSelect>
           <Select
@@ -110,45 +117,53 @@ function Home() {
             borderWidth820="100%"
             defaultValue={"nome"}
             value={buscaTipo}
-            onChange={e => MudarBuscaTipo(e.target.value)}
+            onChange={(e) => MudarBuscaTipo(e.target.value)}
           >
-            <option value="nome">
-              Pesquisar por nome
-            </option>
-            <option value="endereco">
-              Pesquisar por endereço
-            </option>
+            <option value="nome">Pesquisar por nome</option>
+            <option value="endereco">Pesquisar por endereço</option>
           </Select>
         </CaixaSelect>
         <CaixaConteudo>
-        {locais.length === 0 ? (
-          <CaixaPlaceholder>
-            <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
-          </CaixaPlaceholder>
-        ) : (
-          <CaixaLocais>
-            {locaisFiltrados?.map((value, index) => (
-              <Local key={index}>
-                <CaixaFoto>
-                  <img
-                    src={value.foto_url}
-                    width="100%"
-                    height="100%"
-                  ></img>
-                </CaixaFoto>
-                <CaixaDados>
-                  <NomeLocal>{value?.nome}</NomeLocal>
-                  <EnderecoLocal>{value?.endereco}</EnderecoLocal>
-                  <EstrelasLocal>
-                    {value?.estrelas}<Rate value={value?.estrelas} style={{ color: "#570B87" }} disabled />
-                  </EstrelasLocal>
-                </CaixaDados>
-              </Local>
-            ))}
-          </CaixaLocais>
-        )}
+          {locais.length === 0 ? (
+            <CaixaPlaceholder>
+              <TextoPlaceholder>
+                Ainda não existem Locais Cadastrados
+              </TextoPlaceholder>
+            </CaixaPlaceholder>
+          ) : (
+            <CaixaLocais>
+              {locaisFiltrados?.map((value, index) => (
+                <Local key={index}>
+                  <CaixaFoto>
+                    <img src={value.foto_url} width="100%" height="100%"></img>
+                  </CaixaFoto>
+                  <CaixaDados>
+                    <NomeLocal>{value?.nome}</NomeLocal>
+                    <EnderecoLocal>{value?.endereco}</EnderecoLocal>
+                    <EstrelasLocal>
+                      {value?.estrelas}
+                      <Rate
+                        value={value?.estrelas}
+                        style={{
+                          color: "#570B87",
+                          display: "flex",
+                          justifyContent: "row",
+                        }}
+                        allowHalf
+                        defaultValue={value?.mediaAvaliacoes}
+                        disabled
+                      />
+                    </EstrelasLocal>
+                  </CaixaDados>
+                </Local>
+              ))}
+            </CaixaLocais>
+          )}
         </CaixaConteudo>
-        <div className="botoes-direita" style={{ width: "100%", justifyContent: "flex-end" }}>
+        <div
+          className="botoes-direita"
+          style={{ width: "100%", justifyContent: "flex-end" }}
+        >
           <CaixaBotoes>
             <Botao
               borderRadius="10px"
@@ -158,12 +173,20 @@ function Home() {
               height="50px"
               HeightMedia500="50px"
               widthMedia500="100%"
-
             >
               Adicionar Local
             </Botao>
-            <PlusOutlined style={{ fontSize: "26px", color: "#fdfdfd", position: "absolute", right: "4%", top: "23%" }}/>
-          </CaixaBotoes></div>
+            <PlusOutlined
+              style={{
+                fontSize: "26px",
+                color: "#fdfdfd",
+                position: "absolute",
+                right: "4%",
+                top: "23%",
+              }}
+            />
+          </CaixaBotoes>
+        </div>
       </Conteudo>
       <AddToast />
     </Body>

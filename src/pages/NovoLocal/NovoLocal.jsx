@@ -23,15 +23,18 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
-    nome: '',
-    telefone: '',
-    setor: '',
-    empresa: '',
-    endereco: ''
+    nome: "",
+    telefone: "",
+    setor: "",
+    empresa: "",
+    endereco: "",
   };
+
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);
@@ -46,8 +49,9 @@ function CadastroNovoLocal() {
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
-    if (name === 'telefone') {
-      setNovoLocal(prevState => ({
+
+    if (name === "telefone" && value.length < 15) {
+      setNovoLocal((prevState) => ({
         ...prevState,
         [name]: telefone(value)
       }
@@ -56,8 +60,8 @@ function CadastroNovoLocal() {
     } else { 
       setNovoLocal(prevState => ({
         ...prevState,
-        [name]: value
-      }))
+        [name]: value,
+      }));
     }
   }
 
@@ -91,14 +95,14 @@ function CadastroNovoLocal() {
 }
 
   function preenchendoEndereco(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    setNovoLocal(prevState => ({
+    setNovoLocal((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
+      [name]: value,
+    }));
 
-    clearTimeout(timeoutId);
+    clearTimeout(tempoDeEsperaID);
 
     const novoTimeoutId = setTimeout(() => {
       setEnderecoMapa(value);
@@ -111,7 +115,7 @@ function CadastroNovoLocal() {
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [timeoutId]);
+  }, [tempoDeEsperaID]);
 
     return (
       <Body>
