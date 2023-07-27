@@ -4,7 +4,6 @@ export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
   await requesterService.requisicaoDadosUsuario(id).then((res) => {
     dadosUsuario = res.data;
-    
   });
 
   return { dadosUsuario };
@@ -21,22 +20,19 @@ export const GetDadosLocais = async () => {
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
-  .criarComentario(body, id_local)
-  .then((res) => {
-    return res;
-  })
+    .criarComentario(body, id_local)
+    .then((res) => {
+      return res;
+    });
 
   return resposta;
-}
+};
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocal(id_local)
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocal(id_local).then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
@@ -57,12 +53,10 @@ export const GetComentariosLocal = async (id_local) => {
 };
 
 export const DeletaLocal = async (id_local) => {
-  const resposta = await requesterService
-    .deletarLocal(id_local)
-    .then((res) => {
-      return res;
-    })
-    return resposta;
+  const resposta = await requesterService.deletarLocal(id_local).then((res) => {
+    return res;
+  });
+  return resposta;
 };
 
 export const ExcluirPerfil = async (id) => {
@@ -107,10 +101,9 @@ export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);
     sessionStorage.setItem("@clinicas-Token", res.data.token);
+    window.location.href = "/home";
     return res;
-    //window.location.href = "/home";
   } catch (error) {
-    console.log(error);
     toast.error(error.response.data.message);
   }
 
@@ -119,10 +112,9 @@ export const requisicaoLogin = async (email, senha) => {
 
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};

@@ -52,9 +52,6 @@ function Home() {
     }
     return local;
   });
-  function setaIdLocal(idLocal) {
-    console.log(idLocal);
-  }
   async function pegandoDadosDeLocais() {
     const resposta = await managerService.GetDadosLocais();
     setLocais(resposta.dadosLocais);
@@ -134,9 +131,7 @@ function Home() {
                     <img src={value.foto_url} width="100%" height="100%"></img>
                   </CaixaFoto>
                   <CaixaDados>
-                    <NomeLocal onClick={() => setaIdLocal(value?._id)}>
-                      {value?.nome}
-                    </NomeLocal>
+                    <NomeLocal>{value?.nome}</NomeLocal>
                     <EnderecoLocal>{value?.endereco}</EnderecoLocal>
                     <EstrelasLocal>
                       {value?.estrelas}
