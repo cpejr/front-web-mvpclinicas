@@ -23,23 +23,54 @@ import {
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import { data, telefone } from '../../utils/masks';
+import { data, telefone } from "../../utils/masks";
 
-import fotoPerfil from "../../assets/montanha.jpg"
+import ModalAlterarDados from "../../components/ModalAlterarDados";
+import ModalAlterarSenha from "../../components/ModalAlterarSenha";
+import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
+
+import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
-
-
+import useAuthStore from "../../stores/auth";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
-  const id = '6466a62695e98cb373b670f4';
+  const [modalAlterarDados, setModalAlterarDados] = useState(false);
+  const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
+  const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
+  const usuarioLogado = useAuthStore((state) => state.usuario);
 
   async function pegandoDadosUsuario() {
-    const resposta = await managerService.GetDadosUsuario(id);
+    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
   }
-  
+
+  function acionarModais(e) {
+    const botaoId = e.target.dataset.botaoId;
+
+    switch (botaoId) {
+      case "alterarDados":
+        setModalAlterarDados(true);
+        break;
+      case "alterarSenha":
+        setModalAlterarSenha(true);
+        break;
+      case "excluirPerfil":
+        setModalExcluirPerfil(true);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  function cancelouModal() {
+    setModalAlterarDados(false);
+    setModalAlterarSenha(false);
+    setModalExcluirPerfil(false);
+  }
+
   useEffect(() => {
     pegandoDadosUsuario();
   }, []);
@@ -52,7 +83,8 @@ function Perfil() {
             src={fotoPerfil}
             width="100%"
             height="100%"
-            style={{ borderRadius: '100%' }}
+            style={{ borderRadius: "100%" }}
+            alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
         <CaixaInputs>
@@ -154,8 +186,12 @@ function Perfil() {
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
-            <Botao>Alterar Dados</Botao>
-            <Botao>Alterar Senha</Botao>
+            <Botao data-botao-id="alterarDados" onClick={acionarModais}>
+              Alterar Dados
+            </Botao>
+            <Botao data-botao-id="alterarSenha" onClick={acionarModais}>
+              Alterar Senha
+            </Botao>
           </BotoesEdicao>
           <Botao
             color="#ffffff"
@@ -163,11 +199,35 @@ function Perfil() {
             borderColor="#ff0000"
             width="30%"
             widthMedia700="40%"
+            data-botao-id="excluirPerfil"
+            onClick={acionarModais}
           >
             Excluir
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+
+      <ModalAlterarDados
+        open={modalAlterarDados}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalAlterarSenha
+        open={modalAlterarSenha}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalExcluirPerfil
+        open={modalExcluirPerfil}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
     </Body>
   );
 }

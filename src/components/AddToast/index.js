@@ -1,1 +1,1 @@
-export { default } from "./AddToast.jsx"
+export { default } from "./AddToast"

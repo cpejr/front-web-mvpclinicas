@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   AvaliacaoEstrelas,
@@ -25,6 +25,8 @@ import {
   TituloInput,
   Usuario,
   UsuarioComentario,
+  ItemComentario,
+  Pergunta,
 } from "./Styles";
 
 import { Rate } from 'antd';
@@ -50,7 +52,7 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const id_local = "6469762610cc9138d78e6470";
 
@@ -108,7 +110,11 @@ function Local() {
               <TituloIcon>
                 <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#570B87",
+                    fontWeight: "bold",
+                  }}
                 />
               </TituloIcon>
               <Input
@@ -226,7 +232,14 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {comentarios[comentarioAtual].comentario}
+                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                    ([pergunta, resposta]) => (
+                      <ItemComentario key={pergunta}>
+                        <Pergunta>{pergunta}</Pergunta>
+                        {resposta}
+                      </ItemComentario>
+                    )
+                  )}
                 </Comentario>
               </UsuarioComentario>
               <Direita
@@ -240,7 +253,11 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%" onClick={() => navigate("/novocomentario")}>
+          <Botao
+            width="20%"
+            widthMedia700="30%"
+            onClick={() => navigate("/novocomentario")}
+          >
             Adicionar Comentário
           </Botao>
         </CaixaBotoes>
