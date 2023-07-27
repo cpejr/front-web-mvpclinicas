@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 import {
   Body,
@@ -13,6 +13,7 @@ import {
   ConteudoAvaliacao,
   Direita,
   Esquerda,
+  EstrelasLocal,
   FotoNome,
   FotoUsuario,
   InputDividido,
@@ -23,8 +24,11 @@ import {
   TituloInput,
   Usuario,
   UsuarioComentario,
+  ItemComentario,
+  Pergunta,
 } from "./Styles";
 
+import { Rate } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -47,7 +51,7 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const id_local = "6469762610cc9138d78e6470";
 
@@ -75,7 +79,9 @@ function Local() {
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
-    setAvaliacao(resposta.comentariosLocal.media_avaliacao);
+    let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
+    let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
+    setAvaliacao(avaliacaoArredondada);
   }
 
   useEffect(() => {
@@ -103,7 +109,11 @@ function Local() {
               <TituloIcon>
                 <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#570B87",
+                    fontWeight: "bold",
+                  }}
                 />
               </TituloIcon>
               <Input
@@ -182,6 +192,19 @@ function Local() {
         </CaixaInputs>
         <ConteudoAvaliacao>
           <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <EstrelasLocal>
+            <Rate
+              value={Math.floor(avaliacao) + 0.5}
+              style={{
+                color: "#570B87",
+                display: "flex",
+                justifyContent: "row",
+              }}
+              allowHalf
+              defaultValue={avaliacao}
+              disabled
+            />
+          </EstrelasLocal>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>
@@ -212,7 +235,14 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {comentarios[comentarioAtual].comentario}
+                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                    ([pergunta, resposta]) => (
+                      <ItemComentario key={pergunta}>
+                        <Pergunta>{pergunta}</Pergunta>
+                        {resposta}
+                      </ItemComentario>
+                    )
+                  )}
                 </Comentario>
               </UsuarioComentario>
               <Direita
@@ -226,7 +256,11 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%" onClick={() => navigate("/novocomentario")}>
+          <Botao
+            width="20%"
+            widthMedia700="30%"
+            onClick={() => navigate("/novocomentario")}
+          >
             Adicionar Comentário
           </Botao>
         </CaixaBotoes>
