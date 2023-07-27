@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cores, Fontes } from "../../variaveis";
+import { Cores, Fontes } from "../../utils/variaveis";
 
 export const ContainerModalExcluir = styled.div`
   display: flex;

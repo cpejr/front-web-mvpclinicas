@@ -3,7 +3,7 @@ import Botao from "../../Styles/Botao/Botao";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Spin, Upload } from "antd";
 import * as managerService from "../../services/ManagerService/managerService";
-import { Cores } from "../../variaveis";
+import { Cores } from "../../utils/variaveis";
 import {
   ContainerModalExcluir,
   ContainerFooterModalExcluir,

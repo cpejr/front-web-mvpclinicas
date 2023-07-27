@@ -167,7 +167,7 @@ export const SairTexto = styled.div`
   @media (max-width: 900px) {
     font-size: 1em;
   }
-  `;
+`;
 export const TextoAlterarFoto = styled.div`
   width: 100%;
   height: 20px;

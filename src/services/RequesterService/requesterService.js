@@ -42,7 +42,6 @@ export const criarUsuario = async (usuario) => {
   return resposta.data;
 };
 
-
 export const updateFotoDePerfil = (id, base64) =>
   api.put(`/usuariosimagem/${id}`, {
     file: base64,

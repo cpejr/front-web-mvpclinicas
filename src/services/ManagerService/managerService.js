@@ -27,7 +27,6 @@ export const GetDadosPessoais = async () => {
   return { dadosUsuario };
 };
 
-
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
   await requesterService.requisicaoDadosLocais().then((res) => {
