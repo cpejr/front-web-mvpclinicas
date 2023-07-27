@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  AvaliacaoEstrelas,
   Body,
   BoxCarrossel,
   CaixaBotoes,
@@ -29,7 +28,7 @@ import {
   Pergunta,
 } from "./Styles";
 
-import { Rate } from 'antd';
+import { Rate } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -194,12 +193,16 @@ function Local() {
         <ConteudoAvaliacao>
           <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
           <EstrelasLocal>
-            <Rate 
+            <Rate
               value={Math.floor(avaliacao) + 0.5}
-              style={{ color: "#570B87", display: "flex", justifyContent: "row"}} 
-              allowHalf 
-              defaultValue={avaliacao} 
-              disabled 
+              style={{
+                color: "#570B87",
+                display: "flex",
+                justifyContent: "row",
+              }}
+              allowHalf
+              defaultValue={avaliacao}
+              disabled
             />
           </EstrelasLocal>
           {comentarios.length === 0 ? (

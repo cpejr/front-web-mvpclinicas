@@ -48,12 +48,10 @@ export const CriarNovoComentario = async (body, id_local) => {
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocal(id_local)
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocal(id_local).then((res) => {
+    dadosLocais = res.data;
+  });
+
   return { dadosLocais };
 };
 

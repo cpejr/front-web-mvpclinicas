@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AvaliacaoEstrelas = styled.div`
   align-items: baseline;
-  color: #570B87;
+  color: #570b87;
   font-size: 15px;
   width: 100%;
 `;
@@ -33,7 +33,7 @@ export const EstrelasLocal = styled.div`
   margin-bottom: 7%;
   width: 100%;
   padding: 0%;
-  color: #570B87;
+  color: #570b87;
   font-size: 32px;
   @media (max-width: 900px) {
     font-size: 20px;
