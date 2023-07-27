@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="/cadastro" element={<Cadastro />}/>
       <Route path="/local/:id_local" element={<Local />}/>
       <Route path="/login" element={<Login />}/>
-      <Route path="/novocomentario" element={<NovoComentario />}/>
+      <Route path="/novocomentario/:id_local" element={<NovoComentario />}/>
       <Route path="/novolocal" element={<NovoLocal />}/>
       <Route path="/perfil" element={<Perfil />}/>
       <Route path="*" element={<Navigate to="/" replace />} />

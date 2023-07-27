@@ -21,7 +21,7 @@ import Input from "../../Styles/Input/Input";
 import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -40,7 +40,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const {id_local} = useParams();
   const id_usuario = "64ae9e9eb163ec6a9b9ed270";
 
   function estadoCheckbox() {

@@ -245,7 +245,7 @@ function Local() {
           <Botao
             width="20%"
             widthMedia700="30%"
-            onClick={() => navigate("/novocomentario")}
+            onClick={() => navigate(`/novocomentario/${id_local}`)}
           >
             Adicionar Comentário
           </Botao>
