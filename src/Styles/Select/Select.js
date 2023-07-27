@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cores } from "../../variaveis";
+import { Cores } from "../../utils/variaveis";
 const Select = styled.select`
 	background-color: ${(props) => props.backgroundColor};
 	text-align: left;
