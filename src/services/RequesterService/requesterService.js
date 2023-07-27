@@ -8,7 +8,8 @@ export const logarUsuario = (email, senha) =>
     senha,
   });
 
-export const requisicaoDadosPessoais = () => api.get(`/usuarios/`);
+export const requisicaoDadosPessoais = () => api.get(`/usuarios`);
+
 export const requisicaoDadosLocais = () => api.get(`/locais`);
 
 export const criarComentario = async (body, id_local) => {

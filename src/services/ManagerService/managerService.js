@@ -19,12 +19,14 @@ export const GetDadosPessoais = async () => {
   await requesterService
     .requisicaoDadosPessoais()
     .then((res) => {
-      dadosUsuario = res.data;
+      const emails = res.data.map((usuario) => usuario.email);
+      dadosUsuario = emails;
     })
     .catch((error) => {
       alert(error.message);
     });
-  return { dadosUsuario };
+
+  return dadosUsuario;
 };
 
 export const GetDadosLocais = async () => {
@@ -37,13 +39,12 @@ export const GetDadosLocais = async () => {
 };
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
