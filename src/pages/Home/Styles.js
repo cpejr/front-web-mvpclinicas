@@ -209,7 +209,7 @@ export const NomeLocal = styled.div`
   padding-bottom: 2%;
   color: #570b87;
   font-size: 32px;
-
+  font-family: "Roboto Condensed";
   @media (max-width: 900px) {
     font-size: 20px;
   }
@@ -227,7 +227,7 @@ export const TextoPlaceholder = styled.div`
   padding-top: 5%;
   color: #570b87;
   font-size: 32px;
-
+  font-family: "Roboto Condensed";
   @media (max-width: 900px) {
     font-size: 20px;
   }
@@ -252,6 +252,7 @@ export const EnderecoLocal = styled.div`
   gap: 40px;
   height: 20%;
   width: 100%;
+  font-family: "Roboto Condensed";
   padding-bottom: 2%;
   color: #570b87;
   font-size: 26px;
