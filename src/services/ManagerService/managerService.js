@@ -35,6 +35,15 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+  .criarNovoLocal(novoLocal)
+  .then((res) => {
+      return res;
+     
+  });
+  return dadosNovoLocal;
+}
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
@@ -96,14 +105,6 @@ export const UpdateFotoDePerfil = async (id, file) => {
   return;
 };
 
-export const CadastroNovoLocal = async (novoLocal) => {
-  const dadosNovoLocal = await requesterService
-    .criarNovoLocal(novoLocal)
-    .then((res) => {
-      return res;
-    });
-  return dadosNovoLocal;
-};
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)
