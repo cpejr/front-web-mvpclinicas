@@ -6,7 +6,7 @@ const Botao = styled.button`
   display: ${(props) => props.display ?? "inline-block"};
   flex-direction: ${(props) => props.flexDirection};
   justify-content: ${(props) => props.justifyContent ?? "center"};
-  align-self:  ${(props) => props.alignSelf};
+  align-self: ${(props) => props.alignSelf};
 
   /* Medidas */
   gap: ${(props) => props.gap};
@@ -26,11 +26,11 @@ const Botao = styled.button`
   }
 
   @media (max-width: 500px) {
-    width: ${(props) => props.widthMedia500 ?? "180px"};
+    width: ${(props) => props.widthMedia500 ?? "80%"};
   }
 
   @media (max-width: 500px) {
-    height: ${(props) => props.HeightMedia500 ?? "35px"};
+    height: ${(props) => props.heightMedia500 ?? "35px"};
   }
 
   /* Cor e estilo do botão */

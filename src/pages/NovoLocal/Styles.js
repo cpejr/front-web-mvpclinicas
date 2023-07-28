@@ -24,6 +24,7 @@ export const BotoesEdicao = styled.div`
 export const CaixaBotoes = styled.div`
   display: flex;
   flex-direction: column;
+  color: #570b87;
   justify-content: center;
   align-items: center;
   gap: 40px;
@@ -47,6 +48,7 @@ export const CaixaBotoes = styled.div`
 export const CaixaInputs = styled.div`
   display: flex;
   flex-direction: column;
+  color: #8b00ff;
   justify-content: center;
   gap: 10px;
   align-items: center;
@@ -72,7 +74,7 @@ export const CaixaTitulo = styled.div`
   padding: 2%;
   gap: 15px;
   justify-content: center;
-  
+
   @media (max-width: 900px) {
     width: 90%;
   }
@@ -122,20 +124,6 @@ export const Mapa = styled.iframe`
   }
 `;
 
-export const Rotulo = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1em;
-  color: #ff0000c5;
-  margin-bottom: 5%;
-  font-family: "Roboto Condensed";
-
-  @media (max-width: 900px) {
-    font-size: 0.8em;
-  }
-`;
-
 export const Subtitulo = styled.div`
   width: 70%;
   height: 20px;
@@ -143,9 +131,12 @@ export const Subtitulo = styled.div`
   font-weight: 400;
   font-size: 1.3em;
   display: flex;
-  color: #8B00FF;
+  color: #8b00ff;
   justify-content: center;
   align-items: center;
+  justify-content: flex-start;
+  color: #570b87;
+
   @media (max-width: 900px) {
     font-size: 1em;
   }
@@ -168,7 +159,7 @@ export const SubtituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #570B87;
+  color: #570b87;
 
   @media (max-width: 1000px) {
     font-size: 0.9em;
@@ -201,7 +192,7 @@ export const Titulo = styled.div`
   font-family: "Roboto Condensed";
   font-size: 2.5em;
   display: flex;
-  color: #570B87;
+  color: #570b87;
   justify-content: center;
   align-items: center;
 
@@ -236,7 +227,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #570B87;
+  color: #570b87;
 
   @media (max-width: 900px) {
     font-size: 1em;
@@ -250,4 +241,12 @@ export const TituloInput = styled.div`
     font-size: 0.8em;
   }
 `;
+export const Rotulo = styled.div`
+  font-size: 1em;
+  color: #ff0000c5;
+  font-family: Roboto Condensed;
 
+  @media (max-width: 900px) {
+    font-size: 0.8em;
+  }
+`;

@@ -12,7 +12,7 @@ import {
   Rotulo,
   Subtitulo,
   Titulo,
-  TituloInput
+  TituloInput,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -34,11 +34,16 @@ function CadastroNovoLocal() {
     endereco: '',
     foto_url: ''
   };
+
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState({
+    nome: false,
+    telefone: false,
+    setor: false,
+    empresa: false,
     endereco: false,
   });
 
@@ -48,7 +53,8 @@ function CadastroNovoLocal() {
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
-    if (name === "telefone") {
+
+    if (name === "telefone" && value.length < 15) {
       setNovoLocal((prevState) => ({
         ...prevState,
         [name]: telefone(value)
@@ -65,10 +71,18 @@ function CadastroNovoLocal() {
 
   async function requisicaoCadastroNovoLocal() {
     const enderecoErro = !novoLocal.endereco;
-  
-    setErro((erroAnterior)=> ({
+    const nomeErro = !novoLocal.nome || /\d/.test(novoLocal.nome);
+    const telefoneErro = !novoLocal.telefone || novoLocal.telefone.length < 15;
+    const setorErro = !novoLocal.setor;
+    const empresaErro = !novoLocal.empresa;
+
+    setErro((erroAnterior) => ({
       ...erroAnterior,
       endereco: enderecoErro,
+      nome: nomeErro,
+      telefone: telefoneErro,
+      setor: setorErro,
+      empresa: empresaErro,
     }));
     if (enderecoErro){
       toast.error("Preencha todos os campos corretamente!");
@@ -121,7 +135,6 @@ function CadastroNovoLocal() {
     }, 3000);
 
     setTimeoutId(novoTimeoutId);
-    
 }
 
   
@@ -131,7 +144,6 @@ function CadastroNovoLocal() {
     };
   }, [timeoutId]);
   
-
     return (
       <Body>
         <Conteudo>
