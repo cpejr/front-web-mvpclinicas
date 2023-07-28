@@ -56,7 +56,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const id_local = "64b1d06733776c925c899bca";
+  const id_local = "64bfeb1b46f359c7844ccdfb";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -96,7 +96,7 @@ function Local() {
       toast.success("Local deletado com sucesso!");
       setTimeout(() => {
         navegar("/");
-      }, 3000)
+      }, 3000);
     } catch (error) {
       toast.error("Erro ao deletar local");
     }
