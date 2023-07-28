@@ -80,12 +80,12 @@ function Home() {
         <CaixaInputs>
           <Input
             placeholder="Pesquisar Local"
-            height={"25px"}
+            height={"22px"}
             backgroundColor="white"
             width="68%"
             borderColor="#570B87"
             borderWidth="2px"
-            borderRadius="10px"
+            borderRadius="10px" 
             fontSize="1.5em"
             paddingTop="10px"
             paddingRight="10px"
@@ -111,11 +111,11 @@ function Home() {
             borderColor="#570B87"
             borderWidth="2px"
             borderRadius="10px"
-            fontSize="17px"
+            fontSize="16px"
             width="20%"
             marginTop="0px"
             placeholder="Pesquisar por nome"
-            height="45px"
+            height="35px"
             nome="id_usuario"
             borderWidth820="100%"
             defaultValue={"nome"}

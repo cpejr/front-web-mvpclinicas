@@ -21,6 +21,7 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
+  
   @media (max-width: 900px) {
     width: 100%;
   }
@@ -64,8 +65,8 @@ export const CaixaConteudo = styled.div`
   scroll-padding: 0;
   margin-bottom: 3%;
   margin-top: 2%;
-  border: 1px solid #570b87;
-  border-radius: 10px;
+  //border: 1px solid #570b87;
+  //border-radius: 10px;
 `;
 
 export const CaixaFoto = styled.div`
@@ -198,11 +199,10 @@ export const CaixaLocais = styled.div`
 export const Local = styled.div`
   display: flex;
   align-items: stretch;
-  background-color: #f2f2f2;
-  border: 2px solid #570b87;
+  border: 2.5px solid #570b87;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   height: 10%;
   width: 97%;
 `;
@@ -217,6 +217,7 @@ export const NomeLocal = styled.button`
   width: 100%;
   padding-bottom: 2%;
   color: #570b87;
+  background-color: white;
   font-size: 32px;
   border: none;
   cursor: pointer;

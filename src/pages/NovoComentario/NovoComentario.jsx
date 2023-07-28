@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -22,10 +22,32 @@ import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import useAuthStore from "../../stores/auth";
+import * as managerService from "../../services/ManagerService/managerService";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 
+
 function NovoComentario() {
+  /*const [idUsuario, setIdUsuario] = useState({});
+  const usuarioLogado = useAuthStore((state) => state.usuario);
+
+  async function pegarDadosUsuario() {
+   
+    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
+    setIdUsuario(resposta.dadosUsuario);
+  }
+
+  useEffect(() => {
+    pegarDadosUsuario();
+    
+  }, [usuarioLogado._id]); 
+
+  useEffect(() => {
+    console.log("ID do usuário logado:", usuarioLogado._id);
+  }, [usuarioLogado._id]);*/
+
+  
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
@@ -41,7 +63,8 @@ function NovoComentario() {
   const navegar = useNavigate();
 
   const {id_local} = useParams();
-  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
+  const id_usuario ="64c2c8ed95156bfab6335f4a";
+  
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -92,7 +115,7 @@ function NovoComentario() {
 
     try {
       await CriarNovoComentario(body, id_local);
-
+      console.log(id_local);
       toast.success("Local Cadastrado com sucesso!");
       setTimeout(() => {
         navegar("/home");
