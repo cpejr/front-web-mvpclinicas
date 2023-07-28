@@ -29,23 +29,12 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 
 function NovoComentario() {
-  /*const [idUsuario, setIdUsuario] = useState({});
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const id_usuario = usuarioLogado ? usuarioLogado._id : "64c2c8ed95156bfab6335f4a";
 
-  async function pegarDadosUsuario() {
-   
-    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
-    setIdUsuario(resposta.dadosUsuario);
-  }
 
-  useEffect(() => {
-    pegarDadosUsuario();
-    
-  }, [usuarioLogado._id]); 
-
-  useEffect(() => {
-    console.log("ID do usuário logado:", usuarioLogado._id);
-  }, [usuarioLogado._id]);*/
+  //Precisa de uma branch com login funcionando para testar 
+  
 
   
   const [checkPreenchido, setCheckPreenchido] = useState(false);
@@ -63,7 +52,7 @@ function NovoComentario() {
   const navegar = useNavigate();
 
   const {id_local} = useParams();
-  const id_usuario ="64c2c8ed95156bfab6335f4a";
+  //const id_usuario ="64c2c8ed95156bfab6335f4a";
   
 
   function estadoCheckbox() {
@@ -115,8 +104,7 @@ function NovoComentario() {
 
     try {
       await CriarNovoComentario(body, id_local);
-      console.log(id_local);
-      toast.success("Local Cadastrado com sucesso!");
+      toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
         navegar("/home");
         setCarregando(false);
