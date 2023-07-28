@@ -48,8 +48,8 @@ function CadastroNovoLocal() {
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
-    if (name === 'telefone') {
-      setNovoLocal(prevState => ({
+    if (name === "telefone") {
+      setNovoLocal((prevState) => ({
         ...prevState,
         [name]: telefone(value)
       }
@@ -58,8 +58,8 @@ function CadastroNovoLocal() {
     } else { 
       setNovoLocal(prevState => ({
         ...prevState,
-        [name]: value
-      }))
+        [name]: value,
+      }));
     }
   }
 
@@ -79,16 +79,20 @@ function CadastroNovoLocal() {
 
       const proxyUrl = "http://localhost:8080/";
 
-      const placesRequestUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${novoLocal.nome}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&inputtype=textquery&fields=name,photos`;
+      const requisicaoLocalUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${novoLocal.endereco}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I`;
+
 
       try {
-        const response = await axios.get(proxyUrl + placesRequestUrl);
-        setNovoLocal(prevState => ({
-          ...prevState,
-          foto_url: response.data.candidates[0].photos[0].photo_reference
-        }))
-        console.log(novoLocal);
-        await managerService.CadastroNovoLocal(novoLocal);
+        const local = await axios.get(proxyUrl + requisicaoLocalUrl);
+
+        const requisicaoFotosUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${local.data.results[0].geometry.location.lat}%2C${local.data.results[0].geometry.location.lng}2&radius=100&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&keyword=${novoLocal.nome}`;
+
+        const resposta = await axios.get(proxyUrl + requisicaoFotosUrl);
+
+        await managerService.CadastroNovoLocal(
+          {...novoLocal, 
+            foto_url: resposta.data.results[0].photos[0].photo_reference}
+        );
 
         toast.success("Local Cadastrado com sucesso!");
         setTimeout(() => {
@@ -103,12 +107,12 @@ function CadastroNovoLocal() {
   }
 
   function preenchendoEndereco(e) {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    setNovoLocal(prevState => ({
+    setNovoLocal((prevState) => ({
       ...prevState,
-      [name]: value
-    }))
+      [name]: value,
+    }));
 
     clearTimeout(timeoutId);
 
@@ -117,7 +121,8 @@ function CadastroNovoLocal() {
     }, 3000);
 
     setTimeoutId(novoTimeoutId);
-  }
+    
+}
 
   
   useEffect(() => {
