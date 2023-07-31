@@ -69,12 +69,13 @@ function ModalAlterarFotoDePerfil(props) {
     if (imagemUrl) {
       setCarregandoDeletar(true);
       await managerService.UpdateFotoDePerfil(props.idUsuario, imagemUrl);
-      setImagemUrl(null);
+      toast.success("Imagem atualizada com sucesso");
       props.fecharModal();
-      document.location.reload(true);
+      setImagemUrl(null);
       setCarregandoDeletar(false);
+
     } else {
-      toast.error("Selecione uma foto para enviar!");
+      toast.error("Selecione uma imagem para enviar!");
     }
   }
 
