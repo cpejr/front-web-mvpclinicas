@@ -58,7 +58,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const id_local = "64b2b27d04c368656c1ec9ff";
+  const id_local = "64bfeb1b46f359c7844ccdfb";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
