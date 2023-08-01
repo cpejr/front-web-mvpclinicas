@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const AvaliacaoEstrelas = styled.div`
+  color: #570b87;
+`;
+
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
@@ -259,8 +263,7 @@ export const EnderecoLocal = styled.div`
 
 export const EstrelasLocal = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
   gap: 30px;
   height: 20%;
   margin-top: 7%;

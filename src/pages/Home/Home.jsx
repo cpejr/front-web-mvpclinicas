@@ -35,34 +35,41 @@ function Home() {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-  const locaisFiltrados = locais.filter((local) => {
+  const locaisFiltrados = locais.filter((locais) => {
     if (buscaTipo === "nome") {
-      return local?.nome
+      return locais?.nome
         ?.toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .includes(pesquisaAjustada);
     }
     if (buscaTipo === "endereco") {
-      return local?.endereco
+      return locais?.endereco
         ?.toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .includes(pesquisaAjustada);
     }
-    return local;
+    return locais;
   });
+
   async function pegandoDadosDeLocais() {
-    const resposta = await managerService.GetDadosLocais();
-    setLocais(resposta.dadosLocais);
-  }
-  function MudarBuscaTipo(tipo) {
-    setBuscaTipo(tipo);
+    try {
+      const resposta = await managerService.GetDadosLocais();
+
+      setLocais(resposta.dadosLocais);
+    } catch (error) {
+      console.error("Erro ao carregar os dados:", error);
+    }
   }
 
   useEffect(() => {
     pegandoDadosDeLocais();
   }, []);
+
+  function MudarBuscaTipo(tipo) {
+    setBuscaTipo(tipo);
+  }
 
   return (
     <Body>
@@ -137,7 +144,13 @@ function Home() {
                       {value?.estrelas}
                       <Rate
                         value={value?.estrelas}
-                        style={{ color: "#570B87" }}
+                        style={{
+                          color: "#570B87",
+                          display: "flex",
+                          justifyContent: "row",
+                        }}
+                        allowHalf
+                        defaultValue={value?.mediaAvaliacoes}
                         disabled
                       />
                     </EstrelasLocal>

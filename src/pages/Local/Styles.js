@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const AvaliacaoEstrelas = styled.div`
+  align-items: baseline;
+  color: #570b87;
+  font-size: 15px;
+  width: 100%;
+`;
+
 export const Body = styled.div`
   display: flex;
   align-items: center;
@@ -15,6 +22,25 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
+`;
+
+export const EstrelasLocal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 20%;
+  margin-bottom: 7%;
+  width: 100%;
+  padding: 0%;
+  color: #570b87;
+  font-size: 32px;
+  @media (max-width: 900px) {
+    font-size: 20px;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const FotoNome = styled.div`

@@ -1,5 +1,11 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
+export const CadastroUsuario = async (usuario) => {
+  const dados = await requesterService.criarUsuario(usuario).then((res) => {
+    return res;
+  });
+  return dados;
+};
 export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
   await requesterService.requisicaoDadosUsuario(id).then((res) => {
@@ -7,6 +13,18 @@ export const GetDadosUsuario = async (id) => {
   });
 
   return { dadosUsuario };
+};
+export const GetDadosPessoais = async () => {
+  let dadosUsuario = {};
+  await requesterService
+    .requisicaoDadosPessoais()
+    .then((res) => {
+      dadosUsuario = res.data;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+  return dadosUsuario;
 };
 
 export const GetDadosLocais = async () => {
@@ -73,6 +91,14 @@ export const ExcluirPerfil = async (id) => {
     });
 };
 
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
+      return res;
+    });
+  return dadosNovoLocal;
+};
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)
@@ -108,13 +134,4 @@ export const requisicaoLogin = async (email, senha) => {
   }
 
   return;
-};
-
-export const CadastroNovoLocal = async (novoLocal) => {
-  const dadosNovoLocal = await requesterService
-    .criarNovoLocal(novoLocal)
-    .then((res) => {
-      return res;
-    });
-  return dadosNovoLocal;
 };
