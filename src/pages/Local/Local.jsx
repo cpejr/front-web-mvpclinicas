@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
@@ -58,7 +58,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const id_local = "64bfeb1b46f359c7844ccdfb";
+  const id_local = "64b2b27d04c368656c1ec9ff";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
