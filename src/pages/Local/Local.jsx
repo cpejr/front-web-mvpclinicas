@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import useAuthStore from "../../stores/auth";
 import {
   Body,
   BoxCarrossel,
@@ -26,6 +26,7 @@ import {
   UsuarioComentario,
   ItemComentario,
   Pergunta,
+  HeaderUsuario,
 } from "./Styles";
 
 import { Rate } from "antd";
@@ -37,6 +38,7 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -50,10 +52,11 @@ function Local() {
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const usuario = useAuthStore((state) => state.usuario)
 
   const navigate = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "6469762610ec9138d78e6470";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -73,6 +76,7 @@ function Local() {
 
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocalPorId(id_local);
+    console.log(resposta)
     setLocal(resposta.dadosLocais);
   }
 
@@ -221,19 +225,22 @@ function Local() {
                 <LeftOutlined style={{ fontSize: "22px" }} />
               </Esquerda>
               <UsuarioComentario>
-                <Usuario>
-                  <FotoUsuario>
-                    <img
-                      src={fotoPerfil}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: "100%" }}
-                    />
-                  </FotoUsuario>
-                  <NomeUsuario>
-                    {comentarios[comentarioAtual].id_usuario.nome}
-                  </NomeUsuario>
-                </Usuario>
+                <HeaderUsuario>
+                  <Usuario>
+                    <FotoUsuario>
+                      <img
+                        src={fotoPerfil}
+                        width="100%"
+                        height="100%"
+                        style={{ borderRadius: "100%" }}
+                      />
+                    </FotoUsuario>
+                    <NomeUsuario>
+                      {comentarios[comentarioAtual].id_usuario.nome}
+                    </NomeUsuario>
+                  </Usuario>
+                  {/* {(comentarios[comentarioAtual].id_usuario === usuario.id)<DeleteOutlined style={{fontSize: 30}}/>} */}
+                </HeaderUsuario>
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
                     ([pergunta, resposta]) => (

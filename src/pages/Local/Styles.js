@@ -269,6 +269,19 @@ export const Direita = styled.div`
   }
 `;
 
+export const HeaderUsuario = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 80%;
+  padding: 2%;
+  @media (max-width: 700px) {
+    justify-content: space-between
+  }
+`
+
 export const Usuario = styled.div`
   display: flex;
   flex-direction: row;
