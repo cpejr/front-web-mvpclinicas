@@ -39,24 +39,30 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
+  AntCloudOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import { Spin } from "antd";
 
 function Local() {
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const [carregando, setCarregando] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
   const navegar = useNavigate();
 
-  const id_local = "64b1d06733776c925c899bca";
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
+
+  const id_local = "64b2a950b59a260d89d67d62";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -90,7 +96,7 @@ function Local() {
       toast.error("Usuário não é administrador.");
       return;
     }
-
+    setCarregando(true);
     try {
       await managerService.DeletaLocal(id_local);
       toast.success("Local deletado com sucesso!");
@@ -99,6 +105,7 @@ function Local() {
       }, 3000)
     } catch (error) {
       toast.error("Erro ao deletar local");
+      setCarregando(false);
     }
   }
 
@@ -279,7 +286,9 @@ function Local() {
             borderColor="#ff3a3a"
             onClick={() => deletaLocal()}
           >
-            <TextoBotao>Excluir</TextoBotao>
+            <TextoBotao>
+              {carregando ? <Spin indicator={antIcon} /> : "Excluir"}
+            </TextoBotao> 
           </Botao>
         </CaixaBotoes>
       </Conteudo>

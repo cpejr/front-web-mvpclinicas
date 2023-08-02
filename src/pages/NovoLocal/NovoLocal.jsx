@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   BotoesEdicao,
@@ -34,6 +35,8 @@ function CadastroNovoLocal() {
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
   const [tempoDeEsperaID, setTempoDeEsperaID] = useState(null);
+
+  const navegar = useNavigate();
 
   const [erro, setErro] = useState({
     nome: false,
@@ -211,8 +214,9 @@ function CadastroNovoLocal() {
               color="#000000"
               backgroundColor="white"
               borderColor="#FF000080"
+              onClick={() => navegar("/")}
             >
-              Cadastrar
+              Cancelar
             </Botao>
           </BotoesEdicao>
         </CaixaBotoes>
