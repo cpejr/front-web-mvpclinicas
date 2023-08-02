@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
@@ -16,6 +16,7 @@ import {
   ConteudoAvaliacao,
   Direita,
   Esquerda,
+  EstrelasLocal,
   FotoNome,
   FotoUsuario,
   InputDividido,
@@ -31,6 +32,7 @@ import {
   TextoBotao,
 } from "./Styles";
 
+import { Rate } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -88,7 +90,9 @@ function Local() {
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
-    setAvaliacao(resposta.comentariosLocal.media_avaliacao);
+    let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
+    let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
+    setAvaliacao(avaliacaoArredondada);
   }
 
   async function deletaLocal() {
@@ -102,7 +106,7 @@ function Local() {
       toast.success("Local deletado com sucesso!");
       setTimeout(() => {
         navegar("/");
-      }, 3000)
+      }, 3000);
     } catch (error) {
       toast.error("Erro ao deletar local");
       setCarregando(false);
@@ -216,9 +220,20 @@ function Local() {
           </InputDividido>
         </CaixaInputs>
         <ConteudoAvaliacao>
-          <TituloAvaliacao>
-            Avaliação Geral: {Math.trunc(avaliacao * 10) / 10}
-          </TituloAvaliacao>
+          <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <EstrelasLocal>
+            <Rate
+              value={Math.floor(avaliacao) + 0.5}
+              style={{
+                color: "#570B87",
+                display: "flex",
+                justifyContent: "row",
+              }}
+              allowHalf
+              defaultValue={avaliacao}
+              disabled
+            />
+          </EstrelasLocal>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>

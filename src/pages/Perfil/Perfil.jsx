@@ -10,6 +10,7 @@ import {
   InputDividido,
   TituloIcon,
   TituloInput,
+  SairTexto
 } from "./Styles";
 
 import {
@@ -19,6 +20,7 @@ import {
   MailOutlined,
   CopyOutlined,
   GlobalOutlined,
+  ExportOutlined
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -28,11 +30,15 @@ import { data, telefone } from "../../utils/masks";
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
+import { redirecionamento} from '../../utils/redirecionamento';
 
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 import useAuthStore from "../../stores/auth";
+import { logout } from '../../services/auth';
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
@@ -45,6 +51,19 @@ function Perfil() {
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
    
+  }
+
+  async function handleLogout() {
+    try {
+      logout();
+      toast.success('Usuario deslogado com sucesso');
+      setTimeout(() => {
+        redirecionamento('/login');
+      }, 3000);
+      
+    } catch (error) {
+      alert(error);
+    }
   }
 
   function acionarModais(e) {
@@ -78,7 +97,11 @@ function Perfil() {
 
   return (
     <Body>
-       <Conteudo>
+      <Conteudo>
+        <div style={{left:"77%", alignItems:"center", position:"absolute", top:"3%"}}>
+        <ExportOutlined style={{ fontSize: "40px", color: "#570B87"}} onClick={handleLogout} />
+        <SairTexto onClick={handleLogout}>Sair</SairTexto>
+        </div>
         <CaixaFoto>
           <img
             src={fotoPerfil}
@@ -88,6 +111,7 @@ function Perfil() {
             alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
+        
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
@@ -205,6 +229,7 @@ function Perfil() {
           >
             Excluir
           </Botao>
+          
         </CaixaBotoes>
       </Conteudo>
 
@@ -228,7 +253,8 @@ function Perfil() {
         usuario={usuario}
         centered
         destroyOnClose
-      /> 
+      />
+      <AddToast />
     </Body>
   );
 }

@@ -22,6 +22,9 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 80%;
   height: 100%;
+  @media (max-width: 700px){
+    width: 100%;
+  }
 `;
 
 export const CaixaFoto = styled.div`
@@ -34,6 +37,11 @@ export const CaixaFoto = styled.div`
   background-color: #8B00FF;
   margin-top: 2%;
   margin-bottom: -5%;
+
+  @media(max-width: 800px){
+    width: 20%;
+    height: 50px;
+  }
 `;
 export const Form = styled.form``;
 
@@ -47,6 +55,10 @@ export const CaixaInput = styled.div`
   padding: 2%;
   background-color: white;
   margin-top: 3%;
+
+  @media(max-width: 800px){
+    width: 100%;
+  }
 `;
 
 export const InputDividido = styled.div`
@@ -67,7 +79,11 @@ export const TituloInput = styled.div`
   color: #570B87;
   font-weight: 600;
   font-size: 1em;
-  margin-top: 9%
+  margin-top: 9%;
+
+  @media (max-width: 600px){
+    font-size: 0.8em;
+  }
 `;
 export const TituloIcon = styled.div`
   display: flex;
@@ -100,6 +116,11 @@ export const BotoesEdicao = styled.div`
   height: 50%;
   width: 70%;
   background-color: white;
+
+  @media(max-width: 500px){
+    height: 30%;
+    width: 50%;
+  }
 `;
 
 export const BotaoCadastro = styled.button`
@@ -150,9 +171,51 @@ export const BotaoCadastro = styled.button`
     height: ${(props) => props.HeightMedia500 ?? '35px'};
   }
    @media (max-width: 280px) {
-    height: ${(props) => props.heightMedia280 ?? '35px'};
+    height: ${(props) => props.heightMedia280 ?? '25px'};
   }
   @media (max-width: 280px) {
     width: ${(props) => props.widthMedia280 ?? '100px'};
+  }
+  
+`;
+export const Rotulo = styled.div`
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  margin-left: 50%;
+  margin-top: 2%;
+  font-size: 1em;
+  color: #E00000;
+  @media (max-width: 1050px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 900px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 650px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 550px) {
+    font-size: 0.6em;
+  }
+`;
+export const RotuloSenha = styled.div`
+  width: 100%;
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  margin-left: 51%;
+  font-size: 1em;
+  color: #E00000;
+  @media (max-width: 1050px) {
+    font-size: 0.9em;
+  }
+  @media (max-width: 900px) {
+    font-size: 0.8em;
+  }
+  @media (max-width: 650px) {
+    font-size: 0.7em;
+  }
+  @media (max-width: 550px) {
+    font-size: 0.6em;
   }
 `;
