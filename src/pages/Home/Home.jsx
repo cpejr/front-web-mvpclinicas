@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   CaixaInputs,
@@ -16,7 +16,7 @@ import {
   CaixaSelect,
   CaixaConteudo,
 } from "./Styles";
-import { Cores } from "../../variaveis";
+import { Cores } from "../../utils/variaveis";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 import Input from "../../Styles/Input/Input";
