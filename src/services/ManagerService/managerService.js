@@ -101,11 +101,6 @@ export const DeletarComentario = async (id_comentario) =>{
   return resposta;
 }
 
-export const CadastroNovoLocal = async (novoLocal) => {
-  const dadosNovoLocal = await requesterService
-    .criarNovoLocal(novoLocal)
-    .then((res) => {
-      return res;
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService
     .updateFotoDePerfil(id, file)
