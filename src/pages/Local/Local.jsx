@@ -62,9 +62,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
-
-  const id_local = "64b2a950b59a260d89d67d62";
+  const id_local = "64cc32cd2927b8e53c8f919f";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -301,9 +299,7 @@ function Local() {
             borderColor="#ff3a3a"
             onClick={() => deletaLocal()}
           >
-            <TextoBotao>
-              {carregando ? <Spin indicator={antIcon} /> : "Excluir"}
-            </TextoBotao> 
+            <TextoBotao>Excluir</TextoBotao>
           </Botao>
         </CaixaBotoes>
       </Conteudo>
