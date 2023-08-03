@@ -250,6 +250,7 @@ export const UsuarioComentario = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
+  min-height: 300px;
   height: auto;
   align-items: center;
   justify-content: space-around;
@@ -278,7 +279,7 @@ export const HeaderUsuario = styled.div`
   justify-content: center;
   align-items: center;
   height: 40%;
-  width: 80%;
+  width: 100%;
   padding: 2%;
   @media (max-width: 700px) {
     justify-content: space-between
@@ -317,6 +318,10 @@ export const FotoUsuario = styled.div`
   @media (max-width: 500px) {
     width: 120px;
     height: 120px;
+  }
+  @media (max-width: 360px) {
+    width: 90px;
+    height: 90px;
   }
 `;
 

@@ -104,7 +104,6 @@ function NovoComentario() {
         return toast.error("O id do local está incorreto!");
       }
       setCarregando(false);
-      console.log(err.response.data);
       toast.error("Erro no servidor!");
     }
   }

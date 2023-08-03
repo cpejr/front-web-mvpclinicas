@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuthStore from "../../stores/auth";
 import {
   Body,
   BoxCarrossel,
@@ -29,7 +28,7 @@ import {
   HeaderUsuario,
 } from "./Styles";
 
-import { Rate } from "antd";
+import { Rate, Spin } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -39,6 +38,7 @@ import {
   LeftOutlined,
   RightOutlined,
   DeleteOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -46,18 +46,24 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function Local() {
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
-  const [idUsuario, setIdUsuario] = useState("64668ccfcf080fad87158da8")
+  const [carregando, setCarregando] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 30, color: "white" }} spin />
+  );
   
 
   const navigate = useNavigate();
 
   const id_local = "6469762610ec9138d78e6470";
+  const id_usuario = "64668ccfcf080fad87158da8";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -77,7 +83,6 @@ function Local() {
 
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocalPorId(id_local);
-    console.log(resposta)
     setLocal(resposta.dadosLocais);
   }
 
@@ -91,11 +96,16 @@ function Local() {
 
   async function deletarComentario(id_comentario) {
     try{
+      setCarregando(true);
       await managerService.DeletarComentario(id_comentario);
-      setComentarioAtual(0);
-      pegandoComentariosLocal();
+      toast.success("Comentário deletado com sucesso!");
+      setTimeout(() => {
+        setComentarioAtual(0);
+        pegandoComentariosLocal();
+        setCarregando(false);
+      }, 3000);
     } catch(error){
-      console.error("Erro ao deletar comentario", error);
+      toast.error("Erro no servidor!");
     }
   }
 
@@ -109,6 +119,7 @@ function Local() {
 
   return (
     <Body>
+      <AddToast />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
@@ -236,7 +247,9 @@ function Local() {
                 <LeftOutlined style={{ fontSize: "22px" }} />
               </Esquerda>
               <UsuarioComentario>
-                <HeaderUsuario>
+              {carregando ? <Spin indicator={antIcon}/> : 
+              <>
+              <HeaderUsuario>
                   <Usuario>
                     <FotoUsuario>
                       <img
@@ -250,11 +263,11 @@ function Local() {
                       {comentarios[comentarioAtual].id_usuario.nome}
                     </NomeUsuario>
                   </Usuario>
-                  {(comentarios[comentarioAtual].id_usuario._id === idUsuario) ? 
+                  {(comentarios[comentarioAtual].id_usuario._id === id_usuario) ? 
                   <DeleteOutlined style={{fontSize: 30}}
                     onClick={() => deletarComentario(comentarios[comentarioAtual]._id)}
                   /> 
-                  : ""
+                  : <></>
                   }
                 </HeaderUsuario>
                 <Comentario>
@@ -267,6 +280,8 @@ function Local() {
                     )
                   )}
                 </Comentario>
+                </>
+                }
               </UsuarioComentario>
               <Direita
                 onClick={() => {
