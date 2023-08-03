@@ -52,12 +52,12 @@ function Local() {
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const [idUsuario, setIdUsuario] = useState("64668ccfcf080fad87158da8")
   
 
   const navigate = useNavigate();
 
   const id_local = "6469762610ec9138d78e6470";
-  const id_usuario = "64668ccfcf080fad87158da8"
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -87,6 +87,16 @@ function Local() {
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
+  }
+
+  async function deletarComentario(id_comentario) {
+    try{
+      await managerService.DeletarComentario(id_comentario);
+      setComentarioAtual(0);
+      pegandoComentariosLocal();
+    } catch(error){
+      console.error("Erro ao deletar comentario", error);
+    }
   }
 
   useEffect(() => {
@@ -240,7 +250,12 @@ function Local() {
                       {comentarios[comentarioAtual].id_usuario.nome}
                     </NomeUsuario>
                   </Usuario>
-                  {(comentarios[comentarioAtual].id_usuario._id === id_usuario) ? <DeleteOutlined style={{fontSize: 30}}/> : ""}
+                  {(comentarios[comentarioAtual].id_usuario._id === idUsuario) ? 
+                  <DeleteOutlined style={{fontSize: 30}}
+                    onClick={() => deletarComentario(comentarios[comentarioAtual]._id)}
+                  /> 
+                  : ""
+                  }
                 </HeaderUsuario>
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(

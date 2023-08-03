@@ -40,8 +40,8 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
-  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
+  const id_local = "6469762610ec9138d78e6470";
+  const id_usuario = "64668ccfcf080fad87158da8";
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -93,7 +93,7 @@ function NovoComentario() {
     try {
       await CriarNovoComentario(body, id_local);
 
-      toast.success("Local Cadastrado com sucesso!");
+      toast.success("Comentário feito com sucesso!");
       setTimeout(() => {
         navegar("/home");
         setCarregando(false);
@@ -222,21 +222,23 @@ function NovoComentario() {
         </CaixaInputRotulo>
       </CaixaAvaliacao>
       <CaixaBotoes>
-        <Botao
-          color="#ffffff"
-          backgroundColor="#ff0000c5"
-          borderColor="#ff0000"
-          width="40%"
-        >
-          Excluir
-        </Botao>
-        <Botao
+      <Botao
           width="40%"
           onClick={() => {
             validarComentario();
           }}
         >
-          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
+          {carregando ? <Spin indicator={antIcon} /> : "Comentar"}
+        </Botao>
+        <Botao
+          color="#000000"
+          backgroundColor="white"
+          borderColor="#FF000080"
+          onClick={() => {
+            window.location.href = "/Local";
+          }}
+        >
+          Cancelar
         </Botao>
       </CaixaBotoes>
     </Body>

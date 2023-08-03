@@ -256,6 +256,9 @@ export const UsuarioComentario = styled.div`
   padding: 2%;
   background-color: #d580ff;
   border-radius: 2%;
+  .ant-list-item:hover{
+    cursor: pointer;
+  }
 `;
 
 export const Direita = styled.div`
