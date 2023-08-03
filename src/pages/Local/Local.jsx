@@ -52,11 +52,12 @@ function Local() {
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
-  const usuario = useAuthStore((state) => state.usuario)
+  
 
   const navigate = useNavigate();
 
   const id_local = "6469762610ec9138d78e6470";
+  const id_usuario = "64668ccfcf080fad87158da8"
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -239,7 +240,7 @@ function Local() {
                       {comentarios[comentarioAtual].id_usuario.nome}
                     </NomeUsuario>
                   </Usuario>
-                  {/* {(comentarios[comentarioAtual].id_usuario === usuario.id)<DeleteOutlined style={{fontSize: 30}}/>} */}
+                  {(comentarios[comentarioAtual].id_usuario._id === id_usuario) ? <DeleteOutlined style={{fontSize: 30}}/> : ""}
                 </HeaderUsuario>
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
