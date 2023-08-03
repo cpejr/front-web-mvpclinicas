@@ -131,8 +131,7 @@ export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
   align-items: start !important;
-  justify-content: space-evenly;
-  width: 30%;
+
   padding: 2%;
   align-items: center;
   text-align: center;
@@ -161,7 +160,7 @@ export const CaixaCheckbox = styled.div`
 
 export const TituloAvaliacao = styled.div`
   display: flex;
-  width: 60%;
+  padding-right: 0.5rem;
   height: 50%;
   font-family: "Roboto Condensed";
   font-weight: 500;
@@ -199,7 +198,7 @@ export const CaixaInputRotulo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 30%;
+  width: 4rem;
   gap: 10px;
 `;
 

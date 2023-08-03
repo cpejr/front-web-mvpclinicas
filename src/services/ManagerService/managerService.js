@@ -1,46 +1,59 @@
 import * as requesterService from "../RequesterService/requesterService";
 
-export const GetDadosUsuario = async (id) => {
-    let dadosUsuario = {};
-    await requesterService
-      .requisicaoDadosUsuario(id)
-      .then((res) => {
-        dadosUsuario = res.data;
-      })
+export const CadastroUsuario = async (usuario) => {
+  const dados = await requesterService.criarUsuario(usuario).then((res) => {
+    return res;
+  });
+  return dados;
+};
 
-    return { dadosUsuario };
-  };
+export const GetDadosPessoais = async () => {
+  let dadosUsuario = {};
+  await requesterService
+    .requisicaoDadosPessoais()
+    .then((res) => {
+      const emails = res.data.map((usuario) => usuario.email);
+      dadosUsuario = emails;
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+  return dadosUsuario;
+};
+
+export const GetDadosUsuario = async (id) => {
+  let dadosUsuario = {};
+  await requesterService.requisicaoDadosUsuario(id).then((res) => {
+    dadosUsuario = res.data;
+  });
+
+  return { dadosUsuario };
+};
 
 export const GetDadosLocais = async () => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocais()
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocais().then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
-  .criarComentario(body, id_local)
-  .then((res) => {
-    return res;
-  })
+    .criarComentario(body, id_local)
+    .then((res) => {
+      return res;
+    });
 
   return resposta;
-}
+};
 
 export const GetDadosLocalPorId = async (id_local) => {
   let dadosLocais = {};
-  await requesterService
-    .requisicaoDadosLocal(id_local)
-    .then((res) => {
-      dadosLocais = res.data;
-    })
-    
+  await requesterService.requisicaoDadosLocal(id_local).then((res) => {
+    dadosLocais = res.data;
+  });
 
   return { dadosLocais };
 };
@@ -68,3 +81,12 @@ export const DeletarComentario = async (id_comentario) =>{
     })
   return resposta;
 }
+
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
+      return res;
+    });
+  return dadosNovoLocal;
+};

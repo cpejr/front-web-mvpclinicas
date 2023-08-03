@@ -28,8 +28,10 @@ import { LoadingOutlined } from "@ant-design/icons";
 function NovoComentario() {
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
-  const [carregando, setCarregando] = useState(false)
-  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
+  const [carregando, setCarregando] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
+  );
   const [erro, setErro] = useState({
     cargo: false,
     salario: false,
@@ -95,7 +97,7 @@ function NovoComentario() {
       setTimeout(() => {
         navegar("/home");
         setCarregando(false);
-      }, 3000)
+      }, 3000);
     } catch (err) {
       if (err.response.status === 400) {
         setCarregando(false);
@@ -207,13 +209,14 @@ function NovoComentario() {
         <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
         <CaixaInputRotulo>
           <Input
-            width="100%"
             textAlign="center"
             fontSize="1.4em"
             erro={erro.avaliacao}
             onChange={(e) =>
               preenchendoRespostas("Avaliação Geral", e.target.value)
             }
+            borderWidth="0px 0px 1px 0px"
+            borderColor={erro.avaliacao ? "red" : "#570B87"}
           />
           {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
         </CaixaInputRotulo>
@@ -227,8 +230,13 @@ function NovoComentario() {
         >
           Excluir
         </Botao>
-        <Botao width="40%" onClick={() => { validarComentario(); }}>
-          {carregando ? <Spin indicator={antIcon}/> : "Cadastrar"}
+        <Botao
+          width="40%"
+          onClick={() => {
+            validarComentario();
+          }}
+        >
+          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
         </Botao>
       </CaixaBotoes>
     </Body>
