@@ -40,23 +40,7 @@ function ModalAlterarFotoDePerfil(props) {
     </div>
   );
 
-  function antesDoUpload(file) {
-    const eJpgOuPng = file.type === "image/jpeg" || file.type === "image/png";
-
-    if (!eJpgOuPng) {
-      toast.error("Você só pode fazer o upload de JPGS ou PNGS!");
-      setCarregando(true);
-    }
-
-    const eMenorQue2M = file.size / 1024 / 1024 < 2;
-
-    if (!eMenorQue2M) {
-      toast.error("A imagem precisa ser menor que 2MB!");
-      setCarregando(true);
-    }
-
-    return eJpgOuPng && eMenorQue2M;
-  }
+  //   const eMenorQue2M = file.size / 1024 / 1024 < 2;
 
   async function aposMudanca(info) {
     setCarregando(true);
@@ -67,13 +51,18 @@ function ModalAlterarFotoDePerfil(props) {
   }
   async function updateFoto() {
     if (imagemUrl) {
-      setCarregandoDeletar(true);
-      await managerService.UpdateFotoDePerfil(props.idUsuario, imagemUrl);
-      toast.success("Imagem atualizada com sucesso");
-      props.fecharModal();
-      setImagemUrl(null);
-      setCarregandoDeletar(false);
-
+      const base64str = imagemUrl.substring(imagemUrl.indexOf(",") + 1);
+      const imagemDecodificada = atob(base64str);
+      if (imagemDecodificada.length < 2000000) {
+        setCarregandoDeletar(true);
+        await managerService.UpdateFotoDePerfil(props.idUsuario, imagemUrl);
+        toast.success("Imagem atualizada com sucesso");
+        props.fecharModal();
+        setImagemUrl(null);
+        setCarregandoDeletar(false);
+      } else {
+        toast.error("Selecione uma imagem menor que 2Mb!");
+      }
     } else {
       toast.error("Selecione uma imagem para enviar!");
     }
@@ -89,7 +78,6 @@ function ModalAlterarFotoDePerfil(props) {
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
-            antesDoUpload={antesDoUpload}
             onChange={aposMudanca}
           >
             {imagemUrl ? (
