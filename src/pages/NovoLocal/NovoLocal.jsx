@@ -42,6 +42,7 @@ function CadastroNovoLocal() {
   });
   const [enderecoMapa, setEnderecoMapa] = useState("UFMGBeloHorizonte");
   const [tempoDeEsperaID, setTempoDeEsperaID] = useState(null);
+  const [novoLocal, setNovoLocal] = useState(zeraInputs);
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
