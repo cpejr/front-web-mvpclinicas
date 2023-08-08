@@ -40,7 +40,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64cc36e7ad699172358faef7";
   const id_usuario = "64ae9e9eb163ec6a9b9ed270";
 
   function estadoCheckbox() {

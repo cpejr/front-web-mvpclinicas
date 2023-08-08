@@ -73,6 +73,7 @@ function Local() {
 
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocalPorId(id_local);
+    console.log(resposta);
     setLocal(resposta.dadosLocais);
   }
 
