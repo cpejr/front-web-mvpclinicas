@@ -62,7 +62,7 @@ function Local() {
 
   const navigate = useNavigate();
 
-  const id_local = "6469762610ec9138d78e6470";
+  const id_local = "64cc36e7ad699172358faef7";
   const id_usuario = "64668ccfcf080fad87158da8";
 
   const proxComentario = (comentarioAtual) => {
@@ -249,26 +249,22 @@ function Local() {
               <UsuarioComentario>
               {carregando ? <Spin indicator={antIcon}/> : 
               <>
-              <HeaderUsuario>
+              <HeaderUsuario canDelete={comentarios[comentarioAtual].id_usuario._id === id_usuario}>
                   <Usuario>
                     <FotoUsuario>
                       <img
-                        src={fotoPerfil}
-                        width="100%"
-                        height="100%"
-                        style={{ borderRadius: "100%" }}
+                        src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
+                        style={{ backgroundImage: 
+                          `url(https://img.freepik.com/fotos-premium/paisagem-de-montanha-incrivelmente-bela-picos-das-montanhas-ao-sol-vista-panoramica-das-montanhas-de-outono-paisagem-com-vista-para-os-vales-das-montanhas-vista-superior-do-desfiladeiro-da-montanha-copie-o-espaco_135372-459.jpg?w=2000)`}}
                       />
                     </FotoUsuario>
                     <NomeUsuario>
                       {comentarios[comentarioAtual].id_usuario.nome}
                     </NomeUsuario>
-                  </Usuario>
-                  {(comentarios[comentarioAtual].id_usuario._id === id_usuario) ? 
-                  <DeleteOutlined style={{fontSize: 30}}
+                  </Usuario>             
+                  <DeleteOutlined style={{fontSize: 30, display: comentarios[comentarioAtual].id_usuario._id === id_usuario ? 'block' : 'none'}}
                     onClick={() => deletarComentario(comentarios[comentarioAtual]._id)}
                   /> 
-                  : <></>
-                  }
                 </HeaderUsuario>
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
