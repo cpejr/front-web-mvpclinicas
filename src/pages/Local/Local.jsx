@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   Body,
@@ -53,7 +53,8 @@ function Local() {
 
   const navigate = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const {id_local} = useParams();
+  
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -86,11 +87,11 @@ function Local() {
 
   useEffect(() => {
     pegandoDadosLocal();
-  }, []);
+  }, [id_local]);
 
   useEffect(() => {
     pegandoComentariosLocal();
-  }, []);
+  }, [id_local]);
 
   return (
     <Body>
@@ -117,7 +118,7 @@ function Local() {
                 />
               </TituloIcon>
               <Input
-                placeholder={local.nome}
+                placeholder={local?.nome}
                 backgroundColor="white"
                 heightMedia700="20px"
                 marginBottomMedia700="8%"
@@ -130,7 +131,7 @@ function Local() {
                 <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={local.telefone}
+                placeholder={local?.telefone}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -150,7 +151,7 @@ function Local() {
               />
             </TituloIcon>
             <Input
-              placeholder={local.endereco}
+              placeholder={local?.endereco}
               backgroundColor="white"
               width="100%"
               heightMedia700="20px"
@@ -166,7 +167,7 @@ function Local() {
                 <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={local.setor}
+                placeholder={local?.setor}
                 backgroundColor="white"
                 heightMedia700="20px"
                 marginBottomMedia700="8%"
@@ -179,7 +180,7 @@ function Local() {
                 <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={local.empresa}
+                placeholder={local?.empresa}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -259,7 +260,7 @@ function Local() {
           <Botao
             width="20%"
             widthMedia700="30%"
-            onClick={() => navigate("/novocomentario")}
+            onClick={() => navigate(`/novocomentario/${id_local}`)}
           >
             Adicionar Comentário
           </Botao>

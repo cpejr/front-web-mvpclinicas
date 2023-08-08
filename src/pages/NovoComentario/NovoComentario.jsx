@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -21,11 +21,22 @@ import Input from "../../Styles/Input/Input";
 import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import useAuthStore from "../../stores/auth";
+import * as managerService from "../../services/ManagerService/managerService";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 
+
 function NovoComentario() {
+  const usuarioLogado = useAuthStore((state) => state.usuario);
+  const id_usuario = usuarioLogado ? usuarioLogado._id : "64c2c8ed95156bfab6335f4a";
+
+
+  //Precisa de uma branch com login funcionando para testar 
+  
+
+  
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
@@ -40,8 +51,9 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
-  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
+  const {id_local} = useParams();
+  //const id_usuario ="64c2c8ed95156bfab6335f4a";
+  
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -92,8 +104,7 @@ function NovoComentario() {
 
     try {
       await CriarNovoComentario(body, id_local);
-
-      toast.success("Local Cadastrado com sucesso!");
+      toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
         navegar("/home");
         setCarregando(false);
