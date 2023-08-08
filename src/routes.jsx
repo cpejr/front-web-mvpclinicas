@@ -4,6 +4,7 @@ import {
   Route,
   createRoutesFromElements,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 
 import Cadastro from "../src/pages/Cadastro";
@@ -13,7 +14,15 @@ import Login from "../src/pages/Login";
 import NovoComentario from "../src/pages/NovoComentario";
 import NovoLocal from "../src/pages/NovoLocal";
 import Perfil from "../src/pages/Perfil";
-import { RotasPrivadas } from "./utils/RotasPrivadas";
+import useAuthStore from "./stores/auth";
+
+function RotasPrivadas() {
+  const token = useAuthStore((state) => state.token)
+
+  if (token) return (<Outlet/>)
+
+  return <Navigate to="/" replace/>
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
