@@ -10,6 +10,7 @@ export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
   await requesterService.requisicaoDadosUsuario(id).then((res) => {
     dadosUsuario = res.data;
+    
   });
 
   return { dadosUsuario };
@@ -118,7 +119,17 @@ export const UpdateDadosPerfil = async (id, respostas) => {
       return false;
     });
 };
-
+export const UpdateSenha = async (id, respostas) => {
+  try {
+    await requesterService.updateSenha(id, respostas);
+    setTimeout(() => {
+      window.location.href = "/perfil";
+    }, 3000);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);
