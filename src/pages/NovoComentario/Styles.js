@@ -37,7 +37,7 @@ export const CaixaPerguntas = styled.div`
   gap: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
-  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -69,8 +69,6 @@ export const CaixaSalario = styled.div`
 export const ConjuntoTituloInput = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 10px;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -78,7 +76,6 @@ export const ConjuntoTituloInput = styled.div`
 
 export const TituloInput = styled.div`
   width: 100%;
-  height: 30%;
   font-family: "Roboto Condensed";
   font-weight: 400;
   font-size: 1.2em;
@@ -86,6 +83,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-bottom: 0.4rem;
   color: #570b87;
 
   justify-content: ${(props) => props.justifyContent};
@@ -122,7 +120,7 @@ export const InputComentario = styled.input`
   font-size: 1em;
   font-family: "Roboto Condensed";
   line-height: 50px;
-  color: #8B00FF;
+  color: #8b00ff;
 
   &:focus {
     outline: none;
@@ -132,8 +130,8 @@ export const InputComentario = styled.input`
 export const CaixaAvaliacao = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 30%;
+  align-items: start !important;
+
   padding: 2%;
   align-items: center;
   text-align: center;
@@ -142,6 +140,7 @@ export const CaixaAvaliacao = styled.div`
     flex-direction: column;
     width: 60%;
     padding-top: 5%;
+    align-items: center !important;
   }
 `;
 
@@ -152,7 +151,7 @@ export const CaixaCheckbox = styled.div`
   align-items: center;
   width: 70%;
   padding: 1%;
-  
+
   @media (max-width: 500px) {
     width: 70%;
     align-self: center;
@@ -161,12 +160,13 @@ export const CaixaCheckbox = styled.div`
 
 export const TituloAvaliacao = styled.div`
   display: flex;
-  width: 60%;
+  padding-right: 0.5rem;
   height: 50%;
   font-family: "Roboto Condensed";
   font-weight: 500;
   font-size: 1.4em;
   line-height: 20px;
+  padding-top: 1px;
   color: #570b87;
   justify-content: center;
 
@@ -175,7 +175,6 @@ export const TituloAvaliacao = styled.div`
     font-size: 1.2em;
     text-align: center;
   }
-
 `;
 
 export const CaixaBotoes = styled.div`
@@ -199,7 +198,7 @@ export const CaixaInputRotulo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 30%;
+  width: 4rem;
   gap: 10px;
 `;
 
@@ -212,4 +211,15 @@ export const Rotulo = styled.div`
   @media (max-width: 900px) {
     font-size: 0.8em;
   }
+`;
+
+export const NaoObrigatorio = styled.div`
+  font-size: 0.8rem;
+  width: 100%;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  line-height: 1rem;
+  color: #570b87;
+  text-align: end;
+  justify-content: ${(props) => props.justifyContent};
 `;

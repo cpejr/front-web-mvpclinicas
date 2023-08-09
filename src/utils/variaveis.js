@@ -14,6 +14,7 @@ export const Cores = {
     2: "#A7ADE8",
     3: "#bbc0f4",
     4: "#cfd3f8",
+    5: "#8b00ff",
   },
 
   azul: "#151B57",
@@ -23,12 +24,12 @@ export const Cores = {
   branco: "white",
   verde: "green",
   vermelho: "red",
-  vermelhoClaro: '#F9DBDB',
+  vermelhoClaro: "#F9DBDB",
+  vermelhoIntermediario: "#ff3a3a",
   amarelo: "#fdf1d1",
 };
 
 export const Fontes = {
   roboto: "Roboto, sans-serif",
   barlow: "Barlow, sans-serif",
-
 };

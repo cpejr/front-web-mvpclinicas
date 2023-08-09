@@ -151,3 +151,37 @@ export const BotoesEdicao = styled.div`
     width: 100%;
   }
 `;
+
+export const SairTexto = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: darkpurple;
+
+  @media (max-width: 900px) {
+    font-size: 1em;
+  }
+`;
+export const TextoAlterarFoto = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  color: #570b87;
+  cursor: pointer;
+  @media (max-width: 900px) {
+    font-size: 1em;
+  }
+`;

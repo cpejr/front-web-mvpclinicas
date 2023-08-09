@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   BotoesEdicao,
@@ -7,30 +8,35 @@ import {
   CaixaTitulo,
   ConjuntoTituloInput,
   Conteudo,
+  Mapa,
+  Rotulo,
   Subtitulo,
   Titulo,
   TituloInput,
-  Rotulo,
 } from "./Styles";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
-import { GoogleMap, LoadScript, StandaloneSearchBox } from '@react-google-maps/api';
-import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import * as managerService from "../../services/ManagerService/managerService";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
-    nome: '',
-    telefone: '',
-    setor: '',
-    empresa: '',
+    nome: "",
+    telefone: "",
+    setor: "",
+    empresa: "",
+    endereco: "",
   };
- 
+
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
+  const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [carregando, setCarregando] = useState(false);
   const [erro, setErro] = useState({
     nome: false,
     telefone: false,
@@ -38,51 +44,89 @@ function CadastroNovoLocal() {
     empresa: false,
     endereco: false,
   });
+
+  const navegar = useNavigate();
+
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
+  );
+
   function preenchendoDados(e) {
     const { name, value } = e.target;
 
-    if (name === 'telefone' && value.length < 15) {
-     // setErro({ ...erro,[name]: true});
-      setNovoLocal(prevState => ({
+    if (name === "telefone" && value.length < 15) {
+      setNovoLocal((prevState) => ({
         ...prevState,
-        [name]: telefone(value)
-      }
-      ))
+        [name]: telefone(value),
+      }));
     } else {
-      setNovoLocal(prevState => ({
+      setNovoLocal((prevState) => ({
         ...prevState,
-        [name]: value
-      }))
+        [name]: value,
+      }));
     }
-
   }
-  
-  async function requisicaoCadastroNovoLocal() {
-  const nomeErro = !novoLocal.nome || /\d/.test(novoLocal.nome);
-  const telefoneErro = !novoLocal.telefone || novoLocal.telefone.length < 15;
-  const setorErro = !novoLocal.setor;
-  const empresaErro = !novoLocal.empresa;
 
-  setErro((erroAnterior)=> ({
-    ...erroAnterior,
-    nome: nomeErro,
-    telefone: telefoneErro,
-    setor: setorErro,
-    empresa: empresaErro,
-  }));
-    if(nomeErro|| telefoneErro|| setorErro || empresaErro){
+  async function requisicaoCadastroNovoLocal() {
+    const enderecoErro = !novoLocal.endereco;
+    const nomeErro = !novoLocal.nome || /\d/.test(novoLocal.nome);
+    const telefoneErro = !novoLocal.telefone || novoLocal.telefone.length < 15;
+    const setorErro = !novoLocal.setor;
+    const empresaErro = !novoLocal.empresa;
+
+    setErro((erroAnterior) => ({
+      ...erroAnterior,
+      endereco: enderecoErro,
+      nome: nomeErro,
+      telefone: telefoneErro,
+      setor: setorErro,
+      empresa: empresaErro,
+    }));
+    if (nomeErro || telefoneErro || setorErro || empresaErro || enderecoErro) {
       toast.error("Preencha todos os campos corretamente!");
 
       return;
-    }else{
-     
-      toast.success("Local Cadastrado com sucesso!");
-      const novoLocalCadastrado = await managerService.CadastroNovoLocal(
-        novoLocal,
-      )
+    } else {
+      setCarregando(true);
+
+      try {
+        await managerService.CadastroNovoLocal(novoLocal);
+
+        toast.success("Local Cadastrado com sucesso!");
+        setTimeout(() => {
+          navegar("/home");
+          setCarregando(false);
+        }, 3000);
+      } catch (err) {
+        toast.error("Erro na validação!");
+        setCarregando(false);
+      }
     }
-    
   }
+
+  function preenchendoEndereco(e) {
+    const { name, value } = e.target;
+
+    setNovoLocal((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
+    clearTimeout(timeoutId);
+
+    const novoTimeoutId = setTimeout(() => {
+      setEnderecoMapa(value);
+    }, 3000);
+
+    setTimeoutId(novoTimeoutId);
+  }
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [timeoutId]);
+
   return (
     <Body>
       <Conteudo>
@@ -102,10 +146,10 @@ function CadastroNovoLocal() {
               erro={erro.nome}
               value={novoLocal.nome}
               onChange={preenchendoDados}
-              style={{ color: '#570B87' }}
             ></Input>
-      
-            {/\d/.test(novoLocal.nome) && <Rotulo>Digite um local válido</Rotulo>}
+            {/\d/.test(novoLocal.nome) && (
+              <Rotulo>Digite um local válido</Rotulo>
+            )}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Telefone:</TituloInput>
@@ -116,12 +160,13 @@ function CadastroNovoLocal() {
               marginBottomMedia700="8%"
               name="telefone"
               erro={erro.telefone}
+              maxLength={15}
               value={novoLocal.telefone}
               onChange={preenchendoDados}
-              style={{ color: '#570B87' }}
             ></Input>
-            {erro.telefone && novoLocal.telefone.length < 15 && <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>}
-
+            {erro.telefone && novoLocal.telefone.length < 15 && (
+              <Rotulo>Digite um telefone no formato (XX)XXXXX-XXXX</Rotulo>
+            )}
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Setor:</TituloInput>
@@ -131,10 +176,9 @@ function CadastroNovoLocal() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="setor"
-              value={novoLocal.setor}
               erro={erro.setor}
+              value={novoLocal.setor}
               onChange={preenchendoDados}
-              style={{ color: '#570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
@@ -145,23 +189,36 @@ function CadastroNovoLocal() {
               heightMedia700="20px"
               marginBottomMedia700="8%"
               name="empresa"
-              value={novoLocal.empresa}
               erro={erro.empresa}
+              value={novoLocal.empresa}
               onChange={preenchendoDados}
-              style={{ color: '#570B87' }}
             ></Input>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>Selecione um endereço no mapa abaixo:</TituloInput>
+            <TituloInput>Endereço:</TituloInput>
+            <Input
+              placeholder="Digite o endereço da empresa responsável"
+              backgroundColor="white"
+              heightMedia700="20px"
+              marginBottomMedia700="8%"
+              name="endereco"
+              value={novoLocal.endereco}
+              erro={erro.endereco}
+              onChange={preenchendoEndereco}
+            ></Input>
+            {erro.endereco && <Rotulo>Digite um endereço!</Rotulo>}
           </ConjuntoTituloInput>
-
+          <Mapa
+            id="mapIframe"
+            loading="lazy"
+            allowFullScreen
+            src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&q=${
+              enderecoMapa ? enderecoMapa : "Brasil"
+            }`}
+          ></Mapa>
         </CaixaInputs>
         <CaixaBotoes>
           <BotoesEdicao>
-            <Botao
-             onClick={() => { requisicaoCadastroNovoLocal() }}>
-              Cadastrar
-            </Botao>
             <Botao
               color="#000000"
               backgroundColor="white"
@@ -169,11 +226,17 @@ function CadastroNovoLocal() {
             >
               Excluir
             </Botao>
+            <Botao
+              onClick={() => {
+                requisicaoCadastroNovoLocal();
+              }}
+            >
+              {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
+            </Botao>
           </BotoesEdicao>
-
         </CaixaBotoes>
       </Conteudo>
-      <AddToast/>
+      <AddToast />
     </Body>
   );
 }
