@@ -92,6 +92,15 @@ export const ExcluirPerfil = async (id) => {
       return false;
     });
 };
+export const DeletarComentario = async (id_comentario) =>{
+  const resposta = await requesterService
+    .deletarComentario(id_comentario)
+    .then((res)=>{ 
+      return res;
+    })
+  return resposta;
+}
+
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService
     .updateFotoDePerfil(id, file)

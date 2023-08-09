@@ -33,6 +33,12 @@ export const requisicaoDeletarUsuario = (id) => api.delete(`/usuarios/${id}`);
 
 export const updateDadosPerfil = (id, respostas) =>
   api.put(`/usuarios/${id}`, respostas);
+export const requisicaoComentariosUsuario = (id_usuario) => {
+  api.get(`/comentarios/usuario/${id_usuario}`);
+}
+
+export const deletarComentario = (id_comentario) =>
+  api.delete(`/comentarios/${id_comentario}`);
 
 export const criarUsuario = async (usuario) => {
   const resposta = await api.post("/usuarios", {

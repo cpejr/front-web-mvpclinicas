@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import {
   Body,
   BoxCarrossel,
@@ -26,9 +25,10 @@ import {
   UsuarioComentario,
   ItemComentario,
   Pergunta,
+  HeaderUsuario,
 } from "./Styles";
 
-import { Rate } from "antd";
+import { Rate, Spin } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -37,6 +37,8 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
+  DeleteOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
@@ -44,16 +46,24 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
 
 function Local() {
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const [carregando, setCarregando] = useState(false);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 30, color: "white" }} spin />
+  );
+  
 
   const navigate = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64cc36e7ad699172358faef7";
+  const id_usuario = "64668ccfcf080fad87158da8";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -84,6 +94,21 @@ function Local() {
     setAvaliacao(avaliacaoArredondada);
   }
 
+  async function deletarComentario(id_comentario) {
+    try{
+      setCarregando(true);
+      await managerService.DeletarComentario(id_comentario);
+      toast.success("Comentário deletado com sucesso!");
+      setTimeout(() => {
+        setComentarioAtual(0);
+        pegandoComentariosLocal();
+        setCarregando(false);
+      }, 3000);
+    } catch(error){
+      toast.error("Erro no servidor!");
+    }
+  }
+
   useEffect(() => {
     pegandoDadosLocal();
   }, []);
@@ -94,6 +119,7 @@ function Local() {
 
   return (
     <Body>
+      <AddToast />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
@@ -221,19 +247,25 @@ function Local() {
                 <LeftOutlined style={{ fontSize: "22px" }} />
               </Esquerda>
               <UsuarioComentario>
-                <Usuario>
-                  <FotoUsuario>
-                    <img
-                      src={fotoPerfil}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: "100%" }}
-                    />
-                  </FotoUsuario>
-                  <NomeUsuario>
-                    {comentarios[comentarioAtual].id_usuario.nome}
-                  </NomeUsuario>
-                </Usuario>
+              {carregando ? <Spin indicator={antIcon}/> : 
+              <>
+              <HeaderUsuario canDelete={comentarios[comentarioAtual].id_usuario._id === id_usuario}>
+                  <Usuario>
+                    <FotoUsuario>
+                      <img
+                        src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
+                        style={{ backgroundImage: 
+                          `url(https://img.freepik.com/fotos-premium/paisagem-de-montanha-incrivelmente-bela-picos-das-montanhas-ao-sol-vista-panoramica-das-montanhas-de-outono-paisagem-com-vista-para-os-vales-das-montanhas-vista-superior-do-desfiladeiro-da-montanha-copie-o-espaco_135372-459.jpg?w=2000)`}}
+                      />
+                    </FotoUsuario>
+                    <NomeUsuario>
+                      {comentarios[comentarioAtual].id_usuario.nome}
+                    </NomeUsuario>
+                  </Usuario>             
+                  <DeleteOutlined style={{fontSize: 30, display: comentarios[comentarioAtual].id_usuario._id === id_usuario ? 'block' : 'none'}}
+                    onClick={() => deletarComentario(comentarios[comentarioAtual]._id)}
+                  /> 
+                </HeaderUsuario>
                 <Comentario>
                   {Object.entries(comentarios[comentarioAtual].comentario).map(
                     ([pergunta, resposta]) => (
@@ -244,6 +276,8 @@ function Local() {
                     )
                   )}
                 </Comentario>
+                </>
+                }
               </UsuarioComentario>
               <Direita
                 onClick={() => {

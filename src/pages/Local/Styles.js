@@ -250,12 +250,16 @@ export const UsuarioComentario = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
+  min-height: 300px;
   height: auto;
   align-items: center;
   justify-content: space-around;
   padding: 2%;
   background-color: #d580ff;
   border-radius: 2%;
+  .ant-list-item:hover{
+    cursor: pointer;
+  }
 `;
 
 export const Direita = styled.div`
@@ -269,20 +273,33 @@ export const Direita = styled.div`
   }
 `;
 
+export const HeaderUsuario = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  width: 80%;
+  gap: 20px;
+  @media (max-width: 300px) {
+    flex-direction: column;
+    gap: 0;
+  }
+`
+
 export const Usuario = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 40%;
-  width: 80%;
+  width: 70%;
   padding: 2%;
 
   @media (max-width: 700px) {
     flex-direction: column;
     height: 60%;
     width: 60%;
-    justify-content: space-around;
+    gap: 20px;
   }
 `;
 
@@ -290,17 +307,24 @@ export const FotoUsuario = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 120px;
-  border-radius: 50%;
-  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
-  background-color: grey;
-  margin: 2%;
 
-  @media (max-width: 500px) {
+  img {
     width: 120px;
     height: 120px;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center center;
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+    background-color: grey;
+  }
+
+  @media (max-width: 500px) {
+    width: 100px;
+    height: 100px;
+  }
+  @media (max-width: 360px) {
+    width: 80px;
+    height: 80px;
   }
 `;
 
