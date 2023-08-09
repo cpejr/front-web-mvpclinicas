@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import {
   Body,
@@ -30,6 +32,7 @@ import {
   ItemComentario,
   Pergunta,
   TextoBotao,
+  CaixaLoader,
 } from "./Styles";
 
 import { Rate } from "antd";
@@ -41,18 +44,19 @@ import {
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
-  AntCloudOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
-import { LoadingOutlined } from "@ant-design/icons";
 
 import * as managerService from "../../services/ManagerService/managerService";
-import { Spin } from "antd";
 
 function Local() {
+  const antIconModal = (
+    <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
+  );
+
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
@@ -62,7 +66,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const id_local = "64cc32cd2927b8e53c8f919f";
+  const id_local = "64b29944b59a260d89d67d40";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -299,7 +303,15 @@ function Local() {
             borderColor="#ff3a3a"
             onClick={() => deletaLocal()}
           >
-            <TextoBotao>Excluir</TextoBotao>
+            <TextoBotao>
+              {carregando ? (
+                <CaixaLoader>
+                  <Spin indicator={antIconModal} />
+                </CaixaLoader>
+              ) : (
+                "Excluir"
+              )}
+            </TextoBotao>
           </Botao>
         </CaixaBotoes>
       </Conteudo>

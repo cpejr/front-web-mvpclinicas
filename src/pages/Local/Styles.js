@@ -388,3 +388,9 @@ export const TextoBotao = styled.div`
     font-size: 0.8rem;
   }
 `;
+export const CaixaLoader = styled.div`
+  padding-bottom: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
