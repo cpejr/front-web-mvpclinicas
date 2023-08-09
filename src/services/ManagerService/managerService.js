@@ -10,7 +10,6 @@ export const GetDadosUsuario = async (id) => {
   let dadosUsuario = {};
   await requesterService.requisicaoDadosUsuario(id).then((res) => {
     dadosUsuario = res.data;
-    
   });
 
   return { dadosUsuario };
@@ -78,6 +77,13 @@ export const GetComentariosLocal = async (id_local) => {
     });
 
   return { comentariosLocal };
+};
+
+export const DeletaLocal = async (id_local) => {
+  const resposta = await requesterService.deletarLocal(id_local).then((res) => {
+    return res;
+  });
+  return resposta;
 };
 
 export const ExcluirPerfil = async (id) => {

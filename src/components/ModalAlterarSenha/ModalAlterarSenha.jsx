@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   CaixaBotoes,
   CaixaInputRotulo,
@@ -53,7 +53,6 @@ function ModalAlterarSenha(props) {
   }
  
   async function alterandoSenha() {
-      
     if (!respostas.senhaAtual) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
@@ -114,10 +113,12 @@ function ModalAlterarSenha(props) {
       }));
     }
 
-   
-    const resultado = await managerService.UpdateSenha(props.usuario._id, respostas);
+    const resultado = await managerService.UpdateSenha(
+      props.usuario._id,
+      respostas
+    );
 
-    if(!resultado) {
+    if (!resultado) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senhaAtual: true,
@@ -125,18 +126,17 @@ function ModalAlterarSenha(props) {
       toast.error("Senha atual incorreta.");
       setCarregando(false);
       return;
-    }
-    else{
+    } else {
       toast.success("Senha alterada com sucesso!");
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senhaAtual: false,
       }));
     }
-    
+
     setCarregando(true);
     setErro(false);
-   
+
     setTimeout(() => {
       setCarregando(false);
     }, 3000);
@@ -166,7 +166,7 @@ function ModalAlterarSenha(props) {
                 type="password"
                 erro={erro.senhaAtual}
                 onChange={(e) =>
-                  preenchendoRespostas("senhaAtual", e.target.value)  
+                  preenchendoRespostas("senhaAtual", e.target.value)
                 }
               />
               {erro.senhaAtual && <Rotulo>Senha atual incorreta</Rotulo>}
@@ -181,7 +181,9 @@ function ModalAlterarSenha(props) {
                 erro={erro.senha}
                 onChange={(e) => preenchendoRespostas("senha", e.target.value)}
               />
-              {erro.senha && <Rotulo>Insira uma nova senha com no minimo 8 digitos</Rotulo>}
+              {erro.senha && (
+                <Rotulo>Insira uma nova senha com no minimo 8 digitos</Rotulo>
+              )}
             </CaixaInputRotulo>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>

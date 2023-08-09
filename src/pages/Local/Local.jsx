@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../stores/auth";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import {
   Body,
@@ -26,6 +31,8 @@ import {
   UsuarioComentario,
   ItemComentario,
   Pergunta,
+  TextoBotao,
+  CaixaLoader,
 } from "./Styles";
 
 import { Rate } from "antd";
@@ -46,14 +53,20 @@ import fotoPerfil from "../../assets/montanha.jpg";
 import * as managerService from "../../services/ManagerService/managerService";
 
 function Local() {
+  const antIconModal = (
+    <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
+  );
+
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const [carregando, setCarregando] = useState(false);
+  const usuarioLogado = useAuthStore((state) => state.usuario);
 
-  const navigate = useNavigate();
+  const navegar = useNavigate();
 
-  const id_local = "6469762610cc9138d78e6470";
+  const id_local = "64b29944b59a260d89d67d40";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -82,6 +95,24 @@ function Local() {
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
+  }
+
+  async function deletaLocal() {
+    if (usuarioLogado.admin === false) {
+      toast.error("Usuário não é administrador.");
+      return;
+    }
+    setCarregando(true);
+    try {
+      await managerService.DeletaLocal(id_local);
+      toast.success("Local deletado com sucesso!");
+      setTimeout(() => {
+        navegar("/");
+      }, 3000);
+    } catch (error) {
+      toast.error("Erro ao deletar local");
+      setCarregando(false);
+    }
   }
 
   useEffect(() => {
@@ -257,14 +288,34 @@ function Local() {
         </ConteudoAvaliacao>
         <CaixaBotoes>
           <Botao
-            width="20%"
+            width="12.5rem !important"
             widthMedia700="30%"
-            onClick={() => navigate("/novocomentario")}
+            height="2.5rem !important"
+            onClick={() => navegar("/novocomentario")}
           >
-            Adicionar Comentário
+            <TextoBotao>Adicionar Comentário</TextoBotao>
+          </Botao>
+          <Botao
+            width="12.5rem !important"
+            widthMedia700="30%"
+            color="white"
+            backgroundColor="#ff3a3a"
+            borderColor="#ff3a3a"
+            onClick={() => deletaLocal()}
+          >
+            <TextoBotao>
+              {carregando ? (
+                <CaixaLoader>
+                  <Spin indicator={antIconModal} />
+                </CaixaLoader>
+              ) : (
+                "Excluir"
+              )}
+            </TextoBotao>
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }
