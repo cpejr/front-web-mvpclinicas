@@ -24,7 +24,7 @@ export const GetDadosPessoais = async () => {
     .catch((error) => {
       alert(error.message);
     });
-  return dadosUsuario;
+  return { dadosUsuario };
 };
 
 export const GetDadosLocais = async () => {
@@ -35,6 +35,15 @@ export const GetDadosLocais = async () => {
 
   return { dadosLocais };
 };
+export const CadastroNovoLocal = async (novoLocal) => {
+  const dadosNovoLocal = await requesterService
+  .criarNovoLocal(novoLocal)
+  .then((res) => {
+      return res;
+     
+  });
+  return dadosNovoLocal;
+}
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
@@ -90,15 +99,19 @@ export const ExcluirPerfil = async (id) => {
       return false;
     });
 };
-
-export const CadastroNovoLocal = async (novoLocal) => {
-  const dadosNovoLocal = await requesterService
-    .criarNovoLocal(novoLocal)
-    .then((res) => {
-      return res;
+export const UpdateFotoDePerfil = async (id, file) => {
+  await requesterService
+    .updateFotoDePerfil(id, file)
+    .then(() => {
+      toast.success("Foto atualizada com sucesso");
+    })
+    .catch((error) => {
+      alert(error.message);
+      return;
     });
-  return dadosNovoLocal;
+  return;
 };
+
 export const UpdateDadosPerfil = async (id, respostas) => {
   await requesterService
     .updateDadosPerfil(id, respostas)
@@ -134,4 +147,14 @@ export const requisicaoLogin = async (email, senha) => {
   }
 
   return;
+};
+
+export const GetFotoDePerfil = async (id) => {
+  let fotoDePerfil = {};
+  await requesterService
+    .requisicaoFotoDePerfil(id)
+    .then((res) => (fotoDePerfil = res.data.imagem))
+    .catch((error) => alert(error.message));
+
+  return fotoDePerfil;
 };

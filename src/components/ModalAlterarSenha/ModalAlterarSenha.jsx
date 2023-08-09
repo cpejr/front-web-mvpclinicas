@@ -22,6 +22,7 @@ import * as managerService from "../../services/ManagerService/managerService";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 function ModalAlterarSenha(props) {
+  
   const [carregando, setCarregando] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [erro, setErro] = useState({
@@ -35,8 +36,22 @@ function ModalAlterarSenha(props) {
       ...respostasAnteriores,
       [pergunta]: valor,
     }));
-  }
 
+    if (pergunta == 'senha' && valor.length < 8) {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senha: true,
+      }));
+      setCarregando(false);
+      return;
+    } else {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senha: false,
+      }));
+    }
+  }
+ 
   async function alterandoSenha() {
     if (!respostas.senhaAtual) {
       setErro((erroAnterior) => ({
@@ -53,7 +68,7 @@ function ModalAlterarSenha(props) {
       }));
     }
 
-    if (!respostas.senha || respostas.senha.length < 8) {
+    if (!respostas.senha || respostas.senha < 8) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senha: true,
