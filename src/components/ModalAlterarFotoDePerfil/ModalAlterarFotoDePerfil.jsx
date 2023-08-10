@@ -40,8 +40,6 @@ function ModalAlterarFotoDePerfil(props) {
     </div>
   );
 
-  //   const eMenorQue2M = file.size / 1024 / 1024 < 2;
-
   async function aposMudanca(info) {
     setCarregando(true);
     pegarBase64(info.file.originFileObj, (url) => {
