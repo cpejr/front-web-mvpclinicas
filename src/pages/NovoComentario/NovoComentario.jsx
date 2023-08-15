@@ -33,7 +33,7 @@ function NovoComentario() {
   const id_usuario = usuarioLogado ? usuarioLogado._id : "64c2c8ed95156bfab6335f4a";
 
 
-  //Precisa de uma branch com login funcionando para testar 
+
   
 
   
@@ -51,9 +51,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const {id_local} = useParams();
-  //const id_usuario ="64c2c8ed95156bfab6335f4a";
-  
+  const {id_local} = useParams();  
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);

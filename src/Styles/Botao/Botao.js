@@ -22,7 +22,7 @@ const Botao = styled.button`
   width: ${(props) => props.width ?? "30%"};
 
   @media (max-width: 700px) {
-    width: ${(props) => props.widthMedia700};
+    width: ${(props) => props.fontSize700};
   }
 
   @media (max-width: 500px) {
@@ -44,6 +44,14 @@ const Botao = styled.button`
 
   /* Características do texto */
   font-size: ${(props) => props.fontSize ?? "18px"};
+  @media (max-width: 700px) {
+    font-size: ${(props) => props.fontSize700 ?? "16px"};
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${(props) => props.fontSize500 ?? "13px"};
+  }
+
   font-family: ${(props) => props.fontFamily ?? "Roboto Condensed"};
   font-weight: ${(props) => props.fontWeight ?? "400px"};
   line-height: ${(props) => props.lineHeight ?? "21.6px"};
