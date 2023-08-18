@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const AvaliacaoEstrelas = styled.div`
+  align-items: baseline;
+  color: #570b87;
+  font-size: 15px;
+  width: 100%;
+`;
+
 export const Body = styled.div`
   display: flex;
   align-items: center;
@@ -15,6 +22,25 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 90%;
   height: 100%;
+`;
+
+export const EstrelasLocal = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 20%;
+  margin-bottom: 7%;
+  width: 100%;
+  padding: 0%;
+  color: #570b87;
+  font-size: 32px;
+  @media (max-width: 900px) {
+    font-size: 20px;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
 `;
 
 export const FotoNome = styled.div`
@@ -298,16 +324,20 @@ export const NomeUsuario = styled.div`
 export const Comentario = styled.div`
   width: 80%;
   height: 60%;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 3%;
+
   font-size: 1.2em;
   overflow-y: auto;
   overflow-x: hidden;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  word-wrap: normal;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+
+  font-family: "Barlow";
   ::-webkit-scrollbar {
     width: 0px;
   }
@@ -319,16 +349,48 @@ export const Comentario = styled.div`
 
 export const CaixaBotoes = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 100%;
+  width: 80%;
   padding: 2%;
 
   @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
   }
+`;
+
+export const ItemComentario = styled.div`
+  font-size: 1rem;
+  gap: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const Pergunta = styled.div`
+  font-size: 1.1rem;
+  font-style: italic;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+`;
+
+export const TextoBotao = styled.div`
+  font-size: 1rem;
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+  @media (max-width: 400px) {
+    font-size: 0.8rem;
+  }
+`;
+export const CaixaLoader = styled.div`
+  padding-bottom: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

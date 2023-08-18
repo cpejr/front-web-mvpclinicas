@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../stores/auth";
+import AddToast from "../../components/AddToast/AddToast";
+import { toast } from "react-toastify";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import {
   Body,
@@ -12,6 +18,7 @@ import {
   ConteudoAvaliacao,
   Direita,
   Esquerda,
+  EstrelasLocal,
   FotoNome,
   FotoUsuario,
   InputDividido,
@@ -22,8 +29,13 @@ import {
   TituloInput,
   Usuario,
   UsuarioComentario,
+  ItemComentario,
+  Pergunta,
+  TextoBotao,
+  CaixaLoader,
 } from "./Styles";
 
+import { Rate } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
@@ -41,12 +53,20 @@ import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
 
 function Local() {
+  const antIconModal = (
+    <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
+  );
+
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
+  const [carregando, setCarregando] = useState(false);
+  const usuarioLogado = useAuthStore((state) => state.usuario);
 
-  const id_local = "6469762610cc9138d78e6470";
+  const navegar = useNavigate();
+
+  const id_local = "64b29944b59a260d89d67d40";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -65,14 +85,34 @@ function Local() {
   };
 
   async function pegandoDadosLocal() {
-    const resposta = await managerService.GetDadosLocal(id_local);
-    setLocal(resposta.dadosLocal);
+    const resposta = await managerService.GetDadosLocalPorId(id_local);
+    setLocal(resposta.dadosLocais);
   }
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     setComentarios(resposta.comentariosLocal.comentarios);
-    setAvaliacao(resposta.comentariosLocal.media_avaliacao);
+    let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
+    let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
+    setAvaliacao(avaliacaoArredondada);
+  }
+
+  async function deletaLocal() {
+    if (usuarioLogado.admin === false) {
+      toast.error("Usuário não é administrador.");
+      return;
+    }
+    setCarregando(true);
+    try {
+      await managerService.DeletaLocal(id_local);
+      toast.success("Local deletado com sucesso!");
+      setTimeout(() => {
+        navegar("/");
+      }, 3000);
+    } catch (error) {
+      toast.error("Erro ao deletar local");
+      setCarregando(false);
+    }
   }
 
   useEffect(() => {
@@ -101,7 +141,11 @@ function Local() {
               <TituloIcon>
                 <TituloInput>Nome:</TituloInput>
                 <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
+                  style={{
+                    fontSize: "22px",
+                    color: "#570B87",
+                    fontWeight: "bold",
+                  }}
                 />
               </TituloIcon>
               <Input
@@ -180,6 +224,19 @@ function Local() {
         </CaixaInputs>
         <ConteudoAvaliacao>
           <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+          <EstrelasLocal>
+            <Rate
+              value={Math.floor(avaliacao) + 0.5}
+              style={{
+                color: "#570B87",
+                display: "flex",
+                justifyContent: "row",
+              }}
+              allowHalf
+              defaultValue={avaliacao}
+              disabled
+            />
+          </EstrelasLocal>
           {comentarios.length === 0 ? (
             <UsuarioComentario>
               <Comentario>
@@ -210,7 +267,14 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {comentarios[comentarioAtual].comentario}
+                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                    ([pergunta, resposta]) => (
+                      <ItemComentario key={pergunta}>
+                        <Pergunta>{pergunta}</Pergunta>
+                        {resposta}
+                      </ItemComentario>
+                    )
+                  )}
                 </Comentario>
               </UsuarioComentario>
               <Direita
@@ -224,11 +288,35 @@ function Local() {
           )}
         </ConteudoAvaliacao>
         <CaixaBotoes>
-          <Botao width="20%" widthMedia700="30%">
-            Adicionar Comentário
+          <Botao
+            width="12.5rem !important"
+            widthMedia700="30%"
+            height="2.5rem !important"
+            onClick={() => navegar("/novocomentario")}
+          >
+            <TextoBotao>Adicionar Comentário</TextoBotao>
+          </Botao>
+          <Botao
+            width="12.5rem !important"
+            widthMedia700="30%"
+            color="white"
+            backgroundColor="#ff3a3a"
+            borderColor="#ff3a3a"
+            onClick={() => deletaLocal()}
+          >
+            <TextoBotao>
+              {carregando ? (
+                <CaixaLoader>
+                  <Spin indicator={antIconModal} />
+                </CaixaLoader>
+              ) : (
+                "Excluir"
+              )}
+            </TextoBotao>
           </Botao>
         </CaixaBotoes>
       </Conteudo>
+      <AddToast />
     </Body>
   );
 }

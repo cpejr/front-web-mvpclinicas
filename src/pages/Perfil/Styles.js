@@ -13,7 +13,7 @@ export const Conteudo = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   height: 100%;
 
   @media (max-width: 900px) {
@@ -104,7 +104,7 @@ export const TituloInput = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: darkpurple;
+  color: #570b87;
 
   @media (max-width: 900px) {
     font-size: 1em;
@@ -132,7 +132,7 @@ export const CaixaBotoes = styled.div`
 
   @media (max-width: 900px) {
     gap: 20px;
-    padding: 5%;
+    padding: 3%;
     width: 90%;
   }
 `;
@@ -149,5 +149,39 @@ export const BotoesEdicao = styled.div`
     flex-direction: column;
     gap: 20px;
     width: 100%;
+  }
+`;
+
+export const SairTexto = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: darkpurple;
+
+  @media (max-width: 900px) {
+    font-size: 1em;
+  }
+`;
+export const TextoAlterarFoto = styled.div`
+  width: 100%;
+  height: 20px;
+  font-family: "Roboto Condensed";
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  color: #570b87;
+  cursor: pointer;
+  @media (max-width: 900px) {
+    font-size: 1em;
   }
 `;
