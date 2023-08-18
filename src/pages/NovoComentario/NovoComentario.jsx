@@ -23,14 +23,13 @@ import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
-import * as managerService from "../../services/ManagerService/managerService";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 
 
 function NovoComentario() {
   const usuarioLogado = useAuthStore((state) => state.usuario);
-  const id_usuario = usuarioLogado ? usuarioLogado._id : "64c2c8ed95156bfab6335f4a";
+  const id_usuario = usuarioLogado;
 
 
 
