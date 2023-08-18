@@ -11,9 +11,8 @@ function Header() {
        <Icone>
         <UserOutlined
          style={{fontSize: "25px",
-          position: "absolute", 
-          paddingBottom: "1.2%",
-           paddingTop: "0.9%", 
+         margineft: "10%"
+
            }} />
            </Icone>
            </CaixaLink>

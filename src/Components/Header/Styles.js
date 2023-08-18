@@ -7,12 +7,12 @@ export const ContainerHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content:space-around;
   background-color: #8B00FF;
-  height: 90px;
-  padding-left: 45%;
-  padding-right: 47%;
+  height: 14vh;
+  width: 100vw;
   margin-top: -1%;
-  margin-left: -1%;
+ 
   margin-bottom: 1%;
   color:${Cores.branco};
   @media (max-width: 912px) {
@@ -53,10 +53,9 @@ padding-top: 0.9%,
 `;
 export const Texto = styled.p`
  color: white;
- font-size: 1em;
+ font-size: 1.40em;
  white-space: nowrap;
- margin-right: 40%;
- width: 100%;
+ margin-left: 15%;
  @media (max-width: 768px) {
 }
  @media (max-width: 425px) {
@@ -76,14 +75,16 @@ export const Texto2 = styled.p`
 export const CaixaLink = styled.div`
   display: flex;
   flex-direction: row;
-  border-radius: 10px;
+  border-radius: 18px;
   justify-content: space-around;
-  align-items: right;
-  padding-right: 50%;
-  padding-left: 50%;
-  margin-left: 150%;
+  align-items: center;
   background-color:#570B87;
-  width: 200%;
+  width: 23vw;
+  height: 10vh;
+  padding-left: 1em;
+  margin-left: 40vw;
+  margin-top: 0.3em;
+
   @media (max-width: 912px) {
     padding-right: 40%;
   }
@@ -124,12 +125,8 @@ export const CaixaLink2 = styled.div`
   justify-content: flex-start;
   justify-content: space-around;
   align-items: left;
-  padding-right: 50%;
-  padding-left: 50%;
-  margin-right: 120%;
-  margin-left: -250%;
   background-color:#570B87;
-  width: 200%;
+
   @media (max-width: 912px) {
     margin-left: -220%;
   }
