@@ -49,6 +49,7 @@ function Perfil() {
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const clearAuth = useAuthStore((state)=> state.clearAuth);
 
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
@@ -61,6 +62,7 @@ function Perfil() {
 
   async function handleLogout() {
     try {
+      clearAuth();
       logout();
       toast.success("Usuario deslogado com sucesso");
       setTimeout(() => {

@@ -12,6 +12,7 @@ const useAuthStore = create(
         set({ token, usuario });
       },
       setUsuario: (usuario) => set({ usuario }),
+      clearAuth: () => set({token: null, usuario: null}),
     }),
     {
       name: "auth",

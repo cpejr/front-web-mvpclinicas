@@ -197,7 +197,7 @@ function NovoComentario() {
           false
         )}
         {renderizaInput(
-          "Quais as condições de recursos para o trabalho?",
+          "Quais as condições de trabalho?",
           false
         )}
         {renderizaInput("Fornece Alimentação?")}
