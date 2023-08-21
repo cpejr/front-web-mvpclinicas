@@ -107,6 +107,7 @@ function Perfil() {
 
   return (
     <Body>
+      <HeaderHome/>
       <Conteudo>
         <div
           style={{

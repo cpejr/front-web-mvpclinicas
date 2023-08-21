@@ -49,7 +49,7 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
-
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
 
 function Local() {
@@ -126,6 +126,7 @@ function Local() {
   return (
     <Body>
       <Conteudo>
+        <HeaderHome/>
         <FotoNome>
           <CaixaFoto>
             <img
