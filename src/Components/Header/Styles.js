@@ -1,76 +1,76 @@
 import styled from "styled-components";
 import { Cores } from "../../variaveis";
-import { Link } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 
 export const ContainerHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-around;
   background-color: #8B00FF;
   height: 14vh;
   width: 100vw;
   margin-top: -1%;
- 
   margin-bottom: 1%;
   color:${Cores.branco};
-  @media (max-width: 912px) {
-    padding-right: 50%;
-    padding-left: 50%;
-  }
-  @media (max-width: 820px) {
-    padding-right: 50%;
-    padding-left: 50%;
-  }
-  @media (max-width: 768px) {
-    padding-right: 60%;
-    padding-left: 60%;
-  }
-  @media (max-width: 540px) {
-    padding-right: 60%;
-    padding-left: 60%;
-  }
-  @media (max-width: 425px) {
-    padding-right: 40%;
-    padding-left: 40%;
-    margin-top: -2%;
-  }
-  @media (max-width: 375px) {
-    padding-right: 35%;
-    padding-left: 35%;
-    margin-top: -2%;
-    margin-left: -1%;
-  }
-`;
-export const UserIcone = styled(UserOutlined)`
-font-size: 1000px,
-position: absolute, 
-margin-left: 12% ,
-padding-bottom: 1.2%,
-padding-top: 0.9%, 
 
 `;
+
+export const IconeUsuario = styled(UserOutlined)`
+  font-size: 1.4em;
+
+  @media (max-width : 744px){
+    font-size: 1em;
+    margin-right: 0.5em;
+  }
+
+  @media (max-width : 575px){
+    font-size: 1em;
+    margin-left: 5%;
+  }
+
+  @media (max-width: 460px){
+    font-size: 1.4em;
+
+  }
+
+`;
+
 export const Texto = styled.p`
  color: white;
- font-size: 1.40em;
+ font-size: 1.4em;
  white-space: nowrap;
  margin-left: 15%;
- @media (max-width: 768px) {
+
+ @media (max-width: 1075px) {
+  font-size: 1.2em;
+  margin-left: 5%;
 }
- @media (max-width: 425px) {
-  color: transparent;
+ @media (max-width: 744px) {
+  font-size: 1em;
 }
- @media (max-width: 375px) {
-  color: transparent;
+ @media (max-width: 575px) {
+  font-size: 0.8em;
 }
+
+  @media (max-width: 460px){
+    display: none;
+  }
 `;
 export const Texto2 = styled.p`
  color: white;
  font-size: 1em;
  white-space: nowrap;
- margin-right: 40%;
- width: 100%;
+
+ @media (max-width: 1075px) {
+  font-size: 1.2em;
+  margin-left: 5%;
+}
+ @media (max-width: 744px) {
+  font-size: 0.9em;
+}
+ @media (max-width: 575px) {
+  font-size: 0.7em;
+}
 `;
 export const CaixaLink = styled.div`
   display: flex;
@@ -79,83 +79,54 @@ export const CaixaLink = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color:#570B87;
-  width: 23vw;
+  width: 22vw;
   height: 10vh;
   padding-left: 1em;
-  margin-left: 40vw;
+  margin-left: 45vw;
   margin-top: 0.3em;
 
-  @media (max-width: 912px) {
-    padding-right: 40%;
-  }
-  @media (max-width: 820px) {
-    margin: 250%;
-    padding-right: 50%;
-    padding-left: 50%;
-  }
-  @media (max-width: 768px) {
-    display: flex;
-    justify-content: space-around;
-    margin: 350%;
-    width: 20%;
-    padding-right: 60%;
-    padding-left: 60%;
-  }
-  @media (max-width: 540px) {
-    margin: 180%;
-  }
-  @media (max-width: 425px) {
+  @media (max-width: 460px){
     justify-content: center;
-    margin: 50%;
-    width: 20%;
-    padding-right: 20%;
-    padding-left: 20%;
+    width: 10vw;
+    margin-left: 52vw;
+    border-radius: 35px;
   }
-  @media (max-width: 375px) {
-    justify-content: center;
-    margin: 50%;
-    width: 20%;
-    padding-right: 20%;
-    padding-left: 20%;
-  }
+
 `;
 export const CaixaLink2 = styled.div`
+  background-color: red;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  justify-content: space-around;
-  align-items: left;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15vw;
+  width: 10%;
+  height: 10vh;
   background-color:#570B87;
 
-  @media (max-width: 912px) {
-    margin-left: -220%;
-  }
-  @media (max-width: 820px) {
-    margin: -150%;
-  }
-  @media (max-width: 768px) {
-    justify-content: center;
-    margin: -140%;
-    padding-right: 20%;
-    padding-left: 20%;
-  }
-   @media (max-width: 540px) {
-    margin:-80%;
-  }
-  @media (max-width: 425px) {
-    justify-content: center;
-    margin: -25%;
-    padding-right: 20%;
-    padding-left: 20%;
-  }
-  @media (max-width: 375px) {
-    justify-content: center;
-    margin: -25%;
-    padding-right: 20%;
-    padding-left: 20%;
-  }
+  @media (max-width: 744px){
+    width: 15%;
+    margin-left: 10vw;
+
+  };
+
 `;
-export const Logo = styled.div`
+
+export const Icone = styled.div`
+margin-left: 10%;
+padding-right: 10%;
+
+@media (max-width: 460px){
+  margin-left: 0%;
+  padding-right: 15%;
+
+}
+
+`;
+
+
+
+/*export const Logo = styled.div`
   display: flex;
   width: 35%;
 
@@ -213,8 +184,8 @@ export const Logo = styled.div`
       width: 75%;
     }
   }
-`;
-export const MenuHeader = styled.div`
+`;*/
+/*export const MenuHeader = styled.div`
   display: none;
 
   @media (max-width: 780px) {
@@ -226,32 +197,8 @@ export const MenuHeader = styled.div`
     display:flex;
     justify-content:center ;
   }
-`;
-export const Icone = styled.div`
-margin-left: 10%;
-padding-right: 10%;
-@media (max-width: 910px) {
-  margin-right: 10%;
-}
-  @media (max-width: 820px) {
-    margin-right: 10%;
-}
-
-@media (max-width: 425px) {
-  margin-right: 300%;
-  margin-top: 20%;
-}
-@media (max-width: 375px) {
-  margin-right: 300%;
-  margin-top: 20%;
-}
-@media (max-width: 280px) {
-  margin-right: 360%;
-  margin-top: 20%;
-}
-`;
-
-export const CaixaFotoPerfil = styled.div`
+`;*/
+/*export const CaixaFotoPerfil = styled.div`
 display: flex;
 justify-content: left;
 
@@ -271,4 +218,4 @@ background-color: #570B87;
   width: 150px;
   height: 150px;
 }
-`;
+`;*/
