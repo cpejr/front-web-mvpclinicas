@@ -16,13 +16,13 @@ import { Modal, Spin } from "antd";
 
 import Botao from "../../Styles/Botao";
 import Input from "../../Styles/Input";
-import { senha } from "../../utils/masks";
 import AddToast from "../../components/AddToast/AddToast";
 
 import * as managerService from "../../services/ManagerService/managerService";
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 function ModalAlterarSenha(props) {
+  
   const [carregando, setCarregando] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [erro, setErro] = useState({
@@ -36,10 +36,24 @@ function ModalAlterarSenha(props) {
       ...respostasAnteriores,
       [pergunta]: valor,
     }));
-  }
 
+    if (pergunta == 'senha' && valor.length < 8) {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senha: true,
+      }));
+      setCarregando(false);
+      return;
+    } else {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senha: false,
+      }));
+    }
+  }
+ 
   async function alterandoSenha() {
-    if (!respostas.senhaAtual || respostas.senhaAtual !== props.usuario.senha) {
+    if (!respostas.senhaAtual) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senhaAtual: true,
@@ -54,7 +68,7 @@ function ModalAlterarSenha(props) {
       }));
     }
 
-    if (!respostas.senha) {
+    if (!respostas.senha || respostas.senha < 8) {
       setErro((erroAnterior) => ({
         ...erroAnterior,
         senha: true,
@@ -99,10 +113,30 @@ function ModalAlterarSenha(props) {
       }));
     }
 
+    const resultado = await managerService.UpdateSenha(
+      props.usuario._id,
+      respostas
+    );
+
+    if (!resultado) {
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senhaAtual: true,
+      }));
+      toast.error("Senha atual incorreta.");
+      setCarregando(false);
+      return;
+    } else {
+      toast.success("Senha alterada com sucesso!");
+      setErro((erroAnterior) => ({
+        ...erroAnterior,
+        senhaAtual: false,
+      }));
+    }
+
     setCarregando(true);
     setErro(false);
-    await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-    toast.success("Senha alterada com sucesso!");
+
     setTimeout(() => {
       setCarregando(false);
     }, 3000);
@@ -128,7 +162,7 @@ function ModalAlterarSenha(props) {
             <TituloInput>Insira a senha atual:</TituloInput>
             <CaixaInputRotulo>
               <Input
-                placeholder={senha(props.usuario.senha)}
+                placeholder={"Senha atual"}
                 type="password"
                 erro={erro.senhaAtual}
                 onChange={(e) =>
@@ -147,7 +181,9 @@ function ModalAlterarSenha(props) {
                 erro={erro.senha}
                 onChange={(e) => preenchendoRespostas("senha", e.target.value)}
               />
-              {erro.senha && <Rotulo>Insira uma nova senha</Rotulo>}
+              {erro.senha && (
+                <Rotulo>Insira uma nova senha com no minimo 8 digitos</Rotulo>
+              )}
             </CaixaInputRotulo>
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>

@@ -6,6 +6,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+import React from "react";
 
 import Cadastro from "../src/pages/Cadastro";
 import Home from "../src/pages/Home";

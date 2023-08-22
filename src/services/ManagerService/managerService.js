@@ -1,5 +1,7 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
+import requisicaoErro from '../../utils/HttpErros';
+
 export const CadastroUsuario = async (usuario) => {
   const dados = await requesterService.criarUsuario(usuario).then((res) => {
     return res;
@@ -79,6 +81,13 @@ export const GetComentariosLocal = async (id_local) => {
   return { comentariosLocal };
 };
 
+export const DeletaLocal = async (id_local) => {
+  const resposta = await requesterService.deletarLocal(id_local).then((res) => {
+    return res;
+  });
+  return resposta;
+};
+
 export const ExcluirPerfil = async (id) => {
   await requesterService
     .requisicaoDeletarUsuario(id)
@@ -95,11 +104,8 @@ export const ExcluirPerfil = async (id) => {
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService
     .updateFotoDePerfil(id, file)
-    .then(() => {
-      toast.success("Foto atualizada com sucesso");
-    })
     .catch((error) => {
-      alert(error.message);
+      requisicaoErro(error);
       return;
     });
   return;
@@ -118,7 +124,17 @@ export const UpdateDadosPerfil = async (id, respostas) => {
       return false;
     });
 };
-
+export const UpdateSenha = async (id, respostas) => {
+  try {
+    await requesterService.updateSenha(id, respostas);
+    setTimeout(() => {
+      window.location.href = "/perfil";
+    }, 3000);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);
