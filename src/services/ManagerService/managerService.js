@@ -1,5 +1,7 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
+import requisicaoErro from '../../utils/HttpErros';
+
 export const CadastroUsuario = async (usuario) => {
   const dados = await requesterService.criarUsuario(usuario).then((res) => {
     return res;
@@ -102,11 +104,8 @@ export const ExcluirPerfil = async (id) => {
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService
     .updateFotoDePerfil(id, file)
-    .then(() => {
-      toast.success("Foto atualizada com sucesso");
-    })
     .catch((error) => {
-      alert(error.message);
+      requisicaoErro(error);
       return;
     });
   return;
