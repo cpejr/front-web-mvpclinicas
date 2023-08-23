@@ -49,3 +49,8 @@ export const updateFotoDePerfil = (id, base64) =>
   });
 
 export const requisicaoFotoDePerfil = (id) => api.get(`/usuariosimagem/${id}`);
+
+export const updateSenha = (id, respostas)=> api.put(`/usuarios/alterar_senha/${id}`,respostas);
+
+export const deletarLocal = (id_local) =>
+  api.delete(`/locais/${id_local}`);
