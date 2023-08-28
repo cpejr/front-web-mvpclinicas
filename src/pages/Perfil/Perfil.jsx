@@ -52,9 +52,11 @@ function Perfil() {
 
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
-      usuarioLogado._id
+      "64e653213833edb51e9afbc4"
     );
-    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
+    const resposta = await managerService.GetDadosUsuario(
+      "64e653213833edb51e9afbc4"
+    );
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
   }
@@ -202,11 +204,26 @@ function Perfil() {
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>CRM:</TituloInput>
+                <TituloInput>Registro:</TituloInput>
                 <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={usuario.crm}
+                placeholder={usuario.registro}
+                backgroundColor="white"
+                width="100%"
+                heightMedia700="20px"
+                alignSelf="flex-start"
+                marginBottomMedia700="8%"
+                readOnly
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloIcon>
+                <TituloInput>Formação:</TituloInput>
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
+              </TituloIcon>
+              <Input
+                placeholder={usuario.formacao}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
