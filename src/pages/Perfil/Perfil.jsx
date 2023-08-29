@@ -49,13 +49,14 @@ function Perfil() {
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const logout = useAuthStore((state) => state.logout);
 
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
-      "64e653213833edb51e9afbc4"
+      usuarioLogado._id
     );
     const resposta = await managerService.GetDadosUsuario(
-      "64e653213833edb51e9afbc4"
+      usuarioLogado._id
     );
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
