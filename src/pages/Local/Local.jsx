@@ -51,6 +51,7 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import Header from "../../Components/Header/Header";
 
 function Local() {
   const antIconModal = (
@@ -125,6 +126,7 @@ function Local() {
 
   return (
     <Body>
+      <Header/>
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
