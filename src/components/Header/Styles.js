@@ -8,7 +8,7 @@ export const ContainerHeader = styled.div`
   align-items: center;
   background-color: #8B00FF;
   height: 14vh;
-  width: 100vw;
+  width: 100%;
   margin-top: -1%;
   margin-bottom: 1%;
   color:${Cores.branco};
