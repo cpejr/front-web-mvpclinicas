@@ -49,8 +49,10 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
-
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
+import Header from "../../Components/Header/Header";
+const id_local = "64b1d04033776c925c899bc2";
 
 function Local() {
   const antIconModal = (
@@ -65,8 +67,6 @@ function Local() {
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
   const navegar = useNavigate();
-
-  const id_local = "64b29944b59a260d89d67d40";
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -125,6 +125,7 @@ function Local() {
 
   return (
     <Body>
+      <HeaderHome local={local}/>
       <Conteudo>
         <FotoNome>
           <CaixaFoto>

@@ -39,6 +39,7 @@ import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
@@ -107,21 +108,8 @@ function Perfil() {
 
   return (
     <Body>
+      <HeaderHome/>
       <Conteudo>
-        <div
-          style={{
-            left: "77%",
-            alignItems: "center",
-            position: "absolute",
-            top: "3%",
-          }}
-        >
-          <ExportOutlined
-            style={{ fontSize: "40px", color: "#570B87" }}
-            onClick={handleLogout}
-          />
-          <SairTexto onClick={handleLogout}>Sair</SairTexto>
-        </div>
         <CaixaFoto>
           <img
             src={imagem}
