@@ -29,8 +29,7 @@ import Input from "../../Styles/Input/Input";
 import { data, telefone } from "../../utils/masks";
 import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
-import useAuthStore from "../../stores/auth";
-import { logout } from "../../services/auth";
+import { logout, recebeUsuario } from "../../services/auth";
 import AddToast from "../../components/AddToast/AddToast";
 
 import { toast } from "react-toastify";
@@ -48,8 +47,8 @@ function Perfil() {
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
-  const usuarioLogado = useAuthStore((state) => state.usuario);
 
+  const usuarioLogado = JSON.parse(recebeUsuario());
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
       usuarioLogado._id

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -22,17 +22,11 @@ import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuthStore from "../../stores/auth";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { recebeUsuario } from "../../services/auth";
 
 function NovoComentario() {
-  // const usuarioLogado = useAuthStore((state) => {
-  //   console.log(state);
-  //   return state.usuario;
-  // });
-
   const usuarioLogado = JSON.parse(recebeUsuario());
 
   const id_usuario = usuarioLogado;
