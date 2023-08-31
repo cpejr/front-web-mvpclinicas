@@ -25,17 +25,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import useAuthStore from "../../stores/auth";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
-
+import { recebeUsuario } from "../../services/auth";
 
 function NovoComentario() {
-  const usuarioLogado = useAuthStore((state) => state.usuario);
+  // const usuarioLogado = useAuthStore((state) => {
+  //   console.log(state);
+  //   return state.usuario;
+  // });
+
+  const usuarioLogado = JSON.parse(recebeUsuario());
+
   const id_usuario = usuarioLogado;
-
-
-
-  
-
-  
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
@@ -50,7 +50,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const {id_local} = useParams();  
+  const { id_local } = useParams();
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);

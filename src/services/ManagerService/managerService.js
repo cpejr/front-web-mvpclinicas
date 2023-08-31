@@ -37,13 +37,12 @@ export const GetDadosLocais = async () => {
 };
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
@@ -123,6 +122,10 @@ export const requisicaoLogin = async (email, senha) => {
   try {
     const res = await requesterService.logarUsuario(email, senha);
     sessionStorage.setItem("@clinicas-Token", res.data.token);
+    sessionStorage.setItem(
+      "@clinicas-Usuario",
+      JSON.stringify(res.data.usuario)
+    );
     window.location.href = "/home";
     return res;
   } catch (error) {
