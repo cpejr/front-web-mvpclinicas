@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   Body,
   CaixaAvaliacao,
@@ -28,6 +29,7 @@ import { recebeUsuario } from "../../services/auth";
 
 function NovoComentario() {
   const usuarioLogado = JSON.parse(recebeUsuario());
+  const navigate = useNavigate();
 
   const id_usuario = usuarioLogado;
   const [checkPreenchido, setCheckPreenchido] = useState(false);
@@ -225,12 +227,13 @@ function NovoComentario() {
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
-          color="#ffffff"
-          backgroundColor="#ff0000c5"
-          borderColor="#ff0000"
+          color="#000000"
+          backgroundColor="white"
+          borderColor="#FF000080"
           width="40%"
+          onClick={() => navigate(`/local/${id_local}`)}
         >
-          Excluir
+          Cancelar
         </Botao>
         <Botao
           width="40%"
