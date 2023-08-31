@@ -31,7 +31,7 @@ export const EstrelasLocal = styled.div`
   align-items: center;
   gap: 30px;
   height: 20%;
-  margin-bottom: 7%;
+  margin-bottom: 1%;
   width: 100%;
   padding: 0%;
   color: #570b87;

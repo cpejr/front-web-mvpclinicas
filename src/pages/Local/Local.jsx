@@ -125,7 +125,7 @@ function Local() {
 
   return (
     <Body>
-      <HeaderHome />
+      <HeaderHome local={local}/>
       <Conteudo>
         <FotoNome>
           <CaixaFoto>

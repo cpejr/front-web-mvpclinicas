@@ -110,20 +110,6 @@ function Perfil() {
     <Body>
       <HeaderHome/>
       <Conteudo>
-        <div
-          style={{
-            left: "77%",
-            alignItems: "center",
-            position: "absolute",
-            top: "20%",
-          }}
-        >
-          <ExportOutlined
-            style={{ fontSize: "40px", color: "#570B87" }}
-            onClick={handleLogout}
-          />
-          <SairTexto onClick={handleLogout}>Sair</SairTexto>
-        </div>
         <CaixaFoto>
           <img
             src={imagem}
