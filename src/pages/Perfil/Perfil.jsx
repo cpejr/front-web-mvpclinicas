@@ -30,7 +30,6 @@ import { data, telefone } from "../../utils/masks";
 import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
 import useAuthStore from "../../stores/auth";
-import { logout } from "../../services/auth";
 import AddToast from "../../components/AddToast/AddToast";
 
 import { toast } from "react-toastify";
@@ -40,6 +39,7 @@ import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
@@ -49,6 +49,7 @@ function Perfil() {
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const logout = useAuthStore((state) => state.logout);
 
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
@@ -107,21 +108,8 @@ function Perfil() {
 
   return (
     <Body>
+      <HeaderHome/>
       <Conteudo>
-        <div
-          style={{
-            left: "77%",
-            alignItems: "center",
-            position: "absolute",
-            top: "3%",
-          }}
-        >
-          <ExportOutlined
-            style={{ fontSize: "40px", color: "#570B87" }}
-            onClick={handleLogout}
-          />
-          <SairTexto onClick={handleLogout}>Sair</SairTexto>
-        </div>
         <CaixaFoto>
           <img
             src={imagem}
@@ -202,11 +190,26 @@ function Perfil() {
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>CRM:</TituloInput>
+                <TituloInput>Registro:</TituloInput>
                 <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={usuario.crm}
+                placeholder={usuario.registro}
+                backgroundColor="white"
+                width="100%"
+                heightMedia700="20px"
+                alignSelf="flex-start"
+                marginBottomMedia700="8%"
+                readOnly
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloIcon>
+                <TituloInput>Formação:</TituloInput>
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
+              </TituloIcon>
+              <Input
+                placeholder={usuario.formacao}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -271,28 +274,28 @@ function Perfil() {
           fecharModal={() => fechandoModalAlterarFotoPerfil()}
           idUsuario={usuario._id}
         />
-        <ModalAlterarDados
-          open={modalAlterarDados}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalAlterarSenha
-          open={modalAlterarSenha}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalExcluirPerfil
-          open={modalExcluirPerfil}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
       </Modal>
+      <ModalAlterarDados
+        open={modalAlterarDados}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalAlterarSenha
+        open={modalAlterarSenha}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalExcluirPerfil
+        open={modalExcluirPerfil}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
 
       <AddToast />
     </Body>

@@ -13,6 +13,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Modal, Spin } from "antd";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 import { toast } from "react-toastify";
+import useAuthStore from "../../stores/auth";
 
 import Botao from "../../Styles/Botao";
 import AddToast from "../../components/AddToast/AddToast";
@@ -20,11 +21,13 @@ import AddToast from "../../components/AddToast/AddToast";
 import * as managerService from "../../services/ManagerService/managerService";
 function ModalAlterarDados(props) {
   const [carregando, setCarregando] = useState(false);
+  const logout = useAuthStore((state) => state.logout);
 
   async function deletarPerfil() {
     setCarregando(true);
     await managerService.ExcluirPerfil(props.usuario._id);
     toast.success("Sua conta foi excluída com sucesso!");
+    logout();
 
     setTimeout(() => {
       setCarregando(false);
