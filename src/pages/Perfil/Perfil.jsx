@@ -30,7 +30,6 @@ import { data, telefone } from "../../utils/masks";
 import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
 import useAuthStore from "../../stores/auth";
-import { logout } from "../../services/auth";
 import AddToast from "../../components/AddToast/AddToast";
 
 import { toast } from "react-toastify";
@@ -49,6 +48,7 @@ function Perfil() {
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const logout = useAuthStore((state) => state.logout);
 
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
@@ -203,11 +203,26 @@ function Perfil() {
           <InputDividido>
             <ConjuntoTituloInput>
               <TituloIcon>
-                <TituloInput>CRM:</TituloInput>
+                <TituloInput>Registro:</TituloInput>
                 <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
               </TituloIcon>
               <Input
-                placeholder={usuario.crm}
+                placeholder={usuario.registro}
+                backgroundColor="white"
+                width="100%"
+                heightMedia700="20px"
+                alignSelf="flex-start"
+                marginBottomMedia700="8%"
+                readOnly
+              ></Input>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <TituloIcon>
+                <TituloInput>Formação:</TituloInput>
+                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
+              </TituloIcon>
+              <Input
+                placeholder={usuario.formacao}
                 backgroundColor="white"
                 width="100%"
                 heightMedia700="20px"
@@ -272,28 +287,28 @@ function Perfil() {
           fecharModal={() => fechandoModalAlterarFotoPerfil()}
           idUsuario={usuario._id}
         />
-        <ModalAlterarDados
-          open={modalAlterarDados}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalAlterarSenha
-          open={modalAlterarSenha}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalExcluirPerfil
-          open={modalExcluirPerfil}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
       </Modal>
+      <ModalAlterarDados
+        open={modalAlterarDados}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalAlterarSenha
+        open={modalAlterarSenha}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalExcluirPerfil
+        open={modalExcluirPerfil}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
 
       <AddToast />
     </Body>

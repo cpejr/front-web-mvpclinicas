@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 import {
@@ -23,6 +23,7 @@ import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import { Spin } from "antd";
+import useAuthStore from "../../stores/auth";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 function Login() {
@@ -30,6 +31,8 @@ function Login() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
   const [carregando, setCarregando] = useState(false);
+  const setToken = useAuthStore((state) => state.setToken);
+
   const referenciaCamposNulos = {
     email: false,
     senha: false,
@@ -88,7 +91,10 @@ function Login() {
     ) {
       setCarregando(true);
       const resposta = await managerService.requisicaoLogin(email, senha);
+      const { token } = resposta.data;
+      setToken(token)
       setCarregando(false);
+
       if (resposta) toast.success("Login realizado com sucesso");
       else {
         setErroLoginInvalido({ email: true, senha: true });

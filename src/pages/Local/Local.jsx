@@ -87,7 +87,7 @@ function Local() {
 
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocalPorId(id_local);
-    setLocal(resposta.dadosLocais);
+    setLocal(resposta?.dadosLocais);
   }
 
   async function pegandoComentariosLocal() {

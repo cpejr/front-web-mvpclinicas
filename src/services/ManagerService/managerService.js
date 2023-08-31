@@ -1,5 +1,7 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
+import requisicaoErro from '../../utils/HttpErros';
+
 export const CadastroUsuario = async (usuario) => {
   const dados = await requesterService.criarUsuario(usuario).then((res) => {
     return res;
@@ -19,12 +21,14 @@ export const GetDadosPessoais = async () => {
   await requesterService
     .requisicaoDadosPessoais()
     .then((res) => {
-      dadosUsuario = res.data;
+      const emails = res.data.map((usuario) => usuario.email);
+      dadosUsuario = emails;
     })
     .catch((error) => {
       alert(error.message);
     });
-  return { dadosUsuario };
+
+  return dadosUsuario;
 };
 
 export const GetDadosLocais = async () => {
@@ -37,13 +41,12 @@ export const GetDadosLocais = async () => {
 };
 export const CadastroNovoLocal = async (novoLocal) => {
   const dadosNovoLocal = await requesterService
-  .criarNovoLocal(novoLocal)
-  .then((res) => {
+    .criarNovoLocal(novoLocal)
+    .then((res) => {
       return res;
-     
-  });
+    });
   return dadosNovoLocal;
-}
+};
 
 export const CriarNovoComentario = async (body, id_local) => {
   const resposta = await requesterService
@@ -91,7 +94,7 @@ export const ExcluirPerfil = async (id) => {
     .requisicaoDeletarUsuario(id)
     .then(() => {
       setTimeout(() => {
-        window.location.href = "/home";
+        window.location.href = "/login";
       }, 3000);
     })
     .catch((error) => {
@@ -102,11 +105,8 @@ export const ExcluirPerfil = async (id) => {
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService
     .updateFotoDePerfil(id, file)
-    .then(() => {
-      toast.success("Foto atualizada com sucesso");
-    })
     .catch((error) => {
-      alert(error.message);
+      requisicaoErro(error);
       return;
     });
   return;
