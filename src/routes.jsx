@@ -38,7 +38,7 @@ const router = createBrowserRouter(
         <Route path="/perfil" element={<Perfil />}/>
       </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Route>
   )
 );

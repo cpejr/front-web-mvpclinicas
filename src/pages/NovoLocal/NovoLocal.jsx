@@ -227,7 +227,7 @@ function CadastroNovoLocal() {
               color="#000000"
               backgroundColor="white"
               borderColor="#FF000080"
-              onClick={() => navegar("/")}
+              onClick={() => navegar("/home")}
             >
               Cancelar
             </Botao>

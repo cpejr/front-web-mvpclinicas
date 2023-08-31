@@ -110,7 +110,7 @@ function Local() {
       await managerService.DeletaLocal(id_local);
       toast.success("Local deletado com sucesso!");
       setTimeout(() => {
-        navegar("/");
+        navegar("/home");
       }, 3000);
     } catch (error) {
       toast.error("Erro ao deletar local");
