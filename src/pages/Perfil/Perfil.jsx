@@ -11,7 +11,6 @@ import {
   TituloIcon,
   TituloInput,
   TextoAlterarFoto,
-  SairTexto,
 } from "./Styles";
 
 import {
@@ -21,19 +20,14 @@ import {
   MailOutlined,
   CopyOutlined,
   GlobalOutlined,
-  ExportOutlined,
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { data, telefone } from "../../utils/masks";
-import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
-import { logout, recebeUsuario } from "../../services/auth";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
-
-import { toast } from "react-toastify";
 import { Modal } from "antd";
 
 import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/ModalAlterarFotoDePerfil";
@@ -50,9 +44,7 @@ function Perfil() {
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
-  const logout = useAuthStore((state) => state.logout);
 
-  const usuarioLogado = JSON.parse(recebeUsuario());
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
       usuarioLogado._id
@@ -60,18 +52,6 @@ function Perfil() {
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
-  }
-
-  async function handleLogout() {
-    try {
-      logout();
-      toast.success("Usuario deslogado com sucesso");
-      setTimeout(() => {
-        redirecionamento("/login");
-      }, 3000);
-    } catch (error) {
-      alert(error);
-    }
   }
 
   function acionarModais(e) {
