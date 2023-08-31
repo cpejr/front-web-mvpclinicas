@@ -30,7 +30,6 @@ import { data, telefone } from "../../utils/masks";
 import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
 import useAuthStore from "../../stores/auth";
-import { logout } from "../../services/auth";
 import AddToast from "../../components/AddToast/AddToast";
 
 import { toast } from "react-toastify";
@@ -55,9 +54,7 @@ function Perfil() {
     const respostaImagem = await managerService.GetFotoDePerfil(
       usuarioLogado._id
     );
-    const resposta = await managerService.GetDadosUsuario(
-      usuarioLogado._id
-    );
+    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
   }
@@ -289,28 +286,28 @@ function Perfil() {
           fecharModal={() => fechandoModalAlterarFotoPerfil()}
           idUsuario={usuario._id}
         />
-        <ModalAlterarDados
-          open={modalAlterarDados}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalAlterarSenha
-          open={modalAlterarSenha}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
-        <ModalExcluirPerfil
-          open={modalExcluirPerfil}
-          onClose={cancelouModal}
-          usuario={usuario}
-          centered
-          destroyOnClose
-        />
       </Modal>
+      <ModalAlterarDados
+        open={modalAlterarDados}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalAlterarSenha
+        open={modalAlterarSenha}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
+      <ModalExcluirPerfil
+        open={modalExcluirPerfil}
+        onClose={cancelouModal}
+        usuario={usuario}
+        centered
+        destroyOnClose
+      />
 
       <AddToast />
     </Body>

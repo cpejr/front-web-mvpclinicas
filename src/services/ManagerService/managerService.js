@@ -94,7 +94,7 @@ export const ExcluirPerfil = async (id) => {
     .requisicaoDeletarUsuario(id)
     .then(() => {
       setTimeout(() => {
-        window.location.href = "/home";
+        window.location.href = "/login";
       }, 3000);
     })
     .catch((error) => {
