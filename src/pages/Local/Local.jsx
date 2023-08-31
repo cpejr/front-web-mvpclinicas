@@ -232,7 +232,7 @@ function Local() {
                     />
                   </FotoUsuario>
                   <NomeUsuario>
-                    {comentarios[comentarioAtual].id_usuario.nome}
+                    {comentarios[comentarioAtual].id_usuario?.nome}
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>

@@ -33,6 +33,8 @@ function CadastroNovoLocal() {
     endereco: "",
   };
 
+  const navigate = useNavigate();
+
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);
@@ -223,8 +225,9 @@ function CadastroNovoLocal() {
               color="#000000"
               backgroundColor="white"
               borderColor="#FF000080"
+              onClick={() => navigate(`/`)}
             >
-              Excluir
+              Cancelar
             </Botao>
             <Botao
               onClick={() => {
