@@ -38,6 +38,13 @@ export const CaixaBotoes = styled.div`
     
   }
   
+  @media (max-width: 353px) {
+    width: 90%;
+  }
+  
+  @media (max-width: 278px) {
+    width: 100%;
+  }
 
   
 `;
@@ -222,11 +229,17 @@ export const NomeLocal = styled.button`
     
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 666px) {
     font-size : 14px;
     height: 30%;
     margin-bottom: 5%;
   }
+  @media (max-width: 323px) {
+    font-size : 10px;
+    height: 40%;
+    margin-bottom: 5%;
+  }
+  
 `;
 
 export const TextoPlaceholder = styled.div`
