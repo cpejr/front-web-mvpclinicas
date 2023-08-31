@@ -21,11 +21,16 @@ import Input from "../../Styles/Input/Input";
 import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
+import { recebeUsuario } from "../../services/auth";
 
 function NovoComentario() {
+  const usuarioLogado = JSON.parse(recebeUsuario());
+  const navigate = useNavigate();
+
+  const id_usuario = usuarioLogado;
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
@@ -40,8 +45,7 @@ function NovoComentario() {
   });
   const navegar = useNavigate();
 
-  const id_local = "64cc32cd2927b8e53c8f919f";
-  const id_usuario = "64ae9e9eb163ec6a9b9ed270";
+  const { id_local } = useParams();
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -92,7 +96,6 @@ function NovoComentario() {
 
     try {
       await CriarNovoComentario(body, id_local);
-
       toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
         navegar("/local");
@@ -222,12 +225,13 @@ function NovoComentario() {
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
-          color="#ffffff"
-          backgroundColor="#ff0000c5"
-          borderColor="#ff0000"
+          color="#000000"
+          backgroundColor="white"
+          borderColor="#FF000080"
           width="40%"
+          onClick={() => navigate(`/local/${id_local}`)}
         >
-          Excluir
+          Cancelar
         </Botao>
         <Botao
           width="40%"

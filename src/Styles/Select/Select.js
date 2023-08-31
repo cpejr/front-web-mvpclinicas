@@ -17,7 +17,7 @@ const Select = styled.select`
 		return cor;
 	}};
 	color: ${(props) => props.color};
-	border-radius: 3px;
+	border-radius: ${(props) => props.borderRadius ?? "3px"};
 	font-size: ${(props) => props.fontSize ?? "1em"};
 	margin-top: ${(props) => props.marginTop ?? "2%"};
 	margin-bottom: ${(props) => props.marginBottom ?? "0px"};
@@ -27,15 +27,13 @@ const Select = styled.select`
 	border-width: ${(props) => props.borderWidth};
 	box-shadow: ${(props) => props.boxShadow};
 	height: ${(props) => props.height ?? "50px"};
-	padding-left: 0.5%;
+	padding-left: ${(props) => props.paddingLeft ?? "0.5%"};
+	padding-right: ${(props) => props.paddingRight ?? "0.5%"};
 	padding-top: ${(props) => props.paddingTop ?? "0px"};
 	padding-bottom: ${(props) => props.paddingTop ?? "0px"};
-	width: ${(props) => props.width};
-	@media (max-width: 820px) {
-		width: ${(props) => props.borderWidth820 ?? "100%"};
-	}
-	@media (max-width: 290px) {
-		font-size: ${(props) => props.fontSize290 ?? "0.9em"};
+	width: ${(props) => props.width ?? "65%"};
+	@media (max-width: 700px) {
+		font-size: ${(props) => props.fontSize750 ?? "0.9em"};
 	}
 	@media (max-width: 320px) {
 		margin-bottom: ${(props) => props.marginBottomMedia320};

@@ -34,6 +34,8 @@ function CadastroNovoLocal() {
     endereco: "",
   };
 
+  const navigate = useNavigate();
+
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
   const [timeoutId, setTimeoutId] = useState(null);

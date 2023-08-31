@@ -33,10 +33,11 @@ const router = createBrowserRouter(
       <Route element={<RotasPrivadas />}>
         <Route path="/home" element={<Home />}/>
         <Route path="/local" element={<Local />}/>
-        <Route path="/novocomentario" element={<NovoComentario />}/>
+        <Route path="/novocomentario/:id_local" element={<NovoComentario />}/>
         <Route path="/novolocal" element={<NovoLocal />}/>
         <Route path="/perfil" element={<Perfil />}/>
       </Route>
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   )

@@ -29,6 +29,7 @@ import Input from "../../Styles/Input/Input";
 import { data, telefone } from "../../utils/masks";
 import { redirecionamento } from "../../utils/redirecionamento";
 import * as managerService from "../../services/ManagerService/managerService";
+import { logout, recebeUsuario } from "../../services/auth";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 
@@ -51,6 +52,7 @@ function Perfil() {
   const usuarioLogado = useAuthStore((state) => state.usuario);
   const logout = useAuthStore((state) => state.logout);
 
+  const usuarioLogado = JSON.parse(recebeUsuario());
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
       usuarioLogado._id

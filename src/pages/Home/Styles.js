@@ -19,8 +19,9 @@ export const Conteudo = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  width: 90%;
+  width: 95%;
   height: 100%;
+  
   @media (max-width: 900px) {
     width: 100%;
   }
@@ -29,17 +30,23 @@ export const Conteudo = styled.div`
 export const CaixaBotoes = styled.div`
   display: flex;
   justify-content: flex-end;
-  align-items: flex-start;
-  width: 15%;
+  width: 43%;
   position: relative;
-  left: 70%;
-  &.botoes-direita {
-    justify-content: flex-end;
+  left: 4%;
+  @media (max-width: 500px){
+    width: 70%;
+    
   }
-  @media (max-width: 900px) {
-    width: 50%;
-    left: 25%;
+  
+  @media (max-width: 353px) {
+    width: 90%;
   }
+  
+  @media (max-width: 278px) {
+    width: 100%;
+  }
+
+  
 `;
 
 export const CaixaConteudo = styled.div`
@@ -55,31 +62,28 @@ export const CaixaConteudo = styled.div`
   scroll-padding: 0;
   margin-bottom: 3%;
   margin-top: 2%;
-  border: 1px solid #570b87;
-  border-radius: 10px;
 `;
 
 export const CaixaFoto = styled.div`
   display: flex;
   justify-content: center;
-  font-size: 12em;
   align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 150px;
+  margin-left: 3%;
+  margin-top: 3%;
+  width: 140px;
+  height: 100px;
   border-radius: 10px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
-  margin: 0%;
 
   @media (max-width: 900px) {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 85px;
   }
 
   @media (max-width: 500px) {
     width: 100px;
-    height: 100px;
+    height: 70px;
   }
 `;
 
@@ -97,15 +101,24 @@ export const CaixaInputs = styled.div`
 `;
 
 export const CaixaDados = styled.div`
-  margin-left: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 5%;
+  width: 75%;
+  margin-left: 2%;
+  
+
 `;
 
 export const CaixaSelect = styled.div`
   display: flex;
-  width: 70%;
+  width: 40%;
   justify-content: flex-end;
-  @media (max-width: 700px) {
-    justify-content: center;
+  margin-left: 30%;
+
+  @media (max-width: 700px){
+    font-size: 14px;
   }
 `;
 
@@ -177,42 +190,56 @@ export const CaixaLocais = styled.div`
   align-items: center;
   gap: 40px;
   height: 20%;
-  width: 90%;
+  width: 97%;
   padding: 2%;
 
-  @media (max-width: 900px) {
+ /* @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
-  }
+  }*/
 `;
 
 export const Local = styled.div`
   display: flex;
   align-items: stretch;
-  background-color: #f2f2f2;
-  border: 2px solid #570b87;
+  border: 2.5px solid #570b87;
   padding: 10px;
+  margin: 5px;
   margin-bottom: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   height: 10%;
-  width: 97%;
+  width: 100%;
 `;
 
-export const NomeLocal = styled.div`
+export const NomeLocal = styled.button`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
+  align-items: center;
   height: 20%;
   width: 100%;
-  padding-bottom: 2%;
   color: #570b87;
-  font-size: 32px;
-  font-family: "Roboto condensed";
-  @media (max-width: 900px) {
-    font-size: 20px;
+  background-color: white;
+  font-size: 25px;
+  border: none;
+  cursor: pointer;
+
+  @media (max-width: 744px) {
+    font-size: 21px;
+    height: 25%;
+    
   }
+
+  @media (max-width: 666px) {
+    font-size : 14px;
+    height: 30%;
+    margin-bottom: 5%;
+  }
+  @media (max-width: 323px) {
+    font-size : 10px;
+    height: 40%;
+    margin-bottom: 5%;
+  }
+  
 `;
 
 export const TextoPlaceholder = styled.div`
@@ -248,31 +275,34 @@ export const EnderecoLocal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
+  align-items: center;
+  margin-left: 10%;
   height: 20%;
-  width: 100%;
-  padding-bottom: 2%;
+  padding-bottom: 5%;
+  width: 80%;
   color: #570b87;
   font-size: 26px;
   font-family: "Roboto condensed";
   @media (max-width: 900px) {
     font-size: 15px;
   }
+
+  @media (max-width: 500px) {
+    font-size : 11px
+  }
+  
 `;
 
 export const EstrelasLocal = styled.div`
   display: flex;
-  justify-content: start;
-  gap: 30px;
+  justify-content: center;
+
   height: 20%;
-  margin-top: 7%;
   width: 100%;
-  padding: 0%;
   color: #570b87;
   font-size: 32px;
-  @media (max-width: 900px) {
-    font-size: 20px;
+  @media (max-width: 744px) {
+    font-size: 15px;
   }
   @media (max-width: 500px) {
     font-size: 10px;

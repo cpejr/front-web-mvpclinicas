@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Body,
   CaixaInputs,
@@ -27,6 +28,8 @@ import AddToast from "../../components/AddToast/AddToast";
 import Header from "../../Components/Header/Header";
 
 function Home() {
+
+  const navigate = useNavigate();
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState("");
@@ -79,13 +82,13 @@ function Home() {
         <CaixaInputs>
           <Input
             placeholder="Pesquisar Local"
-            height={"25px"}
+            height={"22px"}
             backgroundColor="white"
-            width="68%"
+            width="67%"
             borderColor="#570B87"
             borderWidth="2px"
-            borderRadius="10px"
-            fontSize="1.5em"
+            borderRadius="18px" 
+            fontSize="1.4em"
             paddingTop="10px"
             paddingRight="10px"
             paddingBottom="10px"
@@ -98,7 +101,7 @@ function Home() {
               fontSize: "28px",
               color: "#570B87",
               position: "absolute",
-              right: "19%",
+              right: "20%",
               paddingBottom: "1.8%",
             }}
           />
@@ -109,14 +112,14 @@ function Home() {
             color="#570B87"
             borderColor="#570B87"
             borderWidth="2px"
-            borderRadius="10px"
-            fontSize="17px"
-            width="20%"
+            fontSize="16px"
             marginTop="0px"
+            paddingLeft="20px"
+            borderRadius="18px"
             placeholder="Pesquisar por nome"
-            height="45px"
+            height="35px"
             nome="id_usuario"
-            borderWidth820="100%"
+            fontSize750="13px"
             defaultValue={"nome"}
             value={buscaTipo}
             onChange={(e) => MudarBuscaTipo(e.target.value)}
@@ -126,69 +129,58 @@ function Home() {
           </Select>
         </CaixaSelect>
         <CaixaConteudo>
-          {locais.length === 0 ? (
-            <CaixaPlaceholder>
-              <TextoPlaceholder>
-                Ainda não existem Locais Cadastrados
-              </TextoPlaceholder>
-            </CaixaPlaceholder>
-          ) : (
-            <CaixaLocais>
-              {locaisFiltrados?.map((value, index) => (
-                <Local key={index}>
-                  <CaixaFoto>
-                    <img src={value.foto_url} width="100%" height="100%"></img>
-                  </CaixaFoto>
-                  <CaixaDados>
-                    <NomeLocal>{value?.nome}</NomeLocal>
-                    <EnderecoLocal>{value?.endereco}</EnderecoLocal>
-                    <EstrelasLocal>
-                      {value?.estrelas}
-                      <Rate
-                        value={value?.estrelas}
-                        style={{
-                          color: "#570B87",
-                          display: "flex",
-                          justifyContent: "row",
-                        }}
-                        allowHalf
-                        defaultValue={value?.mediaAvaliacoes}
-                        disabled
-                      />
-                    </EstrelasLocal>
-                  </CaixaDados>
-                </Local>
-              ))}
-            </CaixaLocais>
-          )}
+        {locais.length === 0 ? (
+          <CaixaPlaceholder>
+            <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
+          </CaixaPlaceholder>
+        ) : (
+          <CaixaLocais>
+            {locaisFiltrados?.map((value, index) => (
+              <Local key={index}>
+                <CaixaFoto>
+                  <img
+                    src={value.foto_url}
+                    width="100%"
+                    height="100%"
+                  ></img>
+                </CaixaFoto>
+                <CaixaDados>
+                  <NomeLocal
+                    onClick={() => navigate(`local/${value?._id}`)}
+                  >{value?.nome}
+                  </NomeLocal>
+                  <EnderecoLocal>{value?.endereco}</EnderecoLocal>
+                  <EstrelasLocal>
+                    {value?.estrelas}<Rate value={value?.estrelas} style={{ color: "#570B87", fontSize:"0.75em", marginBottom:"5%" }} disabled />
+                  </EstrelasLocal>
+                </CaixaDados>
+              </Local>
+            ))}
+          </CaixaLocais>
+        )}
         </CaixaConteudo>
-        <div
-          className="botoes-direita"
-          style={{ width: "100%", justifyContent: "flex-end" }}
-        >
+        <div style={{ width: "65%", height: "40%",display:"flex", flexDirection:"row", justifyContent: "flex-end" }}>
           <CaixaBotoes>
             <Botao
-              borderRadius="10px"
-              width="100%"
-              alignSelf="flex-end"
-              fontSize="25px"
-              height="50px"
-              HeightMedia500="50px"
-              widthMedia500="100%"
+               borderRadius="18px"
+               width="100%"
+               alignSelf="flex-end"
+               fontSize="22px"
+               height="45px"
+               paddingRight="30px"
+               onClick={() => navigate("/novolocal")}       
             >
               Adicionar Local
-            </Botao>
-            <PlusOutlined
-              style={{
-                fontSize: "26px",
-                color: "#fdfdfd",
-                position: "absolute",
-                right: "4%",
-                top: "23%",
-              }}
-            />
-          </CaixaBotoes>
-        </div>
+            </Botao>           
+           <PlusOutlined className="iconeMais" style={{
+              fontSize: "20px",
+              color: "#fdfdfd",
+              position: "absolute",
+              right: "4%",
+              top: "50%",
+              transform: "translateY(-50%)", 
+            }}/>
+          </CaixaBotoes></div>
       </Conteudo>
       <AddToast />
     </Body>
