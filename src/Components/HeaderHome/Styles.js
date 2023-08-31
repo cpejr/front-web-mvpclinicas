@@ -9,10 +9,6 @@ flex-direction: row;
 align-items: center;
 background-color: #8B00FF;
 height: 100px;
-margin-top: -1%;
-margin-left: -1%;
-padding-left: 45%;
-padding-right: 47%;
 color:${Cores.branco};
 @media (max-width: 912px) {
   padding-right: 50%;
