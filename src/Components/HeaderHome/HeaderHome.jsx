@@ -1,5 +1,10 @@
 import React from "react";
-import { ExportOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  ExportOutlined,
+  HomeOutlined,
+  UserOutlined,
+  ShopOutlined,
+} from "@ant-design/icons";
 import useAuthStore from "../../stores/auth";
 import { toast } from "react-toastify";
 import { redirecionamento } from "../../utils/redirecionamento";
@@ -47,6 +52,18 @@ function HeaderHome(props) {
             />
           </BackButton>
         </BackLink>
+        {props.linkLocal ? (
+          <BackLink>
+            <BackButton to={props?.linkLocal}>
+              Local
+              <ShopOutlined
+                style={{ padding: "0.5rem", fontSize: "25px", color: "#fff" }}
+              />
+            </BackButton>
+          </BackLink>
+        ) : (
+          <></>
+        )}
         {props.local ? (
           <BackLink>
             <BackButton to="/perfil">
@@ -73,7 +90,8 @@ function HeaderHome(props) {
 }
 
 HeaderHome.propTypes = {
-  local: PropTypes.bool.isRequired,
+  local: PropTypes.bool,
+  linkLocal: PropTypes.string,
 };
 
 export default HeaderHome;

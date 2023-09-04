@@ -25,6 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { recebeUsuario } from "../../services/auth";
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 
 function NovoComentario() {
   const usuarioLogado = JSON.parse(recebeUsuario());
@@ -126,6 +127,7 @@ function NovoComentario() {
 
   return (
     <Body>
+      <HeaderHome local="true" linkLocal={`/local/${id_local}`} />
       <AddToast />
       <Titulo>Responda as perguntas abaixo:</Titulo>
       <CaixaPerguntas>
