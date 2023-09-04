@@ -63,7 +63,7 @@ function Local() {
   const [carregando, setCarregando] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
-  const navegar = useNavigate();
+  const navigate = useNavigate();
 
   const { id_local } = useParams();
 
@@ -106,7 +106,7 @@ function Local() {
       await managerService.DeletaLocal(id_local);
       toast.success("Local deletado com sucesso!");
       setTimeout(() => {
-        navegar("/home");
+        navigate("/home");
       }, 3000);
     } catch (error) {
       toast.error("Erro ao deletar local");

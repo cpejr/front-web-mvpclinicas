@@ -21,7 +21,7 @@ export const Conteudo = styled.div`
   justify-content: center;
   width: 95%;
   height: 100%;
-  
+
   @media (max-width: 900px) {
     width: 100%;
   }
@@ -33,20 +33,17 @@ export const CaixaBotoes = styled.div`
   width: 43%;
   position: relative;
   left: 4%;
-  @media (max-width: 500px){
+  @media (max-width: 500px) {
     width: 70%;
-    
   }
-  
+
   @media (max-width: 353px) {
     width: 90%;
   }
-  
+
   @media (max-width: 278px) {
     width: 100%;
   }
-
-  
 `;
 
 export const CaixaConteudo = styled.div`
@@ -107,8 +104,6 @@ export const CaixaDados = styled.div`
   row-gap: 5%;
   width: 75%;
   margin-left: 2%;
-  
-
 `;
 
 export const CaixaSelect = styled.div`
@@ -117,7 +112,7 @@ export const CaixaSelect = styled.div`
   justify-content: flex-end;
   margin-left: 30%;
 
-  @media (max-width: 700px){
+  @media (max-width: 700px) {
     font-size: 14px;
   }
 `;
@@ -193,7 +188,7 @@ export const CaixaLocais = styled.div`
   width: 97%;
   padding: 2%;
 
- /* @media (max-width: 900px) {
+  /* @media (max-width: 900px) {
     gap: 20px;
     padding: 5%;
   }*/
@@ -209,6 +204,9 @@ export const Local = styled.div`
   border-radius: 5px;
   height: 10%;
   width: 100%;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const NomeLocal = styled.button`
@@ -226,20 +224,18 @@ export const NomeLocal = styled.button`
   @media (max-width: 744px) {
     font-size: 21px;
     height: 25%;
-    
   }
 
   @media (max-width: 666px) {
-    font-size : 14px;
+    font-size: 14px;
     height: 30%;
     margin-bottom: 5%;
   }
   @media (max-width: 323px) {
-    font-size : 10px;
+    font-size: 10px;
     height: 40%;
     margin-bottom: 5%;
   }
-  
 `;
 
 export const TextoPlaceholder = styled.div`
@@ -288,9 +284,8 @@ export const EnderecoLocal = styled.div`
   }
 
   @media (max-width: 500px) {
-    font-size : 11px
+    font-size: 11px;
   }
-  
 `;
 
 export const EstrelasLocal = styled.div`

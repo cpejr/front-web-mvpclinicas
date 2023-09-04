@@ -28,7 +28,6 @@ import AddToast from "../../components/AddToast/AddToast";
 import Header from "../../Components/Header/Header";
 
 function Home() {
-
   const navigate = useNavigate();
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
@@ -77,7 +76,7 @@ function Home() {
 
   return (
     <Body>
-      <Header/>
+      <Header />
       <Conteudo>
         <CaixaInputs>
           <Input
@@ -87,7 +86,7 @@ function Home() {
             width="67%"
             borderColor="#570B87"
             borderWidth="2px"
-            borderRadius="18px" 
+            borderRadius="18px"
             fontSize="1.4em"
             paddingTop="10px"
             paddingRight="10px"
@@ -129,58 +128,77 @@ function Home() {
           </Select>
         </CaixaSelect>
         <CaixaConteudo>
-        {locais.length === 0 ? (
-          <CaixaPlaceholder>
-            <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
-          </CaixaPlaceholder>
-        ) : (
-          <CaixaLocais>
-            {locaisFiltrados?.map((value, index) => (
-              <Local key={index}>
-                <CaixaFoto>
-                  <img
-                    src={value.foto_url}
-                    width="100%"
-                    height="100%"
-                  ></img>
-                </CaixaFoto>
-                <CaixaDados>
-                  <NomeLocal
-                    onClick={() => navigate(`local/${value?._id}`)}
-                  >{value?.nome}
-                  </NomeLocal>
-                  <EnderecoLocal>{value?.endereco}</EnderecoLocal>
-                  <EstrelasLocal>
-                    {value?.estrelas}<Rate value={value?.estrelas} style={{ color: "#570B87", fontSize:"0.75em", marginBottom:"5%" }} disabled />
-                  </EstrelasLocal>
-                </CaixaDados>
-              </Local>
-            ))}
-          </CaixaLocais>
-        )}
+          {locais.length === 0 ? (
+            <CaixaPlaceholder>
+              <TextoPlaceholder>
+                Ainda não existem Locais Cadastrados
+              </TextoPlaceholder>
+            </CaixaPlaceholder>
+          ) : (
+            <CaixaLocais>
+              {locaisFiltrados?.map((value, index) => (
+                <Local
+                  key={index}
+                  onClick={() => navigate(`/local/${value?._id}`)}
+                >
+                  <CaixaFoto>
+                    <img src={value.foto_url} width="100%" height="100%"></img>
+                  </CaixaFoto>
+                  <CaixaDados>
+                    <NomeLocal>{value?.nome}</NomeLocal>
+                    <EnderecoLocal>{value?.endereco}</EnderecoLocal>
+                    <EstrelasLocal>
+                      {value?.estrelas}
+                      <Rate
+                        value={value?.estrelas}
+                        style={{
+                          color: "#570B87",
+                          fontSize: "0.75em",
+                          marginBottom: "5%",
+                        }}
+                        disabled
+                      />
+                    </EstrelasLocal>
+                  </CaixaDados>
+                </Local>
+              ))}
+            </CaixaLocais>
+          )}
         </CaixaConteudo>
-        <div style={{ width: "65%", height: "40%",display:"flex", flexDirection:"row", justifyContent: "flex-end" }}>
+        <div
+          style={{
+            width: "65%",
+            height: "40%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
           <CaixaBotoes>
             <Botao
-               borderRadius="18px"
-               width="100%"
-               alignSelf="flex-end"
-               fontSize="22px"
-               height="45px"
-               paddingRight="30px"
-               onClick={() => navigate("/novolocal")}       
+              borderRadius="18px"
+              width="100%"
+              alignSelf="flex-end"
+              fontSize="22px"
+              height="45px"
+              paddingRight="30px"
+              onClick={() => navigate("/novolocal")}
             >
               Adicionar Local
-            </Botao>           
-           <PlusOutlined className="iconeMais" style={{
-              fontSize: "20px",
-              color: "#fdfdfd",
-              position: "absolute",
-              right: "4%",
-              top: "50%",
-              transform: "translateY(-50%)", 
-            }}/>
-          </CaixaBotoes></div>
+            </Botao>
+            <PlusOutlined
+              className="iconeMais"
+              style={{
+                fontSize: "20px",
+                color: "#fdfdfd",
+                position: "absolute",
+                right: "4%",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
+            />
+          </CaixaBotoes>
+        </div>
       </Conteudo>
       <AddToast />
     </Body>
