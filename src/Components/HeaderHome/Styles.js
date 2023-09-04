@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Cores } from "../../variaveis";
 import { Link } from "react-router-dom";
 
 export const ContainerHeader = styled.header`
@@ -11,19 +10,18 @@ export const ContainerHeader = styled.header`
   height: 100px;
   color: white;
   padding: 0 20px;
-  margin-top: -10px;
   margin-bottom: 1rem;
 `;
 
 export const ContainerDireita = styled.div`
   display: flex;
-  width: 70%;
   align-items: center;
   justify-content: space-evenly;
   height: 100px;
   padding: 0 20px;
   @media (max-width: 600px) {
-    width: 50%;
+    width: 100%;
+    padding: 0;
   }
 `;
 export const ContainerEsquerda = styled.div`

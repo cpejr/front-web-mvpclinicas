@@ -1,5 +1,5 @@
 import React from "react";
-import { ExportOutlined, HomeOutlined } from "@ant-design/icons";
+import { ExportOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
 import useAuthStore from "../../stores/auth";
 import { toast } from "react-toastify";
 import { redirecionamento } from "../../utils/redirecionamento";
@@ -45,7 +45,14 @@ function HeaderHome(props) {
           </BackButton>
         </BackLink>
         {props.local ? (
-          <></>
+          <BackLink>
+            <BackButton to="/perfil">
+              Perfil
+              <UserOutlined
+                style={{ padding: "0.5rem", fontSize: "25px", color: "#fff" }}
+              />
+            </BackButton>
+          </BackLink>
         ) : (
           <BackLink>
             <BackButton onClick={handleLogout}>
