@@ -30,15 +30,8 @@ function ModalAlterarDados(props) {
   }
 
   async function alterandoDados() {
-    setCarregando(true);
-    if (Object.keys(respostas).length === 0) {
-      toast.error("Altere algum campo.");
-    } else {
-      await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-      toast.success("Perfil alterado com sucesso!")
-    }
-    setCarregando(false);
-  }
+    toast.error("Altere algum campo.");
+}
 
   const cancelar = () => {
     props.onClose();
@@ -125,7 +118,7 @@ function ModalAlterarDados(props) {
           >
             Cancelar
           </Botao>
-          <Botao onClick={alterandoDados}>Confirmar</Botao>
+          <Botao onClick={() => alterandoDados()}>Confirmar</Botao>
         </CaixaBotoes>
       </ConteudoModal>
     </Modal>
