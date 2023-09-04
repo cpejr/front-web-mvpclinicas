@@ -90,13 +90,15 @@ function Login() {
       _.isEqual(erro, referenciaCamposNulos)
     ) {
       setCarregando(true);
+      try {
       const resposta = await managerService.requisicaoLogin(email, senha);
       const { token } = resposta.data;
+
       setToken(token)
       setCarregando(false);
-
-      if (resposta) toast.success("Login realizado com sucesso");
-      else {
+      
+      toast.success("Login realizado com sucesso");
+      } catch {
         setErroLoginInvalido({ email: true, senha: true });
       }
     } else if (!_.isEqual(camposVazios, referenciaCamposNulos)) {
