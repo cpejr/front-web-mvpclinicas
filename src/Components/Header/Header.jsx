@@ -4,6 +4,7 @@ import {
   BackButton,
   BackLink,
   ContainerDireita,
+  ContainerEsquerda,
   ContainerDiv,
   ContainerHeader,
   LogoText,
@@ -17,7 +18,7 @@ function Header() {
           <LogoText>Logo</LogoText>
         </ContainerDireita>
       </ContainerDiv>
-      <ContainerDireita>
+      <ContainerEsquerda>
         <BackLink>
           <BackButton to="/perfil">
             Perfil
@@ -26,7 +27,7 @@ function Header() {
             />
           </BackButton>
         </BackLink>
-      </ContainerDireita>
+      </ContainerEsquerda>
     </ContainerHeader>
   );
 }

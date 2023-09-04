@@ -9,6 +9,7 @@ import {
   BackLink,
   ContainerDireita,
   ContainerDiv,
+  ContainerEsquerda,
   ContainerHeader,
   LogoText,
 } from "./Styles";
@@ -34,7 +35,7 @@ function HeaderHome(props) {
           <LogoText>Logo</LogoText>
         </ContainerDireita>
       </ContainerDiv>
-      <ContainerDireita>
+      <ContainerEsquerda>
         <BackLink>
           <BackButton to="/home">
             Home
@@ -47,14 +48,16 @@ function HeaderHome(props) {
           <></>
         ) : (
           <BackLink>
-            <BackButton onClick={handleLogout}>Logout</BackButton>
-            <ExportOutlined
-              style={{ fontSize: "25px", color: "#570B87" }}
-              onClick={handleLogout}
-            />
+            <BackButton onClick={handleLogout}>
+              Logout
+              <ExportOutlined
+                style={{ padding: "0.5rem", fontSize: "25px", color: "#fff" }}
+                onClick={handleLogout}
+              />
+            </BackButton>
           </BackLink>
         )}
-      </ContainerDireita>
+      </ContainerEsquerda>
     </ContainerHeader>
   );
 }
