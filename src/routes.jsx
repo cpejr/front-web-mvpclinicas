@@ -18,24 +18,24 @@ import Perfil from "../src/pages/Perfil";
 import useAuthStore from "./stores/auth";
 
 function RotasPrivadas() {
-  const token = useAuthStore((state) => state.token)
+  const token = useAuthStore((state) => state.token);
 
-  if (token) return (<Outlet/>)
+  if (token) return <Outlet />;
 
-  return <Navigate to="/" replace/>
+  return <Navigate to="/" replace />;
 }
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" element={<Login />}/>
-      <Route path="/cadastro" element={<Cadastro />}/>
+      <Route path="/" element={<Login />} />
+      <Route path="/cadastro" element={<Cadastro />} />
       <Route element={<RotasPrivadas />}>
-        <Route path="/home" element={<Home />}/>
-        <Route path="/local" element={<Local />}/>
-        <Route path="/novocomentario/:id_local" element={<NovoComentario />}/>
-        <Route path="/novolocal" element={<NovoLocal />}/>
-        <Route path="/perfil" element={<Perfil />}/>
+        <Route path="/home" element={<Home />} />
+        <Route path="/local/:id_local" element={<Local />} />
+        <Route path="/novocomentario/:id_local" element={<NovoComentario />} />
+        <Route path="/novolocal" element={<NovoLocal />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/home" replace />} />

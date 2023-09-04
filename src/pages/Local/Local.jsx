@@ -51,14 +51,11 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
-import Header from "../../Components/Header/Header";
-const id_local = "64b1d04033776c925c899bc2";
 
 function Local() {
   const antIconModal = (
     <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
   );
-
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
@@ -68,8 +65,7 @@ function Local() {
 
   const navegar = useNavigate();
 
-  const {id_local} = useParams();
-  
+  const { id_local } = useParams();
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -128,7 +124,7 @@ function Local() {
 
   return (
     <Body>
-      <HeaderHome local={local}/>
+      <HeaderHome local={local} />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
