@@ -225,9 +225,9 @@ function NovoComentario() {
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
-          color="#000000"
-          backgroundColor="white"
-          borderColor="#FF000080"
+          color="#fff"
+          backgroundColor="#ff3a3a"
+          borderColor="#ff3a3a"
           width="40%"
           onClick={() => navigate(`/local/${id_local}`)}
         >

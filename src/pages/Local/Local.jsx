@@ -266,7 +266,7 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                  {Object.entries(comentarios[comentarioAtual]?.comentario).map(
                     ([pergunta, resposta]) => (
                       <ItemComentario key={pergunta}>
                         <Pergunta>{pergunta}</Pergunta>
