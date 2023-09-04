@@ -45,6 +45,9 @@ export const ContainerDiv = styled.div`
   width: 20%;
   text-align: center;
   margin-left: 10%;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const LogoText = styled.p`

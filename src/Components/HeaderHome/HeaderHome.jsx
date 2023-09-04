@@ -13,6 +13,7 @@ import {
   ContainerHeader,
   LogoText,
 } from "./Styles";
+import { useNavigate } from "react-router-dom";
 
 function HeaderHome(props) {
   const logout = useAuthStore((state) => state.logout);
@@ -28,9 +29,11 @@ function HeaderHome(props) {
       alert(error);
     }
   }
+  const navigate = useNavigate();
+
   return (
     <ContainerHeader>
-      <ContainerDiv>
+      <ContainerDiv onClick={() => navigate("/home")}>
         <ContainerDireita>
           <LogoText>Logo</LogoText>
         </ContainerDireita>

@@ -9,11 +9,14 @@ import {
   ContainerHeader,
   LogoText,
 } from "./Styles";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <ContainerHeader>
-      <ContainerDiv>
+      <ContainerDiv onClick={() => navigate("/home")}>
         <ContainerDireita>
           <LogoText>Logo</LogoText>
         </ContainerDireita>
