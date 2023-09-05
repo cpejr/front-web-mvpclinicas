@@ -38,8 +38,10 @@ import { toast } from "react-toastify";
 import _ from "lodash";
 import { Spin } from "antd";
 import * as managerService from "../../services/ManagerService/managerService";
+import { useNavigate } from "react-router-dom";
 
 function Cadastro() {
+  const navegar = useNavigate();
   const [erro, setErro] = useState(false);
   const [erroEmailIgual, setErroEmailIgual] = useState(false);
   const [usuario, setUsuario] = useState({});
@@ -166,6 +168,7 @@ function Cadastro() {
       } else {
         await managerService.CadastroUsuario(usuario);
         toast.success("Usuário cadastrado com sucesso!");
+        navegar("/home");
         setCarregando(false);
       }
     } else {

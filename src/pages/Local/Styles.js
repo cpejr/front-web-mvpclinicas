@@ -256,7 +256,7 @@ export const UsuarioComentario = styled.div`
   justify-content: space-around;
   padding: 2%;
   background-color: #d580ff;
-  border-radius: 2%;
+  border-radius: 1rem;
 `;
 
 export const Direita = styled.div`
@@ -292,22 +292,21 @@ export const FotoUsuario = styled.div`
   justify-content: center;
   align-items: center;
   justify-content: center;
-  width: 150px;
-  height: 120px;
+  width: 120px;
+  height: 100px;
   border-radius: 50%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 2%;
 
-  @media (max-width: 500px) {
-    width: 120px;
-    height: 120px;
+  @media (max-width: 700px) {
+    height: 80px;
+    width: 80px;
   }
 `;
 
 export const NomeUsuario = styled.div`
   width: 100%;
-  height: 30px;
   font-family: "Roboto Condensed";
   font-weight: 500;
   font-size: 1.4em;

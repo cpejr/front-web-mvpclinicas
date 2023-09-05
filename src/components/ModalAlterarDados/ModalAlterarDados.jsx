@@ -34,8 +34,12 @@ function ModalAlterarDados(props) {
     if (Object.keys(respostas).length === 0) {
       toast.error("Altere algum campo.");
     } else {
-      await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-      toast.success("Perfil alterado com sucesso!")
+      try {
+        await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
+        toast.success("Perfil alterado com sucesso!")
+      } catch {
+        toast.error("Erro no servidor!");
+      }
     }
     setCarregando(false);
   }

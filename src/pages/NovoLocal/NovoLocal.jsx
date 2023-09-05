@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
+import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
@@ -132,7 +133,7 @@ function CadastroNovoLocal() {
 
   return (
     <Body>
-      <Header/>
+      <HeaderHome local="true" />
       <Conteudo>
         <CaixaTitulo>
           <Titulo>Cadastro de local</Titulo>

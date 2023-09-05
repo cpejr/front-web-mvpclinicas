@@ -25,6 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { recebeUsuario } from "../../services/auth";
+import Header from "../../Components/Header/Header";
 
 function NovoComentario() {
   const usuarioLogado = JSON.parse(recebeUsuario());
@@ -98,7 +99,7 @@ function NovoComentario() {
       await CriarNovoComentario(body, id_local);
       toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
-        navegar("/local");
+        navegar(`/local/${id_local}`);
         setCarregando(false);
       }, 3000);
     } catch (err) {
@@ -126,6 +127,7 @@ function NovoComentario() {
 
   return (
     <Body>
+      <Header />
       <AddToast />
       <Titulo>Responda as perguntas abaixo:</Titulo>
       <CaixaPerguntas>
@@ -225,9 +227,9 @@ function NovoComentario() {
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
-          color="#000000"
-          backgroundColor="white"
-          borderColor="#FF000080"
+          color="#fff"
+          backgroundColor="#ff3a3a"
+          borderColor="#ff3a3a"
           width="40%"
           onClick={() => navigate(`/local/${id_local}`)}
         >

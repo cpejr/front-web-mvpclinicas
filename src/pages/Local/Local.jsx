@@ -51,14 +51,11 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 import * as managerService from "../../services/ManagerService/managerService";
-import Header from "../../Components/Header/Header";
-const id_local = "64b1d04033776c925c899bc2";
 
 function Local() {
   const antIconModal = (
     <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
   );
-
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
@@ -66,10 +63,9 @@ function Local() {
   const [carregando, setCarregando] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
-  const navegar = useNavigate();
+  const navigate = useNavigate();
 
-  const {id_local} = useParams();
-  
+  const { id_local } = useParams();
 
   const proxComentario = (comentarioAtual) => {
     if (comentarioAtual === comentarios.length - 1) {
@@ -92,9 +88,25 @@ function Local() {
     setLocal(resposta?.dadosLocais);
   }
 
+  async function pegandoImagens(comentarios) {
+    const comentariosComImagens = [];
+
+    for (const comentario of comentarios) {
+      const imagem = await managerService.GetFotoDePerfil(
+        comentario.id_usuario._id
+      );
+      comentario.id_usuario.imagem = imagem;
+      comentariosComImagens.push(comentario);
+    }
+    return comentariosComImagens;
+  }
+
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    setComentarios(resposta.comentariosLocal.comentarios);
+    const comentariosComImagem = await pegandoImagens(
+      resposta.comentariosLocal.comentarios
+    );
+    setComentarios(comentariosComImagem);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
@@ -110,7 +122,7 @@ function Local() {
       await managerService.DeletaLocal(id_local);
       toast.success("Local deletado com sucesso!");
       setTimeout(() => {
-        navegar("/home");
+        navigate("/home");
       }, 3000);
     } catch (error) {
       toast.error("Erro ao deletar local");
@@ -128,7 +140,7 @@ function Local() {
 
   return (
     <Body>
-      <HeaderHome local={local}/>
+      <HeaderHome local={true} />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
@@ -259,10 +271,15 @@ function Local() {
                 <Usuario>
                   <FotoUsuario>
                     <img
-                      src={fotoPerfil}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: "100%" }}
+                      src={
+                        comentarios[comentarioAtual]?.id_usuario.imagem ||
+                        fotoPerfil
+                      }
+                      style={{
+                        borderRadius: "50%",
+                        height: "100%",
+                        width: "100%",
+                      }}
                     />
                   </FotoUsuario>
                   <NomeUsuario>
@@ -270,7 +287,7 @@ function Local() {
                   </NomeUsuario>
                 </Usuario>
                 <Comentario>
-                  {Object.entries(comentarios[comentarioAtual].comentario).map(
+                  {Object.entries(comentarios[comentarioAtual]?.comentario).map(
                     ([pergunta, resposta]) => (
                       <ItemComentario key={pergunta}>
                         <Pergunta>{pergunta}</Pergunta>
