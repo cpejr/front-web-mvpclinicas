@@ -53,7 +53,7 @@ function Perfil() {
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
   }
-
+  console.log(imagem);
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
 
@@ -90,7 +90,7 @@ function Perfil() {
 
   return (
     <Body>
-      <HeaderHome/>
+      <HeaderHome />
       <Conteudo>
         <CaixaFoto>
           <img

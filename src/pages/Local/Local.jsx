@@ -88,9 +88,25 @@ function Local() {
     setLocal(resposta?.dadosLocais);
   }
 
+  async function pegandoImagens(comentarios) {
+    const comentariosComImagens = [];
+
+    for (const comentario of comentarios) {
+      const imagem = await managerService.GetFotoDePerfil(
+        comentario.id_usuario._id
+      );
+      comentario.id_usuario.imagem = imagem;
+      comentariosComImagens.push(comentario);
+    }
+    return comentariosComImagens;
+  }
+
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    setComentarios(resposta.comentariosLocal.comentarios);
+    const comentariosComImagem = await pegandoImagens(
+      resposta.comentariosLocal.comentarios
+    );
+    setComentarios(comentariosComImagem);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
@@ -255,10 +271,15 @@ function Local() {
                 <Usuario>
                   <FotoUsuario>
                     <img
-                      src={fotoPerfil}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: "100%" }}
+                      src={
+                        comentarios[comentarioAtual]?.id_usuario.imagem ||
+                        fotoPerfil
+                      }
+                      style={{
+                        borderRadius: "50%",
+                        height: "100%",
+                        width: "100%",
+                      }}
                     />
                   </FotoUsuario>
                   <NomeUsuario>

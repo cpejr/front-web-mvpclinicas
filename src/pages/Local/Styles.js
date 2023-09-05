@@ -292,7 +292,7 @@ export const FotoUsuario = styled.div`
   justify-content: center;
   align-items: center;
   justify-content: center;
-  width: 150px;
+  width: 120px;
   height: 120px;
   border-radius: 50%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
