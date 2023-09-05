@@ -145,10 +145,11 @@ function Local() {
         <FotoNome>
           <CaixaFoto>
             <img
-              src={fotoPerfil}
-              width="100%"
-              height="100%"
-              style={{ borderRadius: "2%" }}
+              src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
+              style={{ backgroundImage: 
+                `url(http://localhost:8080/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${local.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
+                borderRadius: "2%"
+              }}
             />
           </CaixaFoto>
           <NomeTelefone>
