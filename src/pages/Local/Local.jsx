@@ -140,7 +140,7 @@ function Local() {
 
   return (
     <Body>
-      <HeaderHome local={local} />
+      <HeaderHome local={true} />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>

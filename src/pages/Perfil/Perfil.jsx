@@ -53,7 +53,6 @@ function Perfil() {
     setUsuario(resposta.dadosUsuario);
     setImagem(respostaImagem);
   }
-  console.log(imagem);
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
 

@@ -99,7 +99,7 @@ function NovoComentario() {
       await CriarNovoComentario(body, id_local);
       toast.success("Comentário cadastrado com sucesso!");
       setTimeout(() => {
-        navegar("/local");
+        navegar(`/local/${id_local}`);
         setCarregando(false);
       }, 3000);
     } catch (err) {
