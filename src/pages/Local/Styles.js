@@ -256,7 +256,7 @@ export const UsuarioComentario = styled.div`
   justify-content: space-around;
   padding: 2%;
   background-color: #d580ff;
-  border-radius: 2%;
+  border-radius: 1rem;
 `;
 
 export const Direita = styled.div`
@@ -293,15 +293,15 @@ export const FotoUsuario = styled.div`
   align-items: center;
   justify-content: center;
   width: 120px;
-  height: 120px;
+  height: auto;
   border-radius: 50%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 2%;
 
-  @media (max-width: 500px) {
-    width: 120px;
-    height: 120px;
+  @media (max-width: 700px) {
+    height: 80px;
+    width: 80px;
   }
 `;
 
