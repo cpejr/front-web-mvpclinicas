@@ -92,6 +92,13 @@ export const CaixaFoto = styled.div`
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
 
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2%;
+    background-size: cover;
+    background-position: center center;
+  }
   @media (max-width: 700px) {
     width: 70%;
     height: 70%;
