@@ -88,25 +88,25 @@ function Local() {
     setLocal(resposta?.dadosLocais);
   }
 
-  async function pegandoImagens(comentarios) {
-    const comentariosComImagens = [];
+  // async function pegandoImagens(comentarios) {
+  //   const comentariosComImagens = [];
 
-    for (const comentario of comentarios) {
-      const imagem = await managerService.GetFotoDePerfil(
-        comentario.id_usuario._id
-      );
-      comentario.id_usuario.imagem = imagem;
-      comentariosComImagens.push(comentario);
-    }
-    return comentariosComImagens;
-  }
+  //   for (const comentario of comentarios) {
+  //     const imagem = await managerService.GetFotoDePerfil(
+  //       comentario.id_usuario._id
+  //     );
+  //     comentario.id_usuario.imagem = imagem;
+  //     comentariosComImagens.push(comentario);
+  //   }
+  //   return comentariosComImagens;
+  // }
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    const comentariosComImagem = await pegandoImagens(
-      resposta.comentariosLocal.comentarios
-    );
-    setComentarios(comentariosComImagem);
+    // const comentariosComImagem = await pegandoImagens(
+    //   resposta.comentariosLocal.comentarios
+    // );
+    setComentarios(resposta.comentariosLocal.comentarios);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
@@ -146,9 +146,9 @@ function Local() {
           <CaixaFoto>
             <img
               src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
-              style={{ backgroundImage: 
-                `url(http://localhost:8080/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${local.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
-                borderRadius: "2%"
+              style={{
+                backgroundImage: `url(http://localhost:8080/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${local.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
+                borderRadius: "2%",
               }}
             />
           </CaixaFoto>
@@ -273,7 +273,7 @@ function Local() {
                   <FotoUsuario>
                     <img
                       src={
-                        comentarios[comentarioAtual]?.id_usuario.imagem ||
+                        //comentarios[comentarioAtual]?.id_usuario.imagem ||
                         fotoPerfil
                       }
                       style={{

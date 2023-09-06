@@ -21,6 +21,7 @@ import {
   CopyOutlined,
   GlobalOutlined,
 } from "@ant-design/icons";
+import fotoPerfil from "../../assets/montanha.jpg";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -39,19 +40,19 @@ import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
-  const [imagem, setImagem] = useState("");
+  //const [imagem, setImagem] = useState("");
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
   async function pegandoDadosUsuario() {
-    const respostaImagem = await managerService.GetFotoDePerfil(
-      usuarioLogado._id
-    );
+    // const respostaImagem = await managerService.GetFotoDePerfil(
+    //   usuarioLogado._id
+    // );
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
-    setImagem(respostaImagem);
+    //setImagem(respostaImagem);
   }
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
@@ -93,7 +94,7 @@ function Perfil() {
       <Conteudo>
         <CaixaFoto>
           <img
-            src={imagem}
+            src={fotoPerfil}
             width="100%"
             height="100%"
             style={{ borderRadius: "100%" }}
