@@ -101,13 +101,13 @@ function Perfil() {
             alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
-        <TextoAlterarFoto
+        {/* <TextoAlterarFoto
           onClick={() => {
             setModalAlterarFotoPerfil(true);
           }}
         >
           Alterar imagem de Perfil
-        </TextoAlterarFoto>
+        </TextoAlterarFoto> */}
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
