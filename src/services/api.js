@@ -2,7 +2,7 @@ import axios from "axios";
 import { recebeToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "https://clinicas-4a2g.onrender.com",
+  baseURL: "https://clinicas-4a2g.onrender.com/",
 });
 
 api.interceptors.request.use(
