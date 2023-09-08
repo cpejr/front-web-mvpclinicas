@@ -28,12 +28,12 @@ import axios from "axios";
 
 function CadastroNovoLocal() {
   const zeraInputs = {
-    nome: '',
-    telefone: '',
-    setor: '',
-    empresa: '',
-    endereco: '',
-    foto_url: ''
+    nome: "",
+    telefone: "",
+    setor: "",
+    empresa: "",
+    endereco: "",
+    foto_url: "",
   };
 
   const navigate = useNavigate();
@@ -52,7 +52,9 @@ function CadastroNovoLocal() {
 
   const navegar = useNavigate();
 
-  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin/>;
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
+  );
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
@@ -60,12 +62,10 @@ function CadastroNovoLocal() {
     if (name === "telefone" && value.length < 15) {
       setNovoLocal((prevState) => ({
         ...prevState,
-        [name]: telefone(value)
-      }
-      ))
-
-    } else { 
-      setNovoLocal(prevState => ({
+        [name]: telefone(value),
+      }));
+    } else {
+      setNovoLocal((prevState) => ({
         ...prevState,
         [name]: value,
       }));
@@ -87,17 +87,16 @@ function CadastroNovoLocal() {
       setor: setorErro,
       empresa: empresaErro,
     }));
-    if (enderecoErro){
+    if (enderecoErro) {
       toast.error("Preencha todos os campos corretamente!");
 
       return;
-    } else{
+    } else {
       setCarregando(true);
 
-      const proxyUrl = "http://localhost:8080/";
+      const proxyUrl = "https://corsclinicas.onrender.com/";
 
       const requisicaoLocalUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${novoLocal.endereco}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I`;
-
 
       try {
         const local = await axios.get(proxyUrl + requisicaoLocalUrl);
@@ -105,18 +104,20 @@ function CadastroNovoLocal() {
         const requisicaoFotosUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${local.data.results[0].geometry.location.lat}%2C${local.data.results[0].geometry.location.lng}2&radius=100&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&keyword=${novoLocal.nome}`;
 
         const resposta = await axios.get(proxyUrl + requisicaoFotosUrl);
-
-        await managerService.CadastroNovoLocal(
-          {...novoLocal, 
-            foto_url: resposta.data.results[0].photos[0].photo_reference}
-        );
+        console.log(requisicaoFotosUrl);
+        console.log(resposta);
+        await managerService.CadastroNovoLocal({
+          ...novoLocal,
+          foto_url: resposta.data.results[0].photos[0].photo_reference,
+        });
 
         toast.success("Local Cadastrado com sucesso!");
         setTimeout(() => {
           navegar("/home");
           setCarregando(false);
-        }, 3000)
+        }, 3000);
       } catch (err) {
+        console.log(err);
         toast.error("Erro na validação!");
         setCarregando(false);
       }
@@ -138,9 +139,8 @@ function CadastroNovoLocal() {
     }, 3000);
 
     setTimeoutId(novoTimeoutId);
-}
+  }
 
-  
   useEffect(() => {
     return () => {
       clearTimeout(timeoutId);
