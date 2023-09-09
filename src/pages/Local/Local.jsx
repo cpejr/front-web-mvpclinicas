@@ -88,24 +88,24 @@ function Local() {
     setLocal(resposta?.dadosLocais);
   }
 
-  // async function pegandoImagens(comentarios) {
-  //   const comentariosComImagens = [];
+  async function pegandoImagens(comentarios) {
+    const comentariosComImagens = [];
 
-  //   for (const comentario of comentarios) {
-  //     const imagem = await managerService.GetFotoDePerfil(
-  //       comentario.id_usuario._id
-  //     );
-  //     comentario.id_usuario.imagem = imagem;
-  //     comentariosComImagens.push(comentario);
-  //   }
-  //   return comentariosComImagens;
-  // }
+    for (const comentario of comentarios) {
+      const imagem = await managerService.GetFotoDePerfil(
+        comentario.id_usuario._id
+      );
+      comentario.id_usuario.imagem = imagem;
+      comentariosComImagens.push(comentario);
+    }
+    return comentariosComImagens;
+  }
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    // const comentariosComImagem = await pegandoImagens(
-    //   resposta.comentariosLocal.comentarios
-    // );
+    const comentariosComImagem = await pegandoImagens(
+      resposta.comentariosLocal.comentarios
+    );
     setComentarios(resposta.comentariosLocal.comentarios);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
@@ -273,7 +273,7 @@ function Local() {
                   <FotoUsuario>
                     <img
                       src={
-                        //comentarios[comentarioAtual]?.id_usuario.imagem ||
+                        comentarios[comentarioAtual]?.id_usuario.imagem ||
                         fotoPerfil
                       }
                       style={{
