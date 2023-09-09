@@ -40,19 +40,19 @@ import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
-  //const [imagem, setImagem] = useState("");
+  const [imagem, setImagem] = useState("");
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
   async function pegandoDadosUsuario() {
-    // const respostaImagem = await managerService.GetFotoDePerfil(
-    //   usuarioLogado._id
-    // );
+    const respostaImagem = await managerService.GetFotoDePerfil(
+      usuarioLogado._id
+    );
     const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
     setUsuario(resposta.dadosUsuario);
-    //setImagem(respostaImagem);
+    setImagem(respostaImagem);
   }
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
@@ -94,20 +94,20 @@ function Perfil() {
       <Conteudo>
         <CaixaFoto>
           <img
-            src={fotoPerfil}
+            src={imagem || fotoPerfil}
             width="100%"
             height="100%"
             style={{ borderRadius: "100%" }}
             alt="Foto de Perfil"
           ></img>
         </CaixaFoto>
-        {/* <TextoAlterarFoto
+        <TextoAlterarFoto
           onClick={() => {
             setModalAlterarFotoPerfil(true);
           }}
         >
           Alterar imagem de Perfil
-        </TextoAlterarFoto> */}
+        </TextoAlterarFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TituloIcon>
