@@ -137,7 +137,6 @@ function Cadastro() {
       setFormacao(value);
       if (value == "medico") setStringRegistro("CRM");
       else if (value == "dentista") setStringRegistro("CRO");
-      else if (value == "enfermeiro") setStringRegistro("COREN");
       else if (value == "outros") setStringRegistro("Registro");
     }
   }
@@ -297,7 +296,6 @@ function Cadastro() {
               </option>
               <option value="medico">Médico(a)</option>
               <option value="dentista">Dentista</option>
-              <option value="enfermeiro">Enfermeiro(a)</option>
               <option value="outros">Outros</option>
             </SelecaoFormacao>
           </ConjuntoTituloInput>

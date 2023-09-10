@@ -6,6 +6,7 @@ export const Body = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
 `;
 
 export const Conteudo = styled.div`
@@ -184,4 +185,26 @@ export const TextoAlterarFoto = styled.div`
   @media (max-width: 900px) {
     font-size: 1em;
   }
+`;
+
+export const TextoCarregando = styled.div`
+  font-family: "Roboto Condensed";
+  font-weight: 500;
+  font-size: 1.2em;
+  line-height: 30px;
+  color: #570b87;
+  @media (max-width: 500px) {
+    font-size: 1em;
+  }
+  text-align: center;
+`;
+
+export const ContainerCarregando = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 1rem;
+  flex-basis: auto;
+  align-items: center;
+  justify-content: center;
 `;

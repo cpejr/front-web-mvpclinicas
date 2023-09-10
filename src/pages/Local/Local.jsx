@@ -33,6 +33,7 @@ import {
   Pergunta,
   TextoBotao,
   CaixaLoader,
+  TextoCarregando,
 } from "./Styles";
 
 import { Rate } from "antd";
@@ -61,6 +62,7 @@ function Local() {
   const [avaliacao, setAvaliacao] = useState();
   const [comentarioAtual, setComentarioAtual] = useState(0);
   const [carregando, setCarregando] = useState(false);
+  const [carregandoComentarios, setCarregandoComentarios] = useState(false);
   const usuarioLogado = useAuthStore((state) => state.usuario);
 
   const navigate = useNavigate();
@@ -106,12 +108,12 @@ function Local() {
     const comentariosComImagem = await pegandoImagens(
       resposta.comentariosLocal.comentarios
     );
-    setComentarios(resposta.comentariosLocal.comentarios);
+    setComentarios(comentariosComImagem);
+    setCarregandoComentarios(false);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
   }
-
   async function deletaLocal() {
     if (usuarioLogado.admin === false) {
       toast.error("Usuário não é administrador.");
@@ -135,6 +137,7 @@ function Local() {
   }, [id_local]);
 
   useEffect(() => {
+    setCarregandoComentarios(true);
     pegandoComentariosLocal();
   }, [id_local]);
 
@@ -238,76 +241,94 @@ function Local() {
             </ConjuntoTituloInput>
           </InputDividido>
         </CaixaInputs>
-        <ConteudoAvaliacao>
-          <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
-          <EstrelasLocal>
-            <Rate
-              value={Math.floor(avaliacao) + 0.5}
-              style={{
-                color: "#570B87",
-                display: "flex",
-                justifyContent: "row",
-              }}
-              allowHalf
-              defaultValue={avaliacao}
-              disabled
-            />
-          </EstrelasLocal>
-          {comentarios.length === 0 ? (
+        {carregandoComentarios ? (
+          <ConteudoAvaliacao>
             <UsuarioComentario>
               <Comentario>
-                Ainda não existem comentários relacionados a esse local.
+                <TextoCarregando>Carregando avaliações</TextoCarregando>
+                <LoadingOutlined
+                  style={{
+                    fontSize: 24,
+                    display: "inline",
+                    //padding: "1rem",
+                  }}
+                  spin
+                />
               </Comentario>
             </UsuarioComentario>
-          ) : (
-            <BoxCarrossel>
-              <Esquerda
-                onClick={() => {
-                  antComentario(comentarioAtual);
+          </ConteudoAvaliacao>
+        ) : (
+          <ConteudoAvaliacao>
+            <TituloAvaliacao>Avaliação Geral: {avaliacao}</TituloAvaliacao>
+            <EstrelasLocal>
+              <Rate
+                value={Math.floor(avaliacao) + 0.5}
+                style={{
+                  color: "#570B87",
+                  display: "flex",
+                  justifyContent: "row",
                 }}
-              >
-                <LeftOutlined style={{ fontSize: "22px" }} />
-              </Esquerda>
+                allowHalf
+                defaultValue={avaliacao}
+                disabled
+              />
+            </EstrelasLocal>
+            {comentarios.length === 0 ? (
               <UsuarioComentario>
-                <Usuario>
-                  <FotoUsuario>
-                    <img
-                      src={
-                        comentarios[comentarioAtual]?.id_usuario.imagem ||
-                        fotoPerfil
-                      }
-                      style={{
-                        borderRadius: "50%",
-                        height: "100%",
-                        width: "100%",
-                      }}
-                    />
-                  </FotoUsuario>
-                  <NomeUsuario>
-                    {comentarios[comentarioAtual].id_usuario?.nome}
-                  </NomeUsuario>
-                </Usuario>
                 <Comentario>
-                  {Object.entries(comentarios[comentarioAtual]?.comentario).map(
-                    ([pergunta, resposta]) => (
+                  Ainda não existem comentários relacionados a esse local.
+                </Comentario>
+              </UsuarioComentario>
+            ) : (
+              <BoxCarrossel>
+                <Esquerda
+                  onClick={() => {
+                    antComentario(comentarioAtual);
+                  }}
+                >
+                  <LeftOutlined style={{ fontSize: "22px" }} />
+                </Esquerda>
+                <UsuarioComentario>
+                  <Usuario>
+                    <FotoUsuario>
+                      <img
+                        src={
+                          comentarios[comentarioAtual]?.id_usuario.imagem ||
+                          fotoPerfil
+                        }
+                        style={{
+                          borderRadius: "50%",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                      />
+                    </FotoUsuario>
+                    <NomeUsuario>
+                      {comentarios[comentarioAtual].id_usuario?.nome}
+                    </NomeUsuario>
+                  </Usuario>
+                  <Comentario>
+                    {Object.entries(
+                      comentarios[comentarioAtual]?.comentario
+                    ).map(([pergunta, resposta]) => (
                       <ItemComentario key={pergunta}>
                         <Pergunta>{pergunta}</Pergunta>
                         {resposta}
                       </ItemComentario>
-                    )
-                  )}
-                </Comentario>
-              </UsuarioComentario>
-              <Direita
-                onClick={() => {
-                  proxComentario(comentarioAtual);
-                }}
-              >
-                <RightOutlined style={{ fontSize: "22px" }} />
-              </Direita>
-            </BoxCarrossel>
-          )}
-        </ConteudoAvaliacao>
+                    ))}
+                  </Comentario>
+                </UsuarioComentario>
+                <Direita
+                  onClick={() => {
+                    proxComentario(comentarioAtual);
+                  }}
+                >
+                  <RightOutlined style={{ fontSize: "22px" }} />
+                </Direita>
+              </BoxCarrossel>
+            )}
+          </ConteudoAvaliacao>
+        )}
         <CaixaBotoes>
           <Botao
             width="12.5rem !important"

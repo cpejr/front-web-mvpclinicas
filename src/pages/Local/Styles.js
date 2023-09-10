@@ -401,3 +401,14 @@ export const CaixaLoader = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const TextoCarregando = styled.span`
+  font-family: "Barlow";
+  font-size: 1em;
+  line-height: 30px;
+
+  @media (max-width: 500px) {
+    font-size: 0.8em;
+  }
+  text-align: center;
+`;

@@ -326,3 +326,25 @@ export const BotoesEdicao = styled.div`
     width: 100%;
   }
 `;
+
+export const TextoCarregando = styled.div`
+  font-family: "Roboto Condensed";
+  font-weight: 500;
+  font-size: 1.2em;
+  line-height: 30px;
+  color: #570b87;
+  @media (max-width: 500px) {
+    font-size: 1em;
+  }
+  text-align: center;
+`;
+
+export const ContainerCarregando = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 1rem;
+  flex-basis: auto;
+  align-items: center;
+  justify-content: center;
+`;

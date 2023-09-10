@@ -18,7 +18,11 @@ import {
   CaixaConteudo,
 } from "./Styles";
 import { Cores } from "../../utils/variaveis";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  PlusOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Rate } from "antd";
 import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
@@ -32,6 +36,7 @@ function Home() {
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   const pesquisaAjustada = pesquisa
     .toLowerCase()
@@ -64,9 +69,11 @@ function Home() {
     } catch (error) {
       console.error("Erro ao carregar os dados:", error);
     }
+    setCarregando(false);
   }
 
   useEffect(() => {
+    setCarregando(true);
     pegandoDadosDeLocais();
   }, []);
 
@@ -127,50 +134,64 @@ function Home() {
             <option value="endereco">Pesquisar por endereço</option>
           </Select>
         </CaixaSelect>
-        <CaixaConteudo>
-          {locais.length === 0 ? (
+        {carregando ? (
+          <CaixaConteudo>
             <CaixaPlaceholder>
               <TextoPlaceholder>
-                Ainda não existem Locais Cadastrados
+                Carregando Locais
+                <LoadingOutlined
+                  style={{ fontSize: 24, color: "#570b87" }}
+                  spin
+                />
               </TextoPlaceholder>
             </CaixaPlaceholder>
-          ) : (
-            <CaixaLocais>
-              {locaisFiltrados?.map((value, index) => (
-                <Local
-                  key={index}
-                  onClick={() => navigate(`/local/${value?._id}`)}
-                >
-                  <CaixaFoto>
-                    <img
-                      src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
-                      style={{
-                        backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${value.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
-                        borderRadius: "2%",
-                      }}
-                    ></img>
-                  </CaixaFoto>
-                  <CaixaDados>
-                    <NomeLocal>{value?.nome}</NomeLocal>
-                    <EnderecoLocal>{value?.endereco}</EnderecoLocal>
-                    <EstrelasLocal>
-                      {value?.estrelas}
-                      <Rate
-                        value={value?.estrelas}
+          </CaixaConteudo>
+        ) : (
+          <CaixaConteudo>
+            {locais.length === 0 ? (
+              <CaixaPlaceholder>
+                <TextoPlaceholder>
+                  Ainda não existem Locais Cadastrados
+                </TextoPlaceholder>
+              </CaixaPlaceholder>
+            ) : (
+              <CaixaLocais>
+                {locaisFiltrados?.map((value, index) => (
+                  <Local
+                    key={index}
+                    onClick={() => navigate(`/local/${value?._id}`)}
+                  >
+                    <CaixaFoto>
+                      <img
+                        src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
                         style={{
-                          color: "#570B87",
-                          fontSize: "0.75em",
-                          marginBottom: "5%",
+                          backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${value.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
+                          borderRadius: "2%",
                         }}
-                        disabled
-                      />
-                    </EstrelasLocal>
-                  </CaixaDados>
-                </Local>
-              ))}
-            </CaixaLocais>
-          )}
-        </CaixaConteudo>
+                      ></img>
+                    </CaixaFoto>
+                    <CaixaDados>
+                      <NomeLocal>{value?.nome}</NomeLocal>
+                      <EnderecoLocal>{value?.endereco}</EnderecoLocal>
+                      <EstrelasLocal>
+                        {value?.estrelas}
+                        <Rate
+                          value={value?.estrelas}
+                          style={{
+                            color: "#570B87",
+                            fontSize: "0.75em",
+                            marginBottom: "5%",
+                          }}
+                          disabled
+                        />
+                      </EstrelasLocal>
+                    </CaixaDados>
+                  </Local>
+                ))}
+              </CaixaLocais>
+            )}
+          </CaixaConteudo>
+        )}
         <div
           style={{
             width: "65%",
