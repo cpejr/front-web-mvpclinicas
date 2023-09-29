@@ -129,6 +129,13 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: registro(value) });
     }
 
+    if (name === "Estudante de medicina") {
+      if (registro(value) == 0)
+        setErro({ ...erro, [name]: true });
+      else setErro({ ...erro, [name]: false });
+      setUsuario({ ...usuario, [name]: registro(value) });
+    }
+
     if (name === "uni_federativa") {
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
@@ -136,8 +143,7 @@ function Cadastro() {
     if (name === "formacao") {
       setFormacao(value);
       if (value == "medico") setStringRegistro("CRM");
-      else if (value == "dentista") setStringRegistro("CRO");
-      else if (value == "outros") setStringRegistro("Registro");
+      else if (value == "Estudante de medicina") setStringRegistro("Matrícula");
     }
   }
 
@@ -295,8 +301,7 @@ function Cadastro() {
                 Selecione sua Formação
               </option>
               <option value="medico">Médico(a)</option>
-              <option value="dentista">Dentista</option>
-              <option value="outros">Outros</option>
+              <option value="Estudante de medicina">Estudante de medicina</option>
             </SelecaoFormacao>
           </ConjuntoTituloInput>
 
@@ -310,7 +315,7 @@ function Cadastro() {
                   />
                 </TituloIcon>
                 <Input
-                  placeholder={`Digite seu ${stringRegistro}`}
+                  placeholder={`Digite sua ${stringRegistro}`}
                   backgroundColor="white"
                   width="100%"
                   heightMedia700="20px"
@@ -324,7 +329,7 @@ function Cadastro() {
                   fontSize="0.8em"
                 ></Input>
                 {erro.registro && (
-                  <Rotulo>Digite um {stringRegistro} válido</Rotulo>
+                  <Rotulo>Digite uma {stringRegistro} válida</Rotulo>
                 )}
               </ConjuntoTituloInput>
               <ConjuntoTituloInput>
