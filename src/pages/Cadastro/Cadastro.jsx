@@ -81,7 +81,8 @@ function Cadastro() {
       setCamposVazios({ ...camposVazios, [name]: false });
     }
 
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    // const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
     } else {
@@ -123,7 +124,7 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      if (value.length > 7 || registro(value) == 0)
+      if (registro(value) == 0)
         setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
       setUsuario({ ...usuario, [name]: registro(value) });
