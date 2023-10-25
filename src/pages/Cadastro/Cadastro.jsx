@@ -95,9 +95,6 @@ function Cadastro() {
       }
     }
   }
-  console.log(registro);
-  console.log(usuario);
-  
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
