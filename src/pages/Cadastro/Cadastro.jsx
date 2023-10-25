@@ -81,7 +81,6 @@ function Cadastro() {
       setCamposVazios({ ...camposVazios, [name]: false });
     }
 
-    // const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
     const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
@@ -96,6 +95,9 @@ function Cadastro() {
       }
     }
   }
+  console.log(registro);
+  console.log(usuario);
+  
 
   function preenchendoDados(e) {
     const { name, value } = e.target;
@@ -130,13 +132,6 @@ function Cadastro() {
       setUsuario({ ...usuario, [name]: registro(value) });
     }
 
-    if (name === "Estudante de medicina") {
-      if (registro(value) == 0)
-        setErro({ ...erro, [name]: true });
-      else setErro({ ...erro, [name]: false });
-      setUsuario({ ...usuario, [name]: registro(value) });
-    }
-
     if (name === "uni_federativa") {
       setUsuario({ ...usuario, [name]: apenasLetras(value) });
     }
@@ -146,6 +141,9 @@ function Cadastro() {
       if (value == "medico") setStringRegistro("CRM");
       else if (value == "Estudante de medicina") setStringRegistro("Matrícula");
     }
+
+    if(formacao == "medico" && registro(value).length > 7)
+      setErro({ ...erro, [name]: true });
   }
 
   function preenchendoData(name, value) {
