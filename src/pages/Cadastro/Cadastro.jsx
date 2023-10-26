@@ -81,7 +81,7 @@ function Cadastro() {
       setCamposVazios({ ...camposVazios, [name]: false });
     }
 
-    const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!regEx.test(value)) {
       setErro({ ...erro, [name]: true });
     } else {
@@ -123,7 +123,7 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      if (value.length > 7 || registro(value) == 0)
+      if (registro(value) == 0)
         setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
       setUsuario({ ...usuario, [name]: registro(value) });
@@ -136,9 +136,11 @@ function Cadastro() {
     if (name === "formacao") {
       setFormacao(value);
       if (value == "medico") setStringRegistro("CRM");
-      else if (value == "dentista") setStringRegistro("CRO");
-      else if (value == "outros") setStringRegistro("Registro");
+      else if (value == "Estudante de medicina") setStringRegistro("Matrícula");
     }
+
+    if(formacao == "medico" && registro(value).length > 7)
+      setErro({ ...erro, [name]: true });
   }
 
   function preenchendoData(name, value) {
@@ -295,8 +297,7 @@ function Cadastro() {
                 Selecione sua Formação
               </option>
               <option value="medico">Médico(a)</option>
-              <option value="dentista">Dentista</option>
-              <option value="outros">Outros</option>
+              <option value="Estudante de medicina">Estudante de medicina</option>
             </SelecaoFormacao>
           </ConjuntoTituloInput>
 
@@ -310,7 +311,7 @@ function Cadastro() {
                   />
                 </TituloIcon>
                 <Input
-                  placeholder={`Digite seu ${stringRegistro}`}
+                  placeholder={`Digite sua ${stringRegistro}`}
                   backgroundColor="white"
                   width="100%"
                   heightMedia700="20px"
@@ -324,7 +325,7 @@ function Cadastro() {
                   fontSize="0.8em"
                 ></Input>
                 {erro.registro && (
-                  <Rotulo>Digite um {stringRegistro} válido</Rotulo>
+                  <Rotulo>Digite uma {stringRegistro} válida</Rotulo>
                 )}
               </ConjuntoTituloInput>
               <ConjuntoTituloInput>
