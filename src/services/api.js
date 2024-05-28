@@ -2,7 +2,7 @@ import axios from "axios";
 import { recebeToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "https://clinicas-4a2g.onrender.com",
+  baseURL: import.meta.env.VITE_BACKEND_URL,
 });
 
 api.interceptors.request.use(

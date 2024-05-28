@@ -94,7 +94,7 @@ function CadastroNovoLocal() {
     } else {
       setCarregando(true);
 
-      const proxyUrl = "https://corsclinicas.onrender.com/";
+      const proxyUrl = import.meta.env.VITE_CORS_URL;
 
       const requisicaoLocalUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${novoLocal.endereco}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I`;
 
