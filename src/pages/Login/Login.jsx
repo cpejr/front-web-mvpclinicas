@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 import {
@@ -17,21 +17,31 @@ import {
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
-import * as managerService from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import { Spin } from "antd";
 import useAuthStore from "../../stores/auth";
+import { useLogin } from "../../hooks/user";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
-  const [carregando, setCarregando] = useState(false);
   const setToken = useAuthStore((state) => state.setToken);
+
+  const { mutate: fazerLogin, isPending: carregando } = useLogin({
+    onSuccess: ({ token }) => {
+      toast.success("Login realizado com sucesso", { autoClose: 50000 });
+      setToken(token);
+    },
+    onError: (err) => {
+      toast.error("Não foi possível fazer o login");
+      return err;
+    },
+  });
 
   const referenciaCamposNulos = {
     email: false,
@@ -89,18 +99,9 @@ function Login() {
       _.isEqual(camposVazios, referenciaCamposNulos) &&
       _.isEqual(erro, referenciaCamposNulos)
     ) {
-      setCarregando(true);
-      try {
-      const resposta = await managerService.requisicaoLogin(email, senha);
-      const { token } = resposta.data;
+      // setCarregando(true);
 
-      setToken(token)
-      setCarregando(false);
-      
-      toast.success("Login realizado com sucesso");
-      } catch {
-        setErroLoginInvalido({ email: true, senha: true });
-      }
+      fazerLogin({ email, senha });
     } else if (!_.isEqual(camposVazios, referenciaCamposNulos)) {
       toast.error("Preencha todos os campos");
       return;
