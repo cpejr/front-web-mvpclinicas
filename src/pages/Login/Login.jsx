@@ -18,24 +18,25 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { LoadingOutlined } from "@ant-design/icons";
-import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import { Spin } from "antd";
 import useAuthStore from "../../stores/auth";
 import { useLogin } from "../../hooks/user";
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState(false);
   const setToken = useAuthStore((state) => state.setToken);
+  const navigate = useNavigate();
 
-  const { mutate: fazerLogin, isPending: carregando } = useLogin({
+  const { mutate: login, isPending: carregando } = useLogin({
     onSuccess: ({ token }) => {
-      toast.success("Login realizado com sucesso", { autoClose: 50000 });
+      toast.success("Login realizado com sucesso");
       setToken(token);
+      navigate("/home");
     },
     onError: (err) => {
       toast.error("Não foi possível fazer o login");
@@ -99,9 +100,7 @@ function Login() {
       _.isEqual(camposVazios, referenciaCamposNulos) &&
       _.isEqual(erro, referenciaCamposNulos)
     ) {
-      // setCarregando(true);
-
-      fazerLogin({ email, senha });
+      login({ email, senha });
     } else if (!_.isEqual(camposVazios, referenciaCamposNulos)) {
       toast.error("Preencha todos os campos");
       return;
@@ -189,7 +188,13 @@ function Login() {
               widthMedia280="70%"
               onClick={() => logar()}
             >
-              {carregando ? <Spin indicator={antIcon} /> : "Confirmar"}
+              {carregando ? (
+                <Spin
+                  indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+                />
+              ) : (
+                "Confirmar"
+              )}
             </Botao>
           </BotoesEdicao>
           <BotaoCadastro
@@ -206,7 +211,6 @@ function Login() {
           </BotaoCadastro>
         </CaixaBotoes>
       </Conteudo>
-      <AddToast />
     </Body>
   );
 }
