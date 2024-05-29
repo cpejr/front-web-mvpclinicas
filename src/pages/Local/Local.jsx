@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
@@ -134,11 +134,13 @@ function Local() {
 
   useEffect(() => {
     pegandoDadosLocal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
 
   useEffect(() => {
     setCarregandoComentarios(true);
     pegandoComentariosLocal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
 
   return (

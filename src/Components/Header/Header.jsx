@@ -1,5 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { FaMapMarked } from "react-icons/fa";
+import { IoMdLogOut } from "react-icons/io";
+import useAuthStore from "../../stores/auth";
 import {
   BackButton,
   BackLink,
@@ -8,11 +10,14 @@ import {
   ContainerDiv,
   ContainerHeader,
   LogoText,
+  HeaderArea,
 } from "./Styles";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
+  const isAdmin = useAuthStore((state) => state?.usuario?.admin);
+  console.log(isAdmin);
 
   return (
     <ContainerHeader>
@@ -23,19 +28,20 @@ function Header() {
       </ContainerDiv>
       <ContainerEsquerda>
         <BackLink>
-          <BackButton to="/novolocal" style={{ marginTop: "5px" }}>
-            Local
-          </BackButton>
-
-          <FaMapMarked
-            style={{ marginRight: "10px", fontSize: "25px", color: "#fff" }}
-          />
-          <BackButton to="/perfil">
-            Perfil
-            <UserOutlined
-              style={{ padding: "0.5rem", fontSize: "25px", color: "#fff" }}
-            />
-          </BackButton>
+          {!isAdmin && (
+            <HeaderArea>
+              <BackButton to="/novolocal">Local</BackButton>
+              <FaMapMarked style={{ fontSize: "17px", color: "#fff" }} />
+            </HeaderArea>
+          )}
+          <HeaderArea>
+            <BackButton to="/perfil">Perfil</BackButton>
+            <UserOutlined style={{ fontSize: "20px", color: "#fff" }} />
+          </HeaderArea>
+          <HeaderArea>
+            <BackButton to="/login">Logout</BackButton>
+            <IoMdLogOut style={{ fontSize: "17px", color: "#fff" }} />
+          </HeaderArea>
         </BackLink>
       </ContainerEsquerda>
     </ContainerHeader>
