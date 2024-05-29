@@ -10,11 +10,10 @@ import {
   Conteudo,
   Mapa,
   Rotulo,
-  Subtitulo,
   Titulo,
   TituloInput,
 } from "./Styles";
-import Header from "../../Components/Header/Header";
+
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { telefone } from "../../utils/masks";
@@ -23,7 +22,7 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
-import HeaderHome from "../../Components/HeaderHome/HeaderHome";
+
 import axios from "axios";
 
 function CadastroNovoLocal() {
@@ -35,8 +34,6 @@ function CadastroNovoLocal() {
     endereco: "",
     foto_url: "",
   };
-
-  const navigate = useNavigate();
 
   const [novoLocal, setNovoLocal] = useState(zeraInputs);
   const [enderecoMapa, setEnderecoMapa] = useState("Brasil");
@@ -149,11 +146,9 @@ function CadastroNovoLocal() {
 
   return (
     <Body>
-      <HeaderHome local="true" />
       <Conteudo>
         <CaixaTitulo>
           <Titulo>Cadastro de local</Titulo>
-          <Subtitulo>Insira os dados</Subtitulo>
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>

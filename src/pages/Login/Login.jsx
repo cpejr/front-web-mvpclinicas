@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 import {
   Body,
   BotoesEdicao,
   CaixaBotoes,
-  CaixaFoto,
+  CaixaLogo,
+  CaixaTitulo,
   CaixaInput,
   Conteudo,
   BotaoCadastro,
@@ -14,6 +15,7 @@ import {
   InputNovo,
   Rotulo,
   RotuloSenha,
+  Titulo,
 } from "./Styles";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -91,13 +93,13 @@ function Login() {
     ) {
       setCarregando(true);
       try {
-      const resposta = await managerService.requisicaoLogin(email, senha);
-      const { token } = resposta.data;
+        const resposta = await managerService.requisicaoLogin(email, senha);
+        const { token } = resposta.data;
 
-      setToken(token)
-      setCarregando(false);
-      
-      toast.success("Login realizado com sucesso");
+        setToken(token);
+        setCarregando(false);
+
+        toast.success("Login realizado com sucesso");
       } catch {
         setErroLoginInvalido({ email: true, senha: true });
       }
@@ -113,7 +115,16 @@ function Login() {
   return (
     <Body>
       <Conteudo>
-        <CaixaFoto></CaixaFoto>
+        <CaixaTitulo>
+          <CaixaLogo>
+            <img></img>
+          </CaixaLogo>
+          <Titulo>
+            Faça seu
+            <br style={{ display: "block" }} />
+            login
+          </Titulo>
+        </CaixaTitulo>
         <CaixaInput>
           <InputNovo>
             <TituloIcon>

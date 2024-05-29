@@ -1,5 +1,5 @@
-import React from "react";
 import { UserOutlined } from "@ant-design/icons";
+import { FaMapMarked } from "react-icons/fa";
 import {
   BackButton,
   BackLink,
@@ -23,6 +23,13 @@ function Header() {
       </ContainerDiv>
       <ContainerEsquerda>
         <BackLink>
+          <BackButton to="/novolocal" style={{ marginTop: "5px" }}>
+            Local
+          </BackButton>
+
+          <FaMapMarked
+            style={{ marginRight: "10px", fontSize: "25px", color: "#fff" }}
+          />
           <BackButton to="/perfil">
             Perfil
             <UserOutlined

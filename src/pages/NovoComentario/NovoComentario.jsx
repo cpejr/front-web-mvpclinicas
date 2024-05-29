@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -25,7 +25,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CriarNovoComentario } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { recebeUsuario } from "../../services/auth";
-import Header from "../../Components/Header/Header";
 
 function NovoComentario() {
   const usuarioLogado = JSON.parse(recebeUsuario());
@@ -127,7 +126,6 @@ function NovoComentario() {
 
   return (
     <Body>
-      <Header />
       <AddToast />
       <Titulo>Responda as perguntas abaixo:</Titulo>
       <CaixaPerguntas>

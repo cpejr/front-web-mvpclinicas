@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   BotoesEdicao,
@@ -38,7 +38,6 @@ import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
-import HeaderHome from "../../Components/HeaderHome/HeaderHome";
 
 function Perfil() {
   const [usuario, setUsuario] = useState({});
@@ -87,6 +86,7 @@ function Perfil() {
   useEffect(() => {
     setCarregando(true);
     pegandoDadosUsuario();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fechandoModalAlterarFotoPerfil() {
@@ -96,7 +96,6 @@ function Perfil() {
 
   return (
     <Body>
-      <HeaderHome />
       {carregando ? (
         <ContainerCarregando>
           <TextoCarregando>Carregando Perfil</TextoCarregando>

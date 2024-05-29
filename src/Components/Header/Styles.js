@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cores } from "../../variaveis";
+
 import { Link } from "react-router-dom";
 
 export const ContainerHeader = styled.header`
