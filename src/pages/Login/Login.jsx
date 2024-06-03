@@ -24,6 +24,8 @@ import { Spin } from "antd";
 import useAuthStore from "../../stores/auth";
 import { useLogin } from "../../hooks/user";
 import { useNavigate } from "react-router-dom";
+import Form from "../../Components/Form";
+import { loginSchema } from "./loginSchema";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -110,6 +112,21 @@ function Login() {
     }
   }
 
+  const [inputs] = useState([
+    {
+      type: "text",
+      key: "email",
+      placeholder: "Digite seu e-mail",
+      icon: MailOutlined,
+    },
+    {
+      type: "password",
+      key: "senha",
+      placeholder: "Digite sua senha",
+      icon: LockOutlined,
+    },
+  ]);
+
   return (
     <Body>
       <Conteudo>
@@ -164,7 +181,6 @@ function Login() {
             marginTop="0%"
             paddingRight="2%"
             name="senha"
-            senh
             value={senha}
             onChange={validacaoSenha}
             camposVazios={camposVazios.senha}
@@ -211,6 +227,15 @@ function Login() {
           </BotaoCadastro>
         </CaixaBotoes>
       </Conteudo>
+
+      <Form
+        inputs={inputs}
+        onSubmit={logar}
+        schema={loginSchema}
+        color={"white"}
+        loading={carregando}
+        selectedOptionsInitial={{}}
+      />
     </Body>
   );
 }
