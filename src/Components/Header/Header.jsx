@@ -12,13 +12,26 @@ import {
   LogoText,
   HeaderArea,
 } from "./Styles";
+import { redirecionamento } from "../../utils/redirecionamento";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 function Header() {
   const navigate = useNavigate();
   const isAdmin = useAuthStore((state) => state?.usuario?.admin);
-  console.log(isAdmin);
 
+  const logout = useAuthStore((state) => state.logout);
+
+  async function handleLogout() {
+    try {
+      logout();
+      toast.success("Usuario deslogado com sucesso");
+      setTimeout(() => {
+        redirecionamento("/login");
+      }, 3000);
+    } catch (error) {
+      alert(error);
+    }
+  }
   return (
     <ContainerHeader>
       <ContainerDiv onClick={() => navigate("/home")}>
@@ -28,7 +41,7 @@ function Header() {
       </ContainerDiv>
       <ContainerEsquerda>
         <BackLink>
-          {!isAdmin && (
+          {isAdmin && (
             <HeaderArea>
               <BackButton to="/novolocal">Local</BackButton>
               <FaMapMarked style={{ fontSize: "17px", color: "#fff" }} />
@@ -39,8 +52,11 @@ function Header() {
             <UserOutlined style={{ fontSize: "20px", color: "#fff" }} />
           </HeaderArea>
           <HeaderArea>
-            <BackButton to="/login">Logout</BackButton>
-            <IoMdLogOut style={{ fontSize: "17px", color: "#fff" }} />
+            <BackButton onClick={handleLogout}>Logout</BackButton>
+            <IoMdLogOut
+              onClick={handleLogout}
+              style={{ fontSize: "17px", color: "#fff" }}
+            />
           </HeaderArea>
         </BackLink>
       </ContainerEsquerda>

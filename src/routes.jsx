@@ -7,7 +7,7 @@ import {
   Outlet,
 } from "react-router-dom";
 
-import AppLayout from "./components/AppLayout/AppLayout";
+import AppLayout from "./Components/AppLayout/AppLayout";
 import Cadastro from "../src/pages/Cadastro";
 import Home from "../src/pages/Home";
 import Local from "../src/pages/Local";
