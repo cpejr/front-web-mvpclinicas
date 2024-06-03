@@ -8,6 +8,7 @@ export default function FormInput({
   register,
   defaultValue,
   type,
+  label,
   icon: Icon,
   color,
   width,
@@ -17,7 +18,7 @@ export default function FormInput({
   return (
     <Container>
       <Title>
-        <Label>{inputKey}</Label>
+        <Label>{label}</Label>
         {Icon && (
           <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />
         )}
@@ -53,4 +54,5 @@ FormInput.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.elementType,
   placeholdercolor: PropTypes.string,
+  label: PropTypes.string,
 };

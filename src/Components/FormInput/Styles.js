@@ -18,9 +18,6 @@ export const Label = styled.label`
   color: #570b87;
   font-weight: 550;
   font-size: 1rem;
-  ::first-letter {
-    text-transform: capitalize;
-  }
 `;
 
 export const StyledInput = styled.input`

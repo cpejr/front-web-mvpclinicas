@@ -83,6 +83,7 @@ export default function FormSubmit({
               <FormInput
                 inputKey={input.key}
                 type={input.type}
+                label={input.label}
                 placeholder={input.placeholder}
                 icon={input.icon}
                 error={errors[input.key] ? true : false || requestError}
@@ -113,4 +114,5 @@ FormSubmit.propTypes = {
   color: PropTypes.string,
   loading: PropTypes.bool,
   selectedOptionsInitial: PropTypes.object,
+  requestError: PropTypes.bool,
 };

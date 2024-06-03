@@ -40,12 +40,14 @@ function Login() {
       type: "text",
       key: "email",
       placeholder: "Digite seu e-mail",
+      label: "E-mail",
       icon: MailOutlined,
     },
     {
       type: "password",
       key: "senha",
       placeholder: "Digite sua senha",
+      label: "Senha",
       icon: LockOutlined,
     },
   ]);
