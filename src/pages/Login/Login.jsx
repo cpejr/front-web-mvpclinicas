@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
-import { Body, CaixaFoto } from "./Styles";
+import { Body, CaixaTitulo, Logo, Titulo } from "./Styles";
 
 import { toast } from "react-toastify";
 import useAuthStore from "../../stores/auth";
@@ -54,7 +54,12 @@ function Login() {
 
   return (
     <Body>
-      <CaixaFoto />
+      <CaixaTitulo>
+        <Logo></Logo>
+        <Titulo>
+          Faça seu <br></br>Login
+        </Titulo>
+      </CaixaTitulo>
 
       <Form
         inputs={inputs}

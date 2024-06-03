@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cores } from "../../variaveis";
+
 import { Link } from "react-router-dom";
 
 export const ContainerHeader = styled.header`
@@ -64,6 +64,7 @@ export const LogoText = styled.p`
 export const BackLink = styled.div`
   display: flex;
   align-items: center;
+  gap: 30px;
 `;
 
 export const BackButton = styled(Link)`
@@ -91,3 +92,4 @@ export const SairTexto = styled.div`
     font-size: 1em;
   }
 `;
+export const HeaderArea = styled.div``;

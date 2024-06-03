@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
@@ -50,7 +50,7 @@ import {
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
-import HeaderHome from "../../Components/HeaderHome/HeaderHome";
+
 import * as managerService from "../../services/ManagerService/managerService";
 
 function Local() {
@@ -134,16 +134,17 @@ function Local() {
 
   useEffect(() => {
     pegandoDadosLocal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
 
   useEffect(() => {
     setCarregandoComentarios(true);
     pegandoComentariosLocal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
 
   return (
     <Body>
-      <HeaderHome local={true} />
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
