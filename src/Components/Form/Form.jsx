@@ -11,6 +11,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "../FormInput";
 import Botao from "../../Styles/Botao/Botao";
+import { Label } from "../FormInput/Styles";
 
 export default function FormSubmit({
   inputs,
@@ -100,6 +101,30 @@ export default function FormSubmit({
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
               )}
               {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+            </InputKeep>
+          );
+        } else if (input.type === "select") {
+          return (
+            <InputKeep key={input.key}>
+              <Label>{input.label}</Label>
+              <Select
+                inputKey={input.key}
+                type={input.type}
+                label={input.label}
+                placeholder={input.placeholder}
+                icon={input.icon}
+                error={errors[input.key] ? true : false || requestError}
+                defaultValue={input.value}
+                {...register(input.key)}
+                color={color}
+              >
+                <option value="" disabled selected>
+                  Selecione sua formação
+                </option>
+                {input?.options?.map((option) => (
+                  <option key={option.key}>{option.name}</option>
+                ))}
+              </Select>
             </InputKeep>
           );
         }

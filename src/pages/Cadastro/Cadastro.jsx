@@ -235,6 +235,13 @@ function Cadastro() {
       key: "formacao",
       placeholder: "Selecione sua formação",
       label: "Formacao",
+      options: [
+        {
+          value: "medico",
+          name: "Médico",
+        },
+        { value: "estudante", name: "Estudante" },
+      ],
       icon: RocketOutlined,
     },
     {

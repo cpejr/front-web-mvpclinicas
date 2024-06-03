@@ -37,7 +37,7 @@ export const StyledInput = styled.input`
     outline: none;
   }
   ::placeholder {
-    color: ${(props) => (props?.error ? "#FF4040" : "#242424")};
+    color: ${(props) => (props?.error ? "#FF4040" : "#424242")};
   }
 `;
 
