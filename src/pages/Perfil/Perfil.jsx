@@ -38,7 +38,8 @@ import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
-
+import { useRequisicaoFotoDePerfil } from "../../hooks/imagem";
+import { toast } from "react-toastify";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
@@ -49,6 +50,15 @@ function Perfil() {
   const [carregando, setCarregando] = useState(false);
 
   const usuarioLogado = useAuthStore((state) => state.usuario);
+  const { data: imagemPerfil, isLoading } = useRequisicaoFotoDePerfil(
+    usuarioLogado._id,
+    {
+      onError: (err) => {
+        toast.error("Erro ao pegar itens", err);
+      },
+    }
+  );
+
   async function pegandoDadosUsuario() {
     const respostaImagem = await managerService.GetFotoDePerfil(
       usuarioLogado._id
