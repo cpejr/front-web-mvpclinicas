@@ -15,7 +15,11 @@ function Login() {
   const setToken = useAuthStore((state) => state.setToken);
   const navigate = useNavigate();
 
-  const { mutate: login, isPending: carregando } = useLogin({
+  const {
+    mutate: login,
+    isPending: carregando,
+    error,
+  } = useLogin({
     onSuccess: ({ token }) => {
       toast.success("Login realizado com sucesso");
       setToken(token);
@@ -56,6 +60,7 @@ function Login() {
         schema={loginSchema}
         color={"white"}
         loading={carregando}
+        requestError={error}
         selectedOptionsInitial={{}}
       />
       <Botao

@@ -13,6 +13,7 @@ export default function FormSubmit({
   schema,
   color,
   loading,
+  requestError,
   // selectedOptionsInitial,
 }) {
   const {
@@ -84,7 +85,7 @@ export default function FormSubmit({
                 type={input.type}
                 placeholder={input.placeholder}
                 icon={input.icon}
-                error={errors[input.key] ? true : false}
+                error={errors[input.key] ? true : false || requestError}
                 defaultValue={input.value}
                 register={register}
                 color={color}
@@ -92,6 +93,7 @@ export default function FormSubmit({
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
               )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
             </InputKeep>
           );
         }
