@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, DatePicker } from "antd";
 import Botao from "../../Styles/Botao";
@@ -36,7 +36,7 @@ function ModalAlterarDados(props) {
     } else {
       try {
         await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-        toast.success("Perfil alterado com sucesso!")
+        toast.success("Perfil alterado com sucesso!");
       } catch {
         toast.error("Erro no servidor!");
       }
