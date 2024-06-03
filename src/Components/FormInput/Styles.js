@@ -16,12 +16,12 @@ export const Title = styled.div`
 
 export const Label = styled.label`
   color: #570b87;
-  font-weight: 550;
-  font-size: 1rem;
+  font-size: 1.1rem;
 `;
 
 export const StyledInput = styled.input`
   padding: 0.5rem;
+  padding-left: 0;
   border: 0;
   border-bottom: ${(props) =>
     props?.error ? "1px solid #ff0000" : "1px solid #570b87"} !important;

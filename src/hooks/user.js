@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { login } from "../services/endpoints";
+import { login, cadastro } from "../services/endpoints";
 
 export function useLogin({
   onSuccess = () => {},
@@ -7,6 +7,17 @@ export function useLogin({
 } = {}) {
   return useMutation({
     mutationFn: login,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useCadastro({
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useMutation({
+    mutationFn: cadastro,
     onSuccess,
     onError,
   });

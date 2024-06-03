@@ -2,7 +2,12 @@ import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 // import Button from "../../common/Button/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form as FormContainer, ErrorMessage, InputKeep } from "./Styles";
+import {
+  Form as FormContainer,
+  ErrorMessage,
+  InputKeep,
+  Select,
+} from "./Styles";
 import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "../FormInput";
 import Botao from "../../Styles/Botao/Botao";
@@ -55,7 +60,7 @@ export default function FormSubmit({
   return (
     <FormContainer onSubmit={handleSubmit(submitHandler)}>
       {inputs.map((input) => {
-        // if (input.type === "selects") {
+        // if (input.type === "select") {
         //   return (
         //     <>
         //       <Select
@@ -76,7 +81,7 @@ export default function FormSubmit({
         //       )}
         //     </>
         //   );
-        // } else if (input.type === "input") {
+        // } else
         if (input.type === "text" || input.type === "password") {
           return (
             <InputKeep key={input.key}>

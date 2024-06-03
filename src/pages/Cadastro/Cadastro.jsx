@@ -18,6 +18,7 @@ import {
   Rotulo,
   SelecaoFormacao,
 } from "./Styles";
+import Form from "../../Components/Form";
 
 import {
   IdcardOutlined,
@@ -28,6 +29,8 @@ import {
   GlobalOutlined,
   LockOutlined,
   LoadingOutlined,
+  UserOutlined,
+  RocketOutlined,
 } from "@ant-design/icons";
 
 import { apenasLetras, telefone, registro } from "../../../utils/masks";
@@ -39,13 +42,15 @@ import _ from "lodash";
 import { Spin } from "antd";
 import * as managerService from "../../services/ManagerService/managerService";
 import { useNavigate } from "react-router-dom";
+import { cadastroSchema } from "./cadastroSchema";
+import { useCadastro } from "../../hooks/user";
 
 function Cadastro() {
   const navegar = useNavigate();
   const [erro, setErro] = useState(false);
   const [erroEmailIgual, setErroEmailIgual] = useState(false);
   const [usuario, setUsuario] = useState({});
-  const [carregando, setCarregando] = useState(false);
+  //const [carregando, setCarregando] = useState(false);
   const [formacao, setFormacao] = useState("");
   const [stringRegistro, setStringRegistro] = useState("");
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -123,8 +128,7 @@ function Cadastro() {
     }
 
     if (name === "registro") {
-      if (registro(value) == 0)
-        setErro({ ...erro, [name]: true });
+      if (registro(value) == 0) setErro({ ...erro, [name]: true });
       else setErro({ ...erro, [name]: false });
       setUsuario({ ...usuario, [name]: registro(value) });
     }
@@ -139,7 +143,7 @@ function Cadastro() {
       else if (value == "Estudante de medicina") setStringRegistro("Matrícula");
     }
 
-    if(formacao == "medico" && registro(value).length > 7)
+    if (formacao == "medico" && registro(value).length > 7)
       setErro({ ...erro, [name]: true });
   }
 
@@ -151,35 +155,117 @@ function Cadastro() {
   }
 
   async function requisicaoCadastro() {
-    setCarregando(true);
+    //    setCarregando(true);
 
     if (_.isEqual(camposVazios, verificaCamposVazios)) {
       if (usuario.senha !== usuario.confirmacao_senha) {
         toast.error("As senhas digitadas são diferentes.");
-        setCarregando(false);
+        //      setCarregando(false);
       } else if (erroEmailIgual === true) {
         toast.error("O email digitado já está cadastrado no sistema!");
-        setCarregando(false);
+        //    setCarregando(false);
       } else if (erro.telefone === true) {
         toast.error("Digite o numero de telefone na formatação correta!");
-        setCarregando(false);
+        //  setCarregando(false);
       } else if (erro.senha === true) {
         toast.error("Digite uma senha formatação correta!");
-        setCarregando(false);
+        //setCarregando(false);
       } else {
-        await managerService.CadastroUsuario(usuario);
+        //await managerService.CadastroUsuario(usuario);
+        console.log(usuario);
         toast.success("Usuário cadastrado com sucesso!");
         navegar("/home");
-        setCarregando(false);
+        //setCarregando(false);
       }
     } else {
       setCamposVaziosErro(camposVazios);
       toast.error("Preencha todos os campos obrigatórios");
-      setCarregando(false);
+      // setCarregando(false);
     }
 
-    setCarregando(false);
+    //setCarregando(false);
   }
+
+  const {
+    mutate: cadastro,
+    isPending: carregando,
+    error,
+  } = useCadastro({
+    onSuccess: () => {
+      toast.success("Cadastro realizado com sucesso");
+      navegar("/home");
+    },
+    onError: (err) => {
+      toast.error("Não foi possível fazer o cadastro");
+      return err;
+    },
+  });
+
+  const [inputs] = useState([
+    {
+      type: "text",
+      key: "nome",
+      placeholder: "Digite seu nome",
+      label: "Nome",
+      icon: UserOutlined,
+    },
+    {
+      type: "text",
+      key: "email",
+      placeholder: "Digite seu e-mail",
+      label: "E-mail",
+      icon: MailOutlined,
+    },
+    {
+      type: "text",
+      key: "telefone",
+      placeholder: "Digite seu telefone",
+      label: "Telefone",
+      icon: PhoneOutlined,
+    },
+    {
+      type: "date",
+      key: "data_nascimento",
+      placeholder: "Selecione sua data de nascimento",
+      label: "Data de nascimento",
+      icon: RocketOutlined,
+    },
+    {
+      type: "select",
+      key: "formacao",
+      placeholder: "Selecione sua formação",
+      label: "Formacao",
+      icon: RocketOutlined,
+    },
+    {
+      type: "text",
+      key: "registro",
+      placeholder: "Digite seu registro",
+      label: "Registro (CRM para médicos ou matrícula para estudantes)",
+      icon: CopyOutlined,
+    },
+    {
+      type: "text",
+      key: "uni_federativa",
+      placeholder: "Digite sua UF",
+      label: "Unidade federativa",
+      icon: CopyOutlined,
+    },
+    {
+      type: "password",
+      key: "senha",
+      placeholder: "Digite sua senha",
+      label: "Senha",
+      icon: LockOutlined,
+    },
+    {
+      type: "password",
+      key: "confirmacao_senha",
+      placeholder: "Digite a confirmação da sua senha",
+      label: "Confirmação da senha",
+      icon: LockOutlined,
+    },
+  ]);
 
   return (
     <Body>
@@ -297,7 +383,9 @@ function Cadastro() {
                 Selecione sua Formação
               </option>
               <option value="medico">Médico(a)</option>
-              <option value="Estudante de medicina">Estudante de medicina</option>
+              <option value="Estudante de medicina">
+                Estudante de medicina
+              </option>
             </SelecaoFormacao>
           </ConjuntoTituloInput>
 
@@ -425,6 +513,14 @@ function Cadastro() {
         </CaixaBotoes>
       </Conteudo>
       <AddToast />
+      <Form
+        inputs={inputs}
+        onSubmit={cadastro}
+        schema={cadastroSchema}
+        loading={carregando}
+        requestError={error}
+        selectedOptionsInitial={{}}
+      />
     </Body>
   );
 }
