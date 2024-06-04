@@ -26,7 +26,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { data, telefone } from "../../utils/masks";
-import * as managerService from "../../services/ManagerService/managerService";
+
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { Modal } from "antd";
@@ -55,20 +55,12 @@ function Perfil() {
       },
     }
   );
-  const { data: user, userLoading } = useGetDadosUsuario(usuarioLogado._id, {
+  const { data: user, isPending } = useGetDadosUsuario(usuarioLogado._id, {
     onError: (err) => {
       toast.error("Erro ao pegar itens", err);
     },
   });
 
-  async function pegandoDadosUsuario() {
-    const respostaImagem = await managerService.GetFotoDePerfil(
-      usuarioLogado._id
-    );
-    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
-    setUsuario(resposta.dadosUsuario);
-    setImagem(respostaImagem);
-  }
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
 
@@ -95,16 +87,17 @@ function Perfil() {
   }
 
   useEffect(() => {
-    pegandoDadosUsuario();
+    if (!isPending) {
+      setUsuario(user);
+    }
     if (!isLoading) {
-      setImagem(imagemPerfil);
+      setImagem(imagemPerfil.imagem);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  }, [isLoading, isPending]);
 
   async function fechandoModalAlterarFotoPerfil() {
     setModalAlterarFotoPerfil(false);
-    pegandoDadosUsuario();
   }
 
   return (

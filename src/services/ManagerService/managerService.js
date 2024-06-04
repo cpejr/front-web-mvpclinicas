@@ -1,6 +1,6 @@
 import * as requesterService from "../RequesterService/requesterService";
 import { toast } from "react-toastify";
-import requisicaoErro from '../../utils/HttpErros';
+import requisicaoErro from "../../utils/HttpErros";
 
 export const CadastroUsuario = async (usuario) => {
   const dados = await requesterService.criarUsuario(usuario).then((res) => {
@@ -8,14 +8,7 @@ export const CadastroUsuario = async (usuario) => {
   });
   return dados;
 };
-export const GetDadosUsuario = async (id) => {
-  let dadosUsuario = {};
-  await requesterService.requisicaoDadosUsuario(id).then((res) => {
-    dadosUsuario = res.data;
-  });
 
-  return { dadosUsuario };
-};
 export const GetDadosPessoais = async () => {
   let dadosUsuario = {};
   await requesterService
@@ -103,12 +96,10 @@ export const ExcluirPerfil = async (id) => {
     });
 };
 export const UpdateFotoDePerfil = async (id, file) => {
-  await requesterService
-    .updateFotoDePerfil(id, file)
-    .catch((error) => {
-      requisicaoErro(error);
-      return;
-    });
+  await requesterService.updateFotoDePerfil(id, file).catch((error) => {
+    requisicaoErro(error);
+    return;
+  });
   return;
 };
 
