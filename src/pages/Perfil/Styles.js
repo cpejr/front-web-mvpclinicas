@@ -33,7 +33,7 @@ export const CaixaFoto = styled.div`
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 2%;
-
+  border-radius: "100%";
   @media (max-width: 900px) {
     width: 200px;
     height: 200px;
@@ -187,24 +187,8 @@ export const TextoAlterarFoto = styled.div`
   }
 `;
 
-export const TextoCarregando = styled.div`
-  font-family: "Roboto Condensed";
-  font-weight: 500;
-  font-size: 1.2em;
-  line-height: 30px;
-  color: #570b87;
-  @media (max-width: 500px) {
-    font-size: 1em;
-  }
-  text-align: center;
-`;
-
-export const ContainerCarregando = styled.div`
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  gap: 1rem;
-  flex-basis: auto;
-  align-items: center;
-  justify-content: center;
+export const Imagem = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
 `;

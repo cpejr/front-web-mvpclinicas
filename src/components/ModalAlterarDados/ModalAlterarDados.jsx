@@ -63,14 +63,14 @@ function ModalAlterarDados(props) {
           <ConjuntoTituloInput>
             <TituloInput>Nome Completo</TituloInput>
             <Input
-              placeholder={props.usuario.nome}
+              placeholder={props?.usuario?.nome}
               onChange={(e) => preenchendoRespostas("nome", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Telefone</TituloInput>
             <Input
-              placeholder={telefone(props.usuario.telefone)}
+              placeholder={telefone(props?.usuario?.telefone)}
               onChange={(e) => preenchendoRespostas("telefone", e.target.value)}
             />
           </ConjuntoTituloInput>
@@ -91,28 +91,28 @@ function ModalAlterarDados(props) {
           <ConjuntoTituloInput>
             <TituloInput>Email</TituloInput>
             <Input
-              placeholder={props.usuario.email}
+              placeholder={props?.usuario?.email}
               onChange={(e) => preenchendoRespostas("email", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Registro</TituloInput>
             <Input
-              placeholder={props.usuario.registro}
+              placeholder={props?.usuario?.registro}
               onChange={(e) => preenchendoRespostas("registro", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Formação</TituloInput>
             <Input
-              placeholder={props.usuario.formacao}
+              placeholder={props?.usuario?.formacao}
               onChange={(e) => preenchendoRespostas("formacao", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
             <TituloInput>Unidade Federativa</TituloInput>
             <Input
-              placeholder={props.usuario.uni_federativa}
+              placeholder={props?.usuario?.uni_federativa}
               onChange={(e) =>
                 preenchendoRespostas("uni_federativa", e.target.value)
               }

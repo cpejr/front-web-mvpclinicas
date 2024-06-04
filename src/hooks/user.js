@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
-import { login, cadastro } from "../services/endpoints";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { login, cadastro, requisicaoDadosUsuario } from "../services/endpoints";
 
 export function useLogin({
   onSuccess = () => {},
@@ -23,17 +23,18 @@ export function useCadastro({
   });
 }
 
-// export function useGetUsers({
-//   onSuccess = () => {},
-//   onError = (err) => console.error(err),
-// } = {}) {
-//   return useQuery({
-//     queryKey: ["users"],
-//     queryFn: () => getUsers(),
-//     onSuccess,
-//     onError,
-//   });
-// }
+export function useGetDadosUsuario(
+  id,
+  { onSuccess = () => {}, onError = (err) => console.error(err) } = {}
+) {
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: () => requisicaoDadosUsuario(id),
+    onSuccess,
+    onError,
+  });
+}
+
 // export function useDeleteUsers({
 //   onSuccess = () => {},
 //   onError = (err) => console.error(err),
