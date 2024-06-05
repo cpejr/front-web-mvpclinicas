@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import { Container, StyledInput, Label, Title } from "./Styles";
+import { Container, Label, Title, StyledDatePicker } from "./Styles";
 import { Controller } from "react-hook-form";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+//import DatePicker from "react-datepicker";
+import { ptBR } from "date-fns/locale/pt-BR";
+//import "react-datepicker/dist/react-datepicker.css";
 
 export default function FormDatePicker({
   inputKey,
@@ -15,12 +17,14 @@ export default function FormDatePicker({
   placeholder,
 }) {
   const [date, setDate] = useState(new Date());
+
   const handleChange = (dateChange) => {
     setValue("dateOfBirth", dateChange, {
       shouldDirty: true,
     });
     setDate(dateChange);
   };
+  registerLocale("ptBR", ptBR);
   return (
     <Container>
       <Title>
@@ -34,11 +38,13 @@ export default function FormDatePicker({
         control={control}
         defaultValue={date}
         render={() => (
-          <DatePicker
+          <StyledDatePicker
             error={error}
             selected={date}
+            locale="ptBR"
             placeholderText={placeholder}
             onChange={handleChange}
+            dateFormat="dd/MM/yyyy"
           />
         )}
       />
