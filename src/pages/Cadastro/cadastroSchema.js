@@ -14,7 +14,7 @@ export const cadastroSchema = z
       .email("E-mail inválido"),
     senha: z
       .string({ required_error: "O campo deve ser preenchido" })
-      .min(1, { message: "O campo deve ser preenchido" }),
+      .min(5, { message: "A senha deve possuir, no mínimo, 5 caracteres" }),
     confirmacao_senha: z
       .string({ required_error: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),
@@ -32,7 +32,10 @@ export const cadastroSchema = z
       .min(1, { message: "O campo deve ser preenchido" }),
     telefone: z
       .string({ required_error: "O campo deve ser preenchido" })
-      .min(1, { message: "O campo deve ser preenchido" }),
+      .min(1, { message: "O campo deve ser preenchido" })
+      .refine((val) => !isNaN(Number(val)), {
+        message: "O campo deve ser um número",
+      }),
   })
   .superRefine(({ senha, confirmacao_senha }, ctx) => {
     if (senha !== confirmacao_senha) {

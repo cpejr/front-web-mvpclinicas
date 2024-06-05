@@ -3,9 +3,7 @@ import { Container, Label, Title, StyledDatePicker } from "./Styles";
 import { Controller } from "react-hook-form";
 import { useState } from "react";
 import { registerLocale } from "react-datepicker";
-//import DatePicker from "react-datepicker";
 import { ptBR } from "date-fns/locale/pt-BR";
-//import "react-datepicker/dist/react-datepicker.css";
 
 export default function FormDatePicker({
   inputKey,
@@ -16,15 +14,15 @@ export default function FormDatePicker({
   error,
   placeholder,
 }) {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
 
   const handleChange = (dateChange) => {
     setValue("data_nascimento", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
-    console.log(typeof dateChange.toString());
     setDate(dateChange);
   };
+
   registerLocale("ptBR", ptBR);
   return (
     <Container>
