@@ -27,30 +27,8 @@ export default function FormSubmit({
     resolver: zodResolver(schema),
   });
 
-  // const [selectedOptions, setSelectedOptions] = useState(
-  //   selectedOptionsInitial
-  // );
-
-  // const handleSelectChange = (key, value) => {
-  //   setSelectedOptions((prevSelectedOptions) => ({
-  //     ...prevSelectedOptions,
-  //     [key]: value,
-  //   }));
-  // };
-  // const [selectError, setSelectError] = useState(false);
-
   function submitHandler(data) {
-    // if (
-    //   Object.keys(selectedOptions).length === 0 ||
-    //   selectedOptions.id_categoryType.length === 0
-    // ) {
-    //   setSelectError(true);
-    //   return;
-    // }
-
-    onSubmit(data); //, selectedOptions);
-    // setSelectedOptions({});
-
+    onSubmit(data);
     reset();
   }
 
@@ -107,6 +85,10 @@ export default function FormSubmit({
                 control={control}
                 setValue={setValue}
               />
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
             </InputKeep>
           );
         }

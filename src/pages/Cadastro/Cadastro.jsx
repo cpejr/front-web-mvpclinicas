@@ -522,7 +522,7 @@ function Cadastro() {
       <AddToast />
       <Form
         inputs={inputs}
-        onSubmit={cadastro}
+        onSubmit={(e) => console.log(e)}
         schema={cadastroSchema}
         loading={carregando}
         requestError={error}
