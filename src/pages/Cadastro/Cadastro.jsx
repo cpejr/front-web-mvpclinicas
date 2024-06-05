@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { DatePicker } from "antd";
 import {
   Body,
@@ -228,7 +228,7 @@ function Cadastro() {
       key: "data_nascimento",
       placeholder: "Selecione sua data de nascimento",
       label: "Data de nascimento",
-      icon: RocketOutlined,
+      icon: CalendarOutlined,
     },
     {
       type: "select",

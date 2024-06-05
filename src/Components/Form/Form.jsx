@@ -87,6 +87,7 @@ export default function FormSubmit({
                 error={errors[input.key] ? true : false || requestError}
                 register={register}
                 options={input.options}
+                icon={input.icon}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
@@ -99,14 +100,10 @@ export default function FormSubmit({
             <InputKeep key={input.key}>
               <FormDatePicker
                 inputKey={input.key}
-                type={input.type}
                 label={input.label}
                 placeholder={input.placeholder}
                 icon={input.icon}
                 error={errors[input.key] ? true : false || requestError}
-                defaultValue={input.value}
-                register={register}
-                color={color}
                 control={control}
                 setValue={setValue}
               />
