@@ -6,6 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "../FormInput";
 import Botao from "../../Styles/Botao/Botao";
 import FormSelect from "../Select/FormSelect";
+import FormDatePicker from "../FormDatePicker";
 
 export default function FormSubmit({
   inputs,
@@ -20,6 +21,8 @@ export default function FormSubmit({
     register,
     formState: { errors },
     reset,
+    control,
+    setValue,
   } = useForm({
     resolver: zodResolver(schema),
   });
@@ -84,6 +87,28 @@ export default function FormSubmit({
                 error={errors[input.key] ? true : false || requestError}
                 register={register}
                 options={input.options}
+              />
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+            </InputKeep>
+          );
+        } else if (input.type === "date") {
+          return (
+            <InputKeep key={input.key}>
+              <FormDatePicker
+                inputKey={input.key}
+                type={input.type}
+                label={input.label}
+                placeholder={input.placeholder}
+                icon={input.icon}
+                error={errors[input.key] ? true : false || requestError}
+                defaultValue={input.value}
+                register={register}
+                color={color}
+                control={control}
+                setValue={setValue}
               />
             </InputKeep>
           );
