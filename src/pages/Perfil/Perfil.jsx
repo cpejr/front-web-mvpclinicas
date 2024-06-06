@@ -8,10 +8,9 @@ import {
   ConjuntoTituloInput,
   Conteudo,
   InputDividido,
-  TituloIcon,
-  TituloInput,
   Imagem,
   TextoAlterarFoto,
+  Texto,
 } from "./Styles";
 
 import {
@@ -24,7 +23,7 @@ import {
 } from "@ant-design/icons";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Botao from "../../Styles/Botao/Botao";
-import Input from "../../Styles/Input/Input";
+import PerfilTitle from "../../components/PerfilTitle";
 import { data, telefone } from "../../utils/masks";
 
 import useAuthStore from "../../stores/auth";
@@ -119,113 +118,53 @@ function Perfil() {
         </TextoAlterarFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Nome Completo:</TituloInput>
-              <IdcardOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-            </TituloIcon>
-            <Input
-              placeholder={usuario.nome}
-              backgroundColor="white"
-              heightMedia700="20px"
-              marginBottomMedia700="8%"
-              readOnly
-            ></Input>
+            <PerfilTitle
+              placeholder="Nome Completo"
+              icon={IdcardOutlined}
+            ></PerfilTitle>
+            <Texto>{usuario.nome}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Telefone:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={telefone(usuario.telefone)}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Telefone"
+                icon={PhoneOutlined}
+              ></PerfilTitle>
+              <Texto>{telefone(usuario.telefone)}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Data de Nascimento:</TituloInput>
-                <CalendarOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder={data(usuario.data_nascimento)}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Data de nascimento"
+                icon={CalendarOutlined}
+              ></PerfilTitle>
+              <Texto>{data(usuario.data_nascimento)}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Email:</TituloInput>
-              <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-            </TituloIcon>
-            <Input
-              placeholder={usuario.email}
-              backgroundColor="white"
-              heightMedia700="20px"
-              marginBottomMedia700="8%"
-              readOnly
-            ></Input>
+            <PerfilTitle placeholder="E-mail" icon={MailOutlined}></PerfilTitle>
+            <Texto>{usuario.email}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Registro:</TituloInput>
-                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={usuario.registro}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Registro"
+                icon={CopyOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.registro}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Formação:</TituloInput>
-                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={usuario.formacao}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Formação"
+                icon={CopyOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.formacao}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Unidade Federativa</TituloInput>
-                <GlobalOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder={usuario.uni_federativa}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                justifyContent="flex-start"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Unidade Federativa"
+                icon={GlobalOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.uni_federativa}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
         </CaixaInputs>

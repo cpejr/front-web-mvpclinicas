@@ -95,32 +95,6 @@ export const InputDividido = styled.div`
   }
 `;
 
-export const TituloInput = styled.div`
-  width: 100%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-weight: 400;
-  font-size: 1.2em;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: #570b87;
-
-  @media (max-width: 900px) {
-    font-size: 1em;
-  }
-`;
-
-export const TituloIcon = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 1%;
-  width: 100%;
-`;
-
 export const CaixaBotoes = styled.div`
   display: flex;
   flex-direction: column;
@@ -191,4 +165,9 @@ export const Imagem = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 100%;
+`;
+export const Texto = styled.div`
+  border-bottom: 1px solid #570b87;
+  width: 100%;
+  color: #570b87;
 `;
