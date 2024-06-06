@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { login, cadastro, requisicaoDadosUsuario } from "../services/endpoints";
+import {
+  login,
+  cadastro,
+  requisicaoDadosUsuario,
+  requisicaoDeletarUsuario,
+} from "../services/endpoints";
 
 export function useLogin({
   onSuccess = () => {},
@@ -35,13 +40,13 @@ export function useGetDadosUsuario(
   });
 }
 
-// export function useDeleteUsers({
-//   onSuccess = () => {},
-//   onError = (err) => console.error(err),
-// } = {}) {
-//   return useMutation({
-//     mutationFn: deleteUser,
-//     onSuccess,
-//     onError,
-//   });
-// }
+export function useDeleteUsers({
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useMutation({
+    mutationFn: requisicaoDeletarUsuario,
+    onSuccess,
+    onError,
+  });
+}

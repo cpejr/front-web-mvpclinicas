@@ -82,19 +82,6 @@ export const DeletaLocal = async (id_local) => {
   return resposta;
 };
 
-export const ExcluirPerfil = async (id) => {
-  await requesterService
-    .requisicaoDeletarUsuario(id)
-    .then(() => {
-      setTimeout(() => {
-        window.location.href = "/login";
-      }, 3000);
-    })
-    .catch((error) => {
-      alert(error.message);
-      return false;
-    });
-};
 export const UpdateFotoDePerfil = async (id, file) => {
   await requesterService.updateFotoDePerfil(id, file).catch((error) => {
     requisicaoErro(error);

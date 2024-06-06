@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import {
   CaixaBotoes,
   CaixaInputs,
@@ -14,26 +12,24 @@ import { Modal, Spin } from "antd";
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 import { toast } from "react-toastify";
 import useAuthStore from "../../stores/auth";
-
+import { useDeleteUsers } from "../../hooks/user";
 import Botao from "../../Styles/Botao";
 import AddToast from "../../components/AddToast/AddToast";
 
-import * as managerService from "../../services/ManagerService/managerService";
 function ModalAlterarDados(props) {
-  const [carregando, setCarregando] = useState(false);
   const logout = useAuthStore((state) => state.logout);
-
-  async function deletarPerfil() {
-    setCarregando(true);
-    await managerService.ExcluirPerfil(props.usuario._id);
-    toast.success("Sua conta foi excluída com sucesso!");
-    logout();
-
-    setTimeout(() => {
-      setCarregando(false);
-    }, 3000);
-  }
-
+  const { mutate: deletePerfil, isPending } = useDeleteUsers({
+    onSuccess: () => {
+      toast.success("Usuario excluido!");
+      logout();
+    },
+    onError: (err) => {
+      toast.error("Erro ao excluir usuario .", err);
+    },
+  });
+  const handleDelete = () => {
+    deletePerfil(props.usuario._id);
+  };
   function cancelar() {
     props.onClose();
   }
@@ -43,7 +39,7 @@ function ModalAlterarDados(props) {
       open={props.open}
       onCancel={cancelar}
       footer={null}
-      confirmLoading={carregando}
+      confirmLoading={isPending}
       centered
       destroyOnClose
     >
@@ -67,8 +63,8 @@ function ModalAlterarDados(props) {
           >
             Cancelar
           </Botao>
-          <Botao onClick={deletarPerfil} disabled={carregando}>
-            {carregando ? <Spin indicator={antIcon} /> : "Confirmar"}
+          <Botao onClick={handleDelete} disabled={isPending}>
+            {isPending ? <Spin indicator={antIcon} /> : "Confirmar"}
           </Botao>
         </CaixaBotoes>
       </ConteudoModal>
