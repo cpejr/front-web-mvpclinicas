@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Container, Label, Title, StyledDatePicker } from "./Styles";
 import { Controller } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { registerLocale } from "react-datepicker";
 import { ptBR } from "date-fns/locale/pt-BR";
 
@@ -13,17 +13,23 @@ export default function FormDatePicker({
   setValue,
   error,
   placeholder,
+  isSubmitSuccessful,
 }) {
+  registerLocale("ptBR", ptBR);
   const [date, setDate] = useState(null);
 
   const handleChange = (dateChange) => {
     setValue("data_nascimento", dateChange.toLocaleDateString("pt-BR"), {
       shouldDirty: true,
     });
+
     setDate(dateChange);
   };
 
-  registerLocale("ptBR", ptBR);
+  useEffect(() => {
+    if (isSubmitSuccessful) setDate(null);
+  }, [isSubmitSuccessful]);
+
   return (
     <Container>
       <Title>
@@ -61,4 +67,5 @@ FormDatePicker.propTypes = {
   label: PropTypes.string,
   control: PropTypes.func,
   setValue: PropTypes.func,
+  isSubmitSuccessful: PropTypes.bool,
 };

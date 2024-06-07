@@ -6,7 +6,7 @@ export const cadastroSchema = z
       .string({ required_error: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),
     data_nascimento: z
-      .string({ required_error: "O campo deve ser preenchido" })
+      .string({ message: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),
     email: z
       .string({ required_error: "O campo deve ser preenchido" })
