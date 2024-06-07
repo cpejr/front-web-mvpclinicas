@@ -12,7 +12,6 @@ import {
   RocketOutlined,
 } from "@ant-design/icons";
 
-//import { apenasLetras, telefone, registro } from "../../../utils/masks"; REMOVER ARQUIVO
 import Botao from "../../Styles/Botao";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -116,15 +115,11 @@ function Cadastro() {
         <CaixaLogo>
           <img></img>
         </CaixaLogo>
-        <Titulo>
-          Faça seu
-          <br style={{ display: "block" }} />
-          cadastro
-        </Titulo>
+        <Titulo>Faça seu cadastro</Titulo>
       </CaixaTitulo>
       <Form
         inputs={inputs}
-        onSubmit={(e) => console.log(e)}
+        onSubmit={cadastro}
         schema={cadastroSchema}
         loading={carregando}
         requestError={error}
