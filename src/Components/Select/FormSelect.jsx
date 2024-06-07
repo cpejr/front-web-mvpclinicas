@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Container, Label, Title, StyledSelect } from "./Styles";
+import { useEffect, useState } from "react";
 
 export default function FormSelect({
   inputKey,
@@ -9,7 +10,14 @@ export default function FormSelect({
   label,
   icon: Icon,
   options,
+  isSubmitSuccessful,
 }) {
+  const [selectedValue, setSelectedValue] = useState("");
+
+  useEffect(() => {
+    if (isSubmitSuccessful) setSelectedValue("");
+  }, [isSubmitSuccessful]);
+
   return (
     <Container>
       <Title>
@@ -23,7 +31,9 @@ export default function FormSelect({
         type={type}
         label={label}
         error={error}
+        value={selectedValue}
         {...(register && { ...register(inputKey) })}
+        onChange={(e) => setSelectedValue(e.target.value)}
       >
         <option value="" disabled selected>
           Selecione sua formação
@@ -40,6 +50,7 @@ FormSelect.defaultProps = {
 };
 FormSelect.propTypes = {
   inputKey: PropTypes.string.isRequired,
+  isSubmitSuccessful: PropTypes.bool,
   register: PropTypes.func,
   error: PropTypes.bool.isRequired,
   type: PropTypes.string,

@@ -65,6 +65,7 @@ export default function FormSubmit({
                 register={register}
                 options={input.options}
                 icon={input.icon}
+                isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
