@@ -5,16 +5,15 @@ import useAuthStore from "../../stores/auth";
 import {
   BackButton,
   BackLink,
-  ContainerDireita,
   ContainerEsquerda,
-  ContainerDiv,
   ContainerHeader,
-  LogoText,
   HeaderArea,
 } from "./Styles";
 import { redirecionamento } from "../../utils/redirecionamento";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Logo from "../../assets/logo-no-background.svg";
+
 function Header() {
   const navigate = useNavigate();
   const isAdmin = useAuthStore((state) => state?.usuario?.admin);
@@ -34,11 +33,8 @@ function Header() {
   }
   return (
     <ContainerHeader>
-      <ContainerDiv onClick={() => navigate("/home")}>
-        <ContainerDireita>
-          <LogoText>Logo</LogoText>
-        </ContainerDireita>
-      </ContainerDiv>
+      <img src={Logo} alt="logo" onClick={() => navigate("/home")} />
+
       <ContainerEsquerda>
         <BackLink>
           {isAdmin && (
@@ -47,16 +43,13 @@ function Header() {
               <FaMapMarked style={{ fontSize: "17px", color: "#fff" }} />
             </HeaderArea>
           )}
-          <HeaderArea>
-            <BackButton to="/perfil">Perfil</BackButton>
+          <HeaderArea onClick={() => navigate("/perfil")}>
+            <BackButton>Perfil</BackButton>
             <UserOutlined style={{ fontSize: "20px", color: "#fff" }} />
           </HeaderArea>
-          <HeaderArea>
-            <BackButton onClick={handleLogout}>Logout</BackButton>
-            <IoMdLogOut
-              onClick={handleLogout}
-              style={{ fontSize: "17px", color: "#fff" }}
-            />
+          <HeaderArea onClick={handleLogout}>
+            <BackButton>Logout</BackButton>
+            <IoMdLogOut style={{ fontSize: "20px", color: "#fff" }} />
           </HeaderArea>
         </BackLink>
       </ContainerEsquerda>
