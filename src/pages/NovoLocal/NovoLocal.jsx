@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
+import Logo from "../../assets/logo-no-background.svg";
 
 import axios from "axios";
 
@@ -146,7 +147,9 @@ function CadastroNovoLocal() {
     <Body>
       <Conteudo>
         <CaixaTitulo>
-          <Titulo>Cadastro de local</Titulo>
+          <img src={Logo} alt="logo" />
+
+          <Titulo>Cadastre um local</Titulo>
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>

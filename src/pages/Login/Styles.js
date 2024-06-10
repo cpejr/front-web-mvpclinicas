@@ -75,7 +75,7 @@ export const CaixaTitulo = styled.div`
   }
 
   > img {
-    width: 10rem;
+    width: 8rem;
     height: auto;
     background-color: #570c87;
     border-radius: 100%;

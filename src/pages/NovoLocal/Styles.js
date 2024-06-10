@@ -65,25 +65,6 @@ export const CaixaInputs = styled.div`
   }
 `;
 
-export const CaixaTitulo = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 70%;
-  width: 70%;
-  padding: 2%;
-  gap: 15px;
-  justify-content: center;
-
-  @media (max-width: 900px) {
-    width: 90%;
-  }
-
-  @media (max-width: 700px) {
-    gap: 5px;
-  }
-`;
-
 export const ConjuntoTituloInput = styled.div`
   display: flex;
   flex-direction: column;
@@ -248,5 +229,36 @@ export const Rotulo = styled.div`
 
   @media (max-width: 900px) {
     font-size: 0.8em;
+  }
+`;
+
+export const CaixaTitulo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+  gap: 200px;
+  width: 60%;
+  max-width: 650px;
+  @media (max-width: 1450px) {
+    gap: 100px;
+  }
+
+  @media (max-width: 1000px) {
+    gap: 80px;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  > img {
+    width: 8rem;
+    height: auto;
+    background-color: #570c87;
+    border-radius: 100%;
+    @media (max-width: 700px) {
+      width: 6rem;
+    }
   }
 `;
