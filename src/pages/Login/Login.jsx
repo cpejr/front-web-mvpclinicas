@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
-import { Body, CaixaLogo, CaixaTitulo, Titulo } from "./Styles";
+import { Body, CaixaTitulo, Titulo } from "./Styles";
 
 import { toast } from "react-toastify";
 import useAuthStore from "../../stores/auth";
@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Form from "../../Components/Form";
 import { loginSchema } from "./loginSchema";
 import Botao from "../../Styles/Botao/Botao";
+import Logo from "../../assets/logo-no-background.svg";
 
 function Login() {
   const setToken = useAuthStore((state) => state.setToken);
@@ -55,9 +56,7 @@ function Login() {
   return (
     <Body>
       <CaixaTitulo>
-        <CaixaLogo>
-          <img></img>
-        </CaixaLogo>
+        <img src={Logo} alt="logo" />
         <Titulo>Fazer login</Titulo>
       </CaixaTitulo>
 

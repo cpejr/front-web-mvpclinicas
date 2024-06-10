@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body, CaixaLogo, CaixaTitulo, Titulo } from "./Styles";
+import { Body, CaixaTitulo, Titulo } from "./Styles";
 import Form from "../../Components/Form";
 
 import {
@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { cadastroSchema } from "./cadastroSchema";
 import { useCadastro } from "../../hooks/user";
+import Logo from "../../assets/logo-no-background.svg";
 
 function Cadastro() {
   const navegar = useNavigate();
@@ -112,9 +113,8 @@ function Cadastro() {
   return (
     <Body>
       <CaixaTitulo>
-        <CaixaLogo>
-          <img></img>
-        </CaixaLogo>
+        <img src={Logo} alt="logo" />
+
         <Titulo>Faça seu cadastro</Titulo>
       </CaixaTitulo>
       <Form

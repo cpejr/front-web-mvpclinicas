@@ -74,7 +74,7 @@ export const CaixaTitulo = styled.div`
   padding: 2%;
   gap: 200px;
   width: 60%;
-  max-width: 700px;
+  max-width: 650px;
   @media (max-width: 1450px) {
     gap: 100px;
   }
@@ -85,5 +85,14 @@ export const CaixaTitulo = styled.div`
   @media (max-width: 700px) {
     flex-direction: column;
     gap: 1rem;
+  }
+  > img {
+    width: 10rem;
+    height: auto;
+    background-color: #570c87;
+    border-radius: 100%;
+    @media (max-width: 700px) {
+      width: 6rem;
+    }
   }
 `;
