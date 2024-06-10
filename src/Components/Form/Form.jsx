@@ -19,14 +19,13 @@ export default function FormSubmit({
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     reset,
     control,
     setValue,
   } = useForm({
     resolver: zodResolver(schema),
   });
-
   function submitHandler(data) {
     onSubmit(data);
     reset();
@@ -66,6 +65,7 @@ export default function FormSubmit({
                 register={register}
                 options={input.options}
                 icon={input.icon}
+                isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
@@ -84,6 +84,7 @@ export default function FormSubmit({
                 error={errors[input.key] ? true : false || requestError}
                 control={control}
                 setValue={setValue}
+                isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>

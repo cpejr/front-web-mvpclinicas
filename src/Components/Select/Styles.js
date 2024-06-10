@@ -31,7 +31,8 @@ export const StyledSelect = styled.select`
   border-bottom: ${(props) =>
     props?.error ? "1px solid #ff0000" : "1px solid #570b87"} !important;
   border-radius: 0;
-  color: ${(props) => (props?.error ? "#ff0000" : "black")};
+  color: ${(props) =>
+    props?.error ? "#ff0000" : props?.value === "" ? "#424242" : "black"};
   background-color: white !important;
   font-size: 1em;
   font-family: "Roboto Condensed";

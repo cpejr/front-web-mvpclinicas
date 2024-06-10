@@ -6,7 +6,7 @@ export const cadastroSchema = z
       .string({ required_error: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),
     data_nascimento: z
-      .string({ required_error: "O campo deve ser preenchido" })
+      .string({ message: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),
     email: z
       .string({ required_error: "O campo deve ser preenchido" })
@@ -32,10 +32,7 @@ export const cadastroSchema = z
       .min(1, { message: "O campo deve ser preenchido" }),
     telefone: z
       .string({ required_error: "O campo deve ser preenchido" })
-      .min(1, { message: "O campo deve ser preenchido" })
-      .refine((val) => !isNaN(Number(val)), {
-        message: "O campo deve ser um número",
-      }),
+      .min(1, { message: "O campo deve ser preenchido" }),
   })
   .superRefine(({ senha, confirmacao_senha }, ctx) => {
     if (senha !== confirmacao_senha) {
