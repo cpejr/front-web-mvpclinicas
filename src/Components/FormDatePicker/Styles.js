@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const Container = styled.div`
   display: flex;
@@ -19,10 +21,11 @@ export const Label = styled.label`
   font-size: 1.1rem;
 `;
 
-export const StyledInput = styled.input`
+export const StyledDatePicker = styled(DatePicker)`
   padding: 0.5rem;
   padding-left: 0;
   border: 0;
+  width: 100%;
   border-bottom: ${(props) =>
     props?.error ? "1px solid #ff0000" : "1px solid #570b87"} !important;
 

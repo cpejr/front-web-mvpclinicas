@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
+import Logo from "../../assets/logo-no-background.svg";
 
 import axios from "axios";
 
@@ -101,8 +102,7 @@ function CadastroNovoLocal() {
         const requisicaoFotosUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${local.data.results[0].geometry.location.lat}%2C${local.data.results[0].geometry.location.lng}2&radius=100&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I&keyword=${novoLocal.nome}`;
 
         const resposta = await axios.get(proxyUrl + requisicaoFotosUrl);
-        console.log(requisicaoFotosUrl);
-        console.log(resposta);
+
         await managerService.CadastroNovoLocal({
           ...novoLocal,
           foto_url: resposta.data.results[0].photos[0].photo_reference,
@@ -114,7 +114,6 @@ function CadastroNovoLocal() {
           setCarregando(false);
         }, 3000);
       } catch (err) {
-        console.log(err);
         toast.error("Erro na validação!");
         setCarregando(false);
       }
@@ -148,7 +147,9 @@ function CadastroNovoLocal() {
     <Body>
       <Conteudo>
         <CaixaTitulo>
-          <Titulo>Cadastro de local</Titulo>
+          <img src={Logo} alt="logo" />
+
+          <Titulo>Cadastre um local</Titulo>
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>

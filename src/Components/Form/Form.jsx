@@ -1,16 +1,12 @@
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
-// import Button from "../../common/Button/Button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form as FormContainer,
-  ErrorMessage,
-  InputKeep,
-  Select,
-} from "./Styles";
+import { Form as FormContainer, ErrorMessage, InputKeep } from "./Styles";
 import { LoadingOutlined } from "@ant-design/icons";
 import FormInput from "../FormInput";
 import Botao from "../../Styles/Botao/Botao";
+import FormSelect from "../Select/FormSelect";
+import FormDatePicker from "../FormDatePicker";
 
 export default function FormSubmit({
   inputs,
@@ -19,69 +15,25 @@ export default function FormSubmit({
   color,
   loading,
   requestError,
-  // selectedOptionsInitial,
 }) {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     reset,
+    control,
+    setValue,
   } = useForm({
     resolver: zodResolver(schema),
   });
-
-  // const [selectedOptions, setSelectedOptions] = useState(
-  //   selectedOptionsInitial
-  // );
-
-  // const handleSelectChange = (key, value) => {
-  //   setSelectedOptions((prevSelectedOptions) => ({
-  //     ...prevSelectedOptions,
-  //     [key]: value,
-  //   }));
-  // };
-  // const [selectError, setSelectError] = useState(false);
-
   function submitHandler(data) {
-    // if (
-    //   Object.keys(selectedOptions).length === 0 ||
-    //   selectedOptions.id_categoryType.length === 0
-    // ) {
-    //   setSelectError(true);
-    //   return;
-    // }
-
-    onSubmit(data); //, selectedOptions);
-    // setSelectedOptions({});
-
+    onSubmit(data);
     reset();
   }
 
   return (
     <FormContainer onSubmit={handleSubmit(submitHandler)}>
       {inputs.map((input) => {
-        // if (input.type === "select") {
-        //   return (
-        //     <>
-        //       <Select
-        //         key={input.key}
-        //         options={input.options}
-        //         selectColor={color}
-        //         placeholder={input.placeholder}
-        //         value={selectedOptions[input.key] || ""}
-        //         onChange={(e) => {
-        //           handleSelectChange(input.key, e.target.value);
-        //         }}
-        //       ></Select>
-
-        //       {selectError && (
-        //         <ErrorMessage>
-        //           pelo menos uma categoria é necessaria
-        //         </ErrorMessage>
-        //       )}
-        //     </>
-        //   );
-        // } else
         if (input.type === "text" || input.type === "password") {
           return (
             <InputKeep key={input.key}>
@@ -95,6 +47,44 @@ export default function FormSubmit({
                 defaultValue={input.value}
                 register={register}
                 color={color}
+              />
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+            </InputKeep>
+          );
+        } else if (input.type === "select") {
+          return (
+            <InputKeep key={input.key}>
+              <FormSelect
+                inputKey={input.key}
+                type={input.type}
+                label={input.label}
+                error={errors[input.key] ? true : false || requestError}
+                register={register}
+                options={input.options}
+                icon={input.icon}
+                isSubmitSuccessful={isSubmitSuccessful}
+              />
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+            </InputKeep>
+          );
+        } else if (input.type === "date") {
+          return (
+            <InputKeep key={input.key}>
+              <FormDatePicker
+                inputKey={input.key}
+                label={input.label}
+                placeholder={input.placeholder}
+                icon={input.icon}
+                error={errors[input.key] ? true : false || requestError}
+                control={control}
+                setValue={setValue}
+                isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
