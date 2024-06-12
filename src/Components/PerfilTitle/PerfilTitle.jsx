@@ -1,4 +1,4 @@
-import { Titulo, TituloIcon } from "./styles";
+import { TituloIcon, Titulo } from "./styles";
 import PropTypes from "prop-types";
 function PerfilTitle({ placeholder, icon: Icon }) {
   return (

@@ -11,8 +11,9 @@ export default function FormSelect({
   icon: Icon,
   options,
   isSubmitSuccessful,
+  defaultValue,
 }) {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(defaultValue || "");
 
   useEffect(() => {
     if (isSubmitSuccessful) setSelectedValue("");
@@ -57,4 +58,5 @@ FormSelect.propTypes = {
   icon: PropTypes.elementType,
   label: PropTypes.string,
   options: PropTypes.array,
+  defaultValue: PropTypes.string,
 };

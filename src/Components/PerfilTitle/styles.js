@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const TituloIcon = styled.div`
   display: flex;
   flex-direction: row;
@@ -7,7 +8,7 @@ export const TituloIcon = styled.div`
   padding: 1%;
   width: 100%;
 `;
-export const TituloInput = styled.div`
+export const Titulo = styled.div`
   width: 100%;
   height: 20px;
   font-family: "Roboto Condensed";

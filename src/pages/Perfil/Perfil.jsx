@@ -226,7 +226,6 @@ function Perfil() {
         centered
         destroyOnClose
       />
-
       <AddToast />
     </Body>
   );

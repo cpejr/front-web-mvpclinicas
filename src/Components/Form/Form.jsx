@@ -65,6 +65,7 @@ export default function FormSubmit({
                 register={register}
                 options={input.options}
                 icon={input.icon}
+                defaultValue={input?.value}
                 isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (
@@ -84,6 +85,7 @@ export default function FormSubmit({
                 error={errors[input.key] ? true : false || requestError}
                 control={control}
                 setValue={setValue}
+                defaultValue={input?.defaultValue}
                 isSubmitSuccessful={isSubmitSuccessful}
               />
               {errors[input.key]?.message && (

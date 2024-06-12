@@ -4,6 +4,7 @@ import {
   cadastro,
   requisicaoDadosUsuario,
   requisicaoDeletarUsuario,
+  updateDadosPerfil,
 } from "../services/endpoints";
 
 export function useLogin({
@@ -46,6 +47,16 @@ export function useDeleteUsers({
 } = {}) {
   return useMutation({
     mutationFn: requisicaoDeletarUsuario,
+    onSuccess,
+    onError,
+  });
+}
+export function useUpdateDadosPerfil({
+  onSuccess = () => {},
+  onError = (err) => console.error(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateDadosPerfil,
     onSuccess,
     onError,
   });

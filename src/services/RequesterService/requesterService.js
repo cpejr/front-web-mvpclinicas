@@ -28,9 +28,6 @@ export const requisicaoDadosLocal = (id_local) =>
 export const requisicaoComentariosLocal = (id_local) =>
   api.get(`/comentarios/${id_local}`);
 
-export const updateDadosPerfil = (id, respostas) =>
-  api.put(`/usuarios/${id}`, respostas);
-
 export const criarUsuario = async (usuario) => {
   const resposta = await api.post("/usuarios", {
     ...usuario,

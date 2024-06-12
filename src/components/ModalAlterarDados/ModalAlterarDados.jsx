@@ -1,49 +1,87 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import { Modal, DatePicker } from "antd";
-import Botao from "../../Styles/Botao";
-import Input from "../../Styles/Input";
-import {
-  CaixaBotoes,
-  CaixaInputs,
-  ConjuntoTituloInput,
-  ConteudoModal,
-  Data,
-  TituloInput,
-} from "./Styles";
+import { Modal } from "antd";
+
+import { ConteudoModal } from "./Styles";
 import { toast } from "react-toastify";
-
+import { useUpdateDadosPerfil } from "../../hooks/user";
 import AddToast from "../../components/AddToast/AddToast";
-import { telefone } from "../../utils/masks";
 
-import * as managerService from "../../services/ManagerService/managerService";
-
+import { useQueryClient } from "@tanstack/react-query";
+import Form from "../Form";
+import { updateSchema } from "./updateSchema";
 function ModalAlterarDados(props) {
-  const [carregando, setCarregando] = useState(false);
-  const [respostas, setRespostas] = useState({});
+  const queryClient = useQueryClient();
+  const inputs = [
+    {
+      type: "text",
+      key: "nome",
+      value: props?.usuario?.nome,
+      label: "Nome Completo",
+    },
+    {
+      type: "text",
+      key: "telefone",
+      value: props?.usuario?.telefone,
+      label: "Telefone",
+    },
+    {
+      type: "date",
+      key: "data_nascimento",
+      defaultValue: props?.usuario?.data_nascimento,
+      label: "Data de nascimento",
+    },
+    {
+      type: "text",
+      key: "email",
+      value: props?.usuario?.email,
+      label: "E-mail",
+    },
+    {
+      type: "text",
+      key: "registro",
+      value: props?.usuario?.registro,
+      label: "Registro (CRM para médicos ou matrícula para estudantes)",
+    },
+    {
+      type: "select",
+      key: "formacao",
+      value: props?.usuario?.formacao,
+      label: "Formacao",
+      options: [
+        {
+          value: "medico",
+          name: "Médico",
+        },
+        { value: "estudante", name: "Estudante" },
+      ],
+    },
+    {
+      type: "text",
+      key: "uni_federativa",
+      value: props?.usuario?.uni_federativa,
+      label: "Unidade federativa",
+    },
+  ];
 
-  function preenchendoRespostas(pergunta, valor) {
-    setRespostas((respostasAnteriores) => ({
-      ...respostasAnteriores,
-      [pergunta]: valor,
-    }));
+  const {
+    mutate: updatePerfil,
+    isPending,
+    error,
+  } = useUpdateDadosPerfil({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["memorial"],
+      });
+      toast.success("post atualizado com sucesso!");
+    },
+    onError: (err) => {
+      toast.error("Erro ao atualizar o post.", err);
+    },
+  });
+  function handlePerfilUpdate(data) {
+    updatePerfil({ _id: props.usuario._id, respostas: data });
+    cancelar();
   }
-
-  async function alterandoDados() {
-    setCarregando(true);
-    if (Object.keys(respostas).length === 0) {
-      toast.error("Altere algum campo.");
-    } else {
-      try {
-        await managerService.UpdateDadosPerfil(props.usuario._id, respostas);
-        toast.success("Perfil alterado com sucesso!");
-      } catch {
-        toast.error("Erro no servidor!");
-      }
-    }
-    setCarregando(false);
-  }
-
   const cancelar = () => {
     props.onClose();
   };
@@ -53,84 +91,20 @@ function ModalAlterarDados(props) {
       open={props.open}
       onCancel={cancelar}
       footer={null}
-      confirmLoading={carregando}
+      confirmLoading={isPending}
       centered
       destroyOnClose
     >
       <ConteudoModal>
+        <Form
+          inputs={inputs}
+          onSubmit={handlePerfilUpdate}
+          schema={updateSchema}
+          loading={isPending}
+          requestError={error}
+          selectedOptionsInitial={{}}
+        />
         <AddToast />
-        <CaixaInputs>
-          <ConjuntoTituloInput>
-            <TituloInput>Nome Completo</TituloInput>
-            <Input
-              placeholder={props?.usuario?.nome}
-              onChange={(e) => preenchendoRespostas("nome", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Telefone</TituloInput>
-            <Input
-              placeholder={telefone(props?.usuario?.telefone)}
-              onChange={(e) => preenchendoRespostas("telefone", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Data de Nascimento</TituloInput>
-            <Data>
-              <DatePicker
-                placeholder="Selecione a data"
-                format="DD/MM/YYYY"
-                style={{ border: "none", boxShadow: "none", width: "100%" }}
-                suffixIcon={null}
-                onChange={(date, dateString) =>
-                  preenchendoRespostas("data_nascimento", dateString)
-                }
-              />
-            </Data>
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Email</TituloInput>
-            <Input
-              placeholder={props?.usuario?.email}
-              onChange={(e) => preenchendoRespostas("email", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Registro</TituloInput>
-            <Input
-              placeholder={props?.usuario?.registro}
-              onChange={(e) => preenchendoRespostas("registro", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Formação</TituloInput>
-            <Input
-              placeholder={props?.usuario?.formacao}
-              onChange={(e) => preenchendoRespostas("formacao", e.target.value)}
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput>Unidade Federativa</TituloInput>
-            <Input
-              placeholder={props?.usuario?.uni_federativa}
-              onChange={(e) =>
-                preenchendoRespostas("uni_federativa", e.target.value)
-              }
-            />
-          </ConjuntoTituloInput>
-        </CaixaInputs>
-        <CaixaBotoes>
-          <Botao
-            color="#ffffff"
-            backgroundColor="#ff0000c5"
-            borderColor="#ff0000"
-            width="30%"
-            onClick={cancelar}
-          >
-            Cancelar
-          </Botao>
-          <Botao onClick={alterandoDados}>Confirmar</Botao>
-        </CaixaBotoes>
       </ConteudoModal>
     </Modal>
   );

@@ -14,9 +14,10 @@ export default function FormDatePicker({
   error,
   placeholder,
   isSubmitSuccessful,
+  defaultValue,
 }) {
   registerLocale("ptBR", ptBR);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(defaultValue || null);
 
   const handleChange = (dateChange) => {
     setValue("data_nascimento", dateChange.toLocaleDateString("pt-BR"), {
@@ -68,4 +69,5 @@ FormDatePicker.propTypes = {
   control: PropTypes.func,
   setValue: PropTypes.func,
   isSubmitSuccessful: PropTypes.bool,
+  defaultValue: PropTypes.date,
 };

@@ -90,19 +90,6 @@ export const UpdateFotoDePerfil = async (id, file) => {
   return;
 };
 
-export const UpdateDadosPerfil = async (id, respostas) => {
-  await requesterService
-    .updateDadosPerfil(id, respostas)
-    .then(() => {
-      setTimeout(() => {
-        window.location.href = "/perfil";
-      }, 3000);
-    })
-    .catch((error) => {
-      alert(error.message);
-      return false;
-    });
-};
 export const UpdateSenha = async (id, respostas) => {
   try {
     await requesterService.updateSenha(id, respostas);
