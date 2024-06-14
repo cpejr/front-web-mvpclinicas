@@ -8,25 +8,6 @@ export const Body = styled.div`
   height: 100%;
 `;
 
-export const Titulo = styled.div`
-  width: 40%;
-  height: 20%;
-  font-family: "Barlow";
-  font-weight: 500;
-  font-size: 1.6em;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #570b87;
-  padding: 2%;
-
-  @media (max-width: 900px) {
-    font-size: 1.4em;
-  }
-`;
-
 export const CaixaPerguntas = styled.div`
   display: flex;
   width: 40%;
@@ -222,4 +203,80 @@ export const NaoObrigatorio = styled.div`
   color: #570b87;
   text-align: end;
   justify-content: ${(props) => props.justifyContent};
+`;
+
+export const CaixaLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  background-color: #8b00ff;
+
+  /* @media (max-width: 900px) {
+    width: 20px;
+    height: 130px;
+  }*/
+
+  @media (max-width: 500px) {
+    width: 100px;
+    height: 100px;
+  }
+`;
+
+export const Titulo = styled.div`
+  font-weight: 400;
+  font-size: 3rem;
+  display: flex;
+  color: #570b87;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media (max-width: 1200px) {
+    font-size: 2.5rem;
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 520px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 299px) {
+    font-size: 1.2rem;
+  }
+`;
+
+export const CaixaTitulo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 200px;
+  width: 60%;
+  padding-bottom: 2rem;
+  max-width: 650px;
+  @media (max-width: 1450px) {
+    gap: 100px;
+  }
+
+  @media (max-width: 1000px) {
+    gap: 80px;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  > img {
+    width: 8rem;
+    height: auto;
+    background-color: #570c87;
+    border-radius: 100%;
+    @media (max-width: 700px) {
+      width: 6rem;
+    }
+  }
 `;

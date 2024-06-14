@@ -14,8 +14,9 @@ import {
   TituloAvaliacao,
   TituloInput,
   NaoObrigatorio,
+  CaixaTitulo,
 } from "./Styles";
-
+import Logo from "../../assets/logo-no-background.svg";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { Checkbox, Spin } from "antd";
@@ -127,7 +128,11 @@ function NovoComentario() {
   return (
     <Body>
       <AddToast />
-      <Titulo>Responda as perguntas abaixo:</Titulo>
+      <CaixaTitulo>
+        <img src={Logo} alt="logo" />
+
+        <Titulo>Cadastrar um local</Titulo>
+      </CaixaTitulo>
       <CaixaPerguntas>
         <ConjuntoTituloInput>
           <TituloInput>Qual foi o cargo exercido no local?</TituloInput>

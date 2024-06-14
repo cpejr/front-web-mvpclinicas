@@ -115,7 +115,7 @@ function Cadastro() {
       <CaixaTitulo>
         <img src={Logo} alt="logo" />
 
-        <Titulo>Faça seu cadastro</Titulo>
+        <Titulo>Fazer cadastro</Titulo>
       </CaixaTitulo>
       <Form
         inputs={inputs}

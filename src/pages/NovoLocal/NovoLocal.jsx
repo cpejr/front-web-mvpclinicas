@@ -149,7 +149,7 @@ function CadastroNovoLocal() {
         <CaixaTitulo>
           <img src={Logo} alt="logo" />
 
-          <Titulo>Cadastre um local</Titulo>
+          <Titulo>Cadastrar um local</Titulo>
         </CaixaTitulo>
         <CaixaInputs>
           <ConjuntoTituloInput>
