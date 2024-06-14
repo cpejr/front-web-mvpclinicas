@@ -22,6 +22,8 @@ export const criarNovoLocal = async (novoLocal) => {
   return resposta.data;
 };
 
+export const requisicaoFotoDePerfil = (id) => api.get(`/usuariosimagem/${id}`);
+
 export const requisicaoDadosLocal = (id_local) =>
   api.get(`/locais/${id_local}`);
 

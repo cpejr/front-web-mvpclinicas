@@ -238,7 +238,6 @@ export const TituloAvaliacao = styled.div`
 export const BoxCarrossel = styled.div`
   display: flex;
   width: 100%;
-  height: 60%;
   align-items: center;
   justify-content: center;
 `;
@@ -329,25 +328,39 @@ export const NomeUsuario = styled.div`
 `;
 
 export const Comentario = styled.div`
-  width: 80%;
-  height: 60%;
-  padding: 3%;
+  /* width: 80%;
+  height: 10rem;
 
   font-size: 1.2em;
-  overflow-y: auto;
-  overflow-x: hidden;
-  white-space: pre-wrap;
-  word-wrap: normal;
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.6rem;
 
-  font-family: "Barlow";
+  @media (max-width: 500px) {
+    font-size: 1em;
+  } */
+  width: 80%;
+  height: 10rem;
+  font-size: 1.2em;
+  overflow-y: scroll; /* Changed to auto */
+  overflow: -moz-scrollbars-vertical;
+
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 8px; /* Width of the scrollbar */
   }
+
+  ::-webkit-scrollbar-thumb {
+    background: #00000080; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensure content starts from the top */
+  gap: 0.6rem;
+  padding: 1rem; /* Added padding for better readability */
 
   @media (max-width: 500px) {
     font-size: 1em;
