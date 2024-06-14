@@ -230,6 +230,14 @@ function NovoComentario() {
       </CaixaAvaliacao>
       <CaixaBotoes>
         <Botao
+          width="40%"
+          onClick={() => {
+            validarComentario();
+          }}
+        >
+          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
+        </Botao>
+        <Botao
           color="#fff"
           backgroundColor="#ff3a3a"
           borderColor="#ff3a3a"
@@ -237,14 +245,6 @@ function NovoComentario() {
           onClick={() => navigate(`/local/${id_local}`)}
         >
           Cancelar
-        </Botao>
-        <Botao
-          width="40%"
-          onClick={() => {
-            validarComentario();
-          }}
-        >
-          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
         </Botao>
       </CaixaBotoes>
     </Body>
