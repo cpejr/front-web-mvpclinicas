@@ -11,14 +11,14 @@ export const Body = styled.div`
 export const CaixaPerguntas = styled.div`
   display: flex;
   width: 40%;
-  height: 70vh;
+  /* height: 70vh; */
   flex-direction: column;
   align-items: center;
   padding: 2%;
   gap: 15px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   overflow-x: hidden;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2); */
 
   ::-webkit-scrollbar {
     width: 5px;
