@@ -328,39 +328,25 @@ export const NomeUsuario = styled.div`
 `;
 
 export const Comentario = styled.div`
-  /* width: 80%;
-  height: 10rem;
-
-  font-size: 1.2em;
-  overflow-y: scroll;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.6rem;
-
-  @media (max-width: 500px) {
-    font-size: 1em;
-  } */
   width: 80%;
   height: 10rem;
   font-size: 1.2em;
-  overflow-y: scroll; /* Changed to auto */
+  overflow-y: scroll;
   overflow: -moz-scrollbars-vertical;
 
   ::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
+    width: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #00000080; /* Color of the scrollbar thumb */
-    border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+    background: #00000080;
+    border-radius: 4px;
   }
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Ensure content starts from the top */
+  justify-content: flex-start;
   gap: 0.6rem;
-  padding: 1rem; /* Added padding for better readability */
+  padding: 1rem;
 
   @media (max-width: 500px) {
     font-size: 1em;
