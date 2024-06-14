@@ -29,14 +29,14 @@ import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
 import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
-
+import useAuthStore from "../../stores/auth";
 function Home() {
   const navigate = useNavigate();
   const [locais, setLocais] = useState([]);
   const [buscaTipo, setBuscaTipo] = useState("nome");
   const [pesquisa, setPesquisa] = useState("");
   const [carregando, setCarregando] = useState(false);
-
+  const isAdmin = useAuthStore((state) => state?.usuario?.admin);
   const pesquisaAjustada = pesquisa
     .toLowerCase()
     .normalize("NFD")
@@ -190,40 +190,42 @@ function Home() {
             )}
           </CaixaConteudo>
         )}
-        <div
-          style={{
-            width: "65%",
-            height: "40%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-end",
-          }}
-        >
-          <CaixaBotoes>
-            <Botao
-              borderRadius="18px"
-              width="100%"
-              alignSelf="flex-end"
-              fontSize="22px"
-              height="45px"
-              paddingRight="30px"
-              onClick={() => navigate("/novolocal")}
-            >
-              Adicionar Local
-            </Botao>
-            <PlusOutlined
-              className="iconeMais"
-              style={{
-                fontSize: "20px",
-                color: "#fdfdfd",
-                position: "absolute",
-                right: "4%",
-                top: "50%",
-                transform: "translateY(-50%)",
-              }}
-            />
-          </CaixaBotoes>
-        </div>
+        {isAdmin && (
+          <div
+            style={{
+              width: "65%",
+              height: "40%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "flex-end",
+            }}
+          >
+            <CaixaBotoes>
+              <Botao
+                borderRadius="18px"
+                width="100%"
+                alignSelf="flex-end"
+                fontSize="22px"
+                height="45px"
+                paddingRight="30px"
+                onClick={() => navigate("/novolocal")}
+              >
+                Adicionar Local
+              </Botao>
+              <PlusOutlined
+                className="iconeMais"
+                style={{
+                  fontSize: "20px",
+                  color: "#fdfdfd",
+                  position: "absolute",
+                  right: "4%",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                }}
+              />
+            </CaixaBotoes>
+          </div>
+        )}
       </Conteudo>
       <AddToast />
     </Body>

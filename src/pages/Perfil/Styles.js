@@ -33,7 +33,7 @@ export const CaixaFoto = styled.div`
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
   margin: 2%;
-
+  border-radius: "100%";
   @media (max-width: 900px) {
     width: 200px;
     height: 200px;
@@ -93,32 +93,6 @@ export const InputDividido = styled.div`
     justify-content: space-evenly;
     gap: 5px;
   }
-`;
-
-export const TituloInput = styled.div`
-  width: 100%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-weight: 400;
-  font-size: 1.2em;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  color: #570b87;
-
-  @media (max-width: 900px) {
-    font-size: 1em;
-  }
-`;
-
-export const TituloIcon = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 1%;
-  width: 100%;
 `;
 
 export const CaixaBotoes = styled.div`
@@ -187,24 +161,13 @@ export const TextoAlterarFoto = styled.div`
   }
 `;
 
-export const TextoCarregando = styled.div`
-  font-family: "Roboto Condensed";
-  font-weight: 500;
-  font-size: 1.2em;
-  line-height: 30px;
-  color: #570b87;
-  @media (max-width: 500px) {
-    font-size: 1em;
-  }
-  text-align: center;
+export const Imagem = styled.img`
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
 `;
-
-export const ContainerCarregando = styled.div`
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  gap: 1rem;
-  flex-basis: auto;
-  align-items: center;
-  justify-content: center;
+export const Texto = styled.div`
+  border-bottom: 1px solid #570b87;
+  width: 100%;
+  color: #570b87;
 `;

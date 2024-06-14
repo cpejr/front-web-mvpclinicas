@@ -8,11 +8,9 @@ import {
   ConjuntoTituloInput,
   Conteudo,
   InputDividido,
-  TituloIcon,
-  TituloInput,
+  Imagem,
   TextoAlterarFoto,
-  ContainerCarregando,
-  TextoCarregando,
+  Texto,
 } from "./Styles";
 
 import {
@@ -22,14 +20,12 @@ import {
   MailOutlined,
   CopyOutlined,
   GlobalOutlined,
-  LoadingOutlined,
 } from "@ant-design/icons";
-import fotoPerfil from "../../assets/montanha.jpg";
-
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Botao from "../../Styles/Botao/Botao";
-import Input from "../../Styles/Input/Input";
+import PerfilTitle from "../../components/PerfilTitle";
 import { data, telefone } from "../../utils/masks";
-import * as managerService from "../../services/ManagerService/managerService";
+
 import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { Modal } from "antd";
@@ -38,7 +34,9 @@ import ModalAlterarFotoDePerfil from "../../components/ModalAlterarFotoDePerfil/
 import ModalAlterarDados from "../../components/ModalAlterarDados";
 import ModalAlterarSenha from "../../components/ModalAlterarSenha";
 import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
-
+import { useRequisicaoFotoDePerfil } from "../../hooks/imagem";
+import { useGetDadosUsuario } from "../../hooks/user";
+import { toast } from "react-toastify";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
@@ -46,18 +44,22 @@ function Perfil() {
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
-  const [carregando, setCarregando] = useState(false);
 
   const usuarioLogado = useAuthStore((state) => state.usuario);
-  async function pegandoDadosUsuario() {
-    const respostaImagem = await managerService.GetFotoDePerfil(
-      usuarioLogado._id
-    );
-    const resposta = await managerService.GetDadosUsuario(usuarioLogado._id);
-    setUsuario(resposta.dadosUsuario);
-    setImagem(respostaImagem);
-    setCarregando(false);
-  }
+  const { data: imagemPerfil, isLoading } = useRequisicaoFotoDePerfil(
+    usuarioLogado._id,
+    {
+      onError: (err) => {
+        toast.error("Erro ao pegar itens", err);
+      },
+    }
+  );
+  const { data: user, isPending } = useGetDadosUsuario(usuarioLogado._id, {
+    onError: (err) => {
+      toast.error("Erro ao pegar itens", err);
+    },
+  });
+
   function acionarModais(e) {
     const botaoId = e.target.dataset.botaoId;
 
@@ -84,184 +86,110 @@ function Perfil() {
   }
 
   useEffect(() => {
-    setCarregando(true);
-    pegandoDadosUsuario();
+    if (!isPending) {
+      setUsuario(user);
+    }
+    if (!isLoading) {
+      setImagem(imagemPerfil.imagem);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isLoading, isPending]);
 
   async function fechandoModalAlterarFotoPerfil() {
     setModalAlterarFotoPerfil(false);
-    pegandoDadosUsuario();
   }
 
   return (
     <Body>
-      {carregando ? (
-        <ContainerCarregando>
-          <TextoCarregando>Carregando Perfil</TextoCarregando>
-          <LoadingOutlined style={{ fontSize: 24, color: "#570b87" }} spin />
-        </ContainerCarregando>
-      ) : (
-        <Conteudo>
-          <CaixaFoto>
-            <img
-              src={imagem || fotoPerfil}
-              width="100%"
-              height="100%"
-              style={{ borderRadius: "100%" }}
-              alt="Foto de Perfil"
-            ></img>
-          </CaixaFoto>
-          <TextoAlterarFoto
-            onClick={() => {
-              setModalAlterarFotoPerfil(true);
-            }}
-          >
-            Alterar imagem de Perfil
-          </TextoAlterarFoto>
-          <CaixaInputs>
+      <Conteudo>
+        <CaixaFoto>
+          {isLoading ? (
+            <AiOutlineLoading3Quarters />
+          ) : (
+            <Imagem src={imagem} alt="Event" />
+          )}
+        </CaixaFoto>
+        <TextoAlterarFoto
+          onClick={() => {
+            setModalAlterarFotoPerfil(true);
+          }}
+        >
+          Alterar imagem de Perfil
+        </TextoAlterarFoto>
+        <CaixaInputs>
+          <ConjuntoTituloInput>
+            <PerfilTitle
+              placeholder="Nome Completo"
+              icon={IdcardOutlined}
+            ></PerfilTitle>
+            <Texto>{usuario.nome}</Texto>
+          </ConjuntoTituloInput>
+          <InputDividido>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Nome Completo:</TituloInput>
-                <IdcardOutlined
-                  style={{ fontSize: "22px", color: "#570B87" }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder={usuario.nome}
-                backgroundColor="white"
-                heightMedia700="20px"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Telefone"
+                icon={PhoneOutlined}
+              ></PerfilTitle>
+              <Texto>{telefone(usuario.telefone)}</Texto>
             </ConjuntoTituloInput>
-            <InputDividido>
-              <ConjuntoTituloInput>
-                <TituloIcon>
-                  <TituloInput>Telefone:</TituloInput>
-                  <PhoneOutlined
-                    style={{ fontSize: "22px", color: "#570B87" }}
-                  />
-                </TituloIcon>
-                <Input
-                  placeholder={telefone(usuario.telefone)}
-                  backgroundColor="white"
-                  width="100%"
-                  heightMedia700="20px"
-                  alignSelf="flex-start"
-                  marginBottomMedia700="8%"
-                  readOnly
-                ></Input>
-              </ConjuntoTituloInput>
-              <ConjuntoTituloInput>
-                <TituloIcon>
-                  <TituloInput>Data de Nascimento:</TituloInput>
-                  <CalendarOutlined
-                    style={{ fontSize: "22px", color: "#570B87" }}
-                  />
-                </TituloIcon>
-                <Input
-                  placeholder={data(usuario.data_nascimento)}
-                  backgroundColor="white"
-                  width="100%"
-                  heightMedia700="20px"
-                  alignSelf="flex-start"
-                  marginBottomMedia700="8%"
-                  readOnly
-                ></Input>
-              </ConjuntoTituloInput>
-            </InputDividido>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Email:</TituloInput>
-                <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={usuario.email}
-                backgroundColor="white"
-                heightMedia700="20px"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <PerfilTitle
+                placeholder="Data de nascimento"
+                icon={CalendarOutlined}
+              ></PerfilTitle>
+              <Texto>{data(usuario.data_nascimento)}</Texto>
             </ConjuntoTituloInput>
-            <InputDividido>
-              <ConjuntoTituloInput>
-                <TituloIcon>
-                  <TituloInput>Registro:</TituloInput>
-                  <CopyOutlined
-                    style={{ fontSize: "22px", color: "#570B87" }}
-                  />
-                </TituloIcon>
-                <Input
-                  placeholder={usuario.registro}
-                  backgroundColor="white"
-                  width="100%"
-                  heightMedia700="20px"
-                  alignSelf="flex-start"
-                  marginBottomMedia700="8%"
-                  readOnly
-                ></Input>
-              </ConjuntoTituloInput>
-              <ConjuntoTituloInput>
-                <TituloIcon>
-                  <TituloInput>Formação:</TituloInput>
-                  <CopyOutlined
-                    style={{ fontSize: "22px", color: "#570B87" }}
-                  />
-                </TituloIcon>
-                <Input
-                  placeholder={usuario.formacao}
-                  backgroundColor="white"
-                  width="100%"
-                  heightMedia700="20px"
-                  alignSelf="flex-start"
-                  marginBottomMedia700="8%"
-                  readOnly
-                ></Input>
-              </ConjuntoTituloInput>
-              <ConjuntoTituloInput>
-                <TituloIcon>
-                  <TituloInput>Unidade Federativa</TituloInput>
-                  <GlobalOutlined
-                    style={{ fontSize: "22px", color: "#570B87" }}
-                  />
-                </TituloIcon>
-                <Input
-                  placeholder={usuario.uni_federativa}
-                  backgroundColor="white"
-                  width="100%"
-                  heightMedia700="20px"
-                  justifyContent="flex-start"
-                  alignSelf="flex-start"
-                  marginBottomMedia700="8%"
-                  readOnly
-                ></Input>
-              </ConjuntoTituloInput>
-            </InputDividido>
-          </CaixaInputs>
-          <CaixaBotoes>
-            <BotoesEdicao>
-              <Botao data-botao-id="alterarDados" onClick={acionarModais}>
-                Alterar Dados
-              </Botao>
-              <Botao data-botao-id="alterarSenha" onClick={acionarModais}>
-                Alterar Senha
-              </Botao>
-            </BotoesEdicao>
-            <Botao
-              color="#ffffff"
-              backgroundColor="#ff0000c5"
-              borderColor="#ff0000"
-              width="30%"
-              widthMedia700="40%"
-              data-botao-id="excluirPerfil"
-              onClick={acionarModais}
-            >
-              Excluir
+          </InputDividido>
+          <ConjuntoTituloInput>
+            <PerfilTitle placeholder="E-mail" icon={MailOutlined}></PerfilTitle>
+            <Texto>{usuario.email}</Texto>
+          </ConjuntoTituloInput>
+          <InputDividido>
+            <ConjuntoTituloInput>
+              <PerfilTitle
+                placeholder="Registro"
+                icon={CopyOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.registro}</Texto>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <PerfilTitle
+                placeholder="Formação"
+                icon={CopyOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.formacao}</Texto>
+            </ConjuntoTituloInput>
+            <ConjuntoTituloInput>
+              <PerfilTitle
+                placeholder="Unidade Federativa"
+                icon={GlobalOutlined}
+              ></PerfilTitle>
+              <Texto>{usuario.uni_federativa}</Texto>
+            </ConjuntoTituloInput>
+          </InputDividido>
+        </CaixaInputs>
+        <CaixaBotoes>
+          <BotoesEdicao>
+            <Botao data-botao-id="alterarDados" onClick={acionarModais}>
+              Alterar Dados
             </Botao>
-          </CaixaBotoes>
-        </Conteudo>
-      )}
+            <Botao data-botao-id="alterarSenha" onClick={acionarModais}>
+              Alterar Senha
+            </Botao>
+          </BotoesEdicao>
+          <Botao
+            color="#ffffff"
+            backgroundColor="#ff0000c5"
+            borderColor="#ff0000"
+            width="30%"
+            widthMedia700="40%"
+            data-botao-id="excluirPerfil"
+            onClick={acionarModais}
+          >
+            Excluir
+          </Botao>
+        </CaixaBotoes>
+      </Conteudo>
       <Modal
         open={modalAlterarFotoPerfil}
         onCancel={fechandoModalAlterarFotoPerfil}
@@ -298,7 +226,6 @@ function Perfil() {
         centered
         destroyOnClose
       />
-
       <AddToast />
     </Body>
   );
