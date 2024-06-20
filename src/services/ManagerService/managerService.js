@@ -18,7 +18,7 @@ export const GetDadosPessoais = async () => {
       dadosUsuario = emails;
     })
     .catch((error) => {
-      alert(error.message);
+      console.error(error.message);
     });
 
   return dadosUsuario;
@@ -69,7 +69,7 @@ export const GetComentariosLocal = async (id_local) => {
       comentariosLocal = res.data;
     })
     .catch((error) => {
-      alert(error.message);
+      console.error(error.message);
     });
 
   return { comentariosLocal };

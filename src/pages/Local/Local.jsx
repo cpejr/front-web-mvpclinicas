@@ -54,6 +54,7 @@ import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
 import TextLabel from "../../Components/Label/TextLabel";
+import { useGetComments } from "../../hooks/place";
 
 function Local() {
   const antIconModal = (
@@ -86,6 +87,11 @@ function Local() {
       setComentarioAtual(comentarioAtual - 1);
     }
   };
+  const { data: comments, isLoading } = useGetComments(id_local, {
+    onError: (err) => {
+      toast.error("Erro ao pegar itens", err);
+    },
+  });
 
   async function pegandoDadosLocal() {
     const resposta = await managerService.GetDadosLocalPorId(id_local);
@@ -116,6 +122,7 @@ function Local() {
     let avaliacaoArredondada = recebeAvaliacao.toFixed(1);
     setAvaliacao(avaliacaoArredondada);
   }
+
   async function deletaLocal() {
     if (usuarioLogado.admin === false) {
       toast.error("Usuário não é administrador.");
@@ -237,7 +244,7 @@ function Local() {
                     <FotoUsuario>
                       <img
                         src={
-                          comentarios[comentarioAtual]?.id_usuario.imagem ||
+                          comments[comentarioAtual]?.id_usuario.imagem ||
                           fotoPerfil
                         }
                         style={{
@@ -248,18 +255,18 @@ function Local() {
                       />
                     </FotoUsuario>
                     <NomeUsuario>
-                      {comentarios[comentarioAtual].id_usuario?.nome}
+                      {comments[comentarioAtual].id_usuario?.nome}
                     </NomeUsuario>
                   </Usuario>
                   <Comentario>
-                    {Object.entries(
-                      comentarios[comentarioAtual]?.comentario
-                    ).map(([pergunta, resposta]) => (
-                      <ItemComentario key={pergunta}>
-                        <Pergunta>{pergunta}</Pergunta>
-                        {resposta}
-                      </ItemComentario>
-                    ))}
+                    {Object.entries(comments[comentarioAtual]?.comentario).map(
+                      ([pergunta, resposta]) => (
+                        <ItemComentario key={pergunta}>
+                          <Pergunta>{pergunta}</Pergunta>
+                          {resposta}
+                        </ItemComentario>
+                      )
+                    )}
                   </Comentario>
                 </UsuarioComentario>
                 <Direita

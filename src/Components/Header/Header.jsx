@@ -28,7 +28,7 @@ function Header() {
         redirecionamento("/login");
       }, 3000);
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   }
   return (

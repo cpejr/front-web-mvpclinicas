@@ -30,3 +30,9 @@ export async function requisicaoDeletarUsuario(id) {
   const { data } = await api.delete(`/usuarios/${id}`);
   return data;
 }
+
+export async function getComments(id) {
+  const { data } = await api.get(`/comentarios/${id}`);
+
+  return data;
+}
