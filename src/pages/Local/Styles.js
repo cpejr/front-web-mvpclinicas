@@ -135,38 +135,38 @@ export const CaixaInputs = styled.div`
   }
 `;
 
-export const ConjuntoTituloInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 7px;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+// export const ConjuntoTituloInput = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-evenly;
+//   gap: 7px;
+//   align-items: center;
+//   height: 100%;
+//   width: 100%;
 
-  width: ${(props) => props.width};
+//   width: ${(props) => props.width};
 
-  @media (max-width: 700px) {
-    gap: 0px;
-  }
-`;
+//   @media (max-width: 700px) {
+//     gap: 0px;
+//   }
+// `;
 
-export const InputDividido = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 50px;
-  height: 100%;
-  width: 100%;
+// export const InputDividido = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   gap: 50px;
+//   height: 100%;
+//   width: 100%;
 
-  @media (max-width: 700px) {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 5px;
-  }
-`;
+//   @media (max-width: 700px) {
+//     flex-direction: column;
+//     width: 100%;
+//     align-items: center;
+//     justify-content: space-evenly;
+//     gap: 5px;
+//   }
+// `;
 
 export const TituloInput = styled.div`
   width: 100%;
@@ -410,4 +410,42 @@ export const TextoCarregando = styled.span`
     font-size: 0.8em;
   }
   text-align: center;
+`;
+
+//-------------------
+export const ConjuntoTituloInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 7px;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  @media (max-width: 700px) {
+    gap: 0px;
+  }
+`;
+
+export const InputDividido = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 50px;
+  height: 100%;
+  width: 100%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+`;
+
+export const Texto = styled.div`
+  border-bottom: 1px solid #570b87;
+  width: 100%;
+  color: #570b87;
 `;

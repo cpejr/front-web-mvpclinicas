@@ -3,7 +3,11 @@ import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import {
+  HeatMapOutlined,
+  LoadingOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
@@ -25,8 +29,6 @@ import {
   NomeTelefone,
   NomeUsuario,
   TituloAvaliacao,
-  TituloIcon,
-  TituloInput,
   Usuario,
   UsuarioComentario,
   ItemComentario,
@@ -34,14 +36,13 @@ import {
   TextoBotao,
   CaixaLoader,
   TextoCarregando,
+  Texto,
 } from "./Styles";
 
 import { Rate } from "antd";
 import {
   IdcardOutlined,
   PhoneOutlined,
-  CalendarOutlined,
-  MailOutlined,
   CopyOutlined,
   LeftOutlined,
   RightOutlined,
@@ -52,6 +53,7 @@ import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
+import TextLabel from "../../Components/Label/TextLabel";
 
 function Local() {
   const antIconModal = (
@@ -158,87 +160,28 @@ function Local() {
           </CaixaFoto>
           <NomeTelefone>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Nome:</TituloInput>
-                <IdcardOutlined
-                  style={{
-                    fontSize: "22px",
-                    color: "#570B87",
-                    fontWeight: "bold",
-                  }}
-                />
-              </TituloIcon>
-              <Input
-                placeholder={local?.nome}
-                backgroundColor="white"
-                heightMedia700="20px"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <TextLabel content="Nome" icon={IdcardOutlined} />
+              <Texto>{local?.nome}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Telefone:</TituloInput>
-                <PhoneOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={local?.telefone}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <TextLabel content="Telefone" icon={PhoneOutlined} />
+              <Texto>{local?.telefone}</Texto>
             </ConjuntoTituloInput>
           </NomeTelefone>
         </FotoNome>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <TituloIcon>
-              <TituloInput>Endereço:</TituloInput>
-              <CalendarOutlined
-                style={{ fontSize: "22px", color: "#570B87" }}
-              />
-            </TituloIcon>
-            <Input
-              placeholder={local?.endereco}
-              backgroundColor="white"
-              width="100%"
-              heightMedia700="20px"
-              alignSelf="flex-start"
-              marginBottomMedia700="8%"
-              readOnly
-            ></Input>
+            <TextLabel content="Endereço" icon={HeatMapOutlined} />
+            <Texto>{local?.endereco}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Setor:</TituloInput>
-                <MailOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={local?.setor}
-                backgroundColor="white"
-                heightMedia700="20px"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <TextLabel content="Setor" icon={UserOutlined} />
+              <Texto>{local?.setor}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <TituloIcon>
-                <TituloInput>Empresa Responsável:</TituloInput>
-                <CopyOutlined style={{ fontSize: "22px", color: "#570B87" }} />
-              </TituloIcon>
-              <Input
-                placeholder={local?.empresa}
-                backgroundColor="white"
-                width="100%"
-                heightMedia700="20px"
-                alignSelf="flex-start"
-                marginBottomMedia700="8%"
-                readOnly
-              ></Input>
+              <TextLabel content="Empresa" icon={CopyOutlined} />
+              <Texto>{local?.empresa}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
         </CaixaInputs>
