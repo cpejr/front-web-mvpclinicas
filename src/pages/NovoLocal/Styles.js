@@ -168,6 +168,7 @@ export const SubtituloInput = styled.div`
 `;
 
 export const Titulo = styled.div`
+  padding-top: 3rem;
   width: 100%;
   height: 20px;
   font-family: "Roboto Condensed";

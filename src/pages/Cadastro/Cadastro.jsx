@@ -112,11 +112,7 @@ function Cadastro() {
 
   return (
     <Body>
-      <CaixaTitulo>
-        <img src={Logo} alt="logo" />
-
-        <Titulo>Fazer cadastro</Titulo>
-      </CaixaTitulo>
+      <Titulo>Fazer cadastro</Titulo>
       <Form
         inputs={inputs}
         onSubmit={cadastro}

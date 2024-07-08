@@ -55,10 +55,7 @@ function Login() {
 
   return (
     <Body>
-      <CaixaTitulo>
-        <img src={Logo} alt="logo" />
-        <Titulo>Fazer login</Titulo>
-      </CaixaTitulo>
+      <Titulo>Fazer login</Titulo>
 
       <Form
         inputs={inputs}

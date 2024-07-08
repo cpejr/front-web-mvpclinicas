@@ -128,11 +128,8 @@ function NovoComentario() {
   return (
     <Body>
       <AddToast />
-      <CaixaTitulo>
-        <img src={Logo} alt="logo" />
 
-        <Titulo>Cadastrar um local</Titulo>
-      </CaixaTitulo>
+      <Titulo>Cadastrar um comentário</Titulo>
       <CaixaPerguntas>
         <ConjuntoTituloInput>
           <TituloInput>Qual foi o cargo exercido no local?</TituloInput>

@@ -42,6 +42,7 @@ export const CaixaLogo = styled.div`
 `;
 
 export const Titulo = styled.div`
+  padding-top: 3rem;
   font-weight: 400;
   font-size: 3rem;
   display: flex;
