@@ -20,13 +20,92 @@ import { telefone } from "../../utils/masks";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import {
+  BankOutlined,
+  EnvironmentOutlined,
+  HeartOutlined,
+  LoadingOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  RocketOutlined,
+} from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
 import Logo from "../../assets/logo-no-background.svg";
 
 import axios from "axios";
+import { novoLocalSchema } from "./NovoLocalSchema";
+import Form from "../../Components/Form";
 
 function CadastroNovoLocal() {
+  const [inputs] = useState([
+    {
+      type: "text",
+      key: "nome",
+      placeholder: "Digite o nome do local",
+      label: "Nome",
+      icon: HeartOutlined,
+    },
+    {
+      type: "select",
+      key: "tipo",
+      placeholder: "Selecione o tipo de local",
+      label: "Tipo",
+      options: [
+        {
+          value: "clinica",
+          name: "Clínica",
+        },
+        { value: "instituicao-de-ensino", name: "Instituição de Ensino" },
+      ],
+      icon: RocketOutlined,
+    },
+    {
+      type: "text",
+      key: "telefone",
+      placeholder: "Digite seu telefone",
+      label: "Telefone",
+      icon: PhoneOutlined,
+    },
+    {
+      type: "text",
+      key: "setor",
+      placeholder: "Digite o setor responsável",
+      label: "Setor",
+      icon: MailOutlined,
+    },
+    {
+      type: "text",
+      key: "empresa",
+      placeholder: "Digite a empresa responsável",
+      label: "Empresa",
+      icon: BankOutlined,
+    },
+    {
+      type: "text",
+      key: "endereco",
+      placeholder: "Digite endereço",
+      label: "Endereço",
+      icon: EnvironmentOutlined,
+    },
+  ]);
+
+  const navegar = useNavigate();
+
+  // const {
+  //   mutate: criarNovoLocal,
+  //   isPending: carregandoSubmit,
+  //   error,
+  // } = useCadastro({
+  //   onSuccess: () => {
+  //     toast.success("Local criado com sucesso");
+  //     navegar("/home");
+  //   },
+  //   onError: (err) => {
+  //     toast.error("Não foi possível criar o local");
+  //     return err;
+  //   },
+  // });
+
   const zeraInputs = {
     nome: "",
     telefone: "",
@@ -47,8 +126,6 @@ function CadastroNovoLocal() {
     empresa: false,
     endereco: false,
   });
-
-  const navegar = useNavigate();
 
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
@@ -251,6 +328,13 @@ function CadastroNovoLocal() {
           </BotoesEdicao>
         </CaixaBotoes>
       </Conteudo>
+      <Form
+        inputs={inputs}
+        onSubmit={(e) => console.log(e)}
+        schema={novoLocalSchema}
+        loading={carregando}
+        requestError={undefined}
+      />
       <AddToast />
     </Body>
   );
