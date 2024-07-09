@@ -92,10 +92,17 @@ function ModalAlterarDados(props) {
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>
-            <TituloInput>CRM</TituloInput>
+            <TituloInput>Registro</TituloInput>
             <Input
-              placeholder={props.usuario.crm}
-              onChange={(e) => preenchendoRespostas("crm", e.target.value)}
+              placeholder={props.usuario.registro}
+              onChange={(e) => preenchendoRespostas("registro", e.target.value)}
+            />
+          </ConjuntoTituloInput>
+          <ConjuntoTituloInput>
+            <TituloInput>Formação</TituloInput>
+            <Input
+              placeholder={props.usuario.formacao}
+              onChange={(e) => preenchendoRespostas("formacao", e.target.value)}
             />
           </ConjuntoTituloInput>
           <ConjuntoTituloInput>

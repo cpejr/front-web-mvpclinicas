@@ -24,6 +24,7 @@ import Select from "../../Styles/Select/Select";
 import Botao from "../../Styles/Botao/Botao";
 import * as managerService from "../../services/ManagerService/managerService";
 import AddToast from "../../components/AddToast/AddToast";
+import Header from "../../Components/Header/Header";
 
 function Home() {
   const [locais, setLocais] = useState([]);
@@ -73,6 +74,7 @@ function Home() {
 
   return (
     <Body>
+      <Header/>
       <Conteudo>
         <CaixaInputs>
           <Input

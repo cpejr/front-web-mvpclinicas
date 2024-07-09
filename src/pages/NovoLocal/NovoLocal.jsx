@@ -14,6 +14,7 @@ import {
   Titulo,
   TituloInput,
 } from "./Styles";
+import Header from "../../Components/Header/Header";
 
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
@@ -129,6 +130,7 @@ function CadastroNovoLocal() {
 
   return (
     <Body>
+      <Header/>
       <Conteudo>
         <CaixaTitulo>
           <Titulo>Cadastro de local</Titulo>

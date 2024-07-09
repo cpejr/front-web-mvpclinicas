@@ -12,6 +12,9 @@ const useAuthStore = create(
         set({ token, usuario });
       },
       setUsuario: (usuario) => set({ usuario }),
+      logout: () => {
+        set({ token: null, usuario: null });
+      },
     }),
     {
       name: "auth",
