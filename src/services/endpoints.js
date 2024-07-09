@@ -31,8 +31,15 @@ export async function requisicaoDeletarUsuario(id) {
   return data;
 }
 
+//place
 export async function getComments(id) {
   const { data } = await api.get(`/comentarios/${id}`);
 
   return data;
+}
+
+export async function createPlace(requestData) {
+  // const { data } = await api.post(`/locais/`, requestData);
+  console.log(requestData);
+  return {};
 }

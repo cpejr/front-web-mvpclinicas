@@ -7,6 +7,7 @@ import FormInput from "../FormInput";
 import Botao from "../../Styles/Botao/Botao";
 import FormSelect from "../Select/FormSelect";
 import FormDatePicker from "../FormDatePicker";
+import AddressInput from "../AddressInput";
 
 export default function FormSubmit({
   inputs,
@@ -87,6 +88,28 @@ export default function FormSubmit({
                 setValue={setValue}
                 defaultValue={input?.defaultValue}
                 isSubmitSuccessful={isSubmitSuccessful}
+              />
+              {errors[input.key]?.message && (
+                <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
+              )}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+            </InputKeep>
+          );
+        } else if (input.type === "address") {
+          return (
+            <InputKeep key={input.key}>
+              <AddressInput
+                inputKey={input.key}
+                type={input.type}
+                label={input.label}
+                control={control}
+                setValue={setValue}
+                placeholder={input.placeholder}
+                icon={input.icon}
+                error={errors[input.key] ? true : false || requestError}
+                defaultValue={input.value}
+                register={register}
+                color={color}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>

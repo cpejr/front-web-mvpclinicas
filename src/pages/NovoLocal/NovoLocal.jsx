@@ -5,7 +5,6 @@ import {
   BotoesEdicao,
   CaixaBotoes,
   CaixaInputs,
-  CaixaTitulo,
   ConjuntoTituloInput,
   Conteudo,
   Mapa,
@@ -30,11 +29,11 @@ import {
   RocketOutlined,
 } from "@ant-design/icons";
 import * as managerService from "../../services/ManagerService/managerService";
-import Logo from "../../assets/logo-no-background.svg";
 
 import axios from "axios";
 import { novoLocalSchema } from "./NovoLocalSchema";
 import Form from "../../Components/Form";
+import { useCreatePlace } from "../../hooks/place";
 
 function CadastroNovoLocal() {
   const [inputs] = useState([
@@ -81,7 +80,7 @@ function CadastroNovoLocal() {
       icon: BankOutlined,
     },
     {
-      type: "text",
+      type: "address",
       key: "endereco",
       placeholder: "Digite endereço",
       label: "Endereço",
@@ -91,20 +90,20 @@ function CadastroNovoLocal() {
 
   const navegar = useNavigate();
 
-  // const {
-  //   mutate: criarNovoLocal,
-  //   isPending: carregandoSubmit,
-  //   error,
-  // } = useCadastro({
-  //   onSuccess: () => {
-  //     toast.success("Local criado com sucesso");
-  //     navegar("/home");
-  //   },
-  //   onError: (err) => {
-  //     toast.error("Não foi possível criar o local");
-  //     return err;
-  //   },
-  // });
+  const {
+    mutate: criarLocal,
+    isPending,
+    error,
+  } = useCreatePlace({
+    onSuccess: () => {
+      toast.success("Local criado com sucesso");
+      navegar("/home");
+    },
+    onError: (err) => {
+      toast.error("Não foi possível criar o local");
+      return err;
+    },
+  });
 
   const zeraInputs = {
     nome: "",
@@ -330,10 +329,10 @@ function CadastroNovoLocal() {
       </Conteudo>
       <Form
         inputs={inputs}
-        onSubmit={(e) => console.log(e)}
+        onSubmit={criarLocal}
         schema={novoLocalSchema}
         loading={carregando}
-        requestError={undefined}
+        requestError={error}
       />
       <AddToast />
     </Body>

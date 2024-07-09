@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import { getComments } from "../services/endpoints";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { createPlace, getComments } from "../services/endpoints";
 
 export function useGetComments(
   id,
@@ -8,6 +8,17 @@ export function useGetComments(
   return useQuery({
     queryKey: ["comments"],
     queryFn: () => getComments(id),
+    onSuccess,
+    onError,
+  });
+}
+
+export function useCreatePlace(
+  id,
+  { onSuccess = () => {}, onError = (err) => console.error(err) } = {}
+) {
+  return useMutation({
+    mutationFn: createPlace,
     onSuccess,
     onError,
   });
