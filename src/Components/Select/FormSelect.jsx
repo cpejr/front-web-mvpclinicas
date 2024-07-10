@@ -36,11 +36,11 @@ export default function FormSelect({
         {...(register && { ...register(inputKey) })}
         onChange={(e) => setSelectedValue(e.target.value)}
       >
-        <option value="" disabled selected>
+        <option value="" disabled defaultValue={""}>
           Selecione sua formação
         </option>
         {options?.map((option) => (
-          <option key={option.key}>{option.name}</option>
+          <option key={option.name}>{option.name}</option>
         ))}
       </StyledSelect>
     </Container>
@@ -53,7 +53,7 @@ FormSelect.propTypes = {
   inputKey: PropTypes.string.isRequired,
   isSubmitSuccessful: PropTypes.bool,
   register: PropTypes.func,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   type: PropTypes.string,
   icon: PropTypes.elementType,
   label: PropTypes.string,

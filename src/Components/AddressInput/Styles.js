@@ -55,3 +55,12 @@ export const Map = styled.iframe`
     height: auto;
   }
 `;
+
+export const ErrorMessage = styled.p`
+  font-size: 0.9rem;
+  margin: 0px;
+  color: #ff0000;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 10px;
+`;

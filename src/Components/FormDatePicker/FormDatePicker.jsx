@@ -26,7 +26,6 @@ export default function FormDatePicker({
 
     setDate(dateChange);
   };
-
   useEffect(() => {
     if (isSubmitSuccessful) setDate(null);
   }, [isSubmitSuccessful]);
@@ -63,7 +62,7 @@ FormDatePicker.defaultProps = {
 FormDatePicker.propTypes = {
   inputKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   icon: PropTypes.elementType,
   label: PropTypes.string,
   control: PropTypes.func,

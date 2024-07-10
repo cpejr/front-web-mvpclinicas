@@ -47,7 +47,7 @@ FormInput.propTypes = {
   inputKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   register: PropTypes.func,
-  error: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
   defaultValue: PropTypes.string,
   width: PropTypes.string,
   type: PropTypes.string,

@@ -32,6 +32,7 @@ export default function FormSubmit({
     reset();
   }
 
+  console.log(errors);
   return (
     <FormContainer onSubmit={handleSubmit(submitHandler)}>
       {inputs.map((input) => {
@@ -111,10 +112,10 @@ export default function FormSubmit({
                 register={register}
                 color={color}
               />
-              {errors[input.key]?.message && (
+              {/* {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
               )}
-              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>}
+              {requestError && <ErrorMessage>Campos inválidos</ErrorMessage>} */}
             </InputKeep>
           );
         }

@@ -4,8 +4,10 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   width: 100%;
   height: 100%;
+  margin: 2rem 0;
 `;
 
 export const BotoesEdicao = styled.div`
@@ -168,34 +170,27 @@ export const SubtituloInput = styled.div`
 `;
 
 export const Titulo = styled.div`
-  padding-top: 3rem;
-  width: 100%;
-  height: 20px;
-  font-family: "Roboto Condensed";
-  font-size: 2.5em;
+  font-weight: 400;
+  font-size: 3rem;
   display: flex;
   color: #570b87;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
-  @media (max-width: 900px) {
-    font-size: 2.3em;
+  @media (max-width: 1200px) {
+    font-size: 2.5rem;
   }
 
-  @media (max-width: 800px) {
-    font-size: 2.1em;
+  @media (max-width: 1000px) {
+    font-size: 2rem;
   }
 
-  @media (max-width: 650px) {
-    font-size: 2em;
+  @media (max-width: 520px) {
+    font-size: 1.7rem;
   }
 
-  @media (max-width: 450px) {
-    font-size: 1.7em;
-  }
-
-  @media (max-width: 350px) {
-    font-size: 1.5em;
+  @media (max-width: 299px) {
+    font-size: 1.2rem;
   }
 `;
 

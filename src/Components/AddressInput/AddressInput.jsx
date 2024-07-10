@@ -1,26 +1,24 @@
 import PropTypes from "prop-types";
-import { Container, StyledInput, Label, Title, Map } from "./Styles";
+import {
+  Container,
+  StyledInput,
+  Label,
+  Title,
+  Map,
+  ErrorMessage,
+} from "./Styles";
 import { useState } from "react";
-import { Controller } from "react-hook-form";
 
 export default function AddressInput({
   inputKey,
-  control,
-  setValue,
   placeholder,
   error,
-  register,
-  defaultValue,
-  type,
   label,
   icon: Icon,
-  color,
-  width,
-  placeholdercolor,
-  ...props
+  type,
+  register,
 }) {
   const [address, setAddress] = useState("Brasil");
-
   return (
     <Container>
       <Title>
@@ -29,21 +27,20 @@ export default function AddressInput({
           <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />
         )}
       </Title>
-      <Controller
-        name={inputKey}
-        control={control}
-        defaultValue={"Brasil"}
-        render={() => (
-          <StyledInput
-            placeholder={placeholder}
-            onChange={(e) => {
-              setAddress(e.target.value);
-              setValue("endereco", e.target.value);
-            }}
-            error={error}
-          />
-        )}
+      <StyledInput
+        id={inputKey}
+        inputKey={inputKey}
+        type={type}
+        autoComplete="off"
+        {...(register && { ...register(inputKey) })}
+        placeholder={placeholder}
+        error={error}
+        onChange={(e) => {
+          setAddress(e.target.value);
+        }}
       />
+      {error && <ErrorMessage>O campo deve ser preenchido</ErrorMessage>}
+
       <Map
         id="mapIframe"
         loading="lazy"
@@ -60,27 +57,16 @@ AddressInput.defaultProps = {
 };
 AddressInput.propTypes = {
   inputKey: PropTypes.string.isRequired,
+  control: PropTypes.object.isRequired,
+  setValue: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  error: PropTypes.bool,
+  label: PropTypes.string,
+  icon: PropTypes.elementType,
+
   register: PropTypes.func,
-  error: PropTypes.bool.isRequired,
-  defaultValue: PropTypes.string,
   width: PropTypes.string,
   type: PropTypes.string,
   color: PropTypes.string,
-  icon: PropTypes.elementType,
   placeholdercolor: PropTypes.string,
-  label: PropTypes.string,
 };
-
-//   id={inputKey}
-// inputKey={inputKey}
-// type={type}
-// autoComplete="off"
-// {...(register && { ...register(inputKey) })}
-// placeholder={placeholder}
-// defaultValue={defaultValue}
-// error={error}
-// color={color}
-// placeholdercolor={placeholdercolor}
-// width={width}
-// {...props}
