@@ -103,7 +103,7 @@ function Local() {
 
     for (const comentario of comentarios) {
       const imagem = await managerService.GetFotoDePerfil(
-        comentario.id_usuario._id
+        comentario?.id_usuario._id
       );
       comentario.id_usuario.imagem = imagem;
       comentariosComImagens.push(comentario);
@@ -151,19 +151,12 @@ function Local() {
     pegandoComentariosLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
-
   return (
     <Body>
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
-            <img
-              src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
-              style={{
-                backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${local.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
-                borderRadius: "2%",
-              }}
-            />
+            <img src={`https://corsclinicas.onrender.com/${local.imagem}`} />
           </CaixaFoto>
           <NomeTelefone>
             <ConjuntoTituloInput>

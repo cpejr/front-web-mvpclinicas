@@ -80,6 +80,54 @@ function Home() {
     setBuscaTipo(tipo);
   }
 
+  const GOOGLE_API_KEY = "AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I";
+
+  async function getPlaceImage(placeName) {
+    const url = `https://corsclinicas.onrender.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
+      placeName
+    )}&key=${GOOGLE_API_KEY}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.results.length > 0) {
+        const place = data.results[0];
+        const photoReference = place.photos
+          ? place.photos[0].photo_reference
+          : null;
+
+        if (photoReference) {
+          const photoUrl = `https://corsclinicas.onrender.com/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GOOGLE_API_KEY}`;
+          return photoUrl;
+        } else {
+          console.log("No photos available for this place.");
+          return null;
+        }
+      } else {
+        console.log("No places found.");
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching place image:", error);
+      return null;
+    }
+  }
+  const [imageURL, setImageURL] = useState();
+  // Usage example:
+  getPlaceImage("Eiffel Tower")
+    .then((imageUrl) => {
+      if (imageUrl) {
+        setImageURL(imageUrl);
+        console.log("Place Image URL:", imageUrl);
+      } else {
+        console.log("Image not found.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+
   return (
     <Body>
       <Conteudo>
@@ -161,11 +209,7 @@ function Home() {
                   >
                     <CaixaFoto>
                       <img
-                        src="https://i0.wp.com/www.multarte.com.br/wp-content/uploads/2019/01/totalmente-transparente-png-fw.png?fit=696%2C392&ssl=1"
-                        style={{
-                          backgroundImage: `url(https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${value.foto_url}&key=AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I)`,
-                          borderRadius: "2%",
-                        }}
+                        src={`https://corsclinicas.onrender.com/${value.image}`}
                       ></img>
                     </CaixaFoto>
                     <CaixaDados>
