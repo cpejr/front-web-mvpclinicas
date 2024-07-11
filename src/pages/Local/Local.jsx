@@ -49,7 +49,6 @@ import {
 } from "@ant-design/icons";
 
 import Botao from "../../Styles/Botao/Botao";
-import Input from "../../Styles/Input/Input";
 import fotoPerfil from "../../assets/montanha.jpg";
 
 import * as managerService from "../../services/ManagerService/managerService";
@@ -105,8 +104,8 @@ function Local() {
       const imagem = await managerService.GetFotoDePerfil(
         comentario?.id_usuario._id
       );
-      comentario.id_usuario.imagem = imagem;
-      comentariosComImagens.push(comentario);
+      // comentario.id_usuario.imagem = imagem;
+      // comentariosComImagens.push(comentario);
     }
     return comentariosComImagens;
   }
@@ -151,37 +150,41 @@ function Local() {
     pegandoComentariosLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id_local]);
+  console.log(local);
   return (
     <Body>
       <Conteudo>
         <FotoNome>
           <CaixaFoto>
-            <img src={`https://corsclinicas.onrender.com/${local.imagem}`} />
+            <img
+              src={`https://corsclinicas.onrender.com/${local.imagem}`}
+              onError="https://s2-casaejardim.glbimg.com/nHlVi8l9Hvjpydwfm2vSykkiVU4=/0x0:1400x933/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_a0b7e59562ef42049f4e191fe476fe7d/internal_photos/bs/2023/p/n/a6KJuERmmFBzM2ibHhhw/platina-220-qual-e-o-predio-mais-alto-de-sao-paulo-casa-e-jardim4.jpg"
+            />
           </CaixaFoto>
           <NomeTelefone>
             <ConjuntoTituloInput>
               <TextLabel content="Nome" icon={IdcardOutlined} />
-              <Texto>{local?.nome}</Texto>
+              <Texto>{local?._doc?.nome}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TextLabel content="Telefone" icon={PhoneOutlined} />
-              <Texto>{local?.telefone}</Texto>
+              <Texto>{local?._doc?.telefone}</Texto>
             </ConjuntoTituloInput>
           </NomeTelefone>
         </FotoNome>
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TextLabel content="Endereço" icon={HeatMapOutlined} />
-            <Texto>{local?.endereco}</Texto>
+            <Texto>{local?._doc?.endereco}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
               <TextLabel content="Setor" icon={UserOutlined} />
-              <Texto>{local?.setor}</Texto>
+              <Texto>{local?._doc?.setor}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TextLabel content="Empresa" icon={CopyOutlined} />
-              <Texto>{local?.empresa}</Texto>
+              <Texto>{local?._doc?.empresa}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
         </CaixaInputs>
@@ -237,7 +240,7 @@ function Local() {
                     <FotoUsuario>
                       <img
                         src={
-                          comments[comentarioAtual]?.id_usuario.imagem ||
+                          comments[comentarioAtual]?.id_usuario?.imagem ||
                           fotoPerfil
                         }
                         style={{

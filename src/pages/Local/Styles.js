@@ -87,15 +87,15 @@ export const CaixaFoto = styled.div`
   align-items: center;
   justify-content: center;
   width: 40%;
-  height: 40%;
+  height: auto;
   border-radius: 50%;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
   background-color: grey;
-
   img {
     width: 100%;
     height: 100%;
     border-radius: 2%;
+    max-height: 300px;
     background-size: cover;
     background-position: center center;
   }
