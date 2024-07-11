@@ -3,11 +3,7 @@ import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
-import {
-  HeatMapOutlined,
-  LoadingOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { HeatMapOutlined, LoadingOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
@@ -56,9 +52,7 @@ import TextLabel from "../../Components/Label/TextLabel";
 import { useGetComments } from "../../hooks/place";
 
 function Local() {
-  const antIconModal = (
-    <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />
-  );
+  const antIconModal = <LoadingOutlined style={{ fontSize: 15, color: "#fff" }} spin />;
   const [local, setLocal] = useState({});
   const [comentarios, setComentarios] = useState([]);
   const [avaliacao, setAvaliacao] = useState();
@@ -96,9 +90,7 @@ function Local() {
     const comentariosComImagens = [];
 
     for (const comentario of comentarios) {
-      const imagem = await managerService.GetFotoDePerfil(
-        comentario?.id_usuario._id
-      );
+      const imagem = await managerService.GetFotoDePerfil(comentario?.id_usuario._id);
       comentario.id_usuario.imagem = imagem;
       comentariosComImagens.push(comentario);
     }
@@ -107,9 +99,7 @@ function Local() {
 
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
-    const comentariosComImagem = await pegandoImagens(
-      resposta.comentariosLocal.comentarios
-    );
+    const comentariosComImagem = await pegandoImagens(resposta.comentariosLocal.comentarios);
     console.log(comentariosComImagem);
     setComentarios(comentariosComImagem);
     setCarregandoComentarios(false);
@@ -217,9 +207,7 @@ function Local() {
             </EstrelasLocal>
             {comentarios.length === 0 ? (
               <UsuarioComentario>
-                <Comentario>
-                  Ainda não existem comentários relacionados a esse local.
-                </Comentario>
+                <Comentario>Ainda não existem comentários relacionados a esse local.</Comentario>
               </UsuarioComentario>
             ) : (
               <BoxCarrossel>
@@ -234,10 +222,7 @@ function Local() {
                   <Usuario>
                     <FotoUsuario>
                       <img
-                        src={
-                          comentarios[comentarioAtual]?.id_usuario?.imagem ||
-                          fotoPerfil
-                        }
+                        src={comentarios[comentarioAtual]?.id_usuario?.imagem || fotoPerfil}
                         style={{
                           borderRadius: "50%",
                           height: "100%",
@@ -245,19 +230,17 @@ function Local() {
                         }}
                       />
                     </FotoUsuario>
-                    <NomeUsuario>
-                      {comentarios[comentarioAtual].id_usuario?.nome}
-                    </NomeUsuario>
+                    <NomeUsuario>{comentarios[comentarioAtual].id_usuario?.nome}</NomeUsuario>
                   </Usuario>
                   <Comentario>
-                    {Object.entries(
-                      comentarios[comentarioAtual]?.comentario
-                    ).map(([pergunta, resposta]) => (
-                      <ItemComentario key={pergunta}>
-                        <Pergunta>{pergunta}</Pergunta>
-                        {resposta}
-                      </ItemComentario>
-                    ))}
+                    {Object.entries(comentarios[comentarioAtual]?.comentario).map(
+                      ([pergunta, resposta]) => (
+                        <ItemComentario key={pergunta}>
+                          <Pergunta>{pergunta}</Pergunta>
+                          {resposta}
+                        </ItemComentario>
+                      )
+                    )}
                   </Comentario>
                 </UsuarioComentario>
                 <Direita

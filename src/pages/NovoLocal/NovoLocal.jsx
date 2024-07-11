@@ -14,9 +14,9 @@ import {
   RocketOutlined,
 } from "@ant-design/icons";
 
-import { novoLocalSchema } from "./NovoLocalSchema";
 import Form from "../../Components/Form";
 import { useCreatePlace } from "../../hooks/place";
+import { novoLocalSchema } from "./novoLocalSchema";
 
 function CadastroNovoLocal() {
   const [inputs, setInputs] = useState([
@@ -100,9 +100,7 @@ function CadastroNovoLocal() {
         return prevInputs;
       });
     } else {
-      setInputs((prevInputs) =>
-        prevInputs.filter((input) => input.key !== "hospitalProprio")
-      );
+      setInputs((prevInputs) => prevInputs.filter((input) => input.key !== "hospitalProprio"));
     }
   }, [selectType]);
 

@@ -23,7 +23,7 @@ import {
 } from "@ant-design/icons";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Botao from "../../Styles/Botao/Botao";
-import PerfilTitle from "../../components/PerfilTitle";
+
 import { data, telefone } from "../../utils/masks";
 
 import useAuthStore from "../../stores/auth";
@@ -37,6 +37,7 @@ import ModalExcluirPerfil from "../../components/ModalExcluirPerfil";
 import { useRequisicaoFotoDePerfil } from "../../hooks/imagem";
 import { useGetDadosUsuario } from "../../hooks/user";
 import { toast } from "react-toastify";
+import TextLabel from "../../Components/Label/TextLabel";
 function Perfil() {
   const [usuario, setUsuario] = useState({});
   const [modalAlterarFotoPerfil, setModalAlterarFotoPerfil] = useState(false);
@@ -46,14 +47,11 @@ function Perfil() {
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
 
   const usuarioLogado = useAuthStore((state) => state.usuario);
-  const { data: imagemPerfil, isLoading } = useRequisicaoFotoDePerfil(
-    usuarioLogado._id,
-    {
-      onError: (err) => {
-        toast.error("Erro ao pegar itens", err);
-      },
-    }
-  );
+  const { data: imagemPerfil, isLoading } = useRequisicaoFotoDePerfil(usuarioLogado._id, {
+    onError: (err) => {
+      toast.error("Erro ao pegar itens", err);
+    },
+  });
   const { data: user, isPending } = useGetDadosUsuario(usuarioLogado._id, {
     onError: (err) => {
       toast.error("Erro ao pegar itens", err);
@@ -103,11 +101,7 @@ function Perfil() {
     <Body>
       <Conteudo>
         <CaixaFoto>
-          {isLoading ? (
-            <AiOutlineLoading3Quarters />
-          ) : (
-            <Imagem src={imagem} alt="Event" />
-          )}
+          {isLoading ? <AiOutlineLoading3Quarters /> : <Imagem src={imagem} alt="Event" />}
         </CaixaFoto>
         <TextoAlterarFoto
           onClick={() => {
@@ -118,52 +112,34 @@ function Perfil() {
         </TextoAlterarFoto>
         <CaixaInputs>
           <ConjuntoTituloInput>
-            <PerfilTitle
-              placeholder="Nome Completo"
-              icon={IdcardOutlined}
-            ></PerfilTitle>
+            <TextLabel content="Nome Completo" icon={IdcardOutlined}></TextLabel>
             <Texto>{usuario.nome}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <PerfilTitle
-                placeholder="Telefone"
-                icon={PhoneOutlined}
-              ></PerfilTitle>
+              <TextLabel content="Telefone" icon={PhoneOutlined}></TextLabel>
               <Texto>{telefone(usuario.telefone)}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <PerfilTitle
-                placeholder="Data de nascimento"
-                icon={CalendarOutlined}
-              ></PerfilTitle>
+              <TextLabel content="Data de nascimento" icon={CalendarOutlined}></TextLabel>
               <Texto>{data(usuario.data_nascimento)}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
-            <PerfilTitle placeholder="E-mail" icon={MailOutlined}></PerfilTitle>
+            <TextLabel content="E-mail" icon={MailOutlined}></TextLabel>
             <Texto>{usuario.email}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
-              <PerfilTitle
-                placeholder="Registro"
-                icon={CopyOutlined}
-              ></PerfilTitle>
+              <TextLabel content="Registro" icon={CopyOutlined}></TextLabel>
               <Texto>{usuario.registro}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <PerfilTitle
-                placeholder="Formação"
-                icon={CopyOutlined}
-              ></PerfilTitle>
+              <TextLabel content="Formação" icon={CopyOutlined}></TextLabel>
               <Texto>{usuario.formacao}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
-              <PerfilTitle
-                placeholder="Unidade Federativa"
-                icon={GlobalOutlined}
-              ></PerfilTitle>
+              <TextLabel content="Unidade Federativa" icon={GlobalOutlined}></TextLabel>
               <Texto>{usuario.uni_federativa}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>

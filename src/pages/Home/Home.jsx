@@ -18,11 +18,7 @@ import {
   CaixaConteudo,
 } from "./Styles";
 import { Cores } from "../../utils/variaveis";
-import {
-  SearchOutlined,
-  PlusOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Rate } from "antd";
 import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
@@ -93,9 +89,7 @@ function Home() {
 
       if (data.results.length > 0) {
         const place = data.results[0];
-        const photoReference = place.photos
-          ? place.photos[0].photo_reference
-          : null;
+        const photoReference = place.photos ? place.photos[0].photo_reference : null;
 
         if (photoReference) {
           const photoUrl = `https://corsclinicas.onrender.com/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GOOGLE_API_KEY}`;
@@ -186,10 +180,7 @@ function Home() {
             <CaixaPlaceholder>
               <TextoPlaceholder>
                 Carregando Locais
-                <LoadingOutlined
-                  style={{ fontSize: 24, color: "#570b87" }}
-                  spin
-                />
+                <LoadingOutlined style={{ fontSize: 24, color: "#570b87" }} spin />
               </TextoPlaceholder>
             </CaixaPlaceholder>
           </CaixaConteudo>
@@ -197,21 +188,14 @@ function Home() {
           <CaixaConteudo>
             {locais.length === 0 ? (
               <CaixaPlaceholder>
-                <TextoPlaceholder>
-                  Ainda não existem Locais Cadastrados
-                </TextoPlaceholder>
+                <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
               </CaixaPlaceholder>
             ) : (
               <CaixaLocais>
                 {locaisFiltrados?.map((value, index) => (
-                  <Local
-                    key={index}
-                    onClick={() => navigate(`/local/${value?._id}`)}
-                  >
+                  <Local key={index} onClick={() => navigate(`/local/${value?._id}`)}>
                     <CaixaFoto>
-                      <img
-                        src={`https://corsclinicas.onrender.com/${value.image}`}
-                      ></img>
+                      <img src={`https://corsclinicas.onrender.com/${value.image}`}></img>
                     </CaixaFoto>
                     <CaixaDados>
                       <NomeLocal>{value?.nome}</NomeLocal>
@@ -244,32 +228,7 @@ function Home() {
               flexDirection: "row",
               justifyContent: "flex-end",
             }}
-          >
-            <CaixaBotoes>
-              <Botao
-                borderRadius="18px"
-                width="100%"
-                alignSelf="flex-end"
-                fontSize="22px"
-                height="45px"
-                paddingRight="30px"
-                onClick={() => navigate("/novolocal")}
-              >
-                Adicionar Local
-              </Botao>
-              <PlusOutlined
-                className="iconeMais"
-                style={{
-                  fontSize: "20px",
-                  color: "#fdfdfd",
-                  position: "absolute",
-                  right: "4%",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
-              />
-            </CaixaBotoes>
-          </div>
+          ></div>
         )}
       </Conteudo>
       <AddToast />
