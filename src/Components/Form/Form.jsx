@@ -16,6 +16,7 @@ export default function FormSubmit({
   color,
   loading,
   requestError,
+  ...props
 }) {
   const {
     handleSubmit,
@@ -32,7 +33,6 @@ export default function FormSubmit({
     reset();
   }
 
-  console.log(errors);
   return (
     <FormContainer onSubmit={handleSubmit(submitHandler)}>
       {inputs.map((input) => {
@@ -69,6 +69,8 @@ export default function FormSubmit({
                 icon={input.icon}
                 defaultValue={input?.value}
                 isSubmitSuccessful={isSubmitSuccessful}
+                placeholder={input?.placeholder}
+                setSelectType={props?.setSelectType}
               />
               {errors[input.key]?.message && (
                 <ErrorMessage>{errors[input.key]?.message}</ErrorMessage>
@@ -136,4 +138,5 @@ FormSubmit.propTypes = {
   loading: PropTypes.bool,
   selectedOptionsInitial: PropTypes.object,
   requestError: PropTypes.bool,
+  setSelectType: PropTypes.string,
 };

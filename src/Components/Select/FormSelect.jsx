@@ -11,7 +11,9 @@ export default function FormSelect({
   icon: Icon,
   options,
   isSubmitSuccessful,
+  placeholder,
   defaultValue,
+  setSelectType,
 }) {
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
 
@@ -34,10 +36,13 @@ export default function FormSelect({
         error={error}
         value={selectedValue}
         {...(register && { ...register(inputKey) })}
-        onChange={(e) => setSelectedValue(e.target.value)}
+        onChange={(e) => {
+          setSelectedValue(e.target.value);
+          setSelectType && inputKey === "tipo" && setSelectType(e.target.value);
+        }}
       >
         <option value="" disabled defaultValue={""}>
-          Selecione sua formação
+          {placeholder}
         </option>
         {options?.map((option) => (
           <option key={option.name}>{option.name}</option>
@@ -59,4 +64,6 @@ FormSelect.propTypes = {
   label: PropTypes.string,
   options: PropTypes.array,
   defaultValue: PropTypes.string,
+  placeholder: PropTypes.string,
+  setSelectType: PropTypes.func,
 };

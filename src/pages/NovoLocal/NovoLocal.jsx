@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Body, Titulo } from "./Styles";
 
@@ -19,7 +19,7 @@ import Form from "../../Components/Form";
 import { useCreatePlace } from "../../hooks/place";
 
 function CadastroNovoLocal() {
-  const [inputs] = useState([
+  const [inputs, setInputs] = useState([
     {
       type: "text",
       key: "nome",
@@ -72,6 +72,39 @@ function CadastroNovoLocal() {
   ]);
 
   const navegar = useNavigate();
+  const [selectType, setSelectType] = useState("");
+
+  useEffect(() => {
+    if (selectType === "Instituição de Ensino") {
+      setInputs((prevInputs) => {
+        const hospitalProprioInput = {
+          type: "select",
+          key: "hospitalProprio",
+          placeholder: "Possui hospital próprio?",
+          label: "Hospital Próprio",
+          options: [
+            {
+              value: false,
+              name: "Não",
+            },
+            { value: true, name: "Sim" },
+          ],
+          icon: RocketOutlined,
+        };
+        // Avoid duplicating the input
+        if (!prevInputs.some((input) => input.key === "hospitalProprio")) {
+          const newInputs = [...prevInputs];
+          newInputs.splice(newInputs.length - 1, 0, hospitalProprioInput);
+          return newInputs;
+        }
+        return prevInputs;
+      });
+    } else {
+      setInputs((prevInputs) =>
+        prevInputs.filter((input) => input.key !== "hospitalProprio")
+      );
+    }
+  }, [selectType]);
 
   const {
     mutate: criarLocal,
@@ -97,6 +130,7 @@ function CadastroNovoLocal() {
         schema={novoLocalSchema}
         loading={carregando}
         requestError={error}
+        setSelectType={setSelectType}
       />
       <AddToast />
     </Body>
