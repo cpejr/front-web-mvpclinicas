@@ -205,7 +205,7 @@ export const CaixaLocais = styled.div`
 export const Local = styled.div`
   display: flex;
   align-items: stretch;
-  border: 2.5px solid #570b87;
+  border: 2.5px solid #424242;
   padding: 10px;
   margin: 5px;
   margin-bottom: 10px;

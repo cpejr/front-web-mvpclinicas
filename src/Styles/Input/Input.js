@@ -42,9 +42,10 @@ const Input = styled.input`
       } else {
         cor = "1px solid #570B87";
       }
-    } else {
-      cor = props.color;
     }
+    // } else {
+    //   cor = props.color;
+    // }
     return cor;
   }};
   color: ${(props) => props.color};

@@ -145,6 +145,7 @@ function Home() {
             paddingRight="10px"
             paddingBottom="10px"
             paddingLeft="2%"
+            color="#424242"
             value={pesquisa}
             onChange={(e) => setPesquisa(e.target.value)}
           ></Input>
@@ -161,7 +162,6 @@ function Home() {
         <CaixaSelect>
           <Select
             backgroundColor={Cores.branco}
-            color="#570B87"
             borderColor="#570B87"
             borderWidth="2px"
             fontSize="16px"
@@ -171,6 +171,7 @@ function Home() {
             placeholder="Pesquisar por nome"
             height="35px"
             nome="id_usuario"
+            color="#424242"
             fontSize750="13px"
             defaultValue={"nome"}
             value={buscaTipo}
