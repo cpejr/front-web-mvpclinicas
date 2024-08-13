@@ -105,7 +105,6 @@ function Local() {
   async function pegandoComentariosLocal() {
     const resposta = await managerService.GetComentariosLocal(id_local);
     const comentariosComImagem = await pegandoImagens(resposta.comentariosLocal.comentarios);
-    console.log(comentariosComImagem);
     setComentarios(comentariosComImagem);
     setCarregandoComentarios(false);
     let recebeAvaliacao = resposta.comentariosLocal.media_avaliacao;

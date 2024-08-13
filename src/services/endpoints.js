@@ -12,8 +12,6 @@ export async function cadastro(dados) {
   return data;
 }
 export async function updateDadosPerfil(dados) {
-  console.log(dados.respostas);
-  console.log(dados._id);
   const { data } = await api.put(`/usuarios/${dados._id}`, dados.respostas);
   return data;
 }
@@ -40,7 +38,5 @@ export async function getComments(id) {
 
 export async function createPlace(requestData) {
   const { data } = await api.post(`/locais/`, requestData);
-  //console.log(requestData);
-  console.log(data);
   return data;
 }

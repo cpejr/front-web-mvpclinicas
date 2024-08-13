@@ -17,8 +17,12 @@ import {
 import Form from "../../Components/Form";
 import { useCreatePlace } from "../../hooks/place";
 import { novoLocalSchema } from "./novoLocalSchema";
+import useAuthStore from "../../stores/auth";
 
 function CadastroNovoLocal() {
+  const { usuario } = useAuthStore.getState();
+  const [local, setLocal] = useState(usuario == "estudante" ? "Instituição de ensino" : "Clínica");
+
   const [inputs, setInputs] = useState([
     {
       type: "text",
@@ -102,6 +106,8 @@ function CadastroNovoLocal() {
     } else {
       setInputs((prevInputs) => prevInputs.filter((input) => input.key !== "hospitalProprio"));
     }
+
+    if (selectType) setLocal(selectType);
   }, [selectType]);
 
   const {
@@ -121,7 +127,7 @@ function CadastroNovoLocal() {
 
   return (
     <Body>
-      <Titulo>Cadastrar um local</Titulo>
+      <Titulo>Cadastrar uma {local}</Titulo>
       <Form
         inputs={inputs}
         onSubmit={criarLocal}

@@ -23,10 +23,10 @@ export const cadastroSchema = z
       .min(1, { message: "O campo deve ser preenchido" }),
     registro: z
       .string({ required_error: "O campo deve ser preenchido" })
-      .min(3, { message: "O campo deve ser preenchido" })
       .refine((val) => !isNaN(Number(val)), {
         message: "O campo deve ser um número",
-      }),
+      })
+      .optional(),
     uni_federativa: z
       .string({ required_error: "O campo deve ser preenchido" })
       .min(1, { message: "O campo deve ser preenchido" }),

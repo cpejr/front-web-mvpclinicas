@@ -19,7 +19,8 @@ export const updateSchema = z.object({
     .min(3, { message: "O campo deve ser preenchido" })
     .refine((val) => !isNaN(Number(val)), {
       message: "O campo deve ser um número",
-    }),
+    })
+    .optional(),
   uni_federativa: z
     .string({ required_error: "O campo deve ser preenchido" })
     .min(1, { message: "O campo deve ser preenchido" }),

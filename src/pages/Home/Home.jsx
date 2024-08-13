@@ -76,38 +76,6 @@ function Home() {
     setBuscaTipo(tipo);
   }
 
-  const GOOGLE_API_KEY = "AIzaSyBUwXbN66GC9i-ZGfQmEY8n_QXGytWBe6I";
-
-  async function getPlaceImage(placeName) {
-    const url = `https://corsclinicas.onrender.com/https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(
-      placeName
-    )}&key=${GOOGLE_API_KEY}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.results.length > 0) {
-        const place = data.results[0];
-        const photoReference = place.photos ? place.photos[0].photo_reference : null;
-
-        if (photoReference) {
-          const photoUrl = `https://corsclinicas.onrender.com/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GOOGLE_API_KEY}`;
-          return photoUrl;
-        } else {
-          console.log("No photos available for this place.");
-          return null;
-        }
-      } else {
-        console.log("No places found.");
-        return null;
-      }
-    } catch (error) {
-      console.error("Error fetching place image:", error);
-      return null;
-    }
-  }
-
   return (
     <Body>
       <Conteudo>

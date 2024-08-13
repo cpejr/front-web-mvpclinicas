@@ -130,10 +130,12 @@ function Perfil() {
             <Texto>{usuario.email}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
-            <ConjuntoTituloInput>
-              <TextLabel content="Registro" icon={CopyOutlined}></TextLabel>
-              <Texto>{usuario.registro}</Texto>
-            </ConjuntoTituloInput>
+            {usuario.registro && (
+              <ConjuntoTituloInput>
+                <TextLabel content="Registro" icon={CopyOutlined}></TextLabel>
+                <Texto>{usuario.registro}</Texto>
+              </ConjuntoTituloInput>
+            )}
             <ConjuntoTituloInput>
               <TextLabel content="Formação" icon={CopyOutlined}></TextLabel>
               <Texto>{usuario.formacao}</Texto>
