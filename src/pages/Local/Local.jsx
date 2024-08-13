@@ -3,7 +3,12 @@ import useAuthStore from "../../stores/auth";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { Spin } from "antd";
-import { HeatMapOutlined, LoadingOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  HeatMapOutlined,
+  LoadingOutlined,
+  MedicineBoxOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
@@ -158,6 +163,18 @@ function Local() {
           </NomeTelefone>
         </FotoNome>
         <CaixaInputs>
+          <InputDividido>
+            <ConjuntoTituloInput>
+              <TextLabel content="Tipo" icon={UserOutlined} />
+              <Texto>{local?._doc?.tipo || "Clínica"}</Texto>
+            </ConjuntoTituloInput>
+            {local?._doc?.tipo == "Instituição de Ensino" ? (
+              <ConjuntoTituloInput>
+                <TextLabel content="Contém hospital próprio?" icon={MedicineBoxOutlined} />
+                <Texto>{local?._doc?.hospitalProprio}</Texto>
+              </ConjuntoTituloInput>
+            ) : undefined}
+          </InputDividido>
           <ConjuntoTituloInput>
             <TextLabel content="Endereço" icon={HeatMapOutlined} />
             <Texto>{local?._doc?.endereco}</Texto>

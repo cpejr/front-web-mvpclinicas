@@ -421,6 +421,7 @@ export const ConjuntoTituloInput = styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
+  padding: 0.2rem 0;
 
   @media (max-width: 700px) {
     gap: 0px;
