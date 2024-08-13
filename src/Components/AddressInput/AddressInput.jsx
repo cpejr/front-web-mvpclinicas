@@ -1,12 +1,5 @@
 import PropTypes from "prop-types";
-import {
-  Container,
-  StyledInput,
-  Label,
-  Title,
-  Map,
-  ErrorMessage,
-} from "./Styles";
+import { Container, StyledInput, Label, Title, Map, ErrorMessage } from "./Styles";
 import { useState } from "react";
 
 export default function AddressInput({
@@ -23,9 +16,7 @@ export default function AddressInput({
     <Container>
       <Title>
         <Label>{label}</Label>
-        {Icon && (
-          <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />
-        )}
+        {Icon && <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />}
       </Title>
       <StyledInput
         id={inputKey}
@@ -60,7 +51,7 @@ AddressInput.propTypes = {
   control: PropTypes.object.isRequired,
   setValue: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
-  error: PropTypes.bool,
+  error: PropTypes.any,
   label: PropTypes.string,
   icon: PropTypes.elementType,
 

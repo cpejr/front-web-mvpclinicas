@@ -19,5 +19,5 @@ export const novoLocalSchema = z.object({
   endereco: z
     .string({ required_error: "O campo deve ser preenchido" })
     .min(1, { message: "O campo deve ser preenchido" }),
-  hospitalProprio: z.boolean({ required_error: "O campo deve ser preenchido" }),
+  hospitalProprio: z.string({ required_error: "O campo deve ser preenchido" }).optional(),
 });

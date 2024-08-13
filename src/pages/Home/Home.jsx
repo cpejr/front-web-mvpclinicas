@@ -107,20 +107,6 @@ function Home() {
       return null;
     }
   }
-  const [imageURL, setImageURL] = useState();
-  // Usage example:
-  getPlaceImage("Eiffel Tower")
-    .then((imageUrl) => {
-      if (imageUrl) {
-        setImageURL(imageUrl);
-        console.log("Place Image URL:", imageUrl);
-      } else {
-        console.log("Image not found.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
 
   return (
     <Body>

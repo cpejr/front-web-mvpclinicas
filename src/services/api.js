@@ -1,5 +1,6 @@
 import axios from "axios";
 import { recebeToken } from "./auth";
+import useAuthStore from "../stores/auth";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -7,7 +8,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (req) => {
-    const token = recebeToken();
+    const { token } = useAuthStore.getState();
 
     if (!req.headers.Authorization && token) {
       req.headers.Authorization = `Bearer ${token}`;
@@ -19,4 +20,5 @@ api.interceptors.request.use(
     return error;
   }
 );
+
 export default api;

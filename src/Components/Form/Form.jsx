@@ -137,6 +137,6 @@ FormSubmit.propTypes = {
   color: PropTypes.string,
   loading: PropTypes.bool,
   selectedOptionsInitial: PropTypes.object,
-  requestError: PropTypes.bool,
-  setSelectType: PropTypes.string,
+  requestError: PropTypes.any,
+  setSelectType: PropTypes.func,
 };

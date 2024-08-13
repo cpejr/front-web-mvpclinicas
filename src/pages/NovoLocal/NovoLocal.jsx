@@ -80,8 +80,8 @@ function CadastroNovoLocal() {
         const hospitalProprioInput = {
           type: "select",
           key: "hospitalProprio",
-          placeholder: "Possui hospital próprio?",
-          label: "Hospital Próprio",
+          placeholder: "Possui clinica própria?",
+          label: "Clínica Própria",
           options: [
             {
               value: false,

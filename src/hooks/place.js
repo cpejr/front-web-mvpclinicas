@@ -13,10 +13,7 @@ export function useGetComments(
   });
 }
 
-export function useCreatePlace(
-  id,
-  { onSuccess = () => {}, onError = (err) => console.error(err) } = {}
-) {
+export function useCreatePlace({ onSuccess, onError }) {
   return useMutation({
     mutationFn: createPlace,
     onSuccess,

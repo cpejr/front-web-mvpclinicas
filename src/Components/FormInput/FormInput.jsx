@@ -19,9 +19,7 @@ export default function FormInput({
     <Container>
       <Title>
         <Label>{label}</Label>
-        {Icon && (
-          <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />
-        )}
+        {Icon && <Icon style={{ width: "2rem", marginTop: "2px", color: "#570b87" }} />}
       </Title>
       <StyledInput
         id={inputKey}
@@ -47,7 +45,7 @@ FormInput.propTypes = {
   inputKey: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   register: PropTypes.func,
-  error: PropTypes.bool,
+  error: PropTypes.any,
   defaultValue: PropTypes.string,
   width: PropTypes.string,
   type: PropTypes.string,
