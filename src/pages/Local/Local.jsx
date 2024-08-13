@@ -64,7 +64,7 @@ function Local() {
   const [comentarioAtual, setComentarioAtual] = useState(0);
   const [carregando, setCarregando] = useState(false);
   const [carregandoComentarios, setCarregandoComentarios] = useState(false);
-  const usuarioLogado = useAuthStore((state) => state.usuario);
+  const { usuario: usuarioLogado } = useAuthStore.getState();
 
   const navigate = useNavigate();
 
@@ -129,7 +129,7 @@ function Local() {
       setCarregando(false);
     }
   }
-
+  console.log(usuarioLogado);
   useEffect(() => {
     pegandoDadosLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -271,32 +271,40 @@ function Local() {
           </ConteudoAvaliacao>
         )}
         <CaixaBotoes>
-          <Botao
-            width="12.5rem !important"
-            widthMedia700="30%"
-            onClick={() => navigate(`/novocomentario/${id_local}`)}
-            height="2.5rem !important"
-          >
-            <TextoBotao>Adicionar Comentário</TextoBotao>
-          </Botao>
-          <Botao
-            width="12.5rem !important"
-            widthMedia700="30%"
-            color="white"
-            backgroundColor="#ff3a3a"
-            borderColor="#ff3a3a"
-            onClick={() => deletaLocal()}
-          >
-            <TextoBotao>
-              {carregando ? (
-                <CaixaLoader>
-                  <Spin indicator={antIconModal} />
-                </CaixaLoader>
-              ) : (
-                "Excluir"
-              )}
-            </TextoBotao>
-          </Botao>
+          {!(
+            usuarioLogado?.formacao == "Estudante de Medicina" &&
+            local?._doc?.tipo !== "Instituição de Ensino"
+          ) && (
+            <Botao
+              width="12.5rem !important"
+              widthMedia700="30%"
+              onClick={() => navigate(`/novocomentario/${id_local}`)}
+              height="2.5rem !important"
+            >
+              <TextoBotao>Adicionar Comentário</TextoBotao>
+            </Botao>
+          )}
+
+          {usuarioLogado?.type === "admin" && (
+            <Botao
+              width="12.5rem !important"
+              widthMedia700="30%"
+              color="white"
+              backgroundColor="#ff3a3a"
+              borderColor="#ff3a3a"
+              onClick={() => deletaLocal()}
+            >
+              <TextoBotao>
+                {carregando ? (
+                  <CaixaLoader>
+                    <Spin indicator={antIconModal} />
+                  </CaixaLoader>
+                ) : (
+                  "Excluir"
+                )}
+              </TextoBotao>
+            </Botao>
+          )}
         </CaixaBotoes>
       </Conteudo>
       <AddToast />

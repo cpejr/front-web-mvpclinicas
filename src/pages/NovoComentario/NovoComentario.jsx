@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Body,
   CaixaAvaliacao,
@@ -23,21 +23,24 @@ import { Checkbox, Spin } from "antd";
 import AddToast from "../../components/AddToast/AddToast";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
-import { CriarNovoComentario } from "../../services/ManagerService/managerService";
+import {
+  CriarNovoComentario,
+  GetDadosLocalPorId,
+} from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
 import { recebeUsuario } from "../../services/auth";
+import useAuthStore from "../../stores/auth";
+import { CaixaPlaceholder, TextoPlaceholder } from "../Home/Styles";
 
 function NovoComentario() {
-  const usuarioLogado = JSON.parse(recebeUsuario());
-  const navigate = useNavigate();
+  const { usuario } = useAuthStore.getState();
 
-  const id_usuario = usuarioLogado;
+  const id_usuario = usuario._id;
+
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
-  const antIcon = (
-    <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />
-  );
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />;
   const [erro, setErro] = useState({
     cargo: false,
     salario: false,
@@ -47,6 +50,16 @@ function NovoComentario() {
   const navegar = useNavigate();
 
   const { id_local } = useParams();
+  const [local, setLocal] = useState();
+
+  useEffect(() => {
+    async function pegandoDadosLocal() {
+      console.log(id_local);
+      const resposta = await GetDadosLocalPorId(id_local);
+      setLocal(resposta?.dadosLocais?._doc);
+    }
+    pegandoDadosLocal();
+  }, []);
 
   function estadoCheckbox() {
     setCheckPreenchido(!checkPreenchido);
@@ -62,10 +75,8 @@ function NovoComentario() {
   async function validarComentario() {
     setCarregando(true);
     const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
-    const salarioErro =
-      !checkPreenchido && !respostas["De quanto era o salário pago?"];
-    const diaSalarioErro =
-      !checkPreenchido && !respostas["O salário era pago em dia?"];
+    const salarioErro = !checkPreenchido && !respostas["De quanto era o salário pago?"];
+    const diaSalarioErro = !checkPreenchido && !respostas["O salário era pago em dia?"];
     const avaliacaoErro =
       isNaN(respostas["Avaliação Geral"]) ||
       respostas["Avaliação Geral"] < 0 ||
@@ -124,126 +135,114 @@ function NovoComentario() {
       </ConjuntoTituloInput>
     );
   }
-
+  console.log(usuario);
+  console.log(local);
+  console.log(usuario.formacao, local?.tipo);
   return (
     <Body>
       <AddToast />
 
       <Titulo>Cadastrar um comentário</Titulo>
-      <CaixaPerguntas>
-        <ConjuntoTituloInput>
-          <TituloInput>Qual foi o cargo exercido no local?</TituloInput>
-          <InputComentario
-            placeholder="Área do texto"
-            erro={erro.cargo}
-            onChange={(e) =>
-              preenchendoRespostas(
-                "Qual foi o cargo exercido no local?",
-                e.target.value
-              )
-            }
-          />
-        </ConjuntoTituloInput>
-        <CaixaSalario>
-          <CaixaCheckbox>
-            <TituloInput justifyContent="center">
-              Não desejo responder essa seção
-            </TituloInput>
-            <Checkbox onChange={estadoCheckbox}></Checkbox>
-          </CaixaCheckbox>
-          <ConjuntoTituloInput>
-            <TituloInput
-              style={{ color: checkPreenchido ? "gray" : "#570B87" }}
+
+      {usuario?.formacao == "Estudante de Medicina" && local?.tipo !== "Instituição de Ensino" ? (
+        <CaixaPlaceholder>
+          <TextoPlaceholder>Você não pode comentar nesse local</TextoPlaceholder>
+        </CaixaPlaceholder>
+      ) : (
+        <>
+          <CaixaPerguntas>
+            <ConjuntoTituloInput>
+              <TituloInput>Qual foi o cargo exercido no local?</TituloInput>
+              <InputComentario
+                placeholder="Área do texto"
+                erro={erro.cargo}
+                onChange={(e) =>
+                  preenchendoRespostas("Qual foi o cargo exercido no local?", e.target.value)
+                }
+              />
+            </ConjuntoTituloInput>
+            <CaixaSalario>
+              <CaixaCheckbox>
+                <TituloInput justifyContent="center">Não desejo responder essa seção</TituloInput>
+                <Checkbox onChange={estadoCheckbox}></Checkbox>
+              </CaixaCheckbox>
+              <ConjuntoTituloInput>
+                <TituloInput style={{ color: checkPreenchido ? "gray" : "#570B87" }}>
+                  De quanto era o salário pago?
+                </TituloInput>
+                <InputComentario
+                  placeholder="Área do texto"
+                  disabled={checkPreenchido}
+                  erro={erro.salario}
+                  checkPreenchido={checkPreenchido}
+                  onChange={(e) =>
+                    preenchendoRespostas("De quanto era o salário pago?", e.target.value)
+                  }
+                />
+              </ConjuntoTituloInput>
+              <ConjuntoTituloInput>
+                <TituloInput style={{ color: checkPreenchido ? "gray" : "#570B87" }}>
+                  O salário era pago em dia?
+                </TituloInput>
+                <InputComentario
+                  placeholder="Área do texto"
+                  disabled={checkPreenchido}
+                  erro={erro.dia_salario}
+                  checkPreenchido={checkPreenchido}
+                  onChange={(e) =>
+                    preenchendoRespostas("O salário era pago em dia?", e.target.value)
+                  }
+                />
+              </ConjuntoTituloInput>
+            </CaixaSalario>
+            {renderizaInput("O Local possuí equipe de apoio adequada?")}
+            {renderizaInput("Qual o volume de pacientes?")}
+            {renderizaInput(
+              "No cargo exercido você era responsável por quais outros cargos?",
+              false
+            )}
+            {renderizaInput("Qual a área de abrangência do Local")}
+            {renderizaInput("Como era a organização do local (Divisão em blocos e áreas)?", false)}
+            {renderizaInput("Quais as condições de recursos para o trabalho?", false)}
+            {renderizaInput("Fornece Alimentação?")}
+            {renderizaInput("Fornece Horário e Local de descanso adequado?")}
+            {renderizaInput("Algum outro comentário?")}
+          </CaixaPerguntas>
+          <CaixaAvaliacao>
+            <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
+            <CaixaInputRotulo>
+              <Input
+                textAlign="center"
+                fontSize="1.4em"
+                erro={erro.avaliacao}
+                onChange={(e) => preenchendoRespostas("Avaliação Geral", e.target.value)}
+                borderWidth="0px 0px 1px 0px"
+                borderColor={erro.avaliacao ? "red" : "#570B87"}
+              />
+              {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
+            </CaixaInputRotulo>
+          </CaixaAvaliacao>
+          <CaixaBotoes>
+            <Botao
+              width="40%"
+              onClick={() => {
+                validarComentario();
+              }}
             >
-              De quanto era o salário pago?
-            </TituloInput>
-            <InputComentario
-              placeholder="Área do texto"
-              disabled={checkPreenchido}
-              erro={erro.salario}
-              checkPreenchido={checkPreenchido}
-              onChange={(e) =>
-                preenchendoRespostas(
-                  "De quanto era o salário pago?",
-                  e.target.value
-                )
-              }
-            />
-          </ConjuntoTituloInput>
-          <ConjuntoTituloInput>
-            <TituloInput
-              style={{ color: checkPreenchido ? "gray" : "#570B87" }}
+              {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
+            </Botao>
+            <Botao
+              color="#fff"
+              backgroundColor="#ff3a3a"
+              borderColor="#ff3a3a"
+              width="40%"
+              onClick={() => navigate(`/local/${id_local}`)}
             >
-              O salário era pago em dia?
-            </TituloInput>
-            <InputComentario
-              placeholder="Área do texto"
-              disabled={checkPreenchido}
-              erro={erro.dia_salario}
-              checkPreenchido={checkPreenchido}
-              onChange={(e) =>
-                preenchendoRespostas(
-                  "O salário era pago em dia?",
-                  e.target.value
-                )
-              }
-            />
-          </ConjuntoTituloInput>
-        </CaixaSalario>
-        {renderizaInput("O Local possuí equipe de apoio adequada?")}
-        {renderizaInput("Qual o volume de pacientes?")}
-        {renderizaInput(
-          "No cargo exercido você era responsável por quais outros cargos?",
-          false
-        )}
-        {renderizaInput("Qual a área de abrangência do Local")}
-        {renderizaInput(
-          "Como era a organização do local (Divisão em blocos e áreas)?",
-          false
-        )}
-        {renderizaInput(
-          "Quais as condições de recursos para o trabalho?",
-          false
-        )}
-        {renderizaInput("Fornece Alimentação?")}
-        {renderizaInput("Fornece Horário e Local de descanso adequado?")}
-        {renderizaInput("Algum outro comentário?")}
-      </CaixaPerguntas>
-      <CaixaAvaliacao>
-        <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
-        <CaixaInputRotulo>
-          <Input
-            textAlign="center"
-            fontSize="1.4em"
-            erro={erro.avaliacao}
-            onChange={(e) =>
-              preenchendoRespostas("Avaliação Geral", e.target.value)
-            }
-            borderWidth="0px 0px 1px 0px"
-            borderColor={erro.avaliacao ? "red" : "#570B87"}
-          />
-          {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
-        </CaixaInputRotulo>
-      </CaixaAvaliacao>
-      <CaixaBotoes>
-        <Botao
-          width="40%"
-          onClick={() => {
-            validarComentario();
-          }}
-        >
-          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
-        </Botao>
-        <Botao
-          color="#fff"
-          backgroundColor="#ff3a3a"
-          borderColor="#ff3a3a"
-          width="40%"
-          onClick={() => navigate(`/local/${id_local}`)}
-        >
-          Cancelar
-        </Botao>
-      </CaixaBotoes>
+              Cancelar
+            </Botao>
+          </CaixaBotoes>
+        </>
+      )}
     </Body>
   );
 }
