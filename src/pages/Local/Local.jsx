@@ -285,7 +285,7 @@ function Local() {
             </Botao>
           )}
 
-          {usuarioLogado?.type === "admin" && (
+          {usuarioLogado?.admin === true && (
             <Botao
               width="12.5rem !important"
               widthMedia700="30%"

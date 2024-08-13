@@ -28,25 +28,18 @@ import {
   GetDadosLocalPorId,
 } from "../../services/ManagerService/managerService";
 import { LoadingOutlined } from "@ant-design/icons";
-import { recebeUsuario } from "../../services/auth";
 import useAuthStore from "../../stores/auth";
 import { CaixaPlaceholder, TextoPlaceholder } from "../Home/Styles";
 
 function NovoComentario() {
   const { usuario } = useAuthStore.getState();
-
   const id_usuario = usuario._id;
 
   const [checkPreenchido, setCheckPreenchido] = useState(false);
   const [respostas, setRespostas] = useState({});
   const [carregando, setCarregando] = useState(false);
   const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "white" }} spin />;
-  const [erro, setErro] = useState({
-    cargo: false,
-    salario: false,
-    dia_salario: false,
-    avaliacao: false,
-  });
+  const [erro, setErro] = useState({});
   const navegar = useNavigate();
 
   const { id_local } = useParams();
@@ -54,7 +47,6 @@ function NovoComentario() {
 
   useEffect(() => {
     async function pegandoDadosLocal() {
-      console.log(id_local);
       const resposta = await GetDadosLocalPorId(id_local);
       setLocal(resposta?.dadosLocais?._doc);
     }
@@ -74,23 +66,28 @@ function NovoComentario() {
 
   async function validarComentario() {
     setCarregando(true);
-    const cargoErro = !respostas["Qual foi o cargo exercido no local?"];
-    const salarioErro = !checkPreenchido && !respostas["De quanto era o salário pago?"];
-    const diaSalarioErro = !checkPreenchido && !respostas["O salário era pago em dia?"];
-    const avaliacaoErro =
-      isNaN(respostas["Avaliação Geral"]) ||
-      respostas["Avaliação Geral"] < 0 ||
-      respostas["Avaliação Geral"] > 5;
 
-    setErro((erroAnterior) => ({
-      ...erroAnterior,
-      cargo: cargoErro,
-      salario: salarioErro,
-      dia_salario: diaSalarioErro,
-      avaliacao: avaliacaoErro,
-    }));
+    let novosErros = {};
+    // Validação obrigatória
+    if (usuario?.formacao === "Estudante de Medicina" && local?.tipo === "Instituição de Ensino") {
+      novosErros = {
+        ensino: !respostas["Como você avalia a qualidade do ensino na instituição?"],
+      };
+    } else {
+      novosErros = {
+        cargo: !respostas["Qual foi o cargo exercido no local?"],
+        salario: !checkPreenchido && !respostas["De quanto era o salário pago?"],
+        dia_salario: !checkPreenchido && !respostas["O salário era pago em dia?"],
+        avaliacao:
+          isNaN(respostas["Avaliação Geral"]) ||
+          respostas["Avaliação Geral"] < 0 ||
+          respostas["Avaliação Geral"] > 5,
+      };
+    }
 
-    if (cargoErro || salarioErro || diaSalarioErro || avaliacaoErro) {
+    setErro(novosErros);
+
+    if (Object.values(novosErros).some(Boolean)) {
       setCarregando(false);
       toast.error("Preencha os campos obrigatórios corretamente!");
       return;
@@ -123,21 +120,20 @@ function NovoComentario() {
     }
   }
 
-  function renderizaInput(pergunta) {
+  function renderizaInput(pergunta, obrigatorio = false) {
     return (
       <ConjuntoTituloInput>
         <TituloInput>{pergunta}</TituloInput>
         <InputComentario
           placeholder="Área do texto"
+          erro={obrigatorio && erro[pergunta.toLowerCase()]}
           onChange={(e) => preenchendoRespostas(pergunta, e.target.value)}
         />
-        <NaoObrigatorio>Não obrigatório*</NaoObrigatorio>
+        {!obrigatorio && <NaoObrigatorio>Não obrigatório*</NaoObrigatorio>}
       </ConjuntoTituloInput>
     );
   }
-  console.log(usuario);
-  console.log(local);
-  console.log(usuario.formacao, local?.tipo);
+
   return (
     <Body>
       <AddToast />
@@ -148,6 +144,34 @@ function NovoComentario() {
         <CaixaPlaceholder>
           <TextoPlaceholder>Você não pode comentar nesse local</TextoPlaceholder>
         </CaixaPlaceholder>
+      ) : usuario?.formacao == "Estudante de Medicina" && local?.tipo == "Instituição de Ensino" ? (
+        <>
+          <CaixaPerguntas>
+            {renderizaInput("Como você avalia a qualidade do ensino na instituição?", true)}
+            {renderizaInput("Os laboratórios e recursos para prática médica são adequados?")}
+            {renderizaInput("O corpo docente possui experiência prática na área médica?")}
+            {renderizaInput(
+              "Há oportunidades de estágio e residência oferecidas pela instituição?"
+            )}
+            {renderizaInput("Como você avalia a infraestrutura da instituição?")}
+            {renderizaInput("O suporte acadêmico e administrativo é eficiente?")}
+            {renderizaInput("Qual é a sua avaliação geral sobre a instituição?")}
+          </CaixaPerguntas>
+          <CaixaAvaliacao>
+            <TituloAvaliacao>Avaliação Geral:</TituloAvaliacao>
+            <CaixaInputRotulo>
+              <Input
+                textAlign="center"
+                fontSize="1.4em"
+                erro={erro.avaliacao}
+                onChange={(e) => preenchendoRespostas("Avaliação Geral", e.target.value)}
+                borderWidth="0px 0px 1px 0px"
+                borderColor={erro.avaliacao ? "red" : "#570B87"}
+              />
+              {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
+            </CaixaInputRotulo>
+          </CaixaAvaliacao>
+        </>
       ) : (
         <>
           <CaixaPerguntas>
@@ -197,13 +221,10 @@ function NovoComentario() {
             </CaixaSalario>
             {renderizaInput("O Local possuí equipe de apoio adequada?")}
             {renderizaInput("Qual o volume de pacientes?")}
-            {renderizaInput(
-              "No cargo exercido você era responsável por quais outros cargos?",
-              false
-            )}
+            {renderizaInput("No cargo exercido você era responsável por quais outros cargos?")}
             {renderizaInput("Qual a área de abrangência do Local")}
-            {renderizaInput("Como era a organização do local (Divisão em blocos e áreas)?", false)}
-            {renderizaInput("Quais as condições de recursos para o trabalho?", false)}
+            {renderizaInput("Como era a organização do local (Divisão em blocos e áreas)?")}
+            {renderizaInput("Quais as condições de recursos para o trabalho?")}
             {renderizaInput("Fornece Alimentação?")}
             {renderizaInput("Fornece Horário e Local de descanso adequado?")}
             {renderizaInput("Algum outro comentário?")}
@@ -222,27 +243,23 @@ function NovoComentario() {
               {erro.avaliacao && <Rotulo>Digite uma nota de 0 a 5</Rotulo>}
             </CaixaInputRotulo>
           </CaixaAvaliacao>
-          <CaixaBotoes>
-            <Botao
-              width="40%"
-              onClick={() => {
-                validarComentario();
-              }}
-            >
-              {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
-            </Botao>
-            <Botao
-              color="#fff"
-              backgroundColor="#ff3a3a"
-              borderColor="#ff3a3a"
-              width="40%"
-              onClick={() => navigate(`/local/${id_local}`)}
-            >
-              Cancelar
-            </Botao>
-          </CaixaBotoes>
         </>
       )}
+
+      <CaixaBotoes>
+        <Botao width="40%" onClick={validarComentario}>
+          {carregando ? <Spin indicator={antIcon} /> : "Cadastrar"}
+        </Botao>
+        <Botao
+          color="#fff"
+          backgroundColor="#ff3a3a"
+          borderColor="#ff3a3a"
+          width="40%"
+          onClick={() => navegar(`/local/${id_local}`)}
+        >
+          Cancelar
+        </Botao>
+      </CaixaBotoes>
     </Body>
   );
 }
