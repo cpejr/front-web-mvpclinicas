@@ -19,10 +19,10 @@ import useAuthStore from "./stores/auth";
 
 function RotasPrivadas() {
   const token = useAuthStore((state) => state.token);
-
+  console.log(token)
   if (token) return <Outlet />;
 
-  return <Navigate to="/login " replace />;
+  return <Navigate to="/login" replace />;
 }
 
 const router = createBrowserRouter(

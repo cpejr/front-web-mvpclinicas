@@ -19,14 +19,13 @@ function Header() {
   const isAdmin = useAuthStore((state) => state?.usuario?.admin);
 
   const logout = useAuthStore((state) => state.logout);
-
+  const token = useAuthStore((state) => state.token);
   async function handleLogout() {
     try {
       logout();
       toast.success("Usuario deslogado com sucesso");
-      setTimeout(() => {
-        redirecionamento("/login");
-      }, 3000);
+      redirecionamento("/login");
+      
     } catch (error) {
       console.error(error);
     }
@@ -43,14 +42,17 @@ function Header() {
               <FaMapMarked style={{ fontSize: "17px", color: "#fff" }} />
             </HeaderArea>
           )}
-          <HeaderArea onClick={() => navigate("/perfil")}>
-            <BackButton>Perfil</BackButton>
+          {token &&(
+          <div>
+            <HeaderArea onClick={() => navigate("/perfil")}>
+              <BackButton>Perfil</BackButton>
             <UserOutlined style={{ fontSize: "20px", color: "#fff" }} />
-          </HeaderArea>
-          <HeaderArea onClick={handleLogout}>
-            <BackButton>Logout</BackButton>
-            <IoMdLogOut style={{ fontSize: "20px", color: "#fff" }} />
-          </HeaderArea>
+            </HeaderArea>
+            <HeaderArea onClick={handleLogout}>
+              <BackButton>Logout</BackButton>
+              <IoMdLogOut style={{ fontSize: "20px", color: "#fff" }} />
+          </HeaderArea></div>)}
+          
         </BackLink>
       </ContainerEsquerda>
     </ContainerHeader>
