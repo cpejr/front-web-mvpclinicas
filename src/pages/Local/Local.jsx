@@ -129,7 +129,7 @@ function Local() {
       setCarregando(false);
     }
   }
-  console.log(usuarioLogado);
+
   useEffect(() => {
     pegandoDadosLocal();
     // eslint-disable-next-line react-hooks/exhaustive-deps

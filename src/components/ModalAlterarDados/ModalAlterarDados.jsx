@@ -5,7 +5,7 @@ import { ConteudoModal } from "./Styles";
 import { toast } from "react-toastify";
 import { useUpdateDadosPerfil } from "../../hooks/user";
 import AddToast from "../../components/AddToast/AddToast";
-
+import { updateSchema } from "./updateSchema";
 import { useQueryClient } from "@tanstack/react-query";
 import Form from "../../Components/Form";
 function ModalAlterarDados(props) {
@@ -95,14 +95,14 @@ function ModalAlterarDados(props) {
       destroyOnClose
     >
       <ConteudoModal>
-        {/* <Form
+        {<Form
           inputs={inputs}
           onSubmit={handlePerfilUpdate}
           schema={updateSchema}
           loading={isPending}
           requestError={error}
           selectedOptionsInitial={{}}
-        /> */}
+        />}
         <AddToast />
       </ConteudoModal>
     </Modal>

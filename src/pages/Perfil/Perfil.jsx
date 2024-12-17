@@ -45,7 +45,7 @@ function Perfil() {
   const [modalAlterarDados, setModalAlterarDados] = useState(false);
   const [modalExcluirPerfil, setModalExcluirPerfil] = useState(false);
   const [modalAlterarSenha, setModalAlterarSenha] = useState(false);
-
+  
   const usuarioLogado = useAuthStore((state) => state.usuario);
   const { data: imagemPerfil, isLoading } = useRequisicaoFotoDePerfil(usuarioLogado._id, {
     onError: (err) => {
@@ -113,36 +113,36 @@ function Perfil() {
         <CaixaInputs>
           <ConjuntoTituloInput>
             <TextLabel content="Nome Completo" icon={IdcardOutlined}></TextLabel>
-            <Texto>{usuario.nome}</Texto>
+            <Texto>{usuario?.nome}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             <ConjuntoTituloInput>
               <TextLabel content="Telefone" icon={PhoneOutlined}></TextLabel>
-              <Texto>{telefone(usuario.telefone)}</Texto>
+              <Texto>{telefone(usuario?.telefone)}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TextLabel content="Data de nascimento" icon={CalendarOutlined}></TextLabel>
-              <Texto>{data(usuario.data_nascimento)}</Texto>
+              <Texto>{data(usuario?.data_nascimento)}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
           <ConjuntoTituloInput>
             <TextLabel content="E-mail" icon={MailOutlined}></TextLabel>
-            <Texto>{usuario.email}</Texto>
+            <Texto>{usuario?.email}</Texto>
           </ConjuntoTituloInput>
           <InputDividido>
             {usuario.registro && (
               <ConjuntoTituloInput>
                 <TextLabel content="Registro" icon={CopyOutlined}></TextLabel>
-                <Texto>{usuario.registro}</Texto>
+                <Texto>{usuario?.registro}</Texto>
               </ConjuntoTituloInput>
             )}
             <ConjuntoTituloInput>
               <TextLabel content="Formação" icon={CopyOutlined}></TextLabel>
-              <Texto>{usuario.formacao}</Texto>
+              <Texto>{usuario?.formacao}</Texto>
             </ConjuntoTituloInput>
             <ConjuntoTituloInput>
               <TextLabel content="Unidade Federativa" icon={GlobalOutlined}></TextLabel>
-              <Texto>{usuario.uni_federativa}</Texto>
+              <Texto>{usuario?.uni_federativa}</Texto>
             </ConjuntoTituloInput>
           </InputDividido>
         </CaixaInputs>
