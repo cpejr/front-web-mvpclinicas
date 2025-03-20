@@ -14,9 +14,8 @@ import {
   TituloAvaliacao,
   TituloInput,
   NaoObrigatorio,
-  CaixaTitulo,
+
 } from "./Styles";
-import Logo from "../../assets/logo-no-background.svg";
 import Botao from "../../Styles/Botao/Botao";
 import Input from "../../Styles/Input/Input";
 import { Checkbox, Spin } from "antd";
@@ -150,6 +149,7 @@ function NovoComentario() {
             {renderizaInput("Como você avalia a qualidade do ensino na instituição?", true)}
             {renderizaInput("Os laboratórios e recursos para prática médica são adequados?")}
             {renderizaInput("O corpo docente possui experiência prática na área médica?")}
+            
             {renderizaInput(
               "Há oportunidades de estágio e residência oferecidas pela instituição?"
             )}
@@ -227,6 +227,7 @@ function NovoComentario() {
             {renderizaInput("Quais as condições de recursos para o trabalho?")}
             {renderizaInput("Fornece Alimentação?")}
             {renderizaInput("Fornece Horário e Local de descanso adequado?")}
+            {renderizaInput("Voce sofria assedio pela chefia?")}
             {renderizaInput("Algum outro comentário?")}
           </CaixaPerguntas>
           <CaixaAvaliacao>

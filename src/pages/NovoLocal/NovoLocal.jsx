@@ -21,7 +21,7 @@ import useAuthStore from "../../stores/auth";
 
 function CadastroNovoLocal() {
   const { usuario } = useAuthStore.getState();
-  const [local, setLocal] = useState(usuario == "estudante" ? "Instituição de ensino" : "Clínica");
+  const [local, setLocal] = useState(usuario == "estudante" ? "Instituição de ensino" : "Instituição de Saúde");
 
   const [inputs, setInputs] = useState([
     {
@@ -39,7 +39,7 @@ function CadastroNovoLocal() {
       options: [
         {
           value: "clinica",
-          name: "Clínica",
+          name: "Hospital/Clínica/UPA",
         },
         { value: "instituicao-de-ensino", name: "Instituição de Ensino" },
       ],
