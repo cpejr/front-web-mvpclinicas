@@ -42,6 +42,7 @@ export const CadastroNovoLocal = async (novoLocal) => {
 };
 
 export const CriarNovoComentario = async (body, id_local) => {
+  console.log("olaaa");
   const resposta = await requesterService
     .criarComentario(body, id_local)
     .then((res) => {

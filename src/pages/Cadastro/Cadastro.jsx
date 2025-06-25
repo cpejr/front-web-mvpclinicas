@@ -77,6 +77,7 @@ function Cadastro() {
           name: "Médico",
         },
         { value: "estudante", name: "Estudante de Medicina" },
+        { value: "residente", name: "Residente" },
       ],
       icon: RocketOutlined,
     },

@@ -178,7 +178,7 @@ export const CaixaBotoes = styled.div`
 
 export const CaixaInputRotulo = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-evenly;
   width: 4rem;
   gap: 10px;

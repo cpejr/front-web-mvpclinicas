@@ -18,7 +18,11 @@ import {
   CaixaConteudo,
 } from "./Styles";
 import { Cores } from "../../utils/variaveis";
-import { SearchOutlined, PlusOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  PlusOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Rate } from "antd";
 import Input from "../../Styles/Input/Input";
 import Select from "../../Styles/Select/Select";
@@ -37,7 +41,7 @@ function Home() {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
-
+  console.log(locais);
   const locaisFiltrados = locais.filter((locais) => {
     if (buscaTipo === "nome") {
       return locais?.nome
@@ -134,7 +138,10 @@ function Home() {
             <CaixaPlaceholder>
               <TextoPlaceholder>
                 Carregando Locais
-                <LoadingOutlined style={{ fontSize: 24, color: "#570b87" }} spin />
+                <LoadingOutlined
+                  style={{ fontSize: 24, color: "#570b87" }}
+                  spin
+                />
               </TextoPlaceholder>
             </CaixaPlaceholder>
           </CaixaConteudo>
@@ -142,14 +149,21 @@ function Home() {
           <CaixaConteudo>
             {locais.length === 0 ? (
               <CaixaPlaceholder>
-                <TextoPlaceholder>Ainda não existem Locais Cadastrados</TextoPlaceholder>
+                <TextoPlaceholder>
+                  Ainda não existem Locais Cadastrados
+                </TextoPlaceholder>
               </CaixaPlaceholder>
             ) : (
               <CaixaLocais>
                 {locaisFiltrados?.map((value, index) => (
-                  <Local key={index} onClick={() => navigate(`/local/${value?._id}`)}>
+                  <Local
+                    key={index}
+                    onClick={() => navigate(`/local/${value?._id}`)}
+                  >
                     <CaixaFoto>
-                      <img src={`https://corsclinicas.onrender.com/${value.image}`}></img>
+                      <img
+                        src={`https://corsclinicas.onrender.com/${value.image}`}
+                      ></img>
                     </CaixaFoto>
                     <CaixaDados>
                       <NomeLocal>{value?.nome}</NomeLocal>
