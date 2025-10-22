@@ -1,5 +1,5 @@
 import { z } from "zod";
-
+console.log("pra editar");
 export const updateSchema = z.object({
   nome: z
     .string({ required_error: "O campo deve ser preenchido" })
